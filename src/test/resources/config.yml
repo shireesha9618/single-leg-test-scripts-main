@@ -9,4 +9,4 @@ explicitWaitInSeconds: 60
 googleSheet: false
 grid:
   enabled: false
-role: dipatch_fpa,orders,settings,teams
+role: dipatch,orders,settings,teams,login,resources

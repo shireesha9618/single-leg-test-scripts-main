@@ -1,4 +1,4 @@
-BASE_URL: "https://alpha.preprod.fxtrt.io/fpa/"
+BASE_URL: "https://alpha.preprod.fxtrt.io/application/"
 AUTH_URL: "https://alpha.preprod.fxtrt.io/core/api/v1/aaa/auth/client-credentials"
 GRAPHQL_URL: "https://alpha.preprod.fxtrt.io/app/dispatch/v1/graphql"
 API_URL: "https://alpha.preprod.fxtrt.io/app/fpa/api/v1"
