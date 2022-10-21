@@ -1,0 +1,23 @@
+winAppDriverLocation: 
+nodePath:
+appiumJSPath:
+androidHomePath:
+
+desiredCapabilities:
+  app:
+  appWorkingDir:
+  platformName:
+  deviceName:
+  appPackage:
+  appActivity:
+  autoGrantPermission:
+
+cloudCapabilities:
+  browser:
+  browser_version:
+  os:
+  os_version:
+  build:
+  appiumVersion:
+  userName:
+  password:
