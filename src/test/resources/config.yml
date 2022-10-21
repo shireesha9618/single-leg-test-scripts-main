@@ -1,0 +1,12 @@
+platform: web
+environment: alpha
+infra: local
+browserType: chrome
+cloud: saucelabs
+threads: 1
+implicitWaitInSeconds: 5
+explicitWaitInSeconds: 60
+googleSheet: false
+grid:
+  enabled: false
+role: dipatch,orders,settings,teams,login,resources
