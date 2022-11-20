@@ -4,6 +4,8 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
 
+import java.util.HashMap;
+
 public class DispatchPage {
     private static DispatchPage _instance;
     private final Locator dispatchesCount_Lbl = Locator.builder().withWeb(By.xpath("//p[@class='text-black text-base font-normal' and text()='Dispatches']/preceding-sibling::p"));
@@ -64,5 +66,14 @@ public class DispatchPage {
         return ActionHelper.getText(dispatchesCount_Lbl);
     }
 
+    public HashMap<String, String> getDispatchSummary() {
+        HashMap<String, String> orderSummary = new HashMap<>();
+        orderSummary.put("DispatchCount", get_DispatchCount_Lbl());
+        orderSummary.put("AssignedCount",get_AssignedCount_Lbl());
+        orderSummary.put("StartedCount", get_StartedCount_Lbl());
+        orderSummary.put("OngoingCount", get_OngoingCount_Lbl());
+        orderSummary.put("ClosedCount", get_ClosedCount_Lbl());
+        return orderSummary;
+    }
 
 }

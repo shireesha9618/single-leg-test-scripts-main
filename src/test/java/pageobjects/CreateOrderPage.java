@@ -144,11 +144,14 @@ public class CreateOrderPage {
     }
 
     public void set_PickUpFacility_TextBox(String dropFacility) {
-        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ARROW_DOWN + Keys.ENTER));
+        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord(dropFacility +Keys.ENTER));
+    ActionHelper.gotoSleep(10000);
     }
 
     public void set_DropFacility_TextBox(String dropFacility) {
         ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ENTER));
+        ActionHelper.gotoSleep(10000);
+
     }
 
     public void set_ContactName_TextBox(String contactName) {
@@ -167,6 +170,11 @@ public class CreateOrderPage {
         ActionHelper.gotoSleep(10000);
         ActionHelper.click(submit_Btn);
         CommonActions.getInstance().click_Skip_Btn();
+        ActionHelper.gotoSleep(10000);
+        DriverManager.getDriver().navigate().refresh();
+        CommonActions.getInstance().click_Skip_Btn();
+
+
     }
 
     public void set_DropMobileNumber_TextBox(String dropMobileNumber) {
@@ -207,12 +215,13 @@ public class CreateOrderPage {
         return ActionHelper.getText(facilityId_TxtBox.getBy());
     }
 
-    public Boolean isPresent_PostalCode_TxtBox() {
+    public Boolean isPresent_AddFacilityPostalCode_TxtBox() {
         return ActionHelper.isPresent(addFacilityPostalCode_TxtBox);
     }
 
-    public void set_PostalCode_TxtBox(String postalCode) {
-        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), postalCode);
+    public void set_AddFacilityPostalCode_TxtBox(String postalCode) {
+        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode+Keys.TAB));
+    ActionHelper.gotoSleep(5000);
     }
 
     public Boolean isPresent_AddressLine1_TxtBox() {
@@ -220,7 +229,7 @@ public class CreateOrderPage {
     }
 
     public void set_AddFacilityAddressLine1_TxtBox(String address) {
-        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), address);
+        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), Keys.chord(address+Keys.TAB));
     }
 
     public Boolean isPresent_AddressLine2_TxtBox() {
@@ -249,7 +258,7 @@ public class CreateOrderPage {
 
     public void addFacility(String facilityName, String postalCode, String addressLine1, String addressLine2) {
         set_FacilityName_TxtBox(facilityName);
-        set_PostalCode_TxtBox(postalCode);
+        set_AddFacilityPostalCode_TxtBox(postalCode);
         set_AddFacilityAddressLine1_TxtBox(addressLine1);
         set_AddFacilityAddressLine2_TxtBox(addressLine2);
     }
@@ -292,7 +301,7 @@ public class CreateOrderPage {
     }
 
     public String get_PickupPostalCode_TxtBox() {
-        return ActionHelper.getAttribute(postalCode_TextBox,"value");
+        return ActionHelper.getAttribute(postalCode_TextBox, "value");
     }
 
     public void set_AddressLine1_TxtBox(String address) {
@@ -300,7 +309,7 @@ public class CreateOrderPage {
     }
 
     public String get_AddressLine1_TxtBox() {
-        return ActionHelper.getAttribute(addressLine1_TextBox,"value");
+        return ActionHelper.getAttribute(addressLine1_TextBox, "value");
     }
 
     public void set_AddressLine2_TxtBox(String address) {
@@ -308,7 +317,7 @@ public class CreateOrderPage {
     }
 
     public String get_AddressLine2_TxtBox() {
-        return ActionHelper.getAttribute(addressLine2_TextBox,"value");
+        return ActionHelper.getAttribute(addressLine2_TextBox, "value");
     }
 
     public void set_DropPostalCode_TxtBox(String postalCode) {
@@ -316,7 +325,7 @@ public class CreateOrderPage {
     }
 
     public String get_DropPostalCode_TxtBox() {
-        return ActionHelper.getAttribute(dropPostalCode_TxtBox,"value");
+        return ActionHelper.getAttribute(dropPostalCode_TxtBox, "value");
     }
 
     public void set_DropAddressLine1_TxtBox(String address) {
@@ -324,7 +333,7 @@ public class CreateOrderPage {
     }
 
     public String get_DropAddressLine1_TxtBox() {
-        return ActionHelper.getAttribute(dropAddress1_TxtBox,"value");
+        return ActionHelper.getAttribute(dropAddress1_TxtBox, "value");
     }
 
     public void set_DropAddressLine2_TxtBox(String address) {
@@ -332,16 +341,16 @@ public class CreateOrderPage {
     }
 
     public String get_DropAddressLine2_TxtBox() {
-        return ActionHelper.getAttribute(dropAddress2_TxtBox,"value");
+        return ActionHelper.getAttribute(dropAddress2_TxtBox, "value");
     }
 
-    public void validateAddFacility(String input) {
+    public void validateAddFacility(String input,String postalCode) {
         click_AddFacility_Btn(input);
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         ActionHelper.gotoSleep(5000);
         softAssert.assertTrue(isPresent_FacilityName_TxtBox(), "present");
         softAssert.assertTrue(isPresent_FacilityId_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_PostalCode_TxtBox(), "present");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCode_TxtBox(), "present");
         softAssert.assertTrue(isPresent_AddressLine1_TxtBox(), "present");
         softAssert.assertTrue(isPresent_AddressLine2_TxtBox(), "present");
         softAssert.assertTrue(isPresent_State_TxtBox(), "present");
@@ -354,7 +363,8 @@ public class CreateOrderPage {
         softAssert.assertTrue(isPresent_StateRequiredMandatory_Msg(), "present");
         softAssert.assertTrue(isPresent_CityRequiredMandatory_Msg(), "present");
         softAssert.assertAll();
-        click_CancelFacility_Btn();
+        createFacility(postalCode);
+        ActionHelper.gotoSleep(10000);
     }
 
     public void fill_Pickup_Details(String postalCode, String addressLine1, String addressLine2) {
@@ -387,8 +397,9 @@ public class CreateOrderPage {
         softAssert.assertEquals(get_PickupPostalCode_TxtBox(), "", "Postal Code is matched expected");
         softAssert.assertEquals(get_AddressLine1_TxtBox(), "", "Address Line 1 is matched expected");
         softAssert.assertEquals(get_AddressLine2_TxtBox(), "", "Address Line 1 is matched expected");
-ActionHelper.gotoSleep(3000);
+        ActionHelper.gotoSleep(3000);
     }
+
     public void validate_DropClearAll_Btn(String postalCode, String addressLine1, String addressLine2) {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         fill_Drop_Details(postalCode, addressLine1, addressLine2);
@@ -400,7 +411,16 @@ ActionHelper.gotoSleep(3000);
         softAssert.assertEquals(get_DropAddressLine1_TxtBox(), "", "Address Line 1 is matched expected");
         softAssert.assertEquals(get_DropAddressLine2_TxtBox(), "", "Address Line 1 is matched expected");
         ActionHelper.gotoSleep(3000);
-
     }
+    public void createFacility(String postalCode) {
+        ActionHelper.gotoSleep(5000);
+        set_FacilityName_TxtBox("Facility "+ActionHelper.generateRandomName(3,5));
+        set_AddFacilityPostalCode_TxtBox(postalCode);
+        set_AddFacilityAddressLine1_TxtBox(ActionHelper.generateRandomName(8,10));
+        set_AddFacilityAddressLine2_TxtBox(ActionHelper.generateRandomName(8,10));
+
+        click_CreateFacility_Btn();
+    }
+
 }
 

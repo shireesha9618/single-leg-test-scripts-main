@@ -51,7 +51,8 @@ public class CommonActions {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().selectTeam2(Constants.TEAM);
-        HomePage.getInstance().openCreateOrderPage();
+//        HomePage.getInstance().openCreateOrderPage();
+        ActionHelper.gotoSleep(10000);
     }
 
     public void click_Skip_Btn() {

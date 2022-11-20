@@ -45,6 +45,7 @@ public class DispatchDetailPage {
     }
 
     public String get_FirstElementScannableId_Lbl() {
+        ActionHelper.gotoSleep(5000);
         return ActionHelper.getText(firstElementScannableId_Lbl);
     }
 
