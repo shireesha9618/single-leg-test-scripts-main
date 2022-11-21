@@ -1,4 +1,4 @@
-package testsuite.EndToEnd;
+package testsuite.endtoend;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;

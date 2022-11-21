@@ -47,6 +47,7 @@ public class CommonActions {
         HomePage.getInstance().openDispatchListPage();
 
     }
+
     public void coverJourneyTillCreateOrder() {
         performCommonAction();
         click_Skip_Btn();
@@ -62,6 +63,7 @@ public class CommonActions {
         if (element.isDisplayed())
             element.click();
     }
+
 
     public Boolean isPresent_Skip_Btn() {
         return ActionHelper.isPresent(skip_Btn, 3000);
@@ -100,6 +102,7 @@ public class CommonActions {
             updateLedgerIn(jobId, dispatchId, "CONTAINER", shipmentId, cash);
         }
     }
+
     public void updateLedgerIn(String jobId, String dispatchId, String container, String shipmentId, Integer cash) throws FileNotFoundException, UnsupportedEncodingException, APIResponseException {
         String payloadPath = System.getProperty("user.dir") + "/src/test/java/payload/ledger.json";
 
@@ -173,16 +176,13 @@ public class CommonActions {
         return workFlowInstanceId;
     }
 
-    public void clicksdas(String input)
-    {
+    public void clicksdas(String input) {
         ActionHelper.click(sadasdsfd);
-        List<WebElement> eme=ActionHelper.findElements(sadas.getBy());
-        System.out.println("DSADSDd"+eme);
-        for(WebElement wew:eme)
-        {
-            String m=wew.getText();
-            if(m.equals(input))
-            {
+        List<WebElement> eme = ActionHelper.findElements(sadas.getBy());
+        System.out.println("DSADSDd" + eme);
+        for (WebElement wew : eme) {
+            String m = wew.getText();
+            if (m.equals(input)) {
                 wew.click();
             }
         }
