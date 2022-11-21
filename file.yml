@@ -1,0 +1,32 @@
+appId: 'platform:app:solutions-qa'
+
+rolesRequired:
+  roles:
+    - Platform:Role:platform:app:dispatch-fpa-api:dispatch-creator
+    - Platform:Role:platform:app:dispatch-fpa-api:custody-modifier
+    - Platform:Role:platform:app:dispatch-fpa-api:dispatch-modifier
+    - Platform:Role:platform:app:dispatch-fpa-api:dispatch-viewer
+    - Platform:Role:platform:app:dispatch-fpa-api:dispatch-settings-viewer
+    - Platform:Role:platform:app:dispatch-fpa-api:dispatch-settings-creator
+    - Platform:Role:platform:app:dispatch-fpa-api:job-creator
+    - Platform:Role:platform:app:dispatch-fpa-api:job-modifier
+    - Platform:Role:platform:app:dispatch-fpa-api:job-viewer
+    - Platform:Role:platform:app:dispatch-fpa-api:job-settings-viewer
+    - Platform:Role:platform:app:dispatch-fpa-api:job-settings-creator
+    - Platform:Role:platform:app:dispatch-fpa-api:admin-role
+    - Platform:Role:platform:app:dispatch-fpa-api:mts-editor
+    - Platform:Role:platform:app:coreos:dispatch-service
+    - Platform:Role:platform:app:coreos:aaa-service
+    - Platform:Role:platform:app:coreos:entity-service
+    - Platform:Role:platform:app:coreos:notification-service
+    - Platform:Role:platform:app:participant-fpa-api:participant-fpa-vehicle-fpa-editor
+    - Platform:Role:platform:app:coreos:sds-service
+    - Platform:Role:platform:app:coreos:federated-graphql
+    - Platform:Role:platform:app:participant-fpa-api:participant-fpa-user-fpa-editor
+    - Platform:Role:platform:app:coreos:state-machine-service
+    - Platform:Role:platform:app:participant-fpa-api:participant-fpa-client-fpa-viewer
+    - Platform:Role:platform:app:coreos:fms-service
+    - Platform:Role:platform:app:participant-fpa-api:participant-fpa-facility-fpa-viewer
+    - Platform:Role:platform:app:coreos:mts-service
+    - Platform:Role:platform:app:container-fpa-api:container-fpa-shipment-ops-editor
+    - Platform:Role:platform:app:coreos:workflow-service

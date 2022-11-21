@@ -92,11 +92,6 @@ public class LoginPage extends BaseTestClass {
         return ActionHelper.getAttribute(userIdAfterLogin_Txt, "value");
     }
 
-//    public void performLogout() {
-//        HomePage.getInstance().click_Menu_Btn();
-//        HomePage.getInstance().click_Logout_Btn();
-//    }
-
     public String getText_userIdValidationMessage_Txt() {
         return ActionHelper.findElement(userId_Txt).getAttribute("validationMessage");
     }

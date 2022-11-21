@@ -53,18 +53,13 @@ public class HomePage {
     }
 
     public void openViewOrderPage() {
-//        DriverManager.getDriver().navigate().refresh();
         ActionHelper.gotoSleep(10000);
         ActionHelper.click(viewOrderMenuItem_Btn);
-
         CommonActions.getInstance().click_Skip_Btn();
-
         ActionHelper.gotoSleep(10000);
-
 //        CommonActions.getInstance().click_Skip_Btn();
         DriverManager.getDriver().navigate().refresh();
         CommonActions.getInstance().click_Skip_Btn();
         ActionHelper.gotoSleep(10000);
-
     }
 }

@@ -75,5 +75,4 @@ public class DispatchPage {
         orderSummary.put("ClosedCount", get_ClosedCount_Lbl());
         return orderSummary;
     }
-
 }

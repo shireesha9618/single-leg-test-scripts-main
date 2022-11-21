@@ -5,6 +5,7 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 import utility.Utility;
@@ -124,8 +125,6 @@ public class CreateOrderPage {
 
     public void team() {
         ActionHelper.gotoSleep(10000);
-//        Utility.scrollUsingJS(teamSelect_Btn.getBy());
-//        ActionHelper.click(teamSelect_Btn);
         ActionHelper.sendKeysWithClear(teamSelect_Btn.getBy(), Keys.chord("TestingTeam" + Keys.TAB));
     }
 
@@ -144,14 +143,13 @@ public class CreateOrderPage {
     }
 
     public void set_PickUpFacility_TextBox(String dropFacility) {
-        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord(dropFacility +Keys.ENTER));
-    ActionHelper.gotoSleep(10000);
+        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ENTER));
+        ActionHelper.gotoSleep(10000);
     }
 
     public void set_DropFacility_TextBox(String dropFacility) {
         ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ENTER));
         ActionHelper.gotoSleep(10000);
-
     }
 
     public void set_ContactName_TextBox(String contactName) {
@@ -173,8 +171,6 @@ public class CreateOrderPage {
         ActionHelper.gotoSleep(10000);
         DriverManager.getDriver().navigate().refresh();
         CommonActions.getInstance().click_Skip_Btn();
-
-
     }
 
     public void set_DropMobileNumber_TextBox(String dropMobileNumber) {
@@ -189,14 +185,12 @@ public class CreateOrderPage {
         return ActionHelper.getText(barcodeNumber_TxtBox);
     }
 
-    //facilty
+
     public void click_AddFacility_Btn(String input) {
         if (input.equals("Pickup"))
             ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
-//        ActionHelper.click(addFacility_Btn);
         else
             ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
-
     }
 
     public Boolean isPresent_FacilityName_TxtBox() {
@@ -220,8 +214,8 @@ public class CreateOrderPage {
     }
 
     public void set_AddFacilityPostalCode_TxtBox(String postalCode) {
-        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode+Keys.TAB));
-    ActionHelper.gotoSleep(5000);
+        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode + Keys.TAB));
+        ActionHelper.gotoSleep(5000);
     }
 
     public Boolean isPresent_AddressLine1_TxtBox() {
@@ -229,7 +223,7 @@ public class CreateOrderPage {
     }
 
     public void set_AddFacilityAddressLine1_TxtBox(String address) {
-        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), Keys.chord(address+Keys.TAB));
+        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), Keys.chord(address + Keys.TAB));
     }
 
     public Boolean isPresent_AddressLine2_TxtBox() {
@@ -244,7 +238,7 @@ public class CreateOrderPage {
         return ActionHelper.isPresent(addFacilityState_TxtBox);
     }
 
-    public String get_State_TxtBox() {
+    public String get_AddFacilityState_TxtBox() {
         return ActionHelper.getText(addFacilityState_TxtBox);
     }
 
@@ -252,7 +246,7 @@ public class CreateOrderPage {
         return ActionHelper.isPresent(addFacilityCity_TxtBox);
     }
 
-    public String get_City_TxtBox() {
+    public String get_AddFacilityCity_TxtBox() {
         return ActionHelper.getText(addFacilityCity_TxtBox);
     }
 
@@ -344,7 +338,7 @@ public class CreateOrderPage {
         return ActionHelper.getAttribute(dropAddress2_TxtBox, "value");
     }
 
-    public void validateAddFacility(String input,String postalCode) {
+    public void validateAndCreateFacility(String input, String postalCode) {
         click_AddFacility_Btn(input);
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         ActionHelper.gotoSleep(5000);
@@ -412,15 +406,20 @@ public class CreateOrderPage {
         softAssert.assertEquals(get_DropAddressLine2_TxtBox(), "", "Address Line 1 is matched expected");
         ActionHelper.gotoSleep(3000);
     }
-    public void createFacility(String postalCode) {
-        ActionHelper.gotoSleep(5000);
-        set_FacilityName_TxtBox("Facility "+ActionHelper.generateRandomName(3,5));
-        set_AddFacilityPostalCode_TxtBox(postalCode);
-        set_AddFacilityAddressLine1_TxtBox(ActionHelper.generateRandomName(8,10));
-        set_AddFacilityAddressLine2_TxtBox(ActionHelper.generateRandomName(8,10));
 
+    public void createFacility(String postalCode) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        ActionHelper.gotoSleep(5000);
+        set_FacilityName_TxtBox("Facility " + ActionHelper.generateRandomName(3, 5));
+        set_AddFacilityPostalCode_TxtBox(postalCode);
+        set_AddFacilityAddressLine1_TxtBox(ActionHelper.generateRandomName(8, 10));
+        set_AddFacilityAddressLine2_TxtBox(ActionHelper.generateRandomName(8, 10));
+        softAssert.assertTrue(get_AddFacilityState_TxtBox() != null, "State Text box is not null as expected");
+        softAssert.assertTrue(get_AddFacilityCity_TxtBox() != null, "City Text box is not null as expected");
+        js.executeScript("window.scrollBy(0,1000)");
+        softAssert.assertAll();
         click_CreateFacility_Btn();
     }
-
 }
 
