@@ -148,9 +148,5 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         softAssert.assertEquals(DispatchDetailPage.getInstance().get_CashInHand_Lbl(), "0", "Cash In Hand is matched as expected");
 
         softAssert.assertAll();
-
-
-
-
     }
 }
