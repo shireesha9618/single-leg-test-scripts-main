@@ -1,0 +1,122 @@
+name: New UI Single Leg Test Scripts
+
+on:
+  workflow_dispatch:
+    inputs:
+          suite_type:
+            type: choice
+            description: 'Select a Suite Type'
+            options: 
+              - system
+              - group
+              - role
+            required: true
+          role_name:
+            description: 'A role name is passed like noorg, notenant, oneteam, fullyonboarded, login  etc. Default is login'
+            default: 'login'
+            required: false
+            type: string  
+          group_name:
+            description: 'A group name is passed like smoke, regression etc. Default is smoke'
+            default: 'smoke'
+            required: false
+            type: string
+          Browser_Type:
+            type: choice
+            description: 'Please select the browser type'
+            options: 
+              - chromeheadless
+              - firefoxheadless
+            required: true
+          Thread_Count:
+            type: number
+            default: '1'
+            description: 'Please enter the thread count between 0 to 5'
+            required: true
+          email_ids:
+            description: 'Email id comma separated list for sending the report'
+            default: 'jagadeesh.m@delhivery.com,saurabh.anand@delhivery.com,ashish.chaudhary@delhivery.com,s.shireesha@delhivery.com,arpit.kishor@delhivery.com,shubhra.gupta@delhivery.com,ashish.ranjan@delhivery.com,pavan.bhat@delhivery.com,alexander.fehsenfeld@delhivery.com,derek.gordon@delhivery.com,james.chainey@delhivery.com,uday.anand@delhivery.com'
+            required: false
+            type: string
+
+jobs:
+  E2E-Test-Execution:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: browser-actions/setup-chrome@latest
+    - run: chrome --version
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: maven
+    
+    - name: Create settings.xml file
+      run: |
+        echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd"><servers><server><username>${{secrets.PLATFORM_QUARKS_TEST_SUITE_JFROG_USERNAME}}</username><password>${{secrets.PLATFORM_QUARKS_TEST_SUITE_JFROG_PASSWORD}}</password><id>central</id></server><server><username>${{secrets.PLATFORM_QUARKS_TEST_SUITE_JFROG_USERNAME}}</username><password>${{secrets.PLATFORM_QUARKS_TEST_SUITE_JFROG_PASSWORD}}</password><id>snapshots</id></server></servers></settings>' > settings.xml  
+        
+    - name: Run All Test Scripts
+      if: ${{github.event.inputs.suite_type == 'system'}}
+      run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+    
+    - name: Run Specific Fpa Scripts
+      if: ${{github.event.inputs.suite_type == 'role'}}
+      run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+       
+    - name: Run Specifies Group of Test Scripts
+      if: ${{github.event.inputs.suite_type == 'group'}}
+      run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
+   
+    - name: Create html report file
+      uses: 1arp/create-a-file-action@0.2
+      with:
+        # Path from cwd where file is to be created
+        #path: ${{ github.workspace }}/extentreport
+        # The name of the file to be created with extention
+        file: mailer_file.html
+        # The content of the file
+        content: |
+          <html>
+          <head></head>
+          <body>
+          <table>
+          <tr>
+          <td>Hi Team,</td>
+          </tr> <tr>
+          <td>Please find below the execution summary</td>
+          </tr> <tr>
+          <td>
+          <a href="${{github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"> Click here to open Complete Report </a>
+          </td>
+          </tr><tr>
+          <td>&nbsp;</td>
+          </tr><tr>
+          <td><img src="cid:reportscreenshot.png" width="1100"></td>
+          </tr>
+          </table>
+          </body>
+          </html>
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: Report
+        path: ${{ github.workspace }}/extentreport/
+          
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ankit.gupta@qtsolv.com
+        password: pingpong@1234
+        subject: New UI - Test Automation Suite Report
+        to: ${{github.event.inputs.email_ids}}
+        from: Platform Solutions QA <platform-solutions-qa@delhivery.com>
+        secure: true
+        html_body: file://mailer_file.html
+        attachments: ${{github.workspace}}/extentreport/screenshots/reportscreenshot.png
