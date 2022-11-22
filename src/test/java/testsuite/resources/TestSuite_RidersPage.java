@@ -369,7 +369,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         ridersPage.click_MoreActions_DropDown();
         ridersPage.clickAndChoose_MoreActionsDropDownMenuOptions_Btn("Modify Columns");
         ridersPage.click_MoreActionsDropDownModifyColumnsLinkCancel_Btn();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Validate presence of Vehicle List header label");
+        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Validate presence of Riders List header label");
         softAssert.assertAll();
     }
 

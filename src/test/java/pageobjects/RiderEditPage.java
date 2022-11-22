@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 public class RiderEditPage {
     private static RiderEditPage _instance;
     private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[text()='Home']"));
-    private final Locator ridersBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[@class='text-sm font-medium text-[#A3AAC2] hover:text-gray-700'][text()='Riders']"));
-    private final Locator editRiderBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[text()='Edit Rider']"));
+    private final Locator ridersBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/riders']"));
+    private final Locator editRiderBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/riders/edit']"));
     private final Locator editRiderHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Edit Rider']"));
     private final Locator firstName_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='First Name*']"));
     private final Locator firstName_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter first name']"));
@@ -16,10 +16,10 @@ public class RiderEditPage {
     private final Locator lastName_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Last Name']"));
     private final Locator phoneNumber_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Phone Number*']"));
     private final Locator teams_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Teams*']"));
-    private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-upload ant-upload-select ant-upload-select-text']"));
-    private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//p[@class='text-white text-sm font-medium']"));
-    private final Locator editRiderCancel_Btn = Locator.builder().withWeb(By.xpath("//p[@class='text-black text-sm font-medium']"));
-    private final Locator upadtedSuccessfully_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Updated Successfully']"));
+    private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
+    private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']//p"));
+    private final Locator editRiderCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
+    private final Locator updatedSuccessfully_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Updated Successfully']"));
 
     public static RiderEditPage getInstance() {
         if (_instance == null)
@@ -88,10 +88,10 @@ public class RiderEditPage {
     }
 
     public boolean isPresent_UpdatedSuccessfully_Txt() {
-        return ActionHelper.isPresent(upadtedSuccessfully_Txt);
+        return ActionHelper.isPresent(updatedSuccessfully_Txt);
     }
 
     public String getText_UpdatedSuccessfully_Txt() {
-        return ActionHelper.getText(upadtedSuccessfully_Txt);
+        return ActionHelper.getText(updatedSuccessfully_Txt);
     }
 }
