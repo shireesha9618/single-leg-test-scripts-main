@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BaseTestClass {
     private static LoginPage _instance;
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
     private final Locator loginWithOTP_Lnk = Locator.builder().withWeb(By.id("zocial-otp-login"));
     private final Locator loginWithGoogle_Lnk = Locator.builder().withWeb(By.id("zocial-google"));
     private final Locator userId_Txt = Locator.builder().withWeb(By.id("dp-email-input"));
@@ -17,15 +17,17 @@ public class LoginPage extends BaseTestClass {
     private final Locator countryCode_Txt = Locator.builder().withWeb(By.id("countryCode"));
     private final String otp_Txt = "otp-xyz";
     private final Locator login_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Login']"));
-    private final Locator errorMessage_Lbl = Locator.builder().withWeb(By.xpath("//span[@class='dp-server-error-msg dp-error-red']"));
+    private final Locator loginOTPIncorrectErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Incorrect OTP']"));
     private final Locator loginHomeScreen_Btn = Locator.builder().withWeb(By.id("loginButton"));
+    private final Locator loginOTPReEnterErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//label[contains(text(),'Re-enter')]"));
+    private final Locator loginResendOTP_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Resend OTP']"));
+    private final Locator loginUserErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//form[@name='myform']/div/span"));
 
     public static LoginPage getInstance() {
         if (_instance == null)
             _instance = new LoginPage();
         return _instance;
     }
-
 
     public boolean isPresent_UserId_Txt() {
         return ActionHelper.isPresent(userId_Txt, 3000);
@@ -75,19 +77,20 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithEmail_Lnk() {
-        return ActionHelper.isPresent(loginWithEmail_Lnk,3000);
+        return ActionHelper.isPresent(loginWithEmail_Lnk, 3000);
     }
 
-    public boolean isPresent_ErrorMessage_Lbl() {
-        return ActionHelper.isPresent(errorMessage_Lbl);
+    public boolean isPresent_LoginOTPIncorrectErrorMsg_Txt() {
+        return ActionHelper.isPresent(loginOTPIncorrectErrorMsg_Txt);
     }
 
-    public String getText_ErrorMessage_Lbl() {
-        ActionHelper.waitUntilElementVisible(errorMessage_Lbl.getBy());
-        return ActionHelper.getText(errorMessage_Lbl.getBy());
+    public String getText_LoginOTPIncorrectErrorMsg_Txt() {
+        ActionHelper.waitUntilElementVisible(loginOTPIncorrectErrorMsg_Txt.getBy());
+        return ActionHelper.getText(loginOTPIncorrectErrorMsg_Txt.getBy());
     }
+
     public void performLogout() {
-        HomePage.getInstance().click_Menu_Btn();
+        HomePage.getInstance().click_UserProfile_Img();
         HomePage.getInstance().click_Logout_Btn();
     }
 
@@ -123,5 +126,34 @@ public class LoginPage extends BaseTestClass {
     public void navigateToLoginScreen() {
         if (isPresent_LoginHomeScreen_Btn())
             ActionHelper.click(loginHomeScreen_Btn);
+    }
+
+    public boolean isPresent_LoginOTPReEnterErrorMsg_Txt() {
+        return ActionHelper.isPresent(loginOTPReEnterErrorMsg_Txt);
+    }
+
+    public String getText_LoginOTPReEnterErrorMsg_Txt() {
+        return ActionHelper.getText(loginOTPReEnterErrorMsg_Txt);
+    }
+
+    public boolean isPresent_LoginResendOTP_Btn() {
+        ActionHelper.waitUntilElementVisible(loginResendOTP_Btn.getBy());
+        return ActionHelper.isPresent(loginResendOTP_Btn, 2000);
+    }
+
+    public void click_LoginResendOTP_Btn() {
+        ActionHelper.click(loginResendOTP_Btn);
+    }
+
+    public String getOTP(String emailId, String emailPassword) {
+        return GmailHelper.getInstance().getLatestOTPFromEmail(emailId, emailPassword).substring(0, 6);
+    }
+
+    public boolean isPresent_LoginUserErrorMsg_Txt() {
+        return ActionHelper.isPresent(loginUserErrorMsg_Txt);
+    }
+
+    public String getText_LoginUserErrorMsg_Txt() {
+        return ActionHelper.getText(loginUserErrorMsg_Txt);
     }
 }

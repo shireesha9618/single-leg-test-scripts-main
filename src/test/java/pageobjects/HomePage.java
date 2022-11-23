@@ -16,10 +16,10 @@ public class HomePage extends BaseTestClass {
     private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
     private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Teams']"));
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Settings']"));
-    private final Locator menu_Btn = Locator.builder().withWeb(By.xpath("//button[@id='headlessui-menu-button-1']"));
+    private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
-    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@class='block w-auto h-8']"));
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
+    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
 
     public static HomePage getInstance() {
@@ -29,7 +29,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img, 10000);
+        return ActionHelper.isPresent(delhiveryLogo_Img,2000);
     }
 
     public void click_DelhiveryLogo_Img() {
@@ -37,13 +37,13 @@ public class HomePage extends BaseTestClass {
         ActionHelper.click(delhiveryLogo_Img);
     }
 
-    public boolean isPresent_Menu_Btn() {
-        return ActionHelper.isPresent(menu_Btn, 2000);
+    public boolean isPresent_UserProfile_Img() {
+        return ActionHelper.isPresent(userProfile_Img, 2000);
     }
 
-    public void click_Menu_Btn() {
-        ActionHelper.waitUntilElementVisible(menu_Btn.getBy());
-        ActionHelper.click(menu_Btn);
+    public void click_UserProfile_Img() {
+        ActionHelper.waitUntilElementVisible(userProfile_Img.getBy());
+        ActionHelper.click(userProfile_Img);
     }
 
     public boolean isPresent_Logout_Btn() {
