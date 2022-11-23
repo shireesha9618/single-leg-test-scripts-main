@@ -1,9 +1,11 @@
 package utility;
 
+import framework.common.logger.ExtentLogger;
 import framework.common.logger.Logger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
+import org.apache.logging.log4j.spi.ExtendedLogger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -114,7 +116,7 @@ public class Utility {
     public static void checkCheckbox(WebElement element) {
         ActionHelper.waitUntilElementClickable(element);
         ActionHelper.click(element);
-        Logger.logPass("Checking Checkbox ");
+        ExtentLogger.logPass("Checking Checkbox ");
     }
 
     public static void clickRadio(By by) {
@@ -125,7 +127,7 @@ public class Utility {
     public static void clickRadio(WebElement element) {
         ActionHelper.waitUntilElementClickable(element);
         ActionHelper.click(element);
-        Logger.logPass("Clicking Radio ");
+        ExtentLogger.logPass("Clicking Radio ");
     }
 
     public static String getRecordCountFromTabHeaderLabel(String label) {

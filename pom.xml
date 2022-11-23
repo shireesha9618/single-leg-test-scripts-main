@@ -102,19 +102,19 @@
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>frontend</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.13</version>
         </dependency>
 
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>backend</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.13</version>
         </dependency>
 
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>fileutils</artifactId>
-            <version>1.3.3</version>
+            <version>1.3.13</version>
         </dependency>
 
     </dependencies>
@@ -126,13 +126,13 @@
             </snapshots>
             <id>central</id>
             <name>delhivery-libs-release</name>
-            <url>https://quarks.jfrog.io/artifactory/delhivery-libs-release</url>
+            <url>https://quarks.jfrog.io/artifactory/jarvis-libs-release</url>
         </repository>
         <repository>
             <snapshots/>
             <id>snapshots</id>
             <name>delhivery-libs-snapshot</name>
-            <url>https://quarks.jfrog.io/artifactory/delhivery-libs-snapshot</url>
+            <url>https://quarks.jfrog.io/artifactory/jarvis-libs-snapshot</url>
         </repository>
     </repositories>
 

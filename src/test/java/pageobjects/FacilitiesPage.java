@@ -2,13 +2,19 @@ package pageobjects;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
+import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import utility.Utility;
+
+import java.util.List;
 
 public class FacilitiesPage {
     private static FacilitiesPage _instance;
     private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='flex justify-between']/p"));
-    private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("homeBreadCrumb_Link"));
-    private final Locator facilitiesBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/facilities']"));
+    private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/']"));
+    private final Locator facilitiesBreadCrumb_Link = Locator.builder().withWeb(By.id("/facilities"));
     private final Locator newFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-4']//p"));
     private final Locator search_Txt = Locator.builder().withWeb(By.id("search_ptp"));
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
@@ -17,11 +23,13 @@ public class FacilitiesPage {
     private final Locator statusDropDownPauseValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='active:pause']"));
     private final Locator statusDropDownDeboardValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='active:deboard']"));
     private final Locator statusDropDownInactiveValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='inactive:inactive']"));
-    private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Clear Selection']]"));
+    private final Locator statusDropDownTerminalValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='inactive:terminal']"));
+    private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button/p[text()='Clear Selection']"));
     private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='More Actions']"));
     private final Locator moreActionsDropDownExportAsCSV_Link = Locator.builder().withWeb(By.xpath("//a[text()='Export as CSV']"));
     private final Locator moreActionsDropDownModifyColumns_Link = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
 
+    private final Locator moreActionsDropDownModifyColumnHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']"));
     private final Locator moreActionsDropDownModifyColumnsSearch_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Search']"));
     private final Locator moreActionsDropDownModifyColumnsSelectAll_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']"));
     private final Locator moreActionsDropDownModifyColumnFacilityId_CheckBox = Locator.builder().withWeb(By.id("Facility Id"));
@@ -35,9 +43,12 @@ public class FacilitiesPage {
     private final Locator moreActionsDropDownModifyColumnUpdatedAt_CheckBox = Locator.builder().withWeb(By.id("Updated At"));
     private final Locator moreActionsDropDownModifyColumnCreatedBy_CheckBox = Locator.builder().withWeb(By.id("Created By"));
     private final Locator moreActionsDropDownModifyColumnUpdatedBy_CheckBox = Locator.builder().withWeb(By.id("Updated By"));
+    private final Locator moreActionsDropDownModifyColumnDragOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div"));
+    private final Locator moreActionsDropDownModifyColumnCheckBoxDataList_CheckBox = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-2 items-center']"));
     private final Locator moreActionDropDownModifyColumnCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator moreActionsDropDownModifyColumnSave_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
 
+    private final Locator tableColumnNames = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell']"));
     private final Locator tableColumnNameFacilityId = Locator.builder().withWeb(By.xpath("//th[text()='Facility Id']"));
     private final Locator tableColumnNameFacilityName = Locator.builder().withWeb(By.xpath("//th[text()='Facility Name']"));
     private final Locator tableColumnNameStatus = Locator.builder().withWeb(By.xpath("//th[text()='Status']"));
@@ -45,10 +56,25 @@ public class FacilitiesPage {
     private final Locator tableColumnNameCity = Locator.builder().withWeb(By.xpath("//th[text()='City']"));
     private final Locator tableColumnNameState = Locator.builder().withWeb(By.xpath("//th[text()='State']"));
     private final Locator tableColumnNamePostalCode = Locator.builder().withWeb(By.xpath("//th[text()='Postal Code']"));
+    private final Locator tableColumnNameCreatedAt = Locator.builder().withWeb(By.xpath("//th[text()='Created At']"));
+    private final Locator tableColumnNameUpdatedAt = Locator.builder().withWeb(By.xpath("//th[text()='Updated At']"));
+    private final Locator tableColumnNameCreatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Created By']"));
+    private final Locator tableColumnNameUpdatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Updated By']"));
     private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("//tr[2]/td[1]"));
     private final Locator tableDataEdit_Link = Locator.builder().withWeb(By.xpath("(//p[text()='Edit'])[1]"));
+    private final Locator tableDataFacilityId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
+    private final Locator tableDataFacilityName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
+    private final Locator tableDataPostalCode_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[8]"));
+    private final Locator facilityTableFacilityIdList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[2]"));
+    private final Locator facilityTableStatusList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[4]"));
+    private final Locator facilityTableFacilityNameList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[3]"));
+    private final Locator pageSize = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
+    String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
     private final Locator prev_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
+
+    private final Locator userProfile_Btn = Locator.builder().withWeb(By.id("headlessui-menu-button-1"));
+    private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
 
     public static FacilitiesPage getInstance() {
         if (_instance == null) _instance = new FacilitiesPage();
@@ -103,44 +129,57 @@ public class FacilitiesPage {
         ActionHelper.click(status_DropDown);
     }
 
-    public boolean isPresent_StatusDropDownOnboardingValue_Radio() {
-        return ActionHelper.isPresent(statusDropDownOnboardingValue_Radio);
+    public boolean isEnabled_StatusDropDownOnboardingValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownOnboardingValue_Radio.getBy());
     }
 
     public void click_StatusDropDownOnboardingValue_Radio() {
         ActionHelper.click(statusDropDownOnboardingValue_Radio);
     }
 
-    public boolean isPresent_StatusDropDownActiveValue_Radio() {
-        return ActionHelper.isPresent(statusDropDownActiveValue_Radio);
+    public boolean isEnabled_StatusDropDownActiveValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy());
     }
 
     public void click_StatusDropDownActiveValue_Radio() {
-        ActionHelper.click(statusDropDownActiveValue_Radio);
+        Utility.clickRadio(statusDropDownActiveValue_Radio.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public boolean isPresent_StatusDropDownPauseValue_Radio() {
-        return ActionHelper.isPresent(statusDropDownPauseValue_Radio);
+    public boolean isEnabled_StatusDropDownPauseValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownPauseValue_Radio.getBy());
     }
 
     public void click_StatusDropDownPauseValue_Radio() {
-        ActionHelper.click(statusDropDownPauseValue_Radio);
+        Utility.clickRadio(statusDropDownPauseValue_Radio.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public boolean isPresent_StatusDropDownDeboardValue_Radio() {
-        return ActionHelper.isPresent(statusDropDownDeboardValue_Radio);
+    public boolean isEnabled_StatusDropDownDeboardValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownDeboardValue_Radio.getBy());
     }
 
     public void click_StatusDropDownDeboardValue_Radio() {
-        ActionHelper.click(statusDropDownDeboardValue_Radio);
+        Utility.clickRadio(statusDropDownDeboardValue_Radio.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public boolean isPresent_StatusDropDownInactiveValue_Radio() {
-        return ActionHelper.isPresent(statusDropDownInactiveValue_Radio);
+    public boolean isEnabled_StatusDropDownInactiveValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownInactiveValue_Radio.getBy());
     }
 
     public void click_StatusDropDownInactiveValue_Radio() {
-        ActionHelper.click(statusDropDownInactiveValue_Radio);
+        Utility.clickRadio(statusDropDownInactiveValue_Radio.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isEnabled_StatusDropDownTerminalValue_Radio() {
+        return ActionHelper.isEnabled(statusDropDownTerminalValue_Radio.getBy());
+    }
+
+    public void click_StatusDropDownTerminalValue_Radio() {
+        Utility.clickRadio(statusDropDownTerminalValue_Radio.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
@@ -175,12 +214,20 @@ public class FacilitiesPage {
         ActionHelper.click(moreActionsDropDownModifyColumns_Link);
     }
 
+    public boolean isPresent_MoreActionsDropDownModifyColumnHeader_Lbl() {
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnHeader_Lbl);
+    }
+
+    public String getText_MoreActionsDropDownModifyColumnHeader_Lbl() {
+        return ActionHelper.getText(moreActionsDropDownModifyColumnHeader_Lbl);
+    }
+
     public boolean isPresent_MoreActionsDropDownModifyColumnsSearch_Txt() {
         return ActionHelper.isPresent(moreActionsDropDownModifyColumnsSearch_Txt);
     }
 
     public void fill_MoreActionsDropDownModifyColumnsSearch_Txt(String tableColumnName) {
-        ActionHelper.fill(moreActionsDropDownModifyColumnsSearch_Txt, tableColumnName);
+        ActionHelper.fillWithClear(moreActionsDropDownModifyColumnsSearch_Txt.getBy(), tableColumnName);
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsSelectAll_Btn() {
@@ -200,6 +247,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnFacilityName_CheckBox() {
+        ActionHelper.waitUntilElementVisible(moreActionsDropDownModifyColumnFacilityName_CheckBox.getBy());
         return ActionHelper.isPresent(moreActionsDropDownModifyColumnFacilityName_CheckBox);
     }
 
@@ -279,6 +327,24 @@ public class FacilitiesPage {
         ActionHelper.click(moreActionsDropDownModifyColumnUpdatedBy_CheckBox);
     }
 
+    public boolean isPresent_MoreActionsDropDownModifyColumnDragOptionsList_Lbl() {
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnDragOptionsList_Lbl);
+    }
+
+    public List<String> getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl() {
+        return Utility.getText_ListOfWebElements(moreActionsDropDownModifyColumnDragOptionsList_Lbl.getBy());
+    }
+
+    public void dragAndDrop_MoreActionsDropDownModifyColumnDragOptionsList_Lbl(int fromIndex, int toIndex) {
+        List<WebElement> elements = ActionHelper.findElements(moreActionsDropDownModifyColumnDragOptionsList_Lbl);
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(5000).perform();
+    }
+
+    public boolean isPresent_MoreActionsDropDownModifyColumnCheckBoxDataList_CheckBox() {
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnCheckBoxDataList_CheckBox);
+    }
+
     public boolean isPresent_MoreActionDropDownModifyColumnCancel_Btn() {
         return ActionHelper.isPresent(moreActionDropDownModifyColumnCancel_Btn);
     }
@@ -295,24 +361,52 @@ public class FacilitiesPage {
         ActionHelper.click(moreActionsDropDownModifyColumnSave_Btn);
     }
 
+    public boolean isPresent_TableColumnNames() {
+        return ActionHelper.isPresent(tableColumnNames);
+    }
+
+    public List<String> getText_TableColumnNames() {
+        return Utility.getText_ListOfWebElements(tableColumnNames.getBy());
+    }
+
     public boolean isPresent_TableColumnNameFacilityId() {
         return ActionHelper.isPresent(tableColumnNameFacilityId);
+    }
+
+    public String getText_TableColumnNameFacilityId() {
+        return ActionHelper.getText(tableColumnNameFacilityId);
     }
 
     public boolean isPresent_TableColumnNameFacilityName() {
         return ActionHelper.isPresent(tableColumnNameFacilityName);
     }
 
+    public String getText_TableColumnNameFacilityName() {
+        return ActionHelper.getText(tableColumnNameFacilityName);
+    }
+
     public boolean isPresent_TableColumnNameStatus() {
         return ActionHelper.isPresent(tableColumnNameStatus);
+    }
+
+    public String getText_TableColumnNameStatus() {
+        return ActionHelper.getText(tableColumnNameStatus);
     }
 
     public boolean isPresent_TableColumnNameAddress() {
         return ActionHelper.isPresent(tableColumnNameAddress);
     }
 
+    public String getText_TableColumnNameAddress() {
+        return ActionHelper.getText(tableColumnNameAddress);
+    }
+
     public boolean isPresent_TableColumnNameCity() {
         return ActionHelper.isPresent(tableColumnNameCity);
+    }
+
+    public String getText_TableColumnNameCity() {
+        return ActionHelper.getText(tableColumnNameCity);
     }
 
     public boolean isPresent_TableColumnNameState() {
@@ -321,6 +415,22 @@ public class FacilitiesPage {
 
     public boolean isPresent_TableColumnNamePostalCode() {
         return ActionHelper.isPresent(tableColumnNamePostalCode);
+    }
+
+    public boolean isPresent_TableColumnNameCreatedAt() {
+        return ActionHelper.isPresent(tableColumnNameCreatedAt);
+    }
+
+    public boolean isPresent_TableColumnNameUpdatedAt() {
+        return ActionHelper.isPresent(tableColumnNameUpdatedAt);
+    }
+
+    public boolean isPresent_TableColumnNameCreatedBy() {
+        return ActionHelper.isPresent(tableColumnNameCreatedBy);
+    }
+
+    public boolean isPresent_TableColumnNameUpdatedBy() {
+        return ActionHelper.isPresent(tableColumnNameUpdatedBy);
     }
 
     public boolean isPresent_TableData_CheckBox() {
@@ -336,7 +446,58 @@ public class FacilitiesPage {
     }
 
     public void click_TableDataEdit_Link() {
+        ActionHelper.waitUntilElementVisible(tableDataEdit_Link.getBy());
         ActionHelper.click(tableDataEdit_Link);
+    }
+
+    public boolean isPresent_TableDataFacilityId_Lbl() {
+        return ActionHelper.isPresent(tableDataFacilityId_Lbl);
+    }
+
+    public String getText_TableDataFacilityId_Lbl() {
+        return ActionHelper.getText(tableDataFacilityId_Lbl);
+    }
+
+    public boolean isPresent_TableDataFacilityName_Lbl() {
+        return ActionHelper.isPresent(tableDataFacilityName_Lbl);
+    }
+
+    public String getText_TableDataFacilityName_Lbl() {
+        return ActionHelper.getText(tableDataFacilityName_Lbl);
+    }
+
+    public boolean isPresent_TableDataPostalCode_Lbl() {
+        return ActionHelper.isPresent(tableDataPostalCode_Lbl);
+    }
+
+    public String getText_TableDataPostalCode_Lbl() {
+        return ActionHelper.getText(tableDataPostalCode_Lbl);
+    }
+
+    public List<WebElement> getList_FacilityTableFacilityId_Lbl() {
+        return ActionHelper.findElements(facilityTableFacilityIdList_Lbl.getBy());
+    }
+
+    public List<String> getList_FacilityTableStatus_Lbl() {
+        return Utility.getText_ListOfWebElements(facilityTableStatusList_Lbl.getBy());
+    }
+
+    public List<String> getList_FacilityTableFacilityName_Lbl() {
+        return Utility.getText_ListOfWebElements(facilityTableFacilityNameList_Lbl.getBy());
+    }
+
+    public boolean isPresent_PageSize() {
+        return ActionHelper.isPresent(pageSize);
+    }
+
+    public void click_PageSize() {
+        ActionHelper.click(pageSize);
+    }
+
+    public void chooseNoOfRecordToBeDisplayed(int noOfData) {
+        click_PageSize();
+        ActionHelper.click(ActionHelper.findElement(By.xpath(chooseNoOfRecordToBeDisplayed.replace("ab", String.valueOf(noOfData)))));
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_Prev_Btn() {
@@ -353,5 +514,22 @@ public class FacilitiesPage {
 
     public void click_Next_Btn() {
         ActionHelper.click(next_Btn);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isPresent_UserProfile_Btn() {
+        return ActionHelper.isPresent(userProfile_Btn);
+    }
+
+    public void click_UserProfile_Btn() {
+        ActionHelper.click(userProfile_Btn);
+    }
+
+    public boolean isPresent_Logout_Btn() {
+        return ActionHelper.isPresent(logout_Btn);
+    }
+
+    public void click_Logout_Btn() {
+        ActionHelper.click(logout_Btn);
     }
 }

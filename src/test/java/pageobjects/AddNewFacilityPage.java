@@ -1,14 +1,25 @@
 package pageobjects;
 
+import com.github.javafaker.Faker;
+import framework.backend.APIResponseException;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
+import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
-public class EditFacilityPage {
-    private static EditFacilityPage _instance;
+import java.io.IOException;
+import java.util.HashMap;
+
+public class AddNewFacilityPage {
+    private static AddNewFacilityPage _instance;
     private final Locator facilities_BreadCrumb = Locator.builder().withWeb(By.xpath("//a[@href='/application/facilities/']"));
+    private final Locator addNewFacility_BreadCrumb = Locator.builder().withWeb(By.xpath("//a[@href='/application/facilities/add/']"));
+    private final Locator addNewFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Add New Facility']"));
     private final Locator editFacility_BreadCrumb = Locator.builder().withWeb(By.xpath("//a[@href='/application/facilities/edit/']"));
-    private final Locator editFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2"));
+    private final Locator editFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Edit Facility']"));
     private final Locator basicDetailsSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Basic Details']"));
     private final Locator facilityName_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']"));
     private final Locator facilityName_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Facility Name']"));
@@ -29,9 +40,11 @@ public class EditFacilityPage {
     private final Locator state_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter State']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
+    private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
 
-    public static EditFacilityPage getInstance() {
-        if (_instance == null) _instance = new EditFacilityPage();
+    Faker sampleData = new Faker();
+    public static AddNewFacilityPage getInstance() {
+        if (_instance == null) _instance = new AddNewFacilityPage();
         return _instance;
     }
 
@@ -43,6 +56,14 @@ public class EditFacilityPage {
         ActionHelper.click(facilities_BreadCrumb);
     }
 
+    public boolean isPresent_AddNewFacility_BreadCrumb() {
+        return ActionHelper.isPresent(addNewFacility_BreadCrumb);
+    }
+
+    public void click_AddNewFacility_BreadCrumb() {
+        ActionHelper.click(addNewFacility_BreadCrumb);
+    }
+
     public boolean isPresent_EditFacility_BreadCrumb() {
         return ActionHelper.isPresent(editFacility_BreadCrumb);
     }
@@ -52,11 +73,21 @@ public class EditFacilityPage {
     }
 
     public boolean isPresent_EditFacilityHeader_Lbl() {
+        ActionHelper.waitUntilElementVisible(editFacilityHeader_Lbl.getBy());
         return ActionHelper.isPresent(editFacilityHeader_Lbl);
     }
 
-    public void click_EditFacilityHeader_Lbl() {
-        ActionHelper.click(editFacilityHeader_Lbl);
+    public String getText_EditFacilityHeader_Lbl() {
+        return ActionHelper.getText(editFacilityHeader_Lbl);
+    }
+
+    public boolean isPresent_AddNewFacilityHeader_Lbl() {
+        ActionHelper.waitUntilElementVisible(addNewFacilityHeader_Lbl.getBy());
+        return ActionHelper.isPresent(addNewFacilityHeader_Lbl);
+    }
+
+    public String getText_AddNewFacilityHeader_Lbl() {
+        return ActionHelper.getText(addNewFacilityHeader_Lbl);
     }
 
     public boolean isPresent_BasicDetailsSubHeader_Lbl() {
@@ -73,6 +104,10 @@ public class EditFacilityPage {
 
     public void fill_FacilityName_Txt(String facilityName) {
         ActionHelper.fillWithClear(facilityName_Txt.getBy(), facilityName);
+    }
+
+    public String getText_FacilityName_Txt() {
+        return ActionHelper.getText(facilityName_Txt);
     }
 
     public boolean isPresent_FacilityId_Lbl() {
@@ -103,6 +138,15 @@ public class EditFacilityPage {
         ActionHelper.fillWithClear(postalCode_Txt.getBy(), postalCode);
     }
 
+    public void edit_PostalCode_Txt(String postalCode) {
+        ActionHelper.clear(postalCode_Txt.getBy());
+        Actions actions = new Actions(DriverManager.getDriver());
+        WebElement abc = ActionHelper.findElement(postalCode_Txt);
+        actions.click(abc).sendKeys(Keys.BACK_SPACE).perform();
+        ActionHelper.gotoSleep(10000);
+        ActionHelper.fillWithClear(postalCode_Txt.getBy(), postalCode);
+    }
+
     public boolean isPresent_Country_Lbl() {
         return ActionHelper.isPresent(country_Lbl);
     }
@@ -127,6 +171,11 @@ public class EditFacilityPage {
         ActionHelper.fillWithClear(addressLine1_Txt.getBy(), addressLine1);
     }
 
+    public void edit_AddressLine1_Txt(String addressLine1) {
+        ActionHelper.clear(addressLine1_Txt.getBy());
+        ActionHelper.fillWithClear(addressLine1_Txt.getBy(), addressLine1);
+    }
+
     public boolean isPresent_AddressLine2_Lbl() {
         return ActionHelper.isPresent(addressLine2_Lbl);
     }
@@ -136,6 +185,11 @@ public class EditFacilityPage {
     }
 
     public void fill_AddressLine2_Txt(String addressLine2) {
+        ActionHelper.fillWithClear(addressLine2_Txt.getBy(), addressLine2);
+    }
+
+    public void edit_AddressLine2_Txt(String addressLine2) {
+        ActionHelper.clear(addressLine2_Txt.getBy());
         ActionHelper.fillWithClear(addressLine2_Txt.getBy(), addressLine2);
     }
 
@@ -178,4 +232,40 @@ public class EditFacilityPage {
     public void click_Save_Btn() {
         ActionHelper.click(save_Btn);
     }
+
+    public boolean isPresent_Create_Btn() {
+        return ActionHelper.isPresent(create_Btn);
+    }
+
+    public void click_Create_Btn() {
+        ActionHelper.click(create_Btn);
+    }
+
+    public HashMap<String, String> createFacility() throws APIResponseException,IOException {
+        HashMap<String, String> createNewFacility = new HashMap<>();
+        String facilityName = "facility"+ ActionHelper.generateRandomName(3,5);
+        String postalCode = sampleData.number().digits(6);
+        String addressLine1 = sampleData.address().streetName();
+        String addressLine2 = sampleData.address().streetName();
+        String city = sampleData.address().cityName();
+        String state = sampleData.address().state();
+
+        createNewFacility.put("facilityName", facilityName);
+        createNewFacility.put("postalCode", postalCode);
+        createNewFacility.put("addressLine1", addressLine1);
+        createNewFacility.put("addressLine2", addressLine2);
+        createNewFacility.put("city", city);
+        createNewFacility.put("state", state);
+
+        fill_FacilityName_Txt(facilityName);
+        fill_PostalCode_Txt(postalCode);
+        fill_AddressLine1_Txt(addressLine1);
+        fill_AddressLine2_Txt(addressLine2);
+        fill_City_Txt(city);
+        fill_State_Txt(state);
+
+        click_Create_Btn();
+        return createNewFacility;
+    }
+
 }

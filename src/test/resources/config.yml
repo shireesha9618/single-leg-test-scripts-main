@@ -1,5 +1,5 @@
 platform: web
-environment: alpha
+environment: l7vlwzwczd
 infra: local
 browserType: chrome
 cloud: saucelabs
