@@ -18,6 +18,7 @@ public class Constants {
     public static final String SYSTEM_DATE_FORMAT = "dd-MM-yyyy";
     public static final String ENV = Utils.getValueFromConfig("environment");
     public static final String DISPATCH_TYPE_ID = Utils.getValueFromConfig("DISPATCH_TYPE_ID");
+    public static final String TEAM = "QATeam";
 
     private Constants() {
     }
@@ -41,10 +42,10 @@ public class Constants {
         public static final String FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD");
         public static final String FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE");
 
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE="E-945";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED="E-943";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING="E-944";
-        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE="E-946";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE = "E-945";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED = "E-943";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING = "E-944";
+        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE = "E-946";
     }
 
     public static final HashMap<String, String> headers = new HashMap<>();
