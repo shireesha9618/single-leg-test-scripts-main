@@ -17,7 +17,7 @@ public class LoginPage extends BaseTestClass {
     private final Locator countryCode_Txt = Locator.builder().withWeb(By.id("countryCode"));
     private final String otp_Txt = "otp-xyz";
     private final Locator login_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Login']"));
-    private final Locator loginOTPIncorrectErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Incorrect OTP']"));
+    private final Locator errorMessage_Lbl = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Incorrect OTP']"));
     private final Locator loginHomeScreen_Btn = Locator.builder().withWeb(By.id("loginButton"));
     private final Locator loginOTPReEnterErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//label[contains(text(),'Re-enter')]"));
     private final Locator loginResendOTP_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Resend OTP']"));
@@ -81,12 +81,12 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginOTPIncorrectErrorMsg_Txt() {
-        return ActionHelper.isPresent(loginOTPIncorrectErrorMsg_Txt);
+        return ActionHelper.isPresent(errorMessage_Lbl);
     }
 
     public String getText_LoginOTPIncorrectErrorMsg_Txt() {
-        ActionHelper.waitUntilElementVisible(loginOTPIncorrectErrorMsg_Txt.getBy());
-        return ActionHelper.getText(loginOTPIncorrectErrorMsg_Txt.getBy());
+        ActionHelper.waitUntilElementVisible(errorMessage_Lbl.getBy());
+        return ActionHelper.getText(errorMessage_Lbl.getBy());
     }
 
     public void performLogout() {
