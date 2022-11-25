@@ -10,12 +10,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utility.Utility;
 
+import java.util.List;
+
 public class CommonActions {
     private static CommonActions _instance;
     private final Locator loader_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Loading...']"));
     private final Locator paginationCurrentlyShowingAndTotalCount_Lbl = Locator.builder().withWeb(By.className("ant-pagination-total-text"));
     private final Locator paginationNext_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
     private final Locator paginationPrevious_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
+    private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
+    private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
+
 
 
     public static CommonActions getInstance() {
@@ -60,5 +65,20 @@ public class CommonActions {
     public String getText_PaginationCurrentlyShowingCount_Lbl() {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[1];
+    }
+    public boolean isPresent_PaginationNext_Btn() {
+        return ActionHelper.isPresent(paginationNext_Btn);
+    }
+
+    public void click_PaginationNext_Btn() {
+        ActionHelper.click(paginationNext_Btn);
+    }
+
+    public boolean isPresent_PaginationPrevious_Btn() {
+        return ActionHelper.isPresent(paginationPrevious_Btn);
+    }
+
+    public void click_PaginationPrevious_Btn() {
+        ActionHelper.click(paginationPrevious_Btn);
     }
 }

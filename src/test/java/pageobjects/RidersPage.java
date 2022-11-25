@@ -1,5 +1,6 @@
 package pageobjects;
 
+import framework.common.assertion.JarvisAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public class RidersPage {
     private static RidersPage _instance;
-    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'space-y')]/div[1]/p"));
+    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div/p[text()='Riders']"));
     private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[text()='Home']"));
     private final Locator ridersBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/riders']//p"));
-    private final Locator emptyTable_Txt = Locator.builder().withWeb(By.xpath("//div[@class='ant-table-expanded-row-fixed']//h3"));
+    private final Locator emptyTable_Txt = Locator.builder().withWeb(By.xpath("//h3"));
     private final Locator search_Bar = Locator.builder().withWeb(By.xpath("//input[@id='search_ptp']"));
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
     private final Locator dropDownList_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
@@ -28,7 +29,7 @@ public class RidersPage {
     private final Locator statusDropDownOnboardingValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='onboarding:onboarding']"));
     private final Locator statusDropDownValueList_Lbl = Locator.builder().withWeb(By.xpath("//span[@class='ant-radio']/following-sibling::span"));
     private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Clear Selection']]"));
-    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("(//p[@class='text-black text-sm font-medium'])[2]"));
+    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("(//button[contains(@id,'headlessui-menu-button')]//p[text()='Teams']"));
     private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='More Actions']"));
     private final Locator exportCSV_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Export as CSV']"));
     private final Locator modifyColumns_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
@@ -50,8 +51,8 @@ public class RidersPage {
     private final Locator moreActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
     private final Locator moreActionsDropDownModifyColumnsStatusCross_Icon = Locator.builder().withWeb(By.xpath("//div[@data-rbd-drag-handle-draggable-id='Status']/button"));
     private final Locator editColumnsSearchRightList_Link = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div"));
-    private final Locator editColumnsSearchLeftList_Link = Locator.builder().withWeb(By.xpath("//div[contains(@class,'space-y')]//div[contains(@class,'flex space-x')]/label"));
-    private final Locator addNewRider_Btn = Locator.builder().withWeb(By.xpath("   //button/p[text()='New ']"));
+    private final Locator editColumnsSearchLeftList_Link = Locator.builder().withWeb(By.xpath("//label[@Class='w-full']"));
+    private final Locator addNewRider_Btn = Locator.builder().withWeb(By.xpath("//button/p[text()='New ']"));
     private final Locator tabHeaderList_Lbl = Locator.builder().withWeb(By.xpath("//thead/tr/th[text()]"));
     private final Locator ridersTableRiderIdColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]"));
     private final Locator ridersTableRiderNameColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][2]/p"));
@@ -70,6 +71,8 @@ public class RidersPage {
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
     private final Locator previous_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator edit_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Edit']"));
+    private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
+
 
     public static RidersPage getInstance() {
         if (_instance == null)
@@ -151,15 +154,12 @@ public class RidersPage {
     public boolean isPresent_Status_Btn() {
         return ActionHelper.isPresent(status_DropDown);
     }
-
     public void fill_Status_Btn(String inputText) {
         ActionHelper.fillWithClear(status_DropDown.getBy(), inputText);
     }
-
-    public void click_Status_Btn() {
+    public void close_Status_DropDown() {
         ActionHelper.click(status_DropDown);
     }
-
     public boolean isEnabled_StatusDropDownAvailableValue_Radio() {
         return ActionHelper.isEnabled(statusDropDownAvailableValue_Radio.getBy(), 4000);
     }
@@ -320,7 +320,6 @@ public class RidersPage {
 
     public void click_MoreActionsDropDownModifyColumnsLinkCancel_Btn() {
         ActionHelper.waitUntilElementClickable(moreActionsDropDownModifyColumnsLinkCancel_Btn);
-        //ActionHelper.click(moreActionsDropDownModifyColumnsLinkCancel_Btn);
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsStatusCross_Icon() {
@@ -445,6 +444,16 @@ public class RidersPage {
         return ActionHelper.getText(emptyTable_Txt);
     }
 
+    public void validate_Status_RadioBtn(String status) {
+        if (!isPresent_EmptyTable_Txt()) {
+            for (String value : getTxt_RidersTableStatusColumnList_Link())
+                JarvisAssert.assertEquals(value, status, status + " Status Is Present As Expected");
+        } else {
+            JarvisAssert.assertTrue(isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
+            JarvisAssert.assertEquals(getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
+        }
+    }
+
     public ArrayList<String> getTxt_RidersTableStatusColumnList_Link() {
         List<WebElement> statusRecord = ActionHelper.findElements(ridersTableStatusColumnList_Link);
         ArrayList<String> allStatus = new ArrayList<>();
@@ -546,5 +555,38 @@ public class RidersPage {
     public void click_Edit_Btn(int index) {
         ActionHelper.click(ActionHelper.findElements(edit_Btn).get(index));
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_PaginationPage1Block_Btn() {
+        ActionHelper.click(paginationPage1Block_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_PaginationPage2Block_Btn() {
+        ActionHelper.click(paginationPage2Block_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_PaginationPage3Block_Btn() {
+        ActionHelper.click(paginationPage3Block_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_Status_RadioBtn(String input) {
+        open_Status_DropDown();
+        List<WebElement> list = ActionHelper.findElements(status_RadioBtn.getBy());
+        for (WebElement element : list) {
+            String statusTxt = element.getText();
+            if (statusTxt.toLowerCase().contains(input.toLowerCase())) {
+                Utility.clickRadio(element);
+                break;
+            }
+        }
+        ActionHelper.waitForLoaderToHide();
+        close_Status_DropDown();
+    }
+
+    public void open_Status_DropDown() {
+        ActionHelper.click(status_DropDown);
     }
 }

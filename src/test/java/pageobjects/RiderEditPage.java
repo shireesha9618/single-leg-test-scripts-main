@@ -15,6 +15,7 @@ public class RiderEditPage {
     private final Locator lastName_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Last Name*']"));
     private final Locator lastName_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Last Name']"));
     private final Locator phoneNumber_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Phone Number*']"));
+    private final Locator phoneNumber_Txt = Locator.builder().withWeb(By.xpath("(//label[text()='Phone Number*']/..//input[@type='text'])[2]"));
     private final Locator teams_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Teams*']"));
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']//p"));
@@ -49,6 +50,10 @@ public class RiderEditPage {
 
     public void click_FirstName_Txt() {
         ActionHelper.click(firstName_Txt);
+    }
+
+    public void fill_FirstName_TxtBox(String input) {
+        ActionHelper.sendKeysWithClear(firstName_Txt.getBy(), input);
     }
 
     public String getText_LastName_Lbl() {
@@ -93,5 +98,20 @@ public class RiderEditPage {
 
     public String getText_UpdatedSuccessfully_Txt() {
         return ActionHelper.getText(updatedSuccessfully_Txt);
+    }
+
+    public String getText_FirstName_TxtBox(){
+        return ActionHelper.getText(firstName_Txt);
+    }
+
+    public String getText_LastName_TxtBox(){
+        return ActionHelper.getText(lastName_Txt);
+    }
+
+    public String getText_PhoneNumber_TxtBox(){
+        return ActionHelper.getText(phoneNumber_Lbl);
+    }
+    public String getText_Teams_TxtBox(){
+        return ActionHelper.getText(teams_Lbl);
     }
 }

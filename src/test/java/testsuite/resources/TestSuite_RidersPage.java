@@ -3,6 +3,7 @@ package testsuite.resources;
 import base.BaseTestClass;
 import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
+import framework.common.logger.ExtentLogger;
 import org.testng.annotations.Test;
 import pageobjects.*;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
     public void TC_Riders_06_Verify_The_UI_Of_Status_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
-        ridersPage.click_Status_Btn();
+        ridersPage.open_Status_DropDown();
         softAssert.assertTrue(ridersPage.isEnabled_StatusDropDownAvailableValue_Radio(), "Validate presence of Available radio button");
         softAssert.assertTrue(ridersPage.isEnabled_StatusDropDownBusyValue_Radio(), "Validate presence of Busy radio button");
         softAssert.assertTrue(ridersPage.isEnabled_StatusDropDownUnAvailableValue_Radio(), "Validate presence of Unavailable radio button");
@@ -79,162 +80,17 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_07, Verify The Functionality Of Filter The Rider With Available Status")
-    public void TC_Riders_07_Verify_The_Functionality_Of_Filter_The_Rider_With_Available_Status() {
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_07_08_09_010_011_012_013_014, Verify The Functionality Of Filter The Rider With All Status")
+    public void TC_Riders_07_08_09_010_011_012_013_014_Verify_The_Functionality_Of_Filter_The_Rider_With_All_Status() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownAvailableValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Available", "Status Is Available For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_08, Verify The Functionality Of Filter The Rider With Allocated Status")
-    public void TC_Riders_08_Verify_The_Functionality_Of_Filter_The_Rider_With_Allocated_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownAllocatedValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Allocated", "Status Is Allocated For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_09, Verify The Functionality Of Filter The Rider With Onboarding Status")
-    public void TC_Riders_09_Verify_The_Functionality_Of_Filter_The_Rider_With_Onboarding_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownOnboardingValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Onboarding", "Status Is Onboarding For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_10, Verify The Functionality Of Filter The Rider With Deboarding Status")
-    public void TC_Riders_10_Verify_The_Functionality_Of_Filter_The_Rider_With_Deboarding_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownDeBoardingValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Deboarding", "Status Is Deboarding For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_11, Verify The Functionality Of Filter The Rider With Inactive Status", enabled = true)
-    public void TC_Riders_11_Verify_The_Functionality_Of_Filter_The_Rider_With_Inactive_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownInActiveValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Inactive", "Status Is Inactive For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_12, Verify The Functionality Of Filter The Rider With Busy Status")
-    public void TC_Riders_12_Verify_The_Functionality_Of_Filter_The_Rider_With_Busy_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownBusyValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Busy", "Status Is Busy For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_13, Verify The Functionality Of Filter The Rider With Unavailable Status")
-    public void TC_Riders_13_Verify_The_Functionality_Of_Filter_The_Rider_With_UnAvailable_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownUnAvailableValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Unavailable", "Status Is Unavailable For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_14, Verify The Functionality Of Filter The Rider With Terminal Status")
-    public void TC_Riders_14_Verify_The_Functionality_Of_Filter_The_Rider_With_Terminal_Status() {
-        commonActions.coverUserJourneyTillRiders();
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
-        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
-        ridersPage.click_Status_Btn();
-        ridersPage.click_StatusDropDownTerminalValue_Radio();
-        if (!ridersPage.isPresent_EmptyTable_Txt()) {
-            ArrayList<String> allStatus = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-            for (String status : allStatus) {
-                softAssert.assertEquals(status, "Terminal", "Status Is Terminal For All Record As Expected ");
-            }
-        } else {
-            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
+        String[] statusList = {"Available", "Allocated", "Deboarding", "Inactive", "Onboarding", "Busy", "Unavailable", "Terminal"};
+        for (String status : statusList) {
+            ExtentLog.logPass("Validating" + status + "Status radiobutton");
+            ridersPage.click_Status_RadioBtn(status);
+            ridersPage.validate_Status_RadioBtn(status);
         }
         softAssert.assertAll();
     }
@@ -244,7 +100,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
         List<String> initialStatusList = ridersPage.getTxt_RidersTableStatusColumnList_Link();
-        ridersPage.click_Status_Btn();
+        ridersPage.open_Status_DropDown();
         ridersPage.click_StatusDropDownAvailableValue_Radio();
         for (String text : ridersPage.getTxt_RidersTableStatusColumnList_Link())
             softAssert.assertEquals(text, "Available", "Status Is Available For All Record As Expected ");
@@ -287,13 +143,11 @@ public class TestSuite_RidersPage extends BaseTestClass {
         ridersPage.click_MoreActions_Btn();
         ridersPage.click_ModifyColumns_Btn();
         ridersPage.click_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn();
-        boolean beforeUncheck = ridersPage.getSize_EditColumnsSearchRightList_Link() == ridersPage.getSize_EditColumnsSearchLeftList_Link();
-        softAssert.assertTrue(beforeUncheck, "Left And Right Record Is Same As Expected");
+        softAssert.assertTrue(ridersPage.getSize_EditColumnsSearchRightList_Link() == ridersPage.getSize_EditColumnsSearchLeftList_Link(), "Left And Right Record Is Same As Expected");
         softAssert.assertEquals(ridersPage.getSize_EditColumnsSearchRightList_Link(), ridersPage.getSize_EditColumnsSearchLeftList_Link(), "Select All Work Left & Right Record are Same");
         ridersPage.unCheck_EditColumnsRiderName_CheckBox();
         ridersPage.unCheck_EditColumnsStatus_CheckBox();
-        boolean afterUncheck = ridersPage.getSize_EditColumnsSearchRightList_Link() != ridersPage.getSize_EditColumnsSearchLeftList_Link();
-        softAssert.assertTrue(afterUncheck, "Left And Right Record Is Not Same As Expected");
+        softAssert.assertTrue(ridersPage.getSize_EditColumnsSearchRightList_Link() != ridersPage.getSize_EditColumnsSearchLeftList_Link(), "Left And Right Record Is Not Same As Expected");
         softAssert.assertAll();
     }
 
@@ -350,15 +204,8 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsCreatedBy_CheckBox(), "Validate absence of Created By Checkbox");
         softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsUpdatedBy_CheckBox(), "Validate absence of Updated By Checkbox");
         ridersPage.fill_EditColumnsSearch_Txt("Teams");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsRiderName_CheckBox(), "Validate absence of Rider Name Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsRiderId_CheckBox(), "Validate absence of Rider Id Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsStatus_CheckBox(), "Validate absence of Status Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsPhoneNumber_CheckBox(), "Validate absence of Phone Number Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsCreatedAt_CheckBox(), "Validate absence of Created At Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsUpdatedAt_CheckBox(), "Validate absence of Updated At Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsCreatedBy_CheckBox(), "Validate absence of Created By Checkbox");
-        softAssert.assertTrue(!ridersPage.isPresent_MoreActionsDropDownModifyColumnsUpdatedBy_CheckBox(), "Validate absence of Updated By Checkbox");
         softAssert.assertTrue(ridersPage.isPresent_MoreActionsDropDownModifyColumnsTeams_CheckBox(), "Validate Presence of Teams Checkbox");
+        softAssert.assertEquals(ridersPage.getSize_EditColumnsSearchLeftList_Link(), 1, "One Record Is Visible On Left Pane As Expected");
         softAssert.assertAll();
     }
 
