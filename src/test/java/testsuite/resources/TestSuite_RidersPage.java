@@ -88,7 +88,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Check Text Visibility Of Heading");
         String[] statusList = {"Available", "Allocated", "Deboarding", "Inactive", "Onboarding", "Busy", "Unavailable", "Terminal"};
         for (String status : statusList) {
-            ExtentLog.logPass("Validating" + status + "Status radiobutton");
+            ExtentLogger.logPass("Validating" + status + "Status radiobutton");
             ridersPage.click_Status_RadioBtn(status);
             ridersPage.validate_Status_RadioBtn(status);
         }
