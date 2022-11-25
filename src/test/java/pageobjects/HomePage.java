@@ -10,13 +10,17 @@ public class HomePage {
     private static HomePage _instance;
     private final Locator loginButton_Btn = Locator.builder().withWeb(By.id("loginButton"));
     private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
-    private final Locator selectTeam = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-dropdown ant-select-dropdown-placement-bottomLeft  ant-select-dropdown-hidden']"));
-    private final Locator selectTeam1 = Locator.builder().withWeb(By.id("selectTeam"));
+    private final Locator selectTeam_DropDown = Locator.builder().withWeb(By.id("selectTeam"));
+    private final Locator selectTeam_Txt = Locator.builder().withWeb(By.xpath("//input[@id='selectTeam']/..//following-sibling::span"));
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
     private final Locator teamSelectorOption_Button = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content' and text()='PLACEHOLDER']"));
     private final Locator orderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
     private final Locator createOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
     private final Locator viewOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
+
+
+    private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
+    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Riders']"));
 
     public static HomePage getInstance() {
         if (_instance == null)
@@ -30,22 +34,13 @@ public class HomePage {
 
     public void openDispatchListPage() {
         ActionHelper.click(dispatchMenuItem_Btn);
-//        CommonActions.getInstance().click_Skip_Btn();
-        ActionHelper.gotoSleep(10000);
+        ActionHelper.waitForLoaderToHide();
     }
 
-    public void selectTeam() {
-        ActionHelper.selectValueFromDD(selectTeam, "Bengaluru");
-    }
-
-    public void selectTeam1(String input) {
-        ActionHelper.sendKeys(selectTeam1, Keys.chord(input, Keys.ENTER));
-    }
-
-    public void selectTeam2(String input) {
-        ActionHelper.gotoSleep(4000);
+    public void selectTeam(String input) {
+        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(teamSelector_Dropdown);
-        ActionHelper.sendKeys(selectTeam1, Keys.chord(input, Keys.ENTER));
+        ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
     }
 
     public void openCreateOrderPage() {
@@ -53,13 +48,34 @@ public class HomePage {
     }
 
     public void openViewOrderPage() {
-        ActionHelper.gotoSleep(10000);
+        ActionHelper.waitUntilElementVisible(viewOrderMenuItem_Btn.getBy());
         ActionHelper.click(viewOrderMenuItem_Btn);
         CommonActions.getInstance().click_Skip_Btn();
-        ActionHelper.gotoSleep(10000);
-//        CommonActions.getInstance().click_Skip_Btn();
         DriverManager.getDriver().navigate().refresh();
         CommonActions.getInstance().click_Skip_Btn();
-        ActionHelper.gotoSleep(10000);
+    }
+
+    public void openRidersPage() {
+        ActionHelper.waitForLoaderToHide();
+        click_Resources_Btn();
+        click_RidersMenu_Btn();
+    }
+
+    public void click_Resources_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(resourcesMenu_Btn);
+    }
+
+    public void click_RidersMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(ridersMenu_Btn);
+    }
+
+    public String get_TeamDropdown_Txt() {
+        return ActionHelper.getText(selectTeam_Txt);
+    }
+
+    public Boolean isPresent_TeamDropdown_Txt() {
+        return ActionHelper.isPresent(selectTeam_Txt, 4000);
     }
 }

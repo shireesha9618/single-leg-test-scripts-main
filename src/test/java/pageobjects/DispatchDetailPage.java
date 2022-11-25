@@ -23,6 +23,7 @@ public class DispatchDetailPage {
     private final Locator confirmPublishDispatch_Btn = Locator.builder().withWeb(By.xpath("//button[@id='publishButton']"));
     private final Locator confirmPublishDispatchHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1[@id='publishHeader']//h1[@id='publishHeader']"));
     private final Locator cancelPublishDispatch_Lbl = Locator.builder().withWeb(By.xpath("//button[@id='cancelButton']"));
+
     public static DispatchDetailPage getInstance() {
         if (_instance == null) _instance = new DispatchDetailPage();
         return _instance;
@@ -45,7 +46,7 @@ public class DispatchDetailPage {
     }
 
     public String get_FirstElementScannableId_Lbl() {
-        ActionHelper.gotoSleep(5000);
+        ActionHelper.waitForLoaderToHide();
         return ActionHelper.getText(firstElementScannableId_Lbl);
     }
 
@@ -57,20 +58,18 @@ public class DispatchDetailPage {
         return ActionHelper.getText(dispatchStatus_Lbl);
     }
 
-    public void click_PublishDispatch_Btn()
-    {
+    public void click_PublishDispatch_Btn() {
         ActionHelper.click(publishDispatch_Btn);
-        ActionHelper.gotoSleep(3000);
-    }
-    public void click_ConfirmPublishDispatch_Btn()
-    {
-        ActionHelper.click(confirmPublishDispatch_Btn);
-        ActionHelper.gotoSleep(5000);
-        DriverManager.getDriver().navigate().refresh();
-    }
-    public Boolean isPresent_ConfirmPublishDispatchHeader_Lbl()
-    {
-        return ActionHelper.isPresent(confirmPublishDispatchHeader_Lbl);
+        ActionHelper.waitForLoaderToHide();
     }
 
+    public void click_ConfirmPublishDispatch_Btn() {
+        ActionHelper.click(confirmPublishDispatch_Btn);
+        ActionHelper.waitForLoaderToHide();
+        DriverManager.getDriver().navigate().refresh();
+    }
+
+    public Boolean isPresent_ConfirmPublishDispatchHeader_Lbl() {
+        return ActionHelper.isPresent(confirmPublishDispatchHeader_Lbl);
+    }
 }

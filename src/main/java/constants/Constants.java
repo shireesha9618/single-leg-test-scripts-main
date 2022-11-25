@@ -49,7 +49,8 @@ public class Constants {
 
     public static String ORDER_AMOUNT = Utils.getValueFromConfig("ORDER_AMOUNT");
     public static String TEAM = "QATeam";
-
+    public static String PICKUP_PINCODE="208014";
+    public static String DROP_PINCODE="201301";
 
     private Constants() {
 
@@ -79,6 +80,7 @@ public class Constants {
         public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED="E-943";
         public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING="E-944";
         public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE="E-946";
+
     }
 
     public static final HashMap<String, String> headers = new HashMap<>();

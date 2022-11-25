@@ -2,12 +2,14 @@ package pageobjects;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
+import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 
 import java.util.HashMap;
 
 public class DispatchPage {
     private static DispatchPage _instance;
+    private final Locator dispatchesHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[@id='header_Lbl']"));
     private final Locator dispatchesCount_Lbl = Locator.builder().withWeb(By.xpath("//p[@class='text-black text-base font-normal' and text()='Dispatches']/preceding-sibling::p"));
     private final Locator firstElementName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[2]//p/a"));
     private final Locator firstElementStatus_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[3]//h6"));
@@ -31,6 +33,7 @@ public class DispatchPage {
     }
 
     public String get_FirstElementStatus_Lbl() {
+        DriverManager.getDriver().navigate().refresh();
         return ActionHelper.getText(firstElementStatus_Lbl);
     }
 
@@ -69,10 +72,14 @@ public class DispatchPage {
     public HashMap<String, String> getDispatchSummary() {
         HashMap<String, String> orderSummary = new HashMap<>();
         orderSummary.put("DispatchCount", get_DispatchCount_Lbl());
-        orderSummary.put("AssignedCount",get_AssignedCount_Lbl());
+        orderSummary.put("AssignedCount", get_AssignedCount_Lbl());
         orderSummary.put("StartedCount", get_StartedCount_Lbl());
         orderSummary.put("OngoingCount", get_OngoingCount_Lbl());
         orderSummary.put("ClosedCount", get_ClosedCount_Lbl());
         return orderSummary;
+    }
+
+    public Boolean isPresent_Header_Lbl() {
+        return ActionHelper.isPresent(dispatchesHeader_Lbl, 4000);
     }
 }

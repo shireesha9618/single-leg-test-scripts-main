@@ -1,14 +1,17 @@
 package pageobjects;
 
+import com.github.javafaker.Faker;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import utility.Utility;
+
+import java.awt.*;
 
 public class CreateOrderPage {
     private static CreateOrderPage _instance;
@@ -33,9 +36,7 @@ public class CreateOrderPage {
     private final Locator dropAddress2_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='dropAddressLine2']"));
     private final Locator dropState_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='dropState']"));
     private final Locator dropCity_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='dropCity']"));
-
     private final Locator selectPaymentType_TxtBox = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']"));
-
     private final Locator orderAmount_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='paymentDetails.orderAmount']"));
     private final Locator submit_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
@@ -65,6 +66,8 @@ public class CreateOrderPage {
     private final Locator cancelFacility_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Cancel']/..)[1]"));
     private final Locator pickUpClearAll_Btn = Locator.builder().withWeb(By.xpath("(//div[text()='Clear All'])[1]"));
     private final Locator dropClearAll_Btn = Locator.builder().withWeb(By.xpath("(//div[text()='Clear All'])[2]"));
+    private final Locator state_TxtBox = Locator.builder().withWeb(By.xpath("//h4[text()='State*']"));
+    Faker sampleData = new Faker();
 
     public static CreateOrderPage getInstance() {
         if (_instance == null) _instance = new CreateOrderPage();
@@ -124,7 +127,6 @@ public class CreateOrderPage {
     }
 
     public void team() {
-        ActionHelper.gotoSleep(10000);
         ActionHelper.sendKeysWithClear(teamSelect_Btn.getBy(), Keys.chord("TestingTeam" + Keys.TAB));
     }
 
@@ -142,14 +144,14 @@ public class CreateOrderPage {
         ActionHelper.sendKeysWithClear(description_TxtBox.getBy(), Keys.chord(description + Keys.TAB));
     }
 
-    public void set_PickUpFacility_TextBox(String dropFacility) {
-        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ENTER));
-        ActionHelper.gotoSleep(10000);
+    public void set_PickUpFacility_TextBox() {
+        ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.waitForLoaderToHide();
     }
 
-    public void set_DropFacility_TextBox(String dropFacility) {
-        ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord(dropFacility + Keys.ENTER));
-        ActionHelper.gotoSleep(10000);
+    public void set_DropFacility_TextBox() {
+        ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.waitForLoaderToHide();
     }
 
     public void set_ContactName_TextBox(String contactName) {
@@ -165,10 +167,10 @@ public class CreateOrderPage {
     }
 
     public void click_Submit_Btn() {
-        ActionHelper.gotoSleep(10000);
+        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(submit_Btn);
         CommonActions.getInstance().click_Skip_Btn();
-        ActionHelper.gotoSleep(10000);
+        ActionHelper.waitForLoaderToHide();
         DriverManager.getDriver().navigate().refresh();
         CommonActions.getInstance().click_Skip_Btn();
     }
@@ -194,7 +196,7 @@ public class CreateOrderPage {
     }
 
     public Boolean isPresent_FacilityName_TxtBox() {
-        return ActionHelper.isPresent(facilityName_TxtBox, 2000);
+        return ActionHelper.isPresent(facilityName_TxtBox, 10000);
     }
 
     public void set_FacilityName_TxtBox(String facilityName) {
@@ -215,7 +217,7 @@ public class CreateOrderPage {
 
     public void set_AddFacilityPostalCode_TxtBox(String postalCode) {
         ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode + Keys.TAB));
-        ActionHelper.gotoSleep(5000);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public Boolean isPresent_AddressLine1_TxtBox() {
@@ -262,7 +264,6 @@ public class CreateOrderPage {
     }
 
     public void click_CancelFacility_Btn() {
-        ActionHelper.gotoSleep(3000);
         ActionHelper.click(cancelFacility_Btn);
     }
 
@@ -315,6 +316,7 @@ public class CreateOrderPage {
     }
 
     public void set_DropPostalCode_TxtBox(String postalCode) {
+        ActionHelper.waitUntilElementVisible(dropPostalCode_TxtBox.getBy());
         ActionHelper.sendKeysWithClear(dropPostalCode_TxtBox.getBy(), postalCode);
     }
 
@@ -338,27 +340,25 @@ public class CreateOrderPage {
         return ActionHelper.getAttribute(dropAddress2_TxtBox, "value");
     }
 
-    public void validateAndCreateFacility(String input, String postalCode) {
+    public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
         click_AddFacility_Btn(input);
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.gotoSleep(5000);
-        softAssert.assertTrue(isPresent_FacilityName_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_FacilityId_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_AddFacilityPostalCode_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_AddressLine1_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_AddressLine2_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_State_TxtBox(), "present");
-        softAssert.assertTrue(isPresent_City_TxtBox(), "present");
+        softAssert.assertTrue(isPresent_FacilityName_TxtBox(), "Facility name is present as expected");
+        softAssert.assertTrue(isPresent_FacilityId_TxtBox(), "Facility Id is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCode_TxtBox(), "Add Facility Postal code is present as expected");
+        softAssert.assertTrue(isPresent_AddressLine1_TxtBox(), "Address Line 1 text box is present as expected");
+        softAssert.assertTrue(isPresent_AddressLine2_TxtBox(), "Address Line 2 text box is present as expected");
+        softAssert.assertTrue(isPresent_State_TxtBox(), "State text box is present as expected");
+        softAssert.assertTrue(isPresent_City_TxtBox(), "City text box is present as expected");
         click_CreateFacility_Btn();
-        softAssert.assertTrue(isPresent_FacilityNameRequiredMandatory_Msg(), "present");
-        softAssert.assertTrue(isPresent_PostalCodeRequiredMandatory_Msg(), "present");
-        softAssert.assertTrue(isPresent_AddressLine1RequiredMandatory_Msg(), "present");
-        softAssert.assertTrue(isPresent_AddressLine2RequiredMandatory_Msg(), "present");
-        softAssert.assertTrue(isPresent_StateRequiredMandatory_Msg(), "present");
-        softAssert.assertTrue(isPresent_CityRequiredMandatory_Msg(), "present");
+        softAssert.assertTrue(isPresent_FacilityNameRequiredMandatory_Msg(), "Facility name required message is present as expected");
+        softAssert.assertTrue(isPresent_PostalCodeRequiredMandatory_Msg(), "Postal code required message is present as expected");
+        softAssert.assertTrue(isPresent_AddressLine1RequiredMandatory_Msg(), "Address line 1 required message is present as expected");
+        softAssert.assertTrue(isPresent_AddressLine2RequiredMandatory_Msg(), "Address line 2 required message is present as expected");
+        softAssert.assertTrue(isPresent_StateRequiredMandatory_Msg(), "State required message is present as expected");
+        softAssert.assertTrue(isPresent_CityRequiredMandatory_Msg(), "City required message is present as expected");
         softAssert.assertAll();
         createFacility(postalCode);
-        ActionHelper.gotoSleep(10000);
     }
 
     public void fill_Pickup_Details(String postalCode, String addressLine1, String addressLine2) {
@@ -386,12 +386,12 @@ public class CreateOrderPage {
         fill_Pickup_Details(postalCode, addressLine1, addressLine2);
         softAssert.assertEquals(get_PickupPostalCode_TxtBox(), postalCode, "Postal Code is matched expected");
         softAssert.assertEquals(get_AddressLine1_TxtBox(), addressLine1, "Address Line 1 is matched expected");
-        softAssert.assertEquals(get_AddressLine2_TxtBox(), addressLine2, "Address Line 1 is matched expected");
+        softAssert.assertEquals(get_AddressLine2_TxtBox(), addressLine2, "Address Line 2 is matched expected");
         click_PickUpClearAll_Btn();
         softAssert.assertEquals(get_PickupPostalCode_TxtBox(), "", "Postal Code is matched expected");
         softAssert.assertEquals(get_AddressLine1_TxtBox(), "", "Address Line 1 is matched expected");
-        softAssert.assertEquals(get_AddressLine2_TxtBox(), "", "Address Line 1 is matched expected");
-        ActionHelper.gotoSleep(3000);
+        softAssert.assertEquals(get_AddressLine2_TxtBox(), "", "Address Line 2 is matched expected");
+        ActionHelper.waitForLoaderToHide();
     }
 
     public void validate_DropClearAll_Btn(String postalCode, String addressLine1, String addressLine2) {
@@ -404,22 +404,24 @@ public class CreateOrderPage {
         softAssert.assertEquals(get_DropPostalCode_TxtBox(), "", "Postal Code is matched expected");
         softAssert.assertEquals(get_DropAddressLine1_TxtBox(), "", "Address Line 1 is matched expected");
         softAssert.assertEquals(get_DropAddressLine2_TxtBox(), "", "Address Line 1 is matched expected");
-        ActionHelper.gotoSleep(3000);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public void createFacility(String postalCode) {
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        Actions actions = new Actions(DriverManager.getDriver());
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.gotoSleep(5000);
-        set_FacilityName_TxtBox("Facility " + ActionHelper.generateRandomName(3, 5));
+        isPresent_FacilityName_TxtBox();
+        set_FacilityName_TxtBox("Facility " + sampleData.number().digits(4));
         set_AddFacilityPostalCode_TxtBox(postalCode);
-        set_AddFacilityAddressLine1_TxtBox(ActionHelper.generateRandomName(8, 10));
-        set_AddFacilityAddressLine2_TxtBox(ActionHelper.generateRandomName(8, 10));
+        set_AddFacilityAddressLine1_TxtBox("Building No " + sampleData.number().digits(2));
+        set_AddFacilityAddressLine2_TxtBox("Street No " + sampleData.number().digits(2));
         softAssert.assertTrue(get_AddFacilityState_TxtBox() != null, "State Text box is not null as expected");
         softAssert.assertTrue(get_AddFacilityCity_TxtBox() != null, "City Text box is not null as expected");
-        js.executeScript("window.scrollBy(0,1000)");
         softAssert.assertAll();
+        ActionHelper.click(addFacilityState_TxtBox);
+        actions.sendKeys(Keys.PAGE_DOWN).build().perform();
         click_CreateFacility_Btn();
+        ActionHelper.waitForLoaderToHide();
     }
 }
 

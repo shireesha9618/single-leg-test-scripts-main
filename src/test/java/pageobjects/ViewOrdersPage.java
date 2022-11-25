@@ -56,6 +56,7 @@ public class ViewOrdersPage {
     private final Locator assignRiderDropDownManualAssignAndStart_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign and Start']"));
     private final Locator statusDropdown_Btn = Locator.builder().withWeb(By.xpath("//button[@id='headlessui-menu-button-2']/button"));
     private final Locator clearSelection_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Clear Selection']/.."));
+    private final Locator assignRiderSearch_TextBox = Locator.builder().withWeb(By.xpath("//h4[text()='Rider*']/..//following-sibling::div//input"));
 
     public static ViewOrdersPage getInstance() {
         if (_instance == null) _instance = new ViewOrdersPage();
@@ -63,7 +64,7 @@ public class ViewOrdersPage {
     }
 
     public boolean isPresent_ViewOrdersHeader_Lbl() {
-        return ActionHelper.isPresent(ordersHeader_Lbl);
+        return ActionHelper.isPresent(ordersHeader_Lbl, 5000);
     }
 
     public String getText_OrdersHeader_Lbl() {
@@ -220,7 +221,7 @@ public class ViewOrdersPage {
 
     public void fill_Search_TxtField(String orderId) {
         ActionHelper.fillWithClear(search_TxtField.getBy(), orderId);
-        ActionHelper.gotoSleep(7000);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_Status_Btn() {
@@ -317,6 +318,7 @@ public class ViewOrdersPage {
 
     public void click_AssignRiderDropDownManualRider_DropDown() {
         ActionHelper.click(assignRiderDropDownManualRider_DropDown);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_AssignRiderDropDownManualRiderDropDownData_Lbl() {
@@ -354,23 +356,27 @@ public class ViewOrdersPage {
     public String get_FirstElementNoOfShipment_Lbl() {
         return ActionHelper.getText(firstElementNoOfShipment_Lbl);
     }
-    public void click_ClearSelection_Btn()
-    {
+
+    public void click_ClearSelection_Btn() {
         ActionHelper.click(clearSelection_Btn);
     }
-    public void click_Status_Dropdown()
-    {
+
+    public void click_Status_Dropdown() {
         ActionHelper.click(statusDropdown_Btn);
     }
 
-    public HashMap<String,String> getOrderSummary(){
-        HashMap<String,String> orderSummary=new HashMap<>();
-        orderSummary.put("ToBeAssignedData",ViewOrdersPage.getInstance().getText_ToBeAssignData_Lbl());
-        orderSummary.put("ToBeDispatchedData",ViewOrdersPage.getInstance().getText_ToBeDispatchedData_Lbl());
-        orderSummary.put("DispatchedData",ViewOrdersPage.getInstance().getText_DispatchedData_Lbl());
-        orderSummary.put("DeliveredData",ViewOrdersPage.getInstance().getText_DeliveredData_Lbl());
-        orderSummary.put("FailedData",ViewOrdersPage.getInstance().getText_FailedData_Lbl());
-        orderSummary.put("RemainingData",ViewOrdersPage.getInstance().getText_RemainingData_Lbl());
+    public HashMap<String, String> getOrderSummary() {
+        HashMap<String, String> orderSummary = new HashMap<>();
+        orderSummary.put("ToBeAssignedData", ViewOrdersPage.getInstance().getText_ToBeAssignData_Lbl());
+        orderSummary.put("ToBeDispatchedData", ViewOrdersPage.getInstance().getText_ToBeDispatchedData_Lbl());
+        orderSummary.put("DispatchedData", ViewOrdersPage.getInstance().getText_DispatchedData_Lbl());
+        orderSummary.put("DeliveredData", ViewOrdersPage.getInstance().getText_DeliveredData_Lbl());
+        orderSummary.put("FailedData", ViewOrdersPage.getInstance().getText_FailedData_Lbl());
+        orderSummary.put("RemainingData", ViewOrdersPage.getInstance().getText_RemainingData_Lbl());
         return orderSummary;
+    }
+
+    public void fill_AssignRiderSearch_TextBox(String input) {
+        ActionHelper.sendKeys(assignRiderSearch_TextBox.getBy(), input);
     }
 }
