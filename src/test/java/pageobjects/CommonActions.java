@@ -6,6 +6,7 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import io.github.sukgu.Shadow;
 
 import static utility.Utility.acceptAlertIfPresent;
 
@@ -28,11 +29,11 @@ public class CommonActions {
     }
 
     public void click_Skip_Btn() {
-//        ActionHelper.waitForLoaderToHide();
-//        Shadow shadow = new Shadow(DriverManager.getDriver());
-//        WebElement element = shadow.findElement("button[type='button'][data-pfbind-text='footer.skipButton.text']");
-//        if (element.isDisplayed())
-//            element.click();
+        ActionHelper.waitForLoaderToHide();
+        Shadow shadow = new Shadow(DriverManager.getDriver());
+        WebElement element = shadow.findElement("button[type='button'][data-pfbind-text='footer.skipButton.text']");
+        if (element.isDisplayed())
+            element.click();
     }
 
 

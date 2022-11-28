@@ -8,4 +8,5 @@ public class TestGroup {
     public static final String BVT = "bvt";
     public static final String LOGIN = "login";
     public static final String DISPATCH_DETAIL = "dispatchdetail";
+    public static final String CREATE_NEW_ORDER = "createNewOrder";
 }
