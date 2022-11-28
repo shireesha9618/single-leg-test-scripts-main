@@ -24,7 +24,6 @@ public class TestSuite_Login extends BaseTestClass {
         loginPage.navigateToLoginScreen();
         softAssert.assertTrue(loginPage.isPresent_LoginWithOtp_Lnk(), "Login with OTP Is Present As Expected");
         softAssert.assertTrue(loginPage.isPresent_LoginWithEmail_Lnk(), "Login with Email Is Present As Expected");
-        softAssert.assertTrue(loginPage.isPresent_LoginWitGoogle_Lnk(), "Login with Google Is Present As Expected");
         softAssert.assertAll();
     }
 

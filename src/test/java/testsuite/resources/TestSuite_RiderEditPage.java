@@ -16,7 +16,6 @@ public class TestSuite_RiderEditPage extends BaseTestClass {
     CommonActions commonActions = CommonActions.getInstance();
     Faker sampleData = new Faker();
 
-
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_016, Verify The Functionality Of Edit Button In Riders List Page")
     public void TC_RiderEditPage_16_Verify_The_Functionality_Of_Edit_Button_In_Riders_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -48,7 +47,6 @@ public class TestSuite_RiderEditPage extends BaseTestClass {
         softAssert.assertTrue(riderEditPage.isPresent_Save_Btn(), "Save Button is Present As Expected");
         softAssert.assertAll();
     }
-
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_018, Verify The Functionality Of Cancel Button In Edit Rider Page")
     public void TC_RiderEditPage_018_Verify_The_Functionality_Of_Cancel_Button_In_Edit_Rider_Page() {

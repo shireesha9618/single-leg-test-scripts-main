@@ -138,4 +138,31 @@ public class LoginPage extends BaseTestClass {
             ActionHelper.click(loginHomeScreen_Btn);
     }
 
+    public boolean isPresent_LoginWithOtp_Lnk() {
+        return ActionHelper.isPresent(loginWithOTP_Lnk);
+    }
+
+    public String getText_PlaceHolder_Txt() {
+        return ActionHelper.getAttribute(userId_Txt.getBy(), "placeholder");
+    }
+
+    public boolean isEnabled_SendOTP_Btn() {
+        return ActionHelper.isEnabled(sendOTP_Btn.getBy());
+    }
+
+    public void click_LoginWithOTP_Lnk() {
+        ActionHelper.click(loginWithOTP_Lnk);
+    }
+
+    public boolean isPresent_LoginOTPReEnterErrorMsg_Txt() {
+        return ActionHelper.isPresent(loginOTPReEnterErrorMsg_Txt);
+    }
+
+    public boolean isPresent_LoginResendOTP_Btn() {
+        return ActionHelper.isPresent(loginResendOTP_Btn);
+    }
+
+    public String getText_CountryCode_Txt() {
+        return ActionHelper.getText(countryCode_Txt);
+    }
 }
