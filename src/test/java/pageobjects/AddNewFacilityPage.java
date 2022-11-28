@@ -1,17 +1,14 @@
 package pageobjects;
 
 import com.github.javafaker.Faker;
-import framework.backend.APIResponseException;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Random;
 
 public class AddNewFacilityPage {
     private static AddNewFacilityPage _instance;
@@ -29,7 +26,9 @@ public class AddNewFacilityPage {
     private final Locator postalCode_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']"));
     private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Postal Code']"));
     private final Locator country_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Country*']"));
-    private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//span[@title='India']"));
+    //private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='space-y-2']//span[@class='ant-select-selection-search']/input"));
+    private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-selector']//input[@disabled='']"));
+
     private final Locator addressLine1_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']"));
     private final Locator addressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Address Line 1']"));
     private final Locator addressLine2_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']"));
@@ -106,6 +105,10 @@ public class AddNewFacilityPage {
         ActionHelper.fillWithClear(facilityName_Txt.getBy(), facilityName);
     }
 
+    public boolean isEnabled_FacilityName_Txt() {
+        return ActionHelper.isEnabled(facilityName_Txt.getBy());
+    }
+
     public String getText_FacilityName_Txt() {
         return ActionHelper.getText(facilityName_Txt);
     }
@@ -116,6 +119,10 @@ public class AddNewFacilityPage {
 
     public boolean isPresent_FacilityId_Txt() {
         return ActionHelper.isPresent(facilityId_Txt);
+    }
+
+    public boolean isEnabled_FacilityId_Txt() {
+        return ActionHelper.isEnabled(facilityId_Txt.getBy());
     }
 
     public void fill_FacilityId_Txt(String facilityId) {
@@ -135,16 +142,15 @@ public class AddNewFacilityPage {
     }
 
     public void fill_PostalCode_Txt(String postalCode) {
-        ActionHelper.fillWithClear(postalCode_Txt.getBy(), postalCode);
+        ActionHelper.sendKeysWithClear(postalCode_Txt.getBy(), Keys.chord(postalCode));
     }
 
-    public void edit_PostalCode_Txt(String postalCode) {
-        ActionHelper.clear(postalCode_Txt.getBy());
-        Actions actions = new Actions(DriverManager.getDriver());
-        WebElement abc = ActionHelper.findElement(postalCode_Txt);
-        actions.click(abc).sendKeys(Keys.BACK_SPACE).perform();
-        ActionHelper.gotoSleep(10000);
-        ActionHelper.fillWithClear(postalCode_Txt.getBy(), postalCode);
+    public String getText_PostalCode_Txt() {
+        return ActionHelper.getText(postalCode_Txt);
+    }
+
+    public boolean isEmpty_PostalCode_Txt() {
+        return ActionHelper.findElement(postalCode_Txt).getAttribute("value").length() == 0;
     }
 
     public boolean isPresent_Country_Lbl() {
@@ -159,6 +165,10 @@ public class AddNewFacilityPage {
         ActionHelper.fillWithClear(country_Txt.getBy(), country);
     }
 
+    public boolean isDisabled_Country_Txt() {
+        return ActionHelper.findElement(country_Txt).getAttribute("disabled").equals("true");
+    }
+
     public boolean isPresent_AddressLine1_Lbl() {
         return ActionHelper.isPresent(addressLine1_Lbl);
     }
@@ -168,12 +178,11 @@ public class AddNewFacilityPage {
     }
 
     public void fill_AddressLine1_Txt(String addressLine1) {
-        ActionHelper.fillWithClear(addressLine1_Txt.getBy(), addressLine1);
+        ActionHelper.sendKeysWithClear(addressLine1_Txt.getBy(), Keys.chord(addressLine1));
     }
 
-    public void edit_AddressLine1_Txt(String addressLine1) {
-        ActionHelper.clear(addressLine1_Txt.getBy());
-        ActionHelper.fillWithClear(addressLine1_Txt.getBy(), addressLine1);
+    public boolean isEmpty_AddressLine1_Txt() {
+        return ActionHelper.findElement(addressLine1_Txt).getAttribute("value").length() == 0;
     }
 
     public boolean isPresent_AddressLine2_Lbl() {
@@ -184,13 +193,12 @@ public class AddNewFacilityPage {
         return ActionHelper.isPresent(addressLine2_Txt);
     }
 
-    public void fill_AddressLine2_Txt(String addressLine2) {
-        ActionHelper.fillWithClear(addressLine2_Txt.getBy(), addressLine2);
+    public boolean isEmpty_AddressLine2_Txt() {
+        return ActionHelper.findElement(addressLine2_Txt).getAttribute("value").length() == 0;
     }
 
-    public void edit_AddressLine2_Txt(String addressLine2) {
-        ActionHelper.clear(addressLine2_Txt.getBy());
-        ActionHelper.fillWithClear(addressLine2_Txt.getBy(), addressLine2);
+    public void fill_AddressLine2_Txt(String addressLine2) {
+        ActionHelper.sendKeysWithClear(addressLine2_Txt.getBy(), Keys.chord(addressLine2));
     }
 
     public boolean isPresent_City_Lbl() {
@@ -205,6 +213,10 @@ public class AddNewFacilityPage {
         ActionHelper.fillWithClear(city_Txt.getBy(), city);
     }
 
+    public boolean isEmpty_City_Txt() {
+        return ActionHelper.findElement(city_Txt).getAttribute("value").length() == 0;
+    }
+
     public boolean isPresent_State_Lbl() {
         return ActionHelper.isPresent(state_Lbl);
     }
@@ -215,6 +227,10 @@ public class AddNewFacilityPage {
 
     public void fill_State_Txt(String state) {
         ActionHelper.fillWithClear(state_Txt.getBy(), state);
+    }
+
+    public boolean isEmpty_State_Txt() {
+        return ActionHelper.findElement(state_Txt).getAttribute("value").length() == 0;
     }
 
     public boolean isPresent_Cancel_Btn() {
@@ -241,31 +257,52 @@ public class AddNewFacilityPage {
         ActionHelper.click(create_Btn);
     }
 
-    public HashMap<String, String> createFacility() throws APIResponseException,IOException {
+    public String getPostalCode() {
+        String[] postalCode = {"201301", "506001", "110001", "201313", "845305", "233001", "225001", "243601", "204101", "221002",
+                "450331", "464001", "462026", "456006", "416416", "641001", "638455", "571201", "580001", "743425", "700027", "788701", "781301"};
+        int randomPostalCode = new Random().nextInt(postalCode.length);
+        return postalCode[randomPostalCode];
+    }
+
+    public HashMap<String, String> createFacility() {
         HashMap<String, String> createNewFacility = new HashMap<>();
-        String facilityName = "facility"+ ActionHelper.generateRandomName(3,5);
-        String postalCode = sampleData.number().digits(6);
+        String facilityName = "facility"+ sampleData.name().lastName();
+        String postalCode = getPostalCode();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
-        String city = sampleData.address().cityName();
-        String state = sampleData.address().state();
 
         createNewFacility.put("facilityName", facilityName);
         createNewFacility.put("postalCode", postalCode);
         createNewFacility.put("addressLine1", addressLine1);
         createNewFacility.put("addressLine2", addressLine2);
-        createNewFacility.put("city", city);
-        createNewFacility.put("state", state);
 
         fill_FacilityName_Txt(facilityName);
         fill_PostalCode_Txt(postalCode);
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
-        fill_City_Txt(city);
-        fill_State_Txt(state);
-
+        ActionHelper.waitForLoaderToHide();
         click_Create_Btn();
+        ActionHelper.waitForLoaderToHide();
         return createNewFacility;
     }
 
+    public HashMap<String, String> updateFacility() {
+        DriverManager.getDriver().navigate().refresh();
+        HashMap<String, String> updateFacility = new HashMap<>();
+        String postalCode = getPostalCode();
+        String addressLine1 = sampleData.address().streetName();
+        String addressLine2 = sampleData.address().streetName();
+
+        updateFacility.put("postalCode", postalCode);
+        updateFacility.put("addressLine1", addressLine1);
+        updateFacility.put("addressLine2", addressLine2);
+
+        fill_PostalCode_Txt(postalCode);
+        fill_AddressLine1_Txt(addressLine1);
+        fill_AddressLine2_Txt(addressLine2);
+        ActionHelper.waitForLoaderToHide();
+        click_Save_Btn();
+        ActionHelper.waitForLoaderToHide();
+        return updateFacility;
+    }
 }

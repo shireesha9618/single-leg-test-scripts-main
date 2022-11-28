@@ -8,11 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class FacilitiesPage {
     private static FacilitiesPage _instance;
-    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='flex justify-between']/p"));
+    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div/p[text()='Facilities']"));
     private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/']"));
     private final Locator facilitiesBreadCrumb_Link = Locator.builder().withWeb(By.id("/facilities"));
     private final Locator newFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-4']//p"));
@@ -60,21 +61,31 @@ public class FacilitiesPage {
     private final Locator tableColumnNameUpdatedAt = Locator.builder().withWeb(By.xpath("//th[text()='Updated At']"));
     private final Locator tableColumnNameCreatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Created By']"));
     private final Locator tableColumnNameUpdatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Updated By']"));
-    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("//tr[2]/td[1]"));
+    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("(//span[@class='ant-checkbox'])[1]"));
+    private final Locator tableDataCheckBox_List = Locator.builder().withWeb(By.xpath("//label[contains(@class,'ant-checkbox')]"));
     private final Locator tableDataEdit_Link = Locator.builder().withWeb(By.xpath("(//p[text()='Edit'])[1]"));
     private final Locator tableDataFacilityId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
     private final Locator tableDataFacilityName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
+    private final Locator tableDataFacilityStatus_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[4]"));
     private final Locator tableDataPostalCode_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[8]"));
+    private final Locator tableDataAddress_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[5]"));
+    private final Locator tableDataCity_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[6]"));
+    private final Locator tableDataState_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[7]"));
     private final Locator facilityTableFacilityIdList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[2]"));
     private final Locator facilityTableStatusList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[4]"));
     private final Locator facilityTableFacilityNameList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[3]"));
     private final Locator pageSize = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
-    String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
+    private final Locator paginationBlockList_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
     private final Locator prev_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
+    private final Locator deactivate_Btn = Locator.builder().withWeb(By.xpath("//p[@class='text-black text-sm font-medium']"));
+    private final Locator deactivateFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Deactivate Facility']"));
+    private final Locator deactivateFacilityCancel_Btn = Locator.builder().withWeb(By.xpath("//div[@class='w-full flex justify-center items-center scale-100']//p[text()='Cancel']"));
+    private final Locator deactivateFacilityDeactivate_Btn = Locator.builder().withWeb(By.xpath("//div[@class='w-full flex justify-center items-center scale-100']//p[text()='Deactivate']"));
 
     private final Locator userProfile_Btn = Locator.builder().withWeb(By.id("headlessui-menu-button-1"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
+    String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
 
     public static FacilitiesPage getInstance() {
         if (_instance == null) _instance = new FacilitiesPage();
@@ -439,6 +450,7 @@ public class FacilitiesPage {
 
     public void click_TableData_CheckBox() {
         ActionHelper.click(tableData_CheckBox);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_TableDataEdit_Link() {
@@ -466,12 +478,44 @@ public class FacilitiesPage {
         return ActionHelper.getText(tableDataFacilityName_Lbl);
     }
 
+    public boolean isPresent_TableDataFacilityStatus_Lbl() {
+        return ActionHelper.isPresent(tableDataFacilityStatus_Lbl);
+    }
+
+    public String getText_TableDataFacilityStatus_Lbl() {
+        return ActionHelper.getText(tableDataFacilityStatus_Lbl);
+    }
+
     public boolean isPresent_TableDataPostalCode_Lbl() {
         return ActionHelper.isPresent(tableDataPostalCode_Lbl);
     }
 
     public String getText_TableDataPostalCode_Lbl() {
         return ActionHelper.getText(tableDataPostalCode_Lbl);
+    }
+
+    public boolean isPresent_TableDataAddress_Lbl() {
+        return ActionHelper.isPresent(tableDataAddress_Lbl);
+    }
+
+    public String getText_TableDataAddress_Lbl() {
+        return ActionHelper.getText(tableDataAddress_Lbl);
+    }
+
+    public boolean isPresent_TableDataCity_Lbl() {
+        return ActionHelper.isPresent(tableDataCity_Lbl);
+    }
+
+    public String getText_TableDataCity_Lbl() {
+        return ActionHelper.getText(tableDataCity_Lbl);
+    }
+
+    public boolean isPresent_TableDataState_Lbl() {
+        return ActionHelper.isPresent(tableDataState_Lbl);
+    }
+
+    public String getText_TableDataState_Lbl() {
+        return ActionHelper.getText(tableDataState_Lbl);
     }
 
     public List<WebElement> getList_FacilityTableFacilityId_Lbl() {
@@ -494,6 +538,24 @@ public class FacilitiesPage {
         ActionHelper.click(pageSize);
     }
 
+    public String getText_PageSize() {
+        String[] dataSize = ActionHelper.getText(pageSize).split("/");
+        return dataSize[0].replace(" ", "");
+    }
+
+    public void selectPaginationBlock(String pageNo) {
+        for(WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
+            if(element.getAttribute("title").equals(pageNo)) ActionHelper.click(element);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isPaginationBlockSelected(String label) {
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
+            if (element.getAttribute("title").equals(label) && element.getAttribute("class").contains("item-active"))
+                return true;
+        return false;
+    }
+
     public void chooseNoOfRecordToBeDisplayed(int noOfData) {
         click_PageSize();
         ActionHelper.click(ActionHelper.findElement(By.xpath(chooseNoOfRecordToBeDisplayed.replace("ab", String.valueOf(noOfData)))));
@@ -506,6 +568,7 @@ public class FacilitiesPage {
 
     public void click_Prev_Btn() {
         ActionHelper.click(prev_Btn);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_Next_Btn() {
@@ -515,6 +578,38 @@ public class FacilitiesPage {
     public void click_Next_Btn() {
         ActionHelper.click(next_Btn);
         ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isPresent_Deactivate_Btn() {
+        return ActionHelper.isPresent(deactivate_Btn, 2000);
+    }
+
+    public void click_Deactivate_Btn() {
+        ActionHelper.click(deactivate_Btn);
+    }
+
+    public boolean isPresent_DeactivateFacilityHeader_Lbl() {
+        return ActionHelper.isPresent(deactivateFacilityHeader_Lbl);
+    }
+
+    public String getText_DeactivateFacilityHeader_Lbl() {
+        return ActionHelper.getText(deactivateFacilityHeader_Lbl);
+    }
+
+    public boolean isPresent_DeactivateFacilityCancel_Btn() {
+        return ActionHelper.isPresent(deactivateFacilityCancel_Btn);
+    }
+
+    public void click_DeactivateFacilityCancel_Btn() {
+        ActionHelper.click(deactivateFacilityCancel_Btn);
+    }
+
+    public boolean isPresent_DeactivateFacilityDeactivate_Btn() {
+        return ActionHelper.isPresent(deactivateFacilityDeactivate_Btn);
+    }
+
+    public void click_DeactivateFacilityDeactivate_Btn() {
+        ActionHelper.click(deactivateFacilityDeactivate_Btn);
     }
 
     public boolean isPresent_UserProfile_Btn() {
@@ -531,5 +626,25 @@ public class FacilitiesPage {
 
     public void click_Logout_Btn() {
         ActionHelper.click(logout_Btn);
+    }
+
+    public HashMap<String, String> getData_TableFirstData() {
+        HashMap<String, String> tableData = new HashMap<>();
+        String facilityId = getText_TableDataFacilityId_Lbl();
+        String facilityName = getText_TableDataFacilityName_Lbl();
+        String postalCode = getText_TableDataPostalCode_Lbl();
+        String address = getText_TableDataAddress_Lbl();
+        String city = getText_TableDataCity_Lbl();
+        String state = getText_TableDataState_Lbl();
+
+        tableData.put("facilityId", facilityId);
+        tableData.put("facilityName", facilityName);
+        tableData.put("postalCode", postalCode);
+        tableData.put("address", address);
+        tableData.put("city", city);
+        tableData.put("state", state);
+
+        ActionHelper.waitForLoaderToHide();
+        return tableData;
     }
 }
