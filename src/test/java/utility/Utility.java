@@ -292,6 +292,8 @@ public class Utility {
     public static void acceptAlertIfPresent() {
         try {
             Alert alert = DriverManager.getDriver().switchTo().alert();
+            acceptAlertIfPresent();
+            alert.dismiss();
             alert.accept();
         } catch (Exception ignored) {
 

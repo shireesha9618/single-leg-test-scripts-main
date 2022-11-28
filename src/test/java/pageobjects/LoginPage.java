@@ -126,3 +126,4 @@ public class LoginPage extends BaseTestClass {
             ActionHelper.click(loginHomeScreen_Btn);
     }
 }
+
