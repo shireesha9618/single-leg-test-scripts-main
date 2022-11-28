@@ -17,11 +17,13 @@ public class LoginPage extends BaseTestClass {
     private final Locator countryCode_Txt = Locator.builder().withWeb(By.id("countryCode"));
     private final String otp_Txt = "otp-xyz";
     private final Locator login_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Login']"));
-    private final Locator errorMessage_Lbl = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Incorrect OTP']"));
+    private final Locator errorMessage_Lbl = Locator.builder().withWeb(By.xpath("//span[@class='dp-server-error-msg dp-error-red']"));
     private final Locator loginHomeScreen_Btn = Locator.builder().withWeb(By.id("loginButton"));
     private final Locator loginOTPReEnterErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//label[contains(text(),'Re-enter')]"));
     private final Locator loginResendOTP_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Resend OTP']"));
     private final Locator loginUserErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//form[@name='myform']/div/span"));
+    private final Locator userIdAfterLogin_Txt = Locator.builder().withWeb(By.id("mobileNumber"));
+
 
     public static LoginPage getInstance() {
         if (_instance == null)
@@ -94,53 +96,6 @@ public class LoginPage extends BaseTestClass {
         HomePage.getInstance().click_Logout_Btn();
     }
 
-    public String getText_userIdValidationMessage_Txt() {
-        return ActionHelper.findElement(userId_Txt).getAttribute("validationMessage");
-    }
-
-    public boolean isEnabled_SendOTP_Btn() {
-        return ActionHelper.isEnabled(sendOTP_Btn.getBy());
-    }
-
-    public boolean isPresent_LoginWithOtp_Lnk() {
-        return ActionHelper.isPresent(loginWithOTP_Lnk);
-    }
-
-    public boolean isPresent_LoginWitGoogle_Lnk() {
-        return ActionHelper.isPresent(loginWithGoogle_Lnk);
-    }
-
-    public void click_LoginWithOTP_Lnk() {
-        navigateToLoginScreen();
-        ActionHelper.click(loginWithOTP_Lnk);
-    }
-
-    public String getText_CountryCode_Txt() {
-        return ActionHelper.getAttribute(countryCode_Txt.getBy(), "value");
-    }
-
-    public String getText_PlaceHolder_Txt() {
-        return ActionHelper.getAttribute(userId_Txt.getBy(), "placeholder");
-    }
-
-    public void navigateToLoginScreen() {
-        if (isPresent_LoginHomeScreen_Btn())
-            ActionHelper.click(loginHomeScreen_Btn);
-    }
-
-    public boolean isPresent_LoginOTPReEnterErrorMsg_Txt() {
-        return ActionHelper.isPresent(loginOTPReEnterErrorMsg_Txt);
-    }
-
-    public String getText_LoginOTPReEnterErrorMsg_Txt() {
-        return ActionHelper.getText(loginOTPReEnterErrorMsg_Txt);
-    }
-
-    public boolean isPresent_LoginResendOTP_Btn() {
-        ActionHelper.waitUntilElementVisible(loginResendOTP_Btn.getBy());
-        return ActionHelper.isPresent(loginResendOTP_Btn, 2000);
-    }
-
     public void click_LoginResendOTP_Btn() {
         ActionHelper.click(loginResendOTP_Btn);
     }
@@ -156,4 +111,31 @@ public class LoginPage extends BaseTestClass {
     public String getText_LoginUserErrorMsg_Txt() {
         return ActionHelper.getText(loginUserErrorMsg_Txt);
     }
+
+    public boolean isPresent_ErrorMessage_Lbl() {
+        return ActionHelper.isPresent(errorMessage_Lbl);
+    }
+
+    public String getText_ErrorMessage_Lbl() {
+        ActionHelper.waitUntilElementVisible(errorMessage_Lbl.getBy());
+        return ActionHelper.getText(errorMessage_Lbl.getBy());
+    }
+
+    public void delete_UserIdAfterLogin_Txt() {
+        ActionHelper.sendKeysWithClear(userIdAfterLogin_Txt.getBy(), " ");
+    }
+
+    public String getText_UserIdAfterLogin_Txt() {
+        return ActionHelper.getAttribute(userIdAfterLogin_Txt, "value");
+    }
+
+    public String getText_userIdValidationMessage_Txt() {
+        return ActionHelper.findElement(userId_Txt).getAttribute("validationMessage");
+    }
+
+    public void navigateToLoginScreen() {
+        if (isPresent_LoginHomeScreen_Btn())
+            ActionHelper.click(loginHomeScreen_Btn);
+    }
+
 }

@@ -8,9 +8,7 @@ import framework.frontend.managers.DriverManager;
 import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import utility.Utility;
-
-import java.util.List;
+import static utility.Utility.acceptAlertIfPresent;
 
 public class CommonActions {
     private static CommonActions _instance;
@@ -20,8 +18,8 @@ public class CommonActions {
     private final Locator paginationPrevious_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
-
-
+    private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
+    private final Locator loader_Img = Locator.builder().withWeb(By.cssSelector("*[class*='animate-spin']"));
 
     public static CommonActions getInstance() {
         if (_instance == null)
@@ -31,8 +29,18 @@ public class CommonActions {
 
     public void performCommonAction() {
         ActionHelper.getURL(Constants.Urls.BASE_URL);
-        Utility.acceptAlertIfPresent();
+        acceptAlertIfPresent();
+        waitTillLoaderDisappears();
         checkAndPerformLogin();
+        waitTillLoaderDisappears();
+    }
+
+    public void waitTillLoaderAppears() {
+        ActionHelper.waitUntilElementVisible(loader_Img.getBy());
+    }
+
+    public void waitTillLoaderDisappears() {
+        ActionHelper.waitForElementToHide(loader_Img);
     }
 
     public void checkAndPerformLogin() {
@@ -49,6 +57,18 @@ public class CommonActions {
         JarvisAssert.assertTrue(RidersPage.getInstance().isPresent_Header_Lbl());
     }
 
+    public void coverJourneyTillDispatches() {
+        performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().openDispatchListPage();
+    }
+
+    public void coverJourneyTillCreateOrder() {
+        performCommonAction();
+        click_Skip_Btn();
+        ActionHelper.waitForLoaderToHide();
+    }
+
     public void waitTillLoaderTxtDisappears() {
         ActionHelper.waitForElementToHide(loader_Txt);
     }
@@ -62,10 +82,15 @@ public class CommonActions {
             element.click();
     }
 
+    public Boolean isPresent_Skip_Btn() {
+        return ActionHelper.isPresent(skip_Btn, 3000);
+    }
+
     public String getText_PaginationCurrentlyShowingCount_Lbl() {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[1];
     }
+
     public boolean isPresent_PaginationNext_Btn() {
         return ActionHelper.isPresent(paginationNext_Btn);
     }
