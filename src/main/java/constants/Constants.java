@@ -18,9 +18,42 @@ public class Constants {
     public static final String SYSTEM_DATE_FORMAT = "dd-MM-yyyy";
     public static final String ENV = Utils.getValueFromConfig("environment");
     public static final String DISPATCH_TYPE_ID = Utils.getValueFromConfig("DISPATCH_TYPE_ID");
-    public static final String TEAM = "QATeam";
+    public static final String UU_ID =  Utils.getValueFromConfig("UU_ID");
+    public static String clientId = Utils.getValueFromConfig("clientId");
+    public static String clientSecret = Utils.getValueFromConfig("clientSecret");
+    public static String X_COREOS_REQUEST_ID = Utils.getValueFromConfig("X_COREOS_REQUEST_ID");
+    public static String X_COREOS_TID = Utils.getValueFromConfig("X_COREOS_TID");
+    public static String X_COREOS_USERINFO = Utils.getValueFromConfig("X_COREOS_USERINFO");
+
+    public static String BASE_URL = Utils.getValueFromConfig("BASE_URL");
+    public static String AUTH_URL = Utils.getValueFromConfig("AUTH_URL");
+    public static final String USER_ID = Utils.getValueFromConfig("USER_ID");
+    public static final String USER_NAME = "fe user";
+
+    public static Long RESPONSE_TIME = 5000L;
+    public static String userOwnerID = Utils.getValueFromConfig("userOwnerID");
+    public static String MANAGER = Utils.getValueFromConfig("manager");
+    public static String WORK_LOCATION = Utils.getValueFromConfig("worklocation");
+    public static String FUNCTION = "FE";
+    public static String CATEGORY = "Regular";
+    public static String EMPLOYMENT_TYPE = "Full-time";
+    public static String DESIGNATION = "Field-Executive";
+    public static String DESCRIPTION = "Designation description";
+    public static String USER_GROUP = "Field-Executive";
+    public static String API_VERSION = Utils.getValueFromConfig("ApiVersion");
+
+    public static String FACILITY_TYPE = Utils.getValueFromConfig("FACILITY_TYPE");
+    public static String FACILITY_PROPERTY_ID = Utils.getValueFromConfig("FACILITY_PROPERTY_ID");
+    public static String FACILITY_OWNER_ID = Utils.getValueFromConfig("FACILITY_OWNER_ID");
+    public static String NEW_REPORTING_CENTRE = Utils.getValueFromConfig("REPORTING_CENTRE");
+
+    public static String ORDER_AMOUNT = Utils.getValueFromConfig("ORDER_AMOUNT");
+    public static String TEAM = "QATeam";
+    public static String PICKUP_PINCODE="208014";
+    public static String DROP_PINCODE="201301";
 
     private Constants() {
+
     }
 
     public static final class Urls {
@@ -29,6 +62,7 @@ public class Constants {
         public static final String GRAPHQL_URL = Utils.getValueFromConfig("GRAPHQL_URL");
         public static final String API_URL = Utils.getValueFromConfig("API_URL");
         public static final String COREOS_URL = Utils.getValueFromConfig("COREOS_URL");
+        public static final String ORDER_URL = Utils.getValueFromConfig("ORDER_URL");
 
         public static final String VEHICLE_STATUS_EVENT_CODE_ACTIVE_AVAILABLE = Utils.getValueFromConfig("VEHICLE_STATUS_EVENT_CODE_ACTIVE_AVAILABLE");
         public static final String VEHICLE_STATUS_EVENT_CODE_ACTIVE_INUSE = Utils.getValueFromConfig("VEHICLE_STATUS_EVENT_CODE_ACTIVE_INUSE");
@@ -42,10 +76,11 @@ public class Constants {
         public static final String FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD");
         public static final String FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE");
 
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE = "E-945";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED = "E-943";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING = "E-944";
-        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE = "E-946";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE="E-945";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED="E-943";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING="E-944";
+        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE="E-946";
+
     }
 
     public static final HashMap<String, String> headers = new HashMap<>();

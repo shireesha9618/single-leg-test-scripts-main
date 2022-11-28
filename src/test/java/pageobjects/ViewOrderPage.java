@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utility.Utility;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ViewOrderPage {
@@ -16,7 +17,11 @@ public class ViewOrderPage {
     private final Locator orderListBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/orders/']/p[text()='Order List']"));
 
     private final Locator newOrder_Btn = Locator.builder().withWeb(By.xpath("//span[text()='New Order']"));
-    private final Locator assignRider_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Assign Rider']"));
+
+    private final Locator assignRider_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Assign Rider']"));
+    private final Locator assignRider_DropDown = Locator.builder().withWeb(By.xpath("//div[text()='Assign Rider']//following-sibling::div"));
+    private final Locator assignRiderDropDownManual_Opt = Locator.builder().withWeb(By.xpath("//p[text()='Manual']"));
+    private final Locator assignRiderDropDownAutomatic_Opt = Locator.builder().withWeb(By.xpath("//p[text()='Automatic']"));
 
     private final Locator toBeAssigned_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='To be Assigned']/preceding-sibling::p"));
     private final Locator toBeDispatched_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='To be dispatched']/preceding-sibling::p"));
@@ -64,6 +69,17 @@ public class ViewOrderPage {
     private final Locator tabHeaderDropPostalCode_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[10]/span"));
     private final Locator tabHeaderPaymentType_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[11]/div/h6"));
     private final Locator tabHeaderAmount_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[12]/span"));
+
+    private final Locator firstElementOrderId_Txt = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[2]"));
+    private final Locator firstElementStatus_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[3]"));
+    private final Locator firstElementNoOfShipment_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[4]"));
+
+    private final Locator assignRiderDropDownManualHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Manual Assignment']"));
+    private final Locator assignRiderDropDownManualRider_DropDown = Locator.builder().withWeb(By.xpath("//div[@class='space-y-2']"));
+    private final Locator assignRiderDropDownManualRiderDropDownData_Lbl = Locator.builder().withWeb(By.xpath("(//div[@class='flex flex-col']/p[1])[1]"));
+    private final Locator assignRiderDropDownManualAssign_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign']"));
+    private final Locator assignRiderDropDownManualAssignAndStart_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign and Start']"));
+    private final Locator assignRiderSearch_TextBox = Locator.builder().withWeb(By.xpath("//h4[text()='Rider*']/..//following-sibling::div//input"));
 
     public static ViewOrderPage getInstance() {
         if (_instance == null) {
@@ -116,24 +132,36 @@ public class ViewOrderPage {
         return ActionHelper.getText(newOrder_Btn);
     }
 
-    public boolean isPresent_AssignRider_Txt() {
-        return ActionHelper.isPresent(assignRider_Txt);
+    public boolean isPresent_AssignRider_Btn() {
+        return ActionHelper.isPresent(assignRider_Btn);
     }
 
-    public void fill_AssignRider_Txt(String value) {
-        ActionHelper.fill(assignRider_Txt, value);
+    public void click_AssignRider_Btn() {
+        ActionHelper.click(assignRider_Btn);
     }
 
-    public void fillWithClear_AssignRider_Txt(String value) {
-        ActionHelper.fillWithClear(assignRider_Txt.getBy(), value);
+    public boolean isPresent_AssignRider_DropDown() {
+        return ActionHelper.isPresent(assignRider_DropDown);
     }
 
-    public void clear_AssignRider_Txt() {
-        ActionHelper.clear(assignRider_Txt.getBy());
+    public void click_AssignRider_DropDown() {
+        ActionHelper.click(assignRider_DropDown);
     }
 
-    public String getValue_AssignRider_Txt() {
-        return ActionHelper.getAttribute(assignRider_Txt, "value");
+    public boolean isPresent_AssignRiderDropDownManual_Opt() {
+        return ActionHelper.isPresent(assignRiderDropDownManual_Opt);
+    }
+
+    public void click_AssignRiderDropDownManual_Opt() {
+        ActionHelper.click(assignRiderDropDownManual_Opt);
+    }
+
+    public boolean isPresent_AssignRiderDropDownAutomatic_Opt() {
+        return ActionHelper.isPresent(assignRiderDropDownAutomatic_Opt);
+    }
+
+    public void click_AssignRiderDropDownAutomatic_Opt() {
+        ActionHelper.click(assignRiderDropDownAutomatic_Opt);
     }
 
     public boolean isPresent_ToBeAssigned_Lbl() {
@@ -599,4 +627,65 @@ public class ViewOrderPage {
     public String getText_TabHeaderAmount_ListLbl(int index) {
         return ActionHelper.getText(ActionHelper.findElementsWithoutWait(tabHeaderAmount_ListLbl.getBy()).get(index));
     }
+
+    public HashMap<String, String> getOrderSummary() {
+        HashMap<String, String> orderSummary = new HashMap<>();
+        orderSummary.put("ToBeAssignedData", getText_ToBeAssigned_Lbl());
+        orderSummary.put("ToBeDispatchedData", getText_ToBeDispatched_Lbl());
+        orderSummary.put("DispatchedData", getText_Dispatched_Lbl());
+        orderSummary.put("DeliveredData", getText_Delivered_Lbl());
+        orderSummary.put("FailedData", getText_Failed_Lbl());
+        orderSummary.put("RemainingData", getText_Remaining_Lbl());
+        return orderSummary;
+    }
+
+    public boolean isPresent_AssignRiderDropDownManualHeader_Lbl() {
+        return ActionHelper.isPresent(assignRiderDropDownManualHeader_Lbl);
+    }
+
+    public boolean isPresent_AssignRiderDropDownManualRider_DropDown() {
+        return ActionHelper.isPresent(assignRiderDropDownManualRider_DropDown);
+    }
+
+    public void click_AssignRiderDropDownManualRider_DropDown() {
+        ActionHelper.click(assignRiderDropDownManualRider_DropDown);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isPresent_AssignRiderDropDownManualRiderDropDownData_Lbl() {
+        return ActionHelper.isPresent(assignRiderDropDownManualRiderDropDownData_Lbl);
+    }
+
+    public void click_AssignRiderDropDownManualRiderDropDownData_Lbl() {
+        ActionHelper.click(assignRiderDropDownManualRiderDropDownData_Lbl);
+    }
+
+    public boolean isPresent_AssignRiderDropDownManualAssign_Btn() {
+        return ActionHelper.isPresent(assignRiderDropDownManualAssign_Btn);
+    }
+
+    public void click_AssignRiderDropDownManualAssign_Btn() {
+        ActionHelper.click(assignRiderDropDownManualAssign_Btn);
+    }
+
+    public boolean isPresent_AssignRiderDropDownManualAssignAndStart_Btn() {
+        return ActionHelper.isPresent(assignRiderDropDownManualAssignAndStart_Btn);
+    }
+
+    public void click_AssignRiderDropDownManualAssignAndStart_Btn() {
+        ActionHelper.click(assignRiderDropDownManualAssignAndStart_Btn);
+    }
+
+    public String get_FirstElementOrderId_Txt() {
+        return ActionHelper.getText(firstElementOrderId_Txt);
+    }
+
+    public String get_FirstElementStatus_Lbl() {
+        return ActionHelper.getText(firstElementStatus_Lbl);
+    }
+
+    public String get_FirstElementNoOfShipment_Lbl() {
+        return ActionHelper.getText(firstElementNoOfShipment_Lbl);
+    }
+
 }

@@ -1,12 +1,17 @@
 package pageobjects;
 
+import com.github.javafaker.Faker;
+import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
+import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import utility.Utility;
 
+import java.awt.*;
 import java.util.List;
 
 public class CreateNewOrderPage {
@@ -79,6 +84,25 @@ public class CreateNewOrderPage {
     private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter city']])[2]/following-sibling::span"));
 
     private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']/following-sibling::span"));
+
+    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option ant-select-item-option-active']//p"));
+
+    private final Locator addFacilityFacilityName_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.name']"));
+    private final Locator addFacilityFacilityId_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.ID']"));
+    private final Locator addFacilityPostalCode_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
+    private final Locator addFacilityAddressLine1_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine1']"));
+    private final Locator addFacilityAddressLine2_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine2']"));
+    private final Locator addFacilityState_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.state']"));
+    private final Locator addFacilityCity_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.city']"));
+    private final Locator addFacilityFacilityNameRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='basicDetails.name']"));
+    private final Locator addFacilityPostalCodeRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.postalCode']"));
+    private final Locator addFacilityAddressLine1RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine1']"));
+    private final Locator addFacilityAddressLine2RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine2']"));
+    private final Locator addFacilityStateRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.state']"));
+    private final Locator addFacilityCityRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.city']"));
+    private final Locator addFacilityCreateFacility_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']/.."));
+    private final Locator addFacilityCancelFacility_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Cancel']/..)[1]"));
+    Faker sampleData = new Faker();
 
     public static CreateNewOrderPage getInstance() {
         if (_instance == null) {
@@ -311,7 +335,7 @@ public class CreateNewOrderPage {
         return Utility.getText_ListOfWebElements(new Select(ActionHelper.findElement(pickupDetailsCountry_Select)).getOptions());
     }
 
-    public String getFirstSelectedOption_PickupDetailsCountry_Select(){
+    public String getFirstSelectedOption_PickupDetailsCountry_Select() {
         return new Select(ActionHelper.findElement(pickupDetailsCountry_Select)).getFirstSelectedOption().getText();
     }
 
@@ -507,7 +531,7 @@ public class CreateNewOrderPage {
         return Utility.getText_ListOfWebElements(new Select(ActionHelper.findElement(dropDetailsCountry_Select)).getOptions());
     }
 
-    public String getFirstSelectedOption_DropDetailsCountry_Select(){
+    public String getFirstSelectedOption_DropDetailsCountry_Select() {
         return new Select(ActionHelper.findElement(dropDetailsCountry_Select)).getFirstSelectedOption().getText();
     }
 
@@ -850,5 +874,197 @@ public class CreateNewOrderPage {
 
     public String getText_PaymentDetailsPaymentTypeValidationError_Lbl() {
         return ActionHelper.getText(paymentDetailsPaymentTypeValidationError_Lbl);
+    }
+
+    public void click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown() {
+        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
+    }
+
+    public void click_AddFacilityBtn_DropDetailsSelectAFacility_Dropdown() {
+        ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
+    }
+
+    public Boolean isPresent_AddFacilityFacilityName_TxtBox() {
+        return ActionHelper.isPresent(addFacilityFacilityName_TxtBox, 10000);
+    }
+
+    public void set_AddFacilityFacilityName_TxtBox(String facilityName) {
+        ActionHelper.sendKeysWithClear(addFacilityFacilityName_TxtBox.getBy(), facilityName);
+    }
+
+    public Boolean isPresent_AddFacilityFacilityId_TxtBox() {
+        return ActionHelper.isPresent(addFacilityFacilityId_TxtBox);
+    }
+
+    public String get_addFacilityFacilityId_TxtBox() {
+        return ActionHelper.getText(addFacilityFacilityId_TxtBox.getBy());
+    }
+
+    public Boolean isPresent_AddFacilityPostalCode_TxtBox() {
+        return ActionHelper.isPresent(addFacilityPostalCode_TxtBox);
+    }
+
+    public void set_AddFacilityPostalCode_TxtBox(String postalCode) {
+        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode + Keys.TAB));
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public Boolean isPresent_AddFacilityAddressLine1_TxtBox() {
+        return ActionHelper.isPresent(addFacilityAddressLine1_TxtBox);
+    }
+
+    public void set_AddFacilityAddressLine1_TxtBox(String address) {
+        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), Keys.chord(address + Keys.TAB));
+    }
+
+    public Boolean isPresent_AddFacilityAddressLine2_TxtBox() {
+        return ActionHelper.isPresent(addFacilityAddressLine2_TxtBox);
+    }
+
+    public void set_AddFacilityAddressLine2_TxtBox(String address) {
+        ActionHelper.sendKeysWithClear(addFacilityAddressLine2_TxtBox.getBy(), address);
+    }
+
+    public Boolean isPresent_AddFacilityState_TxtBox() {
+        return ActionHelper.isPresent(addFacilityState_TxtBox);
+    }
+
+    public String get_AddFacilityState_TxtBox() {
+        return ActionHelper.getText(addFacilityState_TxtBox);
+    }
+
+    public Boolean isPresent_AddFacilityCity_TxtBox() {
+        return ActionHelper.isPresent(addFacilityCity_TxtBox);
+    }
+
+    public String get_AddFacilityCity_TxtBox() {
+        return ActionHelper.getText(addFacilityCity_TxtBox);
+    }
+
+    public void addFacility(String facilityName, String postalCode, String addressLine1, String addressLine2) {
+        set_AddFacilityFacilityName_TxtBox(facilityName);
+        set_AddFacilityPostalCode_TxtBox(postalCode);
+        set_AddFacilityAddressLine1_TxtBox(addressLine1);
+        set_AddFacilityAddressLine2_TxtBox(addressLine2);
+    }
+
+    public void click_AddFacilityCreateFacility_Btn() {
+        ActionHelper.click(addFacilityCreateFacility_Btn);
+    }
+
+    public void click_AddFacilityCancelFacility_Btn() {
+        ActionHelper.click(addFacilityCancelFacility_Btn);
+    }
+
+    public Boolean isPresent_AddFacilityFacilityNameRequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityFacilityNameRequiredMandatory_Msg);
+    }
+
+    public Boolean isPresent_AddFacilityPostalCodeRequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityPostalCodeRequiredMandatory_Msg);
+    }
+
+    public Boolean isPresent_AddFacilityAddressLine1RequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityAddressLine1RequiredMandatory_Msg);
+    }
+
+    public Boolean isPresent_AddFacilityAddressLine2RequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityAddressLine2RequiredMandatory_Msg);
+    }
+
+    public Boolean isPresent_AddFacilityStateRequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityStateRequiredMandatory_Msg);
+    }
+
+    public Boolean isPresent_AddFacilityCityRequiredMandatory_Msg() {
+        return ActionHelper.isPresent(addFacilityCityRequiredMandatory_Msg);
+    }
+
+    public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        if (input.equalsIgnoreCase("Pickup"))
+            click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        else click_AddFacilityBtn_DropDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(isPresent_AddFacilityFacilityName_TxtBox(), "Facility name is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityFacilityId_TxtBox(), "Facility Id is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCode_TxtBox(), "Add Facility Postal code is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine1_TxtBox(), "Address Line 1 text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine2_TxtBox(), "Address Line 2 text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityState_TxtBox(), "State text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityCity_TxtBox(), "City text box is present as expected");
+        click_AddFacilityCreateFacility_Btn();
+        softAssert.assertTrue(isPresent_AddFacilityFacilityNameRequiredMandatory_Msg(), "Facility name required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCodeRequiredMandatory_Msg(), "Postal code required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine1RequiredMandatory_Msg(), "Address line 1 required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine2RequiredMandatory_Msg(), "Address line 2 required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityStateRequiredMandatory_Msg(), "State required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityCityRequiredMandatory_Msg(), "City required message is present as expected");
+        softAssert.assertAll();
+        createFacility(postalCode);
+    }
+
+    public void set_PickUpFacility_TextBox() {
+        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void set_DropFacility_TextBox() {
+        ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void fill_Pickup_Details(String postalCode, String addressLine1, String addressLine2) {
+        fillWithClear_PickupDetailsPostalCode_Txt(postalCode);
+        fillWithClear_PickupDetailsAddressLine1_Txt(addressLine1);
+        fillWithClear_PickupDetailsAddressLine2_Txt(addressLine2);
+    }
+
+    public void fill_Drop_Details(String postalCode, String addressLine1, String addressLine2) {
+        fillWithClear_DropDetailsPostalCode_Txt(postalCode);
+        fillWithClear_DropDetailsAddressLine1_Txt(addressLine1);
+        fillWithClear_DropDetailsAddressLine2_Txt(addressLine2);
+    }
+
+    public void validate_PickUpClear_Btn(String postalCode, String addressLine1, String addressLine2) {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        fill_Pickup_Details(postalCode, addressLine1, addressLine2);
+        softAssert.assertEquals(getValue_PickupDetailsPostalCode_Txt(), postalCode, "Postal Code is matched expected");
+        softAssert.assertEquals(getValue_PickupDetailsAddressLine1_Txt(), addressLine1, "Address Line 1 is matched expected");
+        softAssert.assertEquals(getValue_PickupDetailsAddressLine2_Txt(), addressLine2, "Address Line 2 is matched expected");
+        click_PickupDetailsClearAll_Btn();
+        softAssert.assertEquals(getValue_PickupDetailsPostalCode_Txt(), "", "Postal Code is matched expected");
+        softAssert.assertEquals(getValue_PickupDetailsAddressLine1_Txt(), "", "Address Line 1 is matched expected");
+        softAssert.assertEquals(getValue_PickupDetailsAddressLine2_Txt(), "", "Address Line 2 is matched expected");
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void validate_DropClearAll_Btn(String postalCode, String addressLine1, String addressLine2) {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        fill_Drop_Details(postalCode, addressLine1, addressLine2);
+        softAssert.assertEquals(getValue_DropDetailsPostalCode_Txt(), postalCode, "Postal Code is matched expected");
+        softAssert.assertEquals(getValue_DropDetailsAddressLine1_Txt(), addressLine1, "Address Line 1 is matched expected");
+        softAssert.assertEquals(getValue_DropDetailsAddressLine2_Txt(), addressLine2, "Address Line 1 is matched expected");
+        click_PickupDetailsClearAll_Btn();
+        softAssert.assertEquals(getValue_DropDetailsPostalCode_Txt(), "", "Postal Code is matched expected");
+        softAssert.assertEquals(getValue_DropDetailsAddressLine1_Txt(), "", "Address Line 1 is matched expected");
+        softAssert.assertEquals(getValue_DropDetailsAddressLine2_Txt(), "", "Address Line 1 is matched expected");
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void createFacility(String postalCode) {
+        Actions actions = new Actions(DriverManager.getDriver());
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        isPresent_AddFacilityFacilityName_TxtBox();
+        set_AddFacilityFacilityName_TxtBox("Facility " + sampleData.number().digits(4));
+        set_AddFacilityPostalCode_TxtBox(postalCode);
+        set_AddFacilityAddressLine1_TxtBox("Building No " + sampleData.number().digits(2));
+        set_AddFacilityAddressLine2_TxtBox("Street No " + sampleData.number().digits(2));
+        softAssert.assertTrue(get_AddFacilityState_TxtBox() != null, "State Text box is not null as expected");
+        softAssert.assertTrue(get_AddFacilityCity_TxtBox() != null, "City Text box is not null as expected");
+        softAssert.assertAll();
+        ActionHelper.click(addFacilityState_TxtBox);
+        actions.sendKeys(Keys.PAGE_DOWN).build().perform();
+        click_AddFacilityCreateFacility_Btn();
+        ActionHelper.waitForLoaderToHide();
     }
 }
