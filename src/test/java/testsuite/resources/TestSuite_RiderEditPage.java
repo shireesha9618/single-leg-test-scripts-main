@@ -24,10 +24,10 @@ public class TestSuite_RiderEditPage extends BaseTestClass {
         ridersPage.click_Edit_Btn(0);
         softAssert.assertTrue(riderEditPage.isPresent_EditRiderBreadcrumb_Link(), "Edit Rider Breadcrumb Link is Present as Expected");
         softAssert.assertTrue(riderEditPage.isPresent_EditRiderHeader_Lbl(), "Edit Rider Header is Present as Expected");
-        softAssert.assertTrue(!riderEditPage.getText_FirstName_TxtBox().equals(null), "Validate First Name TextBox is Not Null");
-        softAssert.assertTrue(!riderEditPage.getText_LastName_TxtBox().equals(null), "Validate Last Name TextBox is Not Null");
-        softAssert.assertTrue(!riderEditPage.getText_PhoneNumber_TxtBox().equals(null), "Validate Phone Number TextBox is Not Null");
-        softAssert.assertTrue(!riderEditPage.getText_Teams_TxtBox().equals(null), "Validate Teams TextBox is Not Null");
+        softAssert.assertTrue(riderEditPage.getText_FirstName_TxtBox()!=null, "Validate First Name TextBox is Not Null");
+        softAssert.assertTrue(riderEditPage.getText_LastName_TxtBox()!=null, "Validate Last Name TextBox is Not Null");
+        softAssert.assertTrue(riderEditPage.getText_PhoneNumber_TxtBox()!=null, "Validate Phone Number TextBox is Not Null");
+        softAssert.assertTrue(riderEditPage.getText_Teams_TxtBox()!=null, "Validate Teams TextBox is Not Null");
         softAssert.assertAll();
     }
 

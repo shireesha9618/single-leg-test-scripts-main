@@ -1,7 +1,13 @@
 package pageobjects;
 
+import com.github.javafaker.Faker;
+import framework.backend.APIResponseException;
+import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 public class AddNewRiderPage {
     private static AddNewRiderPage _instance;
@@ -19,5 +25,81 @@ public class AddNewRiderPage {
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
     private final Locator addRider_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
-}
 
+    Faker sampleData = new Faker();
+    public static AddNewRiderPage getInstance() {
+        if (_instance == null)
+            _instance = new AddNewRiderPage();
+        return _instance;
+    }
+
+    public boolean isPresent_Header_Lbl() {
+        ActionHelper.waitForLoaderToHide();
+        return ActionHelper.isPresent(header_Lbl, 3000);
+    }
+    public String getText_Header_Txt(){
+        return ActionHelper.getText(header_Lbl);
+    }
+
+    public boolean isPresent_HomeBreadcrumb_Lbl() {
+        return ActionHelper.isPresent(homeBreadCrumb_Link);
+    }
+    public void click_HomeBreadcrumbMenu_Lbl() {
+        ActionHelper.click(homeBreadCrumb_Link);
+    }
+    public boolean isPresent_RidersBreadcrumb_Lbl() {
+        return ActionHelper.isPresent(ridersBreadCrumb_Link);
+    }
+    public void click_RidersBreadcrumbMenu_Lbl() {
+        ActionHelper.click(ridersBreadCrumb_Link);
+    }
+    public boolean isPresent_AddNewRiderBreadcrumbMenu_Lbl(){
+        return ActionHelper.isPresent(addNewRiderBreadCrumb_Link);
+    }
+    public void click_AddNewRiderBreadcrumbMenu_Lbl(){
+        ActionHelper.click(addNewRiderBreadCrumb_Link);
+    }
+    public boolean isPresent_Cancel_Btn() {
+        return ActionHelper.isPresent(cancel_Btn);
+    }
+
+    public void click_Cancel_Btn() {
+        ActionHelper.click(cancel_Btn);}
+
+    public boolean isPresent_AddRider_Btn() {
+        return ActionHelper.isPresent(addRider_Btn);
+    }
+
+    public void click_AddRider_Btn() {
+        ActionHelper.click(addRider_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+    public boolean isPresent_FirstName_TxtBox(){
+        ActionHelper.waitUntilElementVisible(firstName_Txt.getBy());
+        return ActionHelper.isPresent(firstName_Txt);
+    }
+    public boolean isPresent_LastName_TxtBox(){
+        return ActionHelper.isPresent(lastName_Txt);
+    }
+    public boolean isPresent_PhoneNumber_TxtBox(){
+        return ActionHelper.isPresent(phoneNumber_Txt);
+    }
+    public boolean isPresent_UploadPhoto_Btn(){
+        return ActionHelper.isPresent(uploadPhoto_Btn);
+    }
+    public boolean isPresent_Teams_TxtBox() {
+        return ActionHelper.isPresent(teams_Lbl);
+    }
+
+    public void fill_RiderFirstName_Txt(String input) {
+        ActionHelper.sendKeysWithClear(firstName_Txt.getBy(), input);
+    }
+
+    public void fill_RiderLastName_Txt(String input) {
+        ActionHelper.sendKeysWithClear(lastName_Txt.getBy(), input);
+    }
+
+    public void fill_PhoneNumber_Txt(String phoneNumber) {
+        ActionHelper.sendKeysWithClear(phoneNumber_Txt.getBy(), phoneNumber);
+    }
+}

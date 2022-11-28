@@ -2,10 +2,15 @@ package testsuite.resources;
 
 import base.BaseTestClass;
 import constants.TestGroup;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.common.logger.ExtentLogger;
+import framework.frontend.actions.ActionHelper;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
+import utility.Utility;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +21,8 @@ public class TestSuite_RidersPage extends BaseTestClass {
     HomePage homePage = HomePage.getInstance();
     RidersPage ridersPage = RidersPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
+    AddNewRiderPage addNewRiderPage = AddNewRiderPage.getInstance();
+
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_01, Verify The UI Of Riders Page")
     public void TC_Riders_01_Verify_The_UI_Of_Riders_Page() {
@@ -143,7 +150,6 @@ public class TestSuite_RidersPage extends BaseTestClass {
         ridersPage.click_MoreActions_Btn();
         ridersPage.click_ModifyColumns_Btn();
         ridersPage.click_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn();
-        softAssert.assertTrue(ridersPage.getSize_EditColumnsSearchRightList_Link() == ridersPage.getSize_EditColumnsSearchLeftList_Link(), "Left And Right Record Is Same As Expected");
         softAssert.assertEquals(ridersPage.getSize_EditColumnsSearchRightList_Link(), ridersPage.getSize_EditColumnsSearchLeftList_Link(), "Select All Work Left & Right Record are Same");
         ridersPage.unCheck_EditColumnsRiderName_CheckBox();
         ridersPage.unCheck_EditColumnsStatus_CheckBox();
