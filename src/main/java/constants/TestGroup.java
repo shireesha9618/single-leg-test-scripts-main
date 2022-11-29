@@ -9,5 +9,5 @@ public class TestGroup {
     public static final String LOGIN = "login";
     public static final String DISPATCH_DETAIL = "dispatchdetail";
     public static final String RIDERS = "riders";
-
+    public static final String CREATE_NEW_ORDER = "createNewOrder";
 }

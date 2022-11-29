@@ -66,7 +66,8 @@ public class CommonActions {
     public void coverJourneyTillCreateOrder() {
         performCommonAction();
         click_Skip_Btn();
-        ActionHelper.waitForLoaderToHide();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        HomePage.getInstance().openCreateOrderPage();
     }
 
     public void waitTillLoaderTxtDisappears() {
