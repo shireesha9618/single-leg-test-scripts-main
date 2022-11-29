@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BaseTestClass {
     private static LoginPage _instance;
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
     private final Locator loginWithOTP_Lnk = Locator.builder().withWeb(By.id("zocial-otp-login"));
     private final Locator loginWithGoogle_Lnk = Locator.builder().withWeb(By.id("zocial-google"));
     private final Locator userId_Txt = Locator.builder().withWeb(By.id("dp-email-input"));

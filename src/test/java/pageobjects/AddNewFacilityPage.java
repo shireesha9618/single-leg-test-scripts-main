@@ -26,7 +26,6 @@ public class AddNewFacilityPage {
     private final Locator postalCode_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']"));
     private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Postal Code']"));
     private final Locator country_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Country*']"));
-    //private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='space-y-2']//span[@class='ant-select-selection-search']/input"));
     private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-selector']//input[@disabled='']"));
 
     private final Locator addressLine1_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']"));
@@ -42,6 +41,7 @@ public class AddNewFacilityPage {
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
 
     Faker sampleData = new Faker();
+
     public static AddNewFacilityPage getInstance() {
         if (_instance == null) _instance = new AddNewFacilityPage();
         return _instance;
@@ -266,7 +266,7 @@ public class AddNewFacilityPage {
 
     public HashMap<String, String> createFacility() {
         HashMap<String, String> createNewFacility = new HashMap<>();
-        String facilityName = "facility"+ sampleData.name().lastName();
+        String facilityName = "facility" + sampleData.name().lastName();
         String postalCode = getPostalCode();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();

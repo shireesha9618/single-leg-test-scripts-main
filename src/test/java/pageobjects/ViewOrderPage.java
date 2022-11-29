@@ -42,7 +42,6 @@ public class ViewOrderPage {
     private final Locator statusDropdownCancelled_Radio = Locator.builder().withWeb(By.xpath("//input[@value='closed:cancelled']"));
     private final Locator statusDropdownFailed_Radio = Locator.builder().withWeb(By.xpath("//input[@value='closed:undelivered']"));
     private final Locator statusDropdownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Clear Selection']"));
-    private final Locator facilitiesLeftSubMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
 
     private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[div[@id='wrapper']]/following-sibling::div//button/button/p"));
     private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='createdAt']"));
@@ -82,6 +81,7 @@ public class ViewOrderPage {
     private final Locator assignRiderDropDownManualAssignAndStart_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign and Start']"));
     private final Locator assignRiderSearch_TextBox = Locator.builder().withWeb(By.xpath("//h4[text()='Rider*']/..//following-sibling::div//input"));
     private final Locator resourceLeftMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
+    private final Locator facilitiesLeftSubMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
 
     public static ViewOrderPage getInstance() {
         if (_instance == null) {
@@ -699,7 +699,7 @@ public class ViewOrderPage {
     }
 
     public void click_FacilitiesLeftSubMenuItem() {
-        if(isPresent_FacilitiesLeftSubMenuItem())
+        if (isPresent_FacilitiesLeftSubMenuItem())
             ActionHelper.click(facilitiesLeftSubMenuItem);
         else {
             click_ResourceLeftMenuItem();

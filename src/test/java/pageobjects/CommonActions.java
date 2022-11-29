@@ -9,6 +9,7 @@ import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
 import static utility.Utility.acceptAlertIfPresent;
 
 public class CommonActions {
@@ -32,6 +33,14 @@ public class CommonActions {
     public void selectTeamFromHeader(String input) {
         ActionHelper.click(teamSelector_Dropdown);
         ActionHelper.sendKeys(selectTeam1, Keys.chord(input, Keys.ENTER));
+    }
+
+    public void waitTillLoaderAppears() {
+        ActionHelper.waitUntilElementVisible(loader_Img.getBy());
+    }
+
+    public void waitTillLoaderDisappears() {
+        ActionHelper.waitForElementToHide(loader_Img);
     }
 
     public void performCommonAction() {
@@ -62,7 +71,7 @@ public class CommonActions {
         HomePage.getInstance().openDispatchListPage();
     }
 
-    public void coverJourneyTillCreateOrder () {
+    public void coverJourneyTillCreateOrder() {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
@@ -82,29 +91,22 @@ public class CommonActions {
             element.click();
     }
 
-    public void coverJourneyTillFacility () {
+    public void coverJourneyTillFacility() {
         performCommonAction();
         ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
     }
 
-    public void waitTillLoaderAppears () {
-        ActionHelper.waitUntilElementVisible(loader_Img.getBy());
-    }
-
-    public void waitTillLoaderDisappears () {
-        ActionHelper.waitForElementToHide(loader_Img);
-    }
-
-    public void coverJourneyTillRider () {
+    public void coverJourneyTillRider() {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().openRidersPage();
     }
 
-    public void coverJourneyTillViewOrder () {
+    public void coverJourneyTillViewOrder() {
         performCommonAction();
         click_Skip_Btn();
-        HomePage.getInstance().openViewOrderPage();}
+        HomePage.getInstance().openViewOrderPage();
+    }
 
     public Boolean isPresent_Skip_Btn() {
         return ActionHelper.isPresent(skip_Btn, 3000);
