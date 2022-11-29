@@ -145,11 +145,13 @@ public class CreateOrderPage {
     }
 
     public void set_PickUpFacility_TextBox() {
+        ActionHelper.gotoSleep(10000);
         ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("facility" + Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
     }
 
     public void set_DropFacility_TextBox() {
+        ActionHelper.gotoSleep(10000);
         ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("facility" + Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
     }
@@ -190,9 +192,9 @@ public class CreateOrderPage {
 
     public void click_AddFacility_Btn(String input) {
         if (input.equals("Pickup"))
-            ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
+            ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("facility"+Keys.UP + Keys.ENTER));
         else
-            ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
+            ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("facility" + Keys.UP + Keys.ENTER));
     }
 
     public Boolean isPresent_FacilityName_TxtBox() {
@@ -421,7 +423,7 @@ public class CreateOrderPage {
         ActionHelper.click(addFacilityState_TxtBox);
         actions.sendKeys(Keys.PAGE_DOWN).build().perform();
         click_CreateFacility_Btn();
-        ActionHelper.waitForLoaderToHide();
+        ActionHelper.gotoSleep(4000);
     }
 }
 

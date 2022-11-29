@@ -77,4 +77,3 @@ public class CommonActions {
         HomePage.getInstance().openViewOrderPage();
     }
 }
-
