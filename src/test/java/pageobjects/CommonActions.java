@@ -65,7 +65,8 @@ public class CommonActions {
     public void coverJourneyTillCreateOrder () {
         performCommonAction();
         click_Skip_Btn();
-        ActionHelper.waitForLoaderToHide();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        HomePage.getInstance().openCreateOrderPage();
     }
 
     public void waitTillLoaderTxtDisappears() {
@@ -83,7 +84,7 @@ public class CommonActions {
 
     public void coverJourneyTillFacility () {
         performCommonAction();
-        ViewOrdersPage.getInstance().click_FacilitiesLeftSubMenuItem();
+        ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
     }
 
     public void waitTillLoaderAppears () {
