@@ -238,6 +238,7 @@ public class AddNewFacilityPage {
     }
 
     public void click_Cancel_Btn() {
+        ActionHelper.waitUntilElementClickable(cancel_Btn);
         ActionHelper.click(cancel_Btn);
     }
 
@@ -301,8 +302,7 @@ public class AddNewFacilityPage {
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
         ActionHelper.waitForLoaderToHide();
-        click_Save_Btn();
-        ActionHelper.waitForLoaderToHide();
+
         return updateFacility;
     }
 }

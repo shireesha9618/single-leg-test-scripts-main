@@ -248,6 +248,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertTrue(addNewFacilityPage.isDisabled_Country_Txt(), "Country Text Field Is Disabled As Expected");
 
         HashMap<String, String> getUpdatedFacilityDetails = new HashMap<>(addNewFacilityPage.updateFacility());
+        addNewFacilityPage.click_Save_Btn();
         HashMap<String, String> updatedData = new HashMap<>(facilitiesPage.getData_TableFirstData());
         softAssert.assertEquals(updatedData.get("facilityId"), getFacilityDetails.get("facilityId"), "Facility Id Is Matched Before And After Update Facility As Expected");
         softAssert.assertEquals(updatedData.get("facilityName"), getFacilityDetails.get("facilityName"), "Facility Name Is Matched Before And After Update Facility As Expected");
@@ -281,20 +282,30 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         HashMap<String, String> getDataFromTable = new HashMap<>(facilitiesPage.getData_TableFirstData());
-        String initialFacilityPostalCode = getDataFromTable.get("postalCode");
-        String initialFacilityCity = getDataFromTable.get("city");
-        String initialFacilityState = getDataFromTable.get("state");
+        String facilityPostalCode = getDataFromTable.get("postalCode");
+        String facilityCity = getDataFromTable.get("city");
+        String facilityState = getDataFromTable.get("state");
         facilitiesPage.click_TableDataEdit_Link();
-        addNewFacilityPage.click_Cancel_Btn();
 
-        getDataFromTable = new HashMap<>(facilitiesPage.getData_TableFirstData());
-        String finalFacilityPostalCode = getDataFromTable.get("postalCode");
-        String finalFacilityCity = getDataFromTable.get("city");
-        String finalFacilityState = getDataFromTable.get("state");
+        HashMap<String, String> fillData = new HashMap<>(addNewFacilityPage.updateFacility());
+        addNewFacilityPage.click_Cancel_Btn();
+        String updatedFacilityPostalCode = fillData.get("postalCode");
+        String updatedFacilityCity = fillData.get("city");
+        String updatedFacilityState = fillData.get("state");
+
+        HashMap<String, String> getNewDataFromTable = new HashMap<>(facilitiesPage.getData_TableFirstData());
+        String newFacilityPostalCode = getNewDataFromTable.get("postalCode");
+        String newFacilityCity = getNewDataFromTable.get("city");
+        String newFacilityState = getNewDataFromTable.get("state");
+
         softAssert.assertEquals(facilitiesPage.getText_Header_Lbl(), "Facilities", "Facilities Header Is Present After Clicking On Cancel Button In Edit Facility Page");
-        softAssert.assertEquals(initialFacilityPostalCode, finalFacilityPostalCode, "Facility Postal Code Is Same As Expected");
-        softAssert.assertEquals(initialFacilityCity, finalFacilityCity, "Facility City Name Is Same As Expected");
-        softAssert.assertEquals(initialFacilityState, finalFacilityState, "Facility State Name Is Same As Expected");
+        softAssert.assertTrue(!newFacilityPostalCode.equals(updatedFacilityPostalCode), "Facility Postal Code Did Not Matched As Expected");
+        softAssert.assertTrue(!newFacilityCity.equals(updatedFacilityCity), "Facility City Name Did Not Matched As Expected");
+        softAssert.assertTrue(!newFacilityState.equals(updatedFacilityState), "Facility State Name Did Not Matched As Expected");
+
+        softAssert.assertEquals(newFacilityPostalCode, facilityPostalCode, "Facility Postal Code Is Matched As Expected");
+        softAssert.assertEquals(newFacilityCity, facilityCity, "Facility City Is Matched As Expected");
+        softAssert.assertEquals(newFacilityState, facilityState, "Facility State Is Matched As Expected");
         softAssert.assertAll();
     }
 
@@ -410,19 +421,4 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_Next_Btn();
         JarvisAssert.assertNotEquals(firstElement, facilitiesPage.getText_TableDataFacilityName_Lbl(), "First Data Of Current Page And First Data Of Next Page Didn't Matched As Expected ");
     }
-//import framework.frontend.actions.ActionHelper;
-//import framework.frontend.locator.Locator;
-//import framework.frontend.managers.DriverManager;
-//import io.github.bonigarcia.wdm.WebDriverManager;
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.JavascriptExecutor;
-//import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.interactions.Action;
-//import org.openqa.selenium.interactions.Actions;
-//
-//import java.sql.DriverAction;
-//
-//public class TestSuite_Facilities {
-//
 }

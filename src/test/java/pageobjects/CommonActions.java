@@ -93,6 +93,8 @@ public class CommonActions {
 
     public void coverJourneyTillFacility() {
         performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
         ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
     }
 
