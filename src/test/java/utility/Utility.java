@@ -1,7 +1,6 @@
 package utility;
 
 import framework.common.logger.ExtentLogger;
-import framework.common.logger.Logger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
