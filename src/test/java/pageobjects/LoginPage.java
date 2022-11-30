@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BaseTestClass {
     private static LoginPage _instance;
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
     private final Locator loginWithOTP_Lnk = Locator.builder().withWeb(By.id("zocial-otp-login"));
     private final Locator loginWithGoogle_Lnk = Locator.builder().withWeb(By.id("zocial-google"));
     private final Locator userId_Txt = Locator.builder().withWeb(By.id("dp-email-input"));
@@ -23,7 +23,6 @@ public class LoginPage extends BaseTestClass {
     private final Locator loginResendOTP_Btn = Locator.builder().withWeb(By.xpath("//button[text()='Resend OTP']"));
     private final Locator loginUserErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//form[@name='myform']/div/span"));
     private final Locator userIdAfterLogin_Txt = Locator.builder().withWeb(By.id("mobileNumber"));
-
 
     public static LoginPage getInstance() {
         if (_instance == null)
@@ -166,3 +165,4 @@ public class LoginPage extends BaseTestClass {
         return ActionHelper.getText(countryCode_Txt);
     }
 }
+
