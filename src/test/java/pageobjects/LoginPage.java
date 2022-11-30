@@ -24,7 +24,6 @@ public class LoginPage extends BaseTestClass {
     private final Locator loginUserErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//form[@name='myform']/div/span"));
     private final Locator userIdAfterLogin_Txt = Locator.builder().withWeb(By.id("mobileNumber"));
 
-
     public static LoginPage getInstance() {
         if (_instance == null)
             _instance = new LoginPage();
@@ -166,3 +165,4 @@ public class LoginPage extends BaseTestClass {
         return ActionHelper.getText(countryCode_Txt);
     }
 }
+
