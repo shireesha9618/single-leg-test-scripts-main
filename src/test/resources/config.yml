@@ -9,4 +9,4 @@ explicitWaitInSeconds: 60
 googleSheet: false
 grid:
   enabled: false
-role: endtoend
+role: endtoend,login,order,resources
