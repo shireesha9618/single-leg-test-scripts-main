@@ -7,6 +7,7 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -84,9 +85,9 @@ public class CommonActions {
 
     public void click_Skip_Btn() {
         ActionHelper.waitForLoaderToHide();
-        Shadow shadow = new Shadow(DriverManager.getDriver());
-        WebElement element = shadow.findElement("button[type='button'][data-pfbind-text='footer.skipButton.text']");
-        String text = element.getText();
+        String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        WebElement element = (WebElement) js.executeScript(skipButton);
         if (element.isDisplayed())
             element.click();
     }
