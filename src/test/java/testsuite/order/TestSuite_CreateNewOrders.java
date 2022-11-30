@@ -2,14 +2,18 @@ package testsuite.order;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
+import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
 import pageobjects.CreateNewOrderPage;
+import pageobjects.HomePage;
 import pageobjects.ViewOrderPage;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TestSuite_CreateNewOrders extends BaseTestClass {
@@ -86,7 +90,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.click_Create_Btn();
+        createNewOrderPage.click_CreateBtn_WithWait();
 
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderId_Txt(), "Validate presence of validation error message for Order Id field");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescriptionValidationError_Lbl(), "Validate presence of validation error message for Order Description field");
@@ -232,12 +236,17 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_012, Verify The Functionality of Teams Dropdown ")
     public void TC_CreateNewOrder_012_Verify_The_Functionality_of_Teams_Dropdown() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+        softAssert.assertEquals(createNewOrderPage.getValue_OrderDetailsTeam_Dropdown(), Constants.TEAM, "Validate correct value is selected in Team dropdown");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
@@ -384,20 +393,30 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_022, Verify The UI of Select a Facility of Pickup Details")
     public void TC_CreateNewOrder_022_Verify_The_UI_of_Select_a_Facility_of_Pickup_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
+        softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_023, Verify The Functionality of Select a Facility of Pickup Details")
     public void TC_CreateNewOrder_023_Verify_The_Functionality_of_Select_a_Facility_of_Pickup_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-
+        createNewOrderPage.set_PickUpFacility_TextBox();
+        softAssert.assertTrue(createNewOrderPage.getValue_PickupDetailsSelectAFacility_Dropdown() != "", "Validate some value is selected in Select A Facility dropdown");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
@@ -794,18 +813,30 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_048, Verify The UI of Select a Facility of Drop Details")
     public void TC_CreateNewOrder_048_Verify_The_UI_of_Select_a_Facility_of_Drop_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        createNewOrderPage.click_AddFacilityBtn_DropDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
+        softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_049, Verify The Functionality of Select a Facility of Drop Details")
     public void TC_CreateNewOrder_049_Verify_The_Functionality_of_Select_a_Facility_of_Drop_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        createNewOrderPage.set_DropFacility_TextBox();
+        softAssert.assertTrue(createNewOrderPage.getValue_DropDetailsSelectAFacility_Dropdown() != "", "Validate some value is selected in Select A Facility dropdown");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
@@ -1051,15 +1082,21 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //ToDo: Pending
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_065, To verify payment type dropdown")
     public void TC_CreateNewOrder_065_To_verify_payment_type_dropdown() {
+        List<String> expectedValues = new ArrayList<>(List.of("Collect At Pickup", "Collect At Delivery", "Prepaid"));
+        Collections.sort(expectedValues);
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        List<String> actualValues = createNewOrderPage.getAvailableValues_PaymentDetailsPaymentType_Select();
+        Collections.sort(actualValues);
+        for (int i = 0; i < expectedValues.size(); i++)
+            softAssert.assertEquals(actualValues.get(i), expectedValues.get(i), "Validate options present for Payment Type dropdown");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
@@ -1075,173 +1112,677 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
+
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_067, Verify The Functionality of Collect at Pickup in Payment Type without order Amount")
     public void TC_CreateNewOrder_067_Verify_The_Functionality_of_Collect_at_Pickup_in_Payment_Type_without_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Pickup");
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_068, Verify The Functionality of Collect at Deliver in Payment Type without order Amount")
     public void TC_CreateNewOrder_068_Verify_The_Functionality_of_Collect_at_Deliver_in_Payment_Type_without_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_069, Verify The Functionality of Prepaid in Payment Type without order Amount")
     public void TC_CreateNewOrder_069_Verify_The_Functionality_of_Prepaid_in_Payment_Type_without_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_070, Verify The Functionality of Collect at Pickup in Payment Type with order Amount")
     public void TC_CreateNewOrder_070_Verify_The_Functionality_of_Collect_at_Pickup_in_Payment_Type_with_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Pickup");
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(String.valueOf(faker.random().nextInt(100, 1000)));
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_071, Verify The Functionality of Collect at Deliver in Payment Type with order Amount")
     public void TC_CreateNewOrder_071_Verify_The_Functionality_of_Collect_at_Deliver_in_Payment_Type_with_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(String.valueOf(faker.random().nextInt(100, 1000)));
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_072, Verify The Functionality of Prepaid in Payment Type with order Amount")
     public void TC_CreateNewOrder_072_Verify_The_Functionality_of_Prepaid_in_Payment_Type_with_order_Amount() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(String.valueOf(faker.random().nextInt(100, 1000)));
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderId, "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_073, Verify The Validation Functionality For Duplicate Order ID In Create New Order Page ")
     public void TC_CreateNewOrder_073_Verify_The_Validation_Functionality_For_Duplicate_Order_ID_In_Create_New_Order_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        String orderId = faker.idNumber().valid();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(String.valueOf(faker.random().nextInt(100, 1000)));
+        createNewOrderPage.click_CreateBtn_WithWait();
+
+        HomePage.getInstance().openCreateOrderPage();
+
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+
+        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().zipCode());
+        createNewOrderPage.selectByVisibleText_DropDetailsCountry_Select(faker.country().name());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().secondaryAddress());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
+
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(String.valueOf(faker.random().nextInt(100, 1000)));
+        createNewOrderPage.click_Create_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_DuplicateOrderIdToastMsg_Lbl(), "Validate presence of Duplicate Order Id toast msg");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_074, Verify The UI of Add Facility in Select a Facility of Pickup Details")
     public void TC_CreateNewOrder_074_Verify_The_UI_of_Add_Facility_in_Select_a_Facility_of_Pickup_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityName_Txt(), "Validate presence of Facility Name field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityId_Txt(), "Validate presence of Facility ID field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCode_Txt(), "Validate presence of Postal Code field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityCountry_Txt(), "Validate presence of Country field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine1_Txt(), "Validate presence of Address Line 1 field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine2_Txt(), "Validate presence of Address Line 2 field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityState_Txt(), "Validate presence of State field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityCity_Txt(), "Validate presence of City field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityCreate_Btn(), "Validate presence of Create button");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityCancel_Btn(), "Validate presence of Cancel button");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_075, Verify The Validation Functionality For Name In Add New Facility Page For Empty Field")
     public void TC_CreateNewOrder_075_Verify_The_Validation_Functionality_For_Name_In_Add_New_Facility_Page_For_Empty_Field() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.clear_AddFacilityFacilityName_Txt();
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Validate presence of validation error message for Facility Name field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Required", "Validate text of validation error message for Facility Name field");
+        softAssert.assertAll();
     }
+
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_076, Verify The Validation Functionality For Name In Add New Facility Page For Minimum Character")
     public void TC_CreateNewOrder_076_Verify_The_Validation_Functionality_For_Name_In_Add_New_Facility_Page_For_Minimum_Character() {
+        List<String> inputs = List.of("q", "1", "@");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Validate presence of validation error message for Facility Name field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Should be minimum 2", "Validate validation error message for Facility Name field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_077, Verify The Validation Functionality For Name In Add New Facility Page For Maximum Character")
     public void TC_CreateNewOrder_077_Verify_The_Validation_Functionality_For_Name_In_Add_New_Facility_Page_For_Maximum_Character() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt("Max length" + ActionHelper.getRandomNumberString(15));
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Validate presence of validation error message for Facility Name field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Can be at max 25", "Validate validation error message for Facility Name field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_078, Verify The Validation Functionality For Facility ID In Add New Facility Page For Empty Field")
     public void TC_CreateNewOrder_078_Verify_The_Validation_Functionality_For_Facility_ID_In_Add_New_Facility_Page_For_Empty_Field() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.clear_AddFacilityFacilityId_Txt();
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityIdValidationMsg_Lbl(), "Validate presence of validation error message for Facility Id field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityIdValidationMsg_Lbl(), "Required", "Validate text of validation error message for Facility Id field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_079, Verify The Validation Functionality For Facility ID In Add New Facility Page For Minimum Character")
     public void TC_CreateNewOrder_079_Verify_The_Validation_Functionality_For_Facility_ID_In_Add_New_Facility_Page_For_Minimum_Character() {
+        List<String> inputs = List.of("q", "1", "@");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityFacilityId_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityIdValidationMsg_Lbl(), "Validate presence of validation error message for Facility Id field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityIdValidationMsg_Lbl(), "Should be minimum 2", "Validate validation error message for Facility Id field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_080, Verify The Validation Functionality For Facility ID In Add New Facility Page For Maximum Character")
     public void TC_CreateNewOrder_080_Verify_The_Validation_Functionality_For_Facility_ID_In_Add_New_Facility_Page_For_Maximum_Character() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityFacilityId_Txt("Max length" + ActionHelper.getRandomNumberString(15));
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityIdValidationMsg_Lbl(), "Validate presence of validation error message for Facility Id field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityIdValidationMsg_Lbl(), "Can be at max 25", "Validate validation error message for Facility Id field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_081, Verify The Validation Functionality For PostalCode In Add New Facility Page For Empty Field")
     public void TC_CreateNewOrder_081_Verify_The_Validation_Functionality_For_PostalCode_In_Add_New_Facility_Page_For_Empty_Field() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.clear_AddFacilityPostalCode_Txt();
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Validate presence of validation error message for Postal Code field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityPostalCodeValidationMsg_Lbl(), "Required", "Validate text of validation error message for Postal Code field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_082, Verify The Validation Functionality For PostalCode In Add New Facility Page For Minimum Character")
     public void TC_CreateNewOrder_082_Verify_The_Validation_Functionality_For_PostalCode_In_Add_New_Facility_Page_For_Minimum_Character() {
+        List<String> inputs = List.of("q", "1", "@");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl(), "Validate presence of validation toast message for Postal Code field");
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Validate presence of validation error message for Postal Code field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityPostalCodeValidationMsg_Lbl(), "Not correct format", "Validate validation error message for Postal Code field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_083, Verify The Validation Functionality For PostalCode In Add New Facility Page For Maximum Character")
     public void TC_CreateNewOrder_083_Verify_The_Validation_Functionality_For_PostalCode_In_Add_New_Facility_Page_For_Maximum_Character() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(ActionHelper.getRandomNumberString(11));
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl(), "Validate presence of validation toast message for Postal Code field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Validate presence of validation error message for Postal Code field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityPostalCodeValidationMsg_Lbl(), "Not correct format", "Validate validation error message for Postal Code field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_084, Verify The Validation Functionality For PostalCode In Add New Facility Page For Other Than Numeric Value")
     public void TC_CreateNewOrder_084_Verify_The_Validation_Functionality_For_PostalCode_In_Add_New_Facility_Page_For_Other_Than_Numeric_Value() {
+        List<String> inputs = List.of("abcd", "q@ #aaa", "12rW@e$d", "@!#$%");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl(), "Validate presence of validation toast message for Postal Code field");
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Validate presence of validation error message for Postal Code field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityPostalCodeValidationMsg_Lbl(), "Not correct format", "Validate validation error message for Postal Code field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_085, Verify the Functionality of Postal Code With valid data")
-    public void TC_CreateNewOrder_085_Verify_the_Functionlity_of_Postal_Code_With_valid_data() {
+    public void TC_CreateNewOrder_085_Verify_the_Functionality_of_Postal_Code_With_valid_data() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        String pinCode = faker.address().zipCode();
+        createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(pinCode);
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl() == false, "Validate absence of validation toast message for Postal Code field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl() == false, "Validate absence of validation error message for Postal Code field");
+        softAssert.assertEquals(createNewOrderPage.getValue_AddFacilityPostalCode_Txt(), pinCode, "Validate value for Postal Code field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_086, Verify The Validation Functionality For Postal Code in Add New Facility page with invalid postal code")
     public void TC_CreateNewOrder_086_Verify_The_Validation_Functionality_For_Postal_Code_in_Add_New_Facility_page_with_invalid_postal_code() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt("1234567");
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl(), "Validate presence of validation toast message for Postal Code field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_087, Verify Functionality For Country DropDown In Add New Facility Page")
     public void TC_CreateNewOrder_087_Verify_Functionality_For_Country_DropDown_In_Add_New_Facility_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        softAssert.assertTrue(createNewOrderPage.isEnabled_AddFacilityCountry_Txt(), "Validate Country dropdown is disabled");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_088, Verify The Validation Functionality For Address Line 1 In Add New Facility Page For Empty Field")
     public void TC_CreateNewOrder_088_Verify_The_Validation_Functionality_For_Address_Line_1_In_Add_New_Facility_Page_For_Empty_Field() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.clear_AddFacilityAddressLine1_Txt();
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine1ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 1 field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine1ValidationMsg_Lbl(), "Required", "Validate text of validation error message for Address Line 1 field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_089, Verify The Validation Functionality For Address Line 1 In Add New Facility Page For Minimum Character")
     public void TC_CreateNewOrder_089_Verify_The_Validation_Functionality_For_Address_Line_1_In_Add_New_Facility_Page_For_Minimum_Character() {
+        List<String> inputs = List.of("q", "1", "@");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityAddressLine1_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine1ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 1 field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine1ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 1 field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_090, Verify The Validation Functionality For Address Line 1 In Add New Facility Page For Maximum Character")
     public void TC_CreateNewOrder_090_Verify_The_Validation_Functionality_For_Address_Line_1_In_Add_New_Facility_Page_For_Maximum_Character() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityAddressLine1_Txt("Max Length:" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
+                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30));
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine1ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 1 field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine1ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 1 field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_091, Verify The Validation Functionality For Address Line 2 In Add New Facility Page For Empty Field")
     public void TC_CreateNewOrder_091_Verify_The_Validation_Functionality_For_Address_Line_2_In_Add_New_Facility_Page_For_Empty_Field() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.clear_AddFacilityAddressLine2_Txt();
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine2ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 2 field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine2ValidationMsg_Lbl(), "Required", "Validate text of validation error message for Address Line 2 field");
+        softAssert.assertAll();
     }
 
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_092, Verify The Validation Functionality For Address Line 2 In Add New Facility Page For Minimum Character")
     public void TC_CreateNewOrder_092_Verify_The_Validation_Functionality_For_Address_Line_2_In_Add_New_Facility_Page_For_Minimum_Character() {
+        List<String> inputs = List.of("q", "1", "@");
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        for (String input : inputs) {
+            createNewOrderPage.fillWithClear_AddFacilityAddressLine2_Txt(input);
+            createNewOrderPage.click_AddFacilityCreate_Btn();
+            softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine2ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 2 field");
+            softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine2ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 2 field");
+        }
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_093, Verify The Validation Functionality For Address Line 2 In Add New Facility Page For Maximum Character")
     public void TC_CreateNewOrder_093_Verify_The_Validation_Functionality_For_Address_Line_2_In_Add_New_Facility_Page_For_Maximum_Character() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
+        createNewOrderPage.fillWithClear_AddFacilityAddressLine2_Txt("Max Length:" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
+                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30));
+        createNewOrderPage.click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine2ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 2 field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine2ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 2 field");
+        softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_094, Verify The Functionality for selecting same facility for pickup and drop")
     public void TC_CreateNewOrder_094_Verify_The_Functionality_for_selecting_same_facility_for_pickup_and_drop() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(faker.idNumber().valid());
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
+        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
+        createNewOrderPage.fill_PickupDetailsContactName_Txt(faker.name().fullName());
+        createNewOrderPage.fill_PickupDetailsContactNumber_Txt(faker.phoneNumber().cellPhone());
+        createNewOrderPage.set_PickUpFacility_TextBox();
+        createNewOrderPage.fill_DropDetailsContactName_Txt(faker.name().fullName());
+        createNewOrderPage.fill_DropDetailsContactNumber_Txt(faker.phoneNumber().cellPhone());
+        createNewOrderPage.set_DropFacility_TextBox();
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
+        createNewOrderPage.click_Create_Btn();
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_SamePickupAndDropFacilityToastMsg_Lbl(), "Validate presence of Drop facility needs to be different from Pickup facility toast msg");
+        softAssert.assertAll();
     }
 
 }

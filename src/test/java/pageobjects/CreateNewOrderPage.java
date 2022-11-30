@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import utility.Utility;
 
 import java.awt.*;
@@ -26,7 +27,7 @@ public class CreateNewOrderPage {
     private final Locator orderDetailsOrderId_Txt = Locator.builder().withWeb(By.xpath("//input[@name='orderId']"));
     private final Locator orderDetailsScannableBarcodeNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='barcodeNumber']"));
     private final Locator orderDetailsOrderDescription_Txt = Locator.builder().withWeb(By.xpath("//textarea[@name='orderDescription']"));
-    private final Locator orderDetailsTeam_Dropdown = Locator.builder().withWeb(By.xpath("//div[label[text()='Team*']]//input"));
+    private final Locator orderDetailsTeam_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[2]"));
 
     private final Locator pickupDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Pickup Details']"));
     private final Locator pickupDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='contactName']"));
@@ -59,6 +60,10 @@ public class CreateNewOrderPage {
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
 
+    private final Locator successToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Order Creation Success']"));
+    private final Locator duplicateOrderIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Duplicate clientOrderId']"));
+    private final Locator samePickupAndDropFacilityToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Drop facility needs to be different from Pickup facility']"));
+
     private final Locator orderDetailsOrderIdValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter order id']]/following-sibling::span"));
     private final Locator orderDetailsOrderDescriptionValidationError_Lbl = Locator.builder().withWeb(By.xpath("//textarea[@placeholder='Enter order description']/following-sibling::span"));
     private final Locator orderDetailsTeamValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[label[text()='Team*']]//input/following-sibling::span"));
@@ -87,21 +92,28 @@ public class CreateNewOrderPage {
 
     private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option ant-select-item-option-active']//p"));
 
-    private final Locator addFacilityFacilityName_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.name']"));
-    private final Locator addFacilityFacilityId_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.ID']"));
-    private final Locator addFacilityPostalCode_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
-    private final Locator addFacilityAddressLine1_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine1']"));
-    private final Locator addFacilityAddressLine2_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine2']"));
-    private final Locator addFacilityState_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.state']"));
-    private final Locator addFacilityCity_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.city']"));
-    private final Locator addFacilityFacilityNameRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='basicDetails.name']"));
-    private final Locator addFacilityPostalCodeRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.postalCode']"));
-    private final Locator addFacilityAddressLine1RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine1']"));
-    private final Locator addFacilityAddressLine2RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine2']"));
-    private final Locator addFacilityStateRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.state']"));
-    private final Locator addFacilityCityRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.city']"));
-    private final Locator addFacilityCreateFacility_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']/.."));
-    private final Locator addFacilityCancelFacility_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Cancel']/..)[1]"));
+    private final Locator addNewFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Add New Facility']"));
+    private final Locator addFacilityFacilityName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.name']"));
+    private final Locator addFacilityFacilityId_Txt = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.ID']"));
+    private final Locator addFacilityPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
+    private final Locator addFacilityCountry_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Country*']]/following-sibling::div//input"));
+    private final Locator addFacilityAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine1']"));
+    private final Locator addFacilityAddressLine2_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine2']"));
+    private final Locator addFacilityState_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.state']"));
+    private final Locator addFacilityCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.city']"));
+    private final Locator addFacilityCreate_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Create']]"));
+    private final Locator addFacilityCancel_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Cancel']]"));
+
+    private final Locator addFacilityFacilityNameValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='basicDetails.name']]/following-sibling::p"));
+    private final Locator addFacilityFacilityIdValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='basicDetails.ID']]/following-sibling::p"));
+    private final Locator addFacilityPostalCodeValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.postalCode']]/following-sibling::p"));
+    private final Locator addFacilityAddressLine1ValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.addressLine1']]/following-sibling::p"));
+    private final Locator addFacilityAddressLine2ValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.addressLine2']]/following-sibling::p"));
+    private final Locator addFacilityStateValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.state']]/following-sibling::p"));
+    private final Locator addFacilityCityValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.city']]/following-sibling::p"));
+
+    private final Locator addFacilityPinCodeDataNotFoundToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Pincode data not found.']"));
+
     Faker sampleData = new Faker();
 
     public static CreateNewOrderPage getInstance() {
@@ -231,8 +243,13 @@ public class CreateNewOrderPage {
         ActionHelper.click(orderDetailsTeam_Dropdown);
     }
 
-    public String getText_OrderDetailsTeam_Dropdown() {
-        return ActionHelper.getText(orderDetailsTeam_Dropdown);
+    public String getValue_OrderDetailsTeam_Dropdown() {
+        return ActionHelper.getAttribute(orderDetailsTeam_Dropdown, "title");
+    }
+
+    public void select_OrderDetailsTeam_Dropdown(String input) {
+        ActionHelper.click(orderDetailsTeam_Dropdown);
+        ActionHelper.sendKeys(orderDetailsTeam_Dropdown, Keys.chord(input, Keys.ENTER));
     }
 
     public boolean isPresent_PickupDetailsHeader_Lbl() {
@@ -291,8 +308,8 @@ public class CreateNewOrderPage {
         ActionHelper.click(pickupDetailsSelectAFacility_Dropdown);
     }
 
-    public String getText_PickupDetailsSelectAFacility_Dropdown() {
-        return ActionHelper.getText(pickupDetailsSelectAFacility_Dropdown);
+    public String getValue_PickupDetailsSelectAFacility_Dropdown() {
+        return ActionHelper.getAttribute(pickupDetailsSelectAFacility_Dropdown, "value");
     }
 
     public boolean isPresent_PickupDetailsPostalCode_Txt() {
@@ -487,8 +504,8 @@ public class CreateNewOrderPage {
         ActionHelper.click(dropDetailsSelectAFacility_Dropdown);
     }
 
-    public String getText_DropDetailsSelectAFacility_Dropdown() {
-        return ActionHelper.getText(dropDetailsSelectAFacility_Dropdown);
+    public String getValue_DropDetailsSelectAFacility_Dropdown() {
+        return ActionHelper.getAttribute(dropDetailsSelectAFacility_Dropdown, "value");
     }
 
     public boolean isPresent_DropDetailsPostalCode_Txt() {
@@ -692,6 +709,13 @@ public class CreateNewOrderPage {
         return ActionHelper.isPresent(create_Btn);
     }
 
+    public void click_CreateBtn_WithWait() {
+        ActionHelper.click(create_Btn);
+        Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        CommonActions.getInstance().click_Skip_Btn();
+    }
+
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
     }
@@ -884,100 +908,269 @@ public class CreateNewOrderPage {
         ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("DDS" + Keys.UP + Keys.ENTER));
     }
 
-    public Boolean isPresent_AddFacilityFacilityName_TxtBox() {
-        return ActionHelper.isPresent(addFacilityFacilityName_TxtBox, 10000);
+    public boolean isPresent_AddNewFacilityHeader_Lbl() {
+        return ActionHelper.isPresent(addNewFacilityHeader_Lbl, 5000);
     }
 
-    public void set_AddFacilityFacilityName_TxtBox(String facilityName) {
-        ActionHelper.sendKeysWithClear(addFacilityFacilityName_TxtBox.getBy(), facilityName);
+    public boolean isPresent_AddFacilityFacilityName_Txt() {
+        return ActionHelper.isPresent(addFacilityFacilityName_Txt);
     }
 
-    public Boolean isPresent_AddFacilityFacilityId_TxtBox() {
-        return ActionHelper.isPresent(addFacilityFacilityId_TxtBox);
+    public void fill_AddFacilityFacilityName_Txt(String value) {
+        ActionHelper.fill(addFacilityFacilityName_Txt, value);
     }
 
-    public String get_addFacilityFacilityId_TxtBox() {
-        return ActionHelper.getText(addFacilityFacilityId_TxtBox.getBy());
+    public void fillWithClear_AddFacilityFacilityName_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityFacilityName_Txt.getBy(), value);
     }
 
-    public Boolean isPresent_AddFacilityPostalCode_TxtBox() {
-        return ActionHelper.isPresent(addFacilityPostalCode_TxtBox);
+    public void clear_AddFacilityFacilityName_Txt() {
+        ActionHelper.clear(addFacilityFacilityName_Txt.getBy());
     }
 
-    public void set_AddFacilityPostalCode_TxtBox(String postalCode) {
-        ActionHelper.sendKeysWithClear(addFacilityPostalCode_TxtBox.getBy(), Keys.chord(postalCode + Keys.TAB));
-        ActionHelper.waitForLoaderToHide();
+    public String getValue_AddFacilityFacilityName_Txt() {
+        return ActionHelper.getAttribute(addFacilityFacilityName_Txt, "value");
     }
 
-    public Boolean isPresent_AddFacilityAddressLine1_TxtBox() {
-        return ActionHelper.isPresent(addFacilityAddressLine1_TxtBox);
+    public boolean isPresent_AddFacilityFacilityId_Txt() {
+        return ActionHelper.isPresent(addFacilityFacilityId_Txt);
     }
 
-    public void set_AddFacilityAddressLine1_TxtBox(String address) {
-        ActionHelper.sendKeysWithClear(addFacilityAddressLine1_TxtBox.getBy(), Keys.chord(address + Keys.TAB));
+    public void fill_AddFacilityFacilityId_Txt(String value) {
+        ActionHelper.fill(addFacilityFacilityId_Txt, value);
     }
 
-    public Boolean isPresent_AddFacilityAddressLine2_TxtBox() {
-        return ActionHelper.isPresent(addFacilityAddressLine2_TxtBox);
+    public void fillWithClear_AddFacilityFacilityId_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityFacilityId_Txt.getBy(), value);
     }
 
-    public void set_AddFacilityAddressLine2_TxtBox(String address) {
-        ActionHelper.sendKeysWithClear(addFacilityAddressLine2_TxtBox.getBy(), address);
+    public void clear_AddFacilityFacilityId_Txt() {
+        ActionHelper.clear(addFacilityFacilityId_Txt.getBy());
     }
 
-    public Boolean isPresent_AddFacilityState_TxtBox() {
-        return ActionHelper.isPresent(addFacilityState_TxtBox);
+    public String getValue_AddFacilityFacilityId_Txt() {
+        return ActionHelper.getAttribute(addFacilityFacilityId_Txt, "value");
     }
 
-    public String get_AddFacilityState_TxtBox() {
-        return ActionHelper.getText(addFacilityState_TxtBox);
+    public boolean isPresent_AddFacilityPostalCode_Txt() {
+        return ActionHelper.isPresent(addFacilityPostalCode_Txt);
     }
 
-    public Boolean isPresent_AddFacilityCity_TxtBox() {
-        return ActionHelper.isPresent(addFacilityCity_TxtBox);
+    public void fill_AddFacilityPostalCode_Txt(String value) {
+        ActionHelper.fill(addFacilityPostalCode_Txt, value);
     }
 
-    public String get_AddFacilityCity_TxtBox() {
-        return ActionHelper.getText(addFacilityCity_TxtBox);
+    public void fillWithClear_AddFacilityPostalCode_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityPostalCode_Txt.getBy(), value);
     }
+
+    public void clear_AddFacilityPostalCode_Txt() {
+        ActionHelper.clear(addFacilityPostalCode_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityPostalCode_Txt() {
+        return ActionHelper.getAttribute(addFacilityPostalCode_Txt, "value");
+    }
+
+    public boolean isPresent_AddFacilityCountry_Txt() {
+        return ActionHelper.isPresent(addFacilityCountry_Txt);
+    }
+
+    public void fill_AddFacilityCountry_Txt(String value) {
+        ActionHelper.fill(addFacilityCountry_Txt, value);
+    }
+
+    public void fillWithClear_AddFacilityCountry_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityCountry_Txt.getBy(), value);
+    }
+
+    public void clear_AddFacilityCountry_Txt() {
+        ActionHelper.clear(addFacilityCountry_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityCountry_Txt() {
+        return ActionHelper.getAttribute(addFacilityCountry_Txt, "value");
+    }
+
+    public boolean isEnabled_AddFacilityCountry_Txt() {
+        return ActionHelper.isEnabled(addFacilityCountry_Txt.getBy());
+    }
+
+    public boolean isPresent_AddFacilityAddressLine1_Txt() {
+        return ActionHelper.isPresent(addFacilityAddressLine1_Txt);
+    }
+
+    public void fill_AddFacilityAddressLine1_Txt(String value) {
+        ActionHelper.fill(addFacilityAddressLine1_Txt, value);
+    }
+
+    public void fillWithClear_AddFacilityAddressLine1_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityAddressLine1_Txt.getBy(), value);
+    }
+
+    public void clear_AddFacilityAddressLine1_Txt() {
+        ActionHelper.clear(addFacilityAddressLine1_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityAddressLine1_Txt() {
+        return ActionHelper.getAttribute(addFacilityAddressLine1_Txt, "value");
+    }
+
+    public boolean isPresent_AddFacilityAddressLine2_Txt() {
+        return ActionHelper.isPresent(addFacilityAddressLine2_Txt);
+    }
+
+    public void fill_AddFacilityAddressLine2_Txt(String value) {
+        ActionHelper.fill(addFacilityAddressLine2_Txt, value);
+    }
+
+    public void fillWithClear_AddFacilityAddressLine2_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityAddressLine2_Txt.getBy(), value);
+    }
+
+    public void clear_AddFacilityAddressLine2_Txt() {
+        ActionHelper.clear(addFacilityAddressLine2_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityAddressLine2_Txt() {
+        return ActionHelper.getAttribute(addFacilityAddressLine2_Txt, "value");
+    }
+
+    public boolean isPresent_AddFacilityState_Txt() {
+        return ActionHelper.isPresent(addFacilityState_Txt);
+    }
+
+    public void fill_AddFacilityState_Txt(String value) {
+        ActionHelper.fill(addFacilityState_Txt, value);
+    }
+
+    public void fillWithClear_AddFacilityState_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityState_Txt.getBy(), value);
+    }
+
+    public void clear_AddFacilityState_Txt() {
+        ActionHelper.clear(addFacilityState_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityState_Txt() {
+        return ActionHelper.getAttribute(addFacilityState_Txt, "value");
+    }
+
+    public boolean isPresent_AddFacilityCity_Txt() {
+        return ActionHelper.isPresent(addFacilityCity_Txt);
+    }
+
+    public void fill_AddFacilityCity_Txt(String value) {
+        ActionHelper.fill(addFacilityCity_Txt, value);
+    }
+
+    public void fillWithClear_AddFacilityCity_Txt(String value) {
+        ActionHelper.fillWithClear(addFacilityCity_Txt.getBy(), value);
+    }
+
+    public void clear_AddFacilityCity_Txt() {
+        ActionHelper.clear(addFacilityCity_Txt.getBy());
+    }
+
+    public String getValue_AddFacilityCity_Txt() {
+        return ActionHelper.getAttribute(addFacilityCity_Txt, "value");
+    }
+
+    public boolean isPresent_AddFacilityCreate_Btn() {
+        return ActionHelper.isPresent(addFacilityCreate_Btn);
+    }
+
+    public void click_AddFacilityCreateBtn_WithWait() {
+        ActionHelper.click(addFacilityCreate_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_AddFacilityCreate_Btn() {
+        ActionHelper.click(addFacilityCreate_Btn);
+    }
+
+    public String getText_AddFacilityCreate_Btn() {
+        return ActionHelper.getText(addFacilityCreate_Btn);
+    }
+
+    public boolean isPresent_AddFacilityCancel_Btn() {
+        return ActionHelper.isPresent(addFacilityCancel_Btn);
+    }
+
+    public void click_AddFacilityCancel_Btn() {
+        ActionHelper.click(addFacilityCancel_Btn);
+    }
+
+    public String getText_AddFacilityCancel_Btn() {
+        return ActionHelper.getText(addFacilityCancel_Btn);
+    }
+
 
     public void addFacility(String facilityName, String postalCode, String addressLine1, String addressLine2) {
-        set_AddFacilityFacilityName_TxtBox(facilityName);
-        set_AddFacilityPostalCode_TxtBox(postalCode);
-        set_AddFacilityAddressLine1_TxtBox(addressLine1);
-        set_AddFacilityAddressLine2_TxtBox(addressLine2);
+        fillWithClear_AddFacilityFacilityName_Txt(facilityName);
+        fillWithClear_AddFacilityPostalCode_Txt(postalCode);
+        fillWithClear_AddFacilityAddressLine1_Txt(addressLine1);
+        fillWithClear_AddFacilityAddressLine2_Txt(addressLine2);
     }
 
-    public void click_AddFacilityCreateFacility_Btn() {
-        ActionHelper.click(addFacilityCreateFacility_Btn);
+    public Boolean isPresent_AddFacilityFacilityNameValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityFacilityNameValidationMsg_Lbl);
     }
 
-    public void click_AddFacilityCancelFacility_Btn() {
-        ActionHelper.click(addFacilityCancelFacility_Btn);
+    public String getText_AddFacilityFacilityNameValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityFacilityNameValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityFacilityNameRequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityFacilityNameRequiredMandatory_Msg);
+    public Boolean isPresent_AddFacilityFacilityIdValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityFacilityIdValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityPostalCodeRequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityPostalCodeRequiredMandatory_Msg);
+    public String getText_AddFacilityFacilityIdValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityFacilityIdValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityAddressLine1RequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityAddressLine1RequiredMandatory_Msg);
+    public Boolean isPresent_AddFacilityPostalCodeValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityPostalCodeValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityAddressLine2RequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityAddressLine2RequiredMandatory_Msg);
+    public String getText_AddFacilityPostalCodeValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityPostalCodeValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityStateRequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityStateRequiredMandatory_Msg);
+    public Boolean isPresent_AddFacilityAddressLine1ValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityAddressLine1ValidationMsg_Lbl);
     }
 
-    public Boolean isPresent_AddFacilityCityRequiredMandatory_Msg() {
-        return ActionHelper.isPresent(addFacilityCityRequiredMandatory_Msg);
+    public String getText_AddFacilityAddressLine1ValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityAddressLine1ValidationMsg_Lbl);
+    }
+
+    public Boolean isPresent_AddFacilityAddressLine2ValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityAddressLine2ValidationMsg_Lbl);
+    }
+
+    public String getText_AddFacilityAddressLine2ValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityAddressLine2ValidationMsg_Lbl);
+    }
+
+    public Boolean isPresent_AddFacilityStateValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityStateValidationMsg_Lbl);
+    }
+
+    public String getText_AddFacilityStateValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityStateValidationMsg_Lbl);
+    }
+
+    public Boolean isPresent_AddFacilityCityValidationMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityCityValidationMsg_Lbl);
+    }
+
+    public String getText_AddFacilityCityValidationMsg_Lbl() {
+        return ActionHelper.getText(addFacilityCityValidationMsg_Lbl);
+    }
+
+    public boolean isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl() {
+        return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl);
     }
 
     public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
@@ -985,20 +1178,20 @@ public class CreateNewOrderPage {
         if (input.equalsIgnoreCase("Pickup"))
             click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         else click_AddFacilityBtn_DropDetailsSelectAFacility_Dropdown();
-        softAssert.assertTrue(isPresent_AddFacilityFacilityName_TxtBox(), "Facility name is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityFacilityId_TxtBox(), "Facility Id is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityPostalCode_TxtBox(), "Add Facility Postal code is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityAddressLine1_TxtBox(), "Address Line 1 text box is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityAddressLine2_TxtBox(), "Address Line 2 text box is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityState_TxtBox(), "State text box is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityCity_TxtBox(), "City text box is present as expected");
-        click_AddFacilityCreateFacility_Btn();
-        softAssert.assertTrue(isPresent_AddFacilityFacilityNameRequiredMandatory_Msg(), "Facility name required message is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityPostalCodeRequiredMandatory_Msg(), "Postal code required message is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityAddressLine1RequiredMandatory_Msg(), "Address line 1 required message is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityAddressLine2RequiredMandatory_Msg(), "Address line 2 required message is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityStateRequiredMandatory_Msg(), "State required message is present as expected");
-        softAssert.assertTrue(isPresent_AddFacilityCityRequiredMandatory_Msg(), "City required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityFacilityName_Txt(), "Facility name is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityFacilityId_Txt(), "Facility Id is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCode_Txt(), "Add Facility Postal code is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine1_Txt(), "Address Line 1 text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine2_Txt(), "Address Line 2 text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityState_Txt(), "State text box is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityCity_Txt(), "City text box is present as expected");
+        click_AddFacilityCreate_Btn();
+        softAssert.assertTrue(isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Facility name required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Postal code required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine1ValidationMsg_Lbl(), "Address line 1 required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityAddressLine2ValidationMsg_Lbl(), "Address line 2 required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityStateValidationMsg_Lbl(), "State required message is present as expected");
+        softAssert.assertTrue(isPresent_AddFacilityCityValidationMsg_Lbl(), "City required message is present as expected");
         softAssert.assertAll();
         createFacility(postalCode);
     }
@@ -1054,17 +1247,29 @@ public class CreateNewOrderPage {
     public void createFacility(String postalCode) {
         Actions actions = new Actions(DriverManager.getDriver());
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        isPresent_AddFacilityFacilityName_TxtBox();
-        set_AddFacilityFacilityName_TxtBox("Facility " + sampleData.number().digits(4));
-        set_AddFacilityPostalCode_TxtBox(postalCode);
-        set_AddFacilityAddressLine1_TxtBox("Building No " + sampleData.number().digits(2));
-        set_AddFacilityAddressLine2_TxtBox("Street No " + sampleData.number().digits(2));
-        softAssert.assertTrue(get_AddFacilityState_TxtBox() != null, "State Text box is not null as expected");
-        softAssert.assertTrue(get_AddFacilityCity_TxtBox() != null, "City Text box is not null as expected");
+        isPresent_AddFacilityFacilityName_Txt();
+        fillWithClear_AddFacilityFacilityName_Txt("Facility " + sampleData.number().digits(4));
+        fillWithClear_AddFacilityPostalCode_Txt(postalCode);
+        fillWithClear_AddFacilityAddressLine1_Txt("Building No " + sampleData.number().digits(2));
+        fillWithClear_AddFacilityAddressLine2_Txt("Street No " + sampleData.number().digits(2));
+        softAssert.assertTrue(getValue_AddFacilityState_Txt() != null, "State Text box is not null as expected");
+        softAssert.assertTrue(getValue_AddFacilityCity_Txt() != null, "City Text box is not null as expected");
         softAssert.assertAll();
-        ActionHelper.click(addFacilityState_TxtBox);
+        ActionHelper.click(addFacilityState_Txt);
         actions.sendKeys(Keys.PAGE_DOWN).build().perform();
-        click_AddFacilityCreateFacility_Btn();
+        click_AddFacilityCreate_Btn();
         ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isPresent_SuccessToastMsg_Lbl() {
+        return ActionHelper.isPresent(successToastMsg_Lbl, 5000);
+    }
+
+    public boolean isPresent_DuplicateOrderIdToastMsg_Lbl() {
+        return ActionHelper.isPresent(duplicateOrderIdToastMsg_Lbl, 5000);
+    }
+
+    public boolean isPresent_SamePickupAndDropFacilityToastMsg_Lbl() {
+        return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, 5000);
     }
 }
