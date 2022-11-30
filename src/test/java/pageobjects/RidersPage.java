@@ -29,7 +29,7 @@ public class RidersPage {
     private final Locator statusDropDownOnboardingValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='onboarding:onboarding']"));
     private final Locator statusDropDownValueList_Lbl = Locator.builder().withWeb(By.xpath("//span[@class='ant-radio']/following-sibling::span"));
     private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Clear Selection']]"));
-    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("(//button[contains(@id,'headlessui-menu-button')]//p[text()='Teams']"));
+    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("//button//p[text()='Teams']"));
     private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='More Actions']"));
     private final Locator exportCSV_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Export as CSV']"));
     private final Locator modifyColumns_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
@@ -71,8 +71,19 @@ public class RidersPage {
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
     private final Locator previous_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator edit_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Edit']"));
-    private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
-
+    private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//td//label[@class='ant-checkbox-wrapper']"));
+    private final Locator tableDataRiderId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
+    private final Locator tableDataRiderName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
+    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td//span"));
+    private final Locator changeStatus_Btn = Locator.builder().withWeb(By.xpath("//button//p[text()='Change Status']"));
+    private final Locator changeStatusHeader_Lbl = Locator.builder().withWeb(By.xpath("(//p[text()='Change Status'])[2]"));
+    private final Locator state_TextBox = Locator.builder().withWeb(By.xpath("//span[text()='Select State']"));
+    private final Locator stateHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='State']"));
+    private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='State']/../parent::div/following-sibling::div/button/p[text()='Cancel']"));
+    private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='State']/../parent::div/following-sibling::div/button/p[text()='Save']"));
+    private final Locator paginationPage5Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='5']/p"));
+    private final Locator paginationPrevious5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Previous 5 Pages']//a"));
+    private final Locator paginationNext5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Next 5 Pages']//a"));
 
     public static RidersPage getInstance() {
         if (_instance == null)
@@ -557,12 +568,12 @@ public class RidersPage {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
 
-    public void click_PaginationPage1Block_Btn() {
+    public void click_PaginationPageFirstBlock_Btn() {
         ActionHelper.click(paginationPage1Block_Btn);
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
 
-    public void click_PaginationPage2Block_Btn() {
+    public void click_PaginationPageSecondBlock_Btn() {
         ActionHelper.click(paginationPage2Block_Btn);
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
@@ -588,5 +599,80 @@ public class RidersPage {
 
     public void open_Status_DropDown() {
         ActionHelper.click(status_DropDown);
+    }
+
+    public String getText_TableDataRiderName_Lbl() {
+        return ActionHelper.getText(tableDataRiderName_Lbl);
+    }
+
+    public void check_TableData_CheckBox(int index) {
+            ActionHelper.waitForLoaderToHide();
+            ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
+            Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
+    }
+
+    public void uncheck_TableData_CheckBox(int index) {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
+        Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
+    }
+
+    public boolean isPresent_ChangeStatus_Btn(){
+        return ActionHelper.isPresent(changeStatus_Btn);
+    }
+
+    public void click_ChangeStatus_Btn(){
+        ActionHelper.click(changeStatus_Btn);
+    }
+
+    public boolean isPresent_ChangeStatusHeader_Lbl(){
+        return ActionHelper.isPresent(changeStatusHeader_Lbl);
+    }
+
+    public String getText_ChangeStatusHeader_Lbl(){
+        return ActionHelper.getText(changeStatusHeader_Lbl);
+    }
+
+    public boolean isPresent_Cancel_Btn(){
+        return ActionHelper.isPresent(cancel_Btn);
+    }
+
+    public void click_Cancel_Btn(){
+        ActionHelper.click(cancel_Btn);
+    }
+
+    public boolean isPresent_Save_Btn(){
+        return ActionHelper.isPresent(save_Btn);
+    }
+
+    public void click_Save_Btn(){
+        ActionHelper.click(save_Btn);
+    }
+
+    public boolean isEnabled_Save_Btn(){
+        return ActionHelper.isEnabled(save_Btn.getBy());
+    }
+
+    public boolean isPresent_State_TextBox(){
+        return ActionHelper.isPresent(state_TextBox);
+    }
+
+    public void click_SelectState_DropDown(){
+        ActionHelper.click(state_TextBox);
+    }
+
+    public void click_PaginationPageFifthBlock_Btn() {
+        ActionHelper.click(paginationPage5Block_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_PaginationPreviousFivePages_Btn() {
+        ActionHelper.click(paginationPrevious5Pages_Btn);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void click_PaginationNextFivePages_Btn() {
+        ActionHelper.click(paginationNext5Pages_Btn);
+        ActionHelper.waitForLoaderToHide();
     }
 }

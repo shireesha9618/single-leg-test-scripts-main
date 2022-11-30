@@ -2,7 +2,7 @@ package testsuite.resources;
 
 import base.BaseTestClass;
 import constants.TestGroup;
-import framework.backend.APIResponseException;
+import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
 import utility.Utility;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,6 @@ public class TestSuite_RidersPage extends BaseTestClass {
     RidersPage ridersPage = RidersPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
     AddNewRiderPage addNewRiderPage = AddNewRiderPage.getInstance();
-
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_01, Verify The UI Of Riders Page")
     public void TC_Riders_01_Verify_The_UI_Of_Riders_Page() {
@@ -255,5 +253,161 @@ public class TestSuite_RidersPage extends BaseTestClass {
             softAssert.assertEquals(actualTabHeadersLabelsAfter.get(size), expectedTabHeadersAfter.get(size), "After Uncheck Table Header label is matched as expected " + expectedTabHeadersAfter.get(size));
         }
         softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "Riders_29, Verify Functionality Of Next Page Pagination Button")
+    public void TC_Riders_29_Verify_Functionality_Of_Next_Page_Pagination_Button() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        commonActions.click_PaginationNext_Btn();
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_30, Verify Functionality Of Previous Page Pagination Button")
+    public void TC_Riders_30_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        commonActions.click_PaginationNext_Btn();
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
+        commonActions.click_PaginationPrevious_Btn();
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_31 Verify Functionality Of Vertically Scroll Of Rider Table Using Mouse Scroll Wheel")
+    public void TC_Riders_031_Verify_Functionality_Of_Vertically_Scroll_Of_Rider_Table_Using_Mouse_Scroll_Wheel() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverUserJourneyTillRiders();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(20);
+        List<WebElement> elements = ridersPage.getElements_RiderTableRiderIdColumnList_Link();
+        Utility.validatePageScrollDown(elements.get(elements.size() - 1));
+        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 3000), "Validate last element is present");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_32, Verify Functionality Of Vertically Scroll Of Rider Table Using Keyboard")
+    public void TC_Riders_032_Verify_Functionality_Of_Vertically_Scroll_Of_Rider_Table_Using_Keyboard() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverUserJourneyTillRiders();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(10);
+        List<WebElement> elements = ridersPage.getElements_RiderTableRiderIdColumnList_Link();
+        Utility.scrollDownUsingKeyboardKey(10);
+        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 3000), "Validate last element is present");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_33, Verify Displaying Of Rider Table Records As Per Pagination Value")
+    public void TC_Riders_033_Verify_Displaying_Of_Rider_Table_Records_As_Per_Pagination_Value() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverUserJourneyTillRiders();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(10);
+        String[] records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
+        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Validate number of records being displayed");
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(20);
+        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
+        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Validate number of records being displayed");
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(50);
+        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
+        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Validate number of records being displayed");
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(5);
+        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
+        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Validate number of records being displayed");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_34, Verify Functionality Of Pagination Paging Block")
+    public void TC_Riders_034_Verify_Functionality_Of_Pagination_Paging_Block() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverUserJourneyTillRiders();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(20);
+        List<WebElement> webElement = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link());
+        String firstBlockElement = webElement.get(0).getText();
+        String secondBlockElement = webElement.get(5).getText();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(5);
+        ridersPage.click_PaginationPageFirstBlock_Btn();
+        String webElementForFirstBlock = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(webElementForFirstBlock, firstBlockElement, "Pagination 1 Block Record Is Matched As Expected");
+        ridersPage.click_PaginationPageSecondBlock_Btn();
+        String webElementForSecondBlock = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(webElementForSecondBlock, secondBlockElement, "Pagination 2 Block Record Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_35, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
+    public void TC_Riders_035_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(5);
+        ridersPage.click_Next_Btn();
+        List<WebElement> webElementAfterNext = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link());
+        String nextBlockElement = webElementAfterNext.get(0).getText();
+        ridersPage.click_Previous_Btn();
+        List<WebElement> webElementAfterPrevious = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link());
+        String prevBlockElement = webElementAfterPrevious.get(0).getText();
+        ridersPage.click_PaginationPageSecondBlock_Btn();
+        String webElementForSecondBlock = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(webElementForSecondBlock, nextBlockElement, "Pagination 2 Block Record Is Matched With Next As Expected");
+        ridersPage.click_PaginationPageFirstBlock_Btn();
+        String webElementForFirstBlock = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(webElementForFirstBlock, prevBlockElement, "Pagination 1 Block Record Is Matched With Previous As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_36, Verify Functionality Of Pagination Paging Block With Next 5 pages And Previous 5 pages Button")
+    public void TC_Riders_36_Verify_Functionality_Of_Pagination_Paging_Block_With_Next5pages_And_Previous5pages_Button(){
+        commonActions.coverUserJourneyTillRiders();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(5);
+        ridersPage.click_PaginationPageFifthBlock_Btn();
+        ridersPage.click_PaginationPreviousFivePages_Btn();
+        String twentyFirstRecord = ridersPage.getElements_RiderTableRiderIdColumnList_Link().get(0).getText();
+        ridersPage.click_PaginationNextFivePages_Btn();
+        String twentySixthRecord = ridersPage.getElements_RiderTableRiderIdColumnList_Link().get(0).getText();
+        JarvisAssert.assertNotEquals(twentyFirstRecord, twentySixthRecord, "The Two Record Names Didn't Matched As Expected");
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_37, Verify Functionality Of Pagination Per Page With Paging Block And Next Button")
+    public void TC_Riders_37_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(10);
+        String elementAfterTenthPagination = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(5).getText();
+        ridersPage.chooseNoOfRecordsToBeDisplayedPerPage(5);
+        String elementAfterFifthPagination = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        ridersPage.click_Next_Btn();
+        String elementAfterNext = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(elementAfterTenthPagination, elementAfterNext, "Pagination 10 Per Page Record Is Matched With Next As Expected");
+        ridersPage.click_Previous_Btn();
+        String elementAfterPrev = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(elementAfterFifthPagination, elementAfterPrev, "Pagination 5 Per Page Record Is Matched With Prev As Expected");
+        ridersPage.click_PaginationPageSecondBlock_Btn();
+        String elementForSecondBlock = new ArrayList<>(ridersPage.getElements_RiderTableRiderIdColumnList_Link()).get(0).getText();
+        softAssert.assertEquals(elementForSecondBlock, elementAfterNext, "Pagination 2 Block Record Is Matched With Next As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_38, Verify The Functionality Of New Rider Button")
+    public void TC_Riders_038_Verify_The_Functionality_Of_New_Rider_Button() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header is Present As Expected");
+        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
+        ridersPage.click_NewRider_Btn();
+        softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Heading Is Present As Expected");
+        softAssert.assertTrue(addNewRiderPage.isPresent_Cancel_Btn(), "Cancel Button Is Present As Expected");
+        softAssert.assertTrue(addNewRiderPage.isPresent_AddRider_Btn(), "Add Rider Button Is Present As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_040, Verify The Functionality Of CheckBox Present In Riders Table for any record")
+    public void TC_Riders_040_Verify_The_Functionality_Of_CheckBox_Present_In_Riders_Table_For_Any_Record() {
+        commonActions.coverUserJourneyTillRiders();
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header is Present As Expected");
+        softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
+        ridersPage.check_TableData_CheckBox(0);
+        softAssert.assertTrue(ridersPage.isPresent_ChangeStatus_Btn(), "Change Status Button is Present as Expected");
     }
 }

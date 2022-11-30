@@ -1,13 +1,9 @@
 package pageobjects;
 
 import com.github.javafaker.Faker;
-import framework.backend.APIResponseException;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 public class AddNewRiderPage {
     private static AddNewRiderPage _instance;
@@ -25,6 +21,9 @@ public class AddNewRiderPage {
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
     private final Locator addRider_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
+    private final Locator firstNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='First Name*']/following-sibling::p"));
+    private final Locator teamsDropDown_TextBox = Locator.builder().withWeb(By.xpath("//span[text()='Select Teams']"));
+    private final Locator lastNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Last Name*']/following-sibling::p"));
 
     Faker sampleData = new Faker();
     public static AddNewRiderPage getInstance() {
@@ -101,5 +100,9 @@ public class AddNewRiderPage {
 
     public void fill_PhoneNumber_Txt(String phoneNumber) {
         ActionHelper.sendKeysWithClear(phoneNumber_Txt.getBy(), phoneNumber);
+    }
+
+    public String get_FirstNameValidation_Txt() {
+        return ActionHelper.getText(firstNameValidation_Txt);
     }
 }
