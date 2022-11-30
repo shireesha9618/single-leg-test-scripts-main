@@ -192,7 +192,7 @@ public class CreateOrderPage {
 
     public void click_AddFacility_Btn(String input) {
         if (input.equals("Pickup"))
-            ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("facility"+Keys.UP + Keys.ENTER));
+            ActionHelper.sendKeysWithClear(pickupFacility_DropDown.getBy(), Keys.chord("facility" + Keys.UP + Keys.ENTER));
         else
             ActionHelper.sendKeysWithClear(dropFacility_DropDown.getBy(), Keys.chord("facility" + Keys.UP + Keys.ENTER));
     }
@@ -426,4 +426,3 @@ public class CreateOrderPage {
         ActionHelper.gotoSleep(4000);
     }
 }
-
