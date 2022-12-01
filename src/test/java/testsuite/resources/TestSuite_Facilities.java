@@ -2,16 +2,13 @@ package testsuite.resources;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
-import constants.Constants;
 import constants.TestGroup;
 import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
-import utility.Utility;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -110,7 +107,7 @@ public class TestSuite_Facilities extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_005, Verify The Functionality Of Search Bar By Facility Name")
-    public void TC_Facility_005_Verify_The_Functionality_Of_Search_Bar_By_Facility_Name() throws APIResponseException, IOException {
+    public void TC_Facility_005_Verify_The_Functionality_Of_Search_Bar_By_Facility_Name() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
@@ -123,7 +120,7 @@ public class TestSuite_Facilities extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_006, Verify The Functionality Of Search Bar By Facility Id")
-    public void TC_Facility_006_Verify_The_Functionality_Of_Search_Bar_By_Facility_Id() throws APIResponseException, IOException {
+    public void TC_Facility_006_Verify_The_Functionality_Of_Search_Bar_By_Facility_Id() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
@@ -155,8 +152,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_008_Verify_The_Functionality_Of_Filter_The_Facilities_With_Active_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        facilitiesPage.click_Status_DropDown();
-        facilitiesPage.click_StatusDropDownActiveValue_Radio();
+        facilitiesPage.click_Status_RadioBtn("Active");
         for (String status : facilitiesPage.getList_FacilityTableStatus_Lbl())
             softAssert.assertEquals(status, "Active", "Active Status Is Present As Expected");
         softAssert.assertAll();
@@ -167,8 +163,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_009_Verify_The_Functionality_Of_Filter_The_Facilities_With_Pause_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        facilitiesPage.click_Status_DropDown();
-        facilitiesPage.click_StatusDropDownPauseValue_Radio();
+        facilitiesPage.click_Status_RadioBtn("Pause");
         for (String status : facilitiesPage.getList_FacilityTableStatus_Lbl())
             softAssert.assertEquals(status, "Pause", "Pause Status Is Present As Expected");
         softAssert.assertAll();
@@ -179,10 +174,9 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_010_Verify_The_Functionality_Of_Filter_The_Facilities_With_Onboarding_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        facilitiesPage.click_Status_DropDown();
-        facilitiesPage.click_StatusDropDownOnboardingValue_Radio();
+        facilitiesPage.click_Status_RadioBtn("Onboarding");
         for (String status : facilitiesPage.getList_FacilityTableStatus_Lbl())
-            softAssert.assertEquals(status, "Onboarding", "Pause Status Is Present As Expected");
+            softAssert.assertEquals(status, "Onboarding", "Onboarding Status Is Present As Expected");
         softAssert.assertAll();
     }
 
@@ -191,8 +185,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_011_Verify_The_Functionality_Of_Filter_The_Facilities_With_Deboard_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        facilitiesPage.click_Status_DropDown();
-        facilitiesPage.click_StatusDropDownOnboardingValue_Radio();
+        facilitiesPage.click_Status_RadioBtn("Deboard");
         for (String status : facilitiesPage.getList_FacilityTableStatus_Lbl())
             softAssert.assertEquals(status, "Deboard", "Deboard Status Is Present As Expected");
         softAssert.assertAll();
@@ -203,8 +196,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_012_Verify_The_Functionality_Of_Filter_The_Facilities_With_InActive_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        facilitiesPage.click_Status_DropDown();
-        facilitiesPage.click_StatusDropDownOnboardingValue_Radio();
+        facilitiesPage.click_Status_RadioBtn("Inactive");
         for (String status : facilitiesPage.getList_FacilityTableStatus_Lbl())
             softAssert.assertEquals(status, "Inactive", "Inactive Status Is Present As Expected");
         softAssert.assertAll();
@@ -248,6 +240,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertTrue(addNewFacilityPage.isDisabled_Country_Txt(), "Country Text Field Is Disabled As Expected");
 
         HashMap<String, String> getUpdatedFacilityDetails = new HashMap<>(addNewFacilityPage.updateFacility());
+        ActionHelper.waitForLoaderToHide();
         addNewFacilityPage.click_Save_Btn();
         HashMap<String, String> updatedData = new HashMap<>(facilitiesPage.getData_TableFirstData());
         softAssert.assertEquals(updatedData.get("facilityId"), getFacilityDetails.get("facilityId"), "Facility Id Is Matched Before And After Update Facility As Expected");
