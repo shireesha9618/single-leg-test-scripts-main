@@ -51,7 +51,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void selectTeam(String input) {
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(teamSelector_Dropdown);
         ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
     }

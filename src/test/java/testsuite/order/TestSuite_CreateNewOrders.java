@@ -73,7 +73,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
             description = "TC_002, Verify The Functionality of Scannable/Barcode Number Text box")
     public void TC_CreateNewOrder_002_Verify_The_Functionality_of_Scannable_Barcode_Number_Text_box() {
-        String input = ActionHelper.getRandomNumberString(6);
+        String input = ActionHelper.generateRandomName(6, 6);
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -90,9 +90,9 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.click_CreateBtn_WithWait();
+        createNewOrderPage.click_Create_Btn();
 
-        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderId_Txt(), "Validate presence of validation error message for Order Id field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderIdValidationError_Lbl(), "Validate presence of validation error message for Order Id field");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescriptionValidationError_Lbl(), "Validate presence of validation error message for Order Description field");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsTeamValidationError_Lbl(), "Validate presence of validation error message for Team field");
 
@@ -182,8 +182,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt("Max length " + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) +
-                ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(29));
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt("Max length " + ActionHelper.generateRandomName(119, 119));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderIdValidationError_Lbl(), "Validate presence of validation error message for Order Id field");
         softAssert.assertEquals(createNewOrderPage.getText_OrderDetailsOrderIdValidationError_Lbl(), "", "Validate validation error message for Order Id field");
@@ -212,11 +211,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(23));
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt("Max length" + ActionHelper.generateRandomName(503, 503));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertEquals(createNewOrderPage.getText_OrderDetailsOrderDescriptionValidationError_Lbl(), "Length Should Be Between 3 And 512", "Validate validation error message for Order Description field");
         softAssert.assertAll();
@@ -230,7 +225,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(ActionHelper.getRandomNumberString(2));
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(ActionHelper.generateRandomName(2, 2));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertEquals(createNewOrderPage.getText_OrderDetailsOrderDescriptionValidationError_Lbl(), "Length Should Be Between 3 And 512", "Validate validation error message for Order Description field");
         softAssert.assertAll();
@@ -368,7 +363,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_PickupDetailsContactNumber_Txt(ActionHelper.getRandomNumberString(11));
+        createNewOrderPage.fillWithClear_PickupDetailsContactNumber_Txt(ActionHelper.generateRandomName(11, 11));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNumberValidationError_Lbl(), "Validate presence of validation error message for Contact Number field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsContactNumberValidationError_Lbl(), "Not Correct format", "Validate text of validation error message for Contact Number field");
@@ -463,8 +458,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(29));
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt("Max length" + ActionHelper.generateRandomName(119, 119));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsAddressLine1ValidationError_Lbl(), "Validate presence of validation error message for Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsAddressLine1ValidationError_Lbl(), "Can be at max 128", "Validate text of validation error message for Address Line 1 field");
@@ -478,8 +472,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(29));
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt("Max length" + ActionHelper.generateRandomName(119, 119));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsAddressLine2ValidationError_Lbl(), "Validate presence of validation error message for Address Line 2 field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsAddressLine2ValidationError_Lbl(), "Can be at max 128", "Validate text of validation error message for Address Line 2 field");
@@ -529,7 +522,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(25));
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt("Max length" + ActionHelper.generateRandomName(55, 55));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCityValidationError_Lbl(), "Validate presence of validation error message for City field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsCityValidationError_Lbl(), "Can be at max 64", "Validate validation error message for City field");
@@ -579,7 +572,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_PickupDetailsState_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(25));
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt("Max length" + ActionHelper.generateRandomName(55, 55));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsStateValidationError_Lbl(), "Validate presence of validation error message for State field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsStateValidationError_Lbl(), "Can be at max 64", "Validate validation error message for State field");
@@ -648,12 +641,11 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.selectByValue_PickupDetailsCountry_Select(faker.country().name());
         createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt(faker.address().buildingNumber());
         createNewOrderPage.fillWithClear_PickupDetailsAddressLine2_Txt(faker.address().buildingNumber());
-        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().state());
-        createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().city());
+        createNewOrderPage.fillWithClear_PickupDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_PickupDetailsCity_Txt(faker.address().city());
         createNewOrderPage.click_PickupDetailsClearAll_Btn();
 
         softAssert.assertEquals(createNewOrderPage.getValue_PickupDetailsPostalCode_Txt(), "", "Validate value of Postal Code field");
-        softAssert.assertEquals(createNewOrderPage.getFirstSelectedOption_PickupDetailsCountry_Select(), "", "Validate value of Country field");
         softAssert.assertEquals(createNewOrderPage.getValue_PickupDetailsAddressLine1_Txt(), "", "Validate value of Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getValue_PickupDetailsAddressLine2_Txt(), "", "Validate value of Address Line 2 field");
         softAssert.assertEquals(createNewOrderPage.getValue_PickupDetailsState_Txt(), "", "Validate value of State field");
@@ -788,7 +780,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_DropDetailsContactNumber_Txt(ActionHelper.getRandomNumberString(11));
+        createNewOrderPage.fillWithClear_DropDetailsContactNumber_Txt(ActionHelper.generateRandomName(11, 11));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactNumberValidationError_Lbl(), "Validate presence of validation error message for Contact Number field");
         softAssert.assertEquals(createNewOrderPage.getText_DropDetailsContactNumberValidationError_Lbl(), "Not Correct format", "Validate text of validation error message for Contact Number field");
@@ -883,8 +875,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(29));
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt("Max length" + ActionHelper.generateRandomName(119, 119));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine1ValidationError_Lbl(), "Validate presence of validation error message for Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getText_DropDetailsAddressLine1ValidationError_Lbl(), "Can be at max 128", "Validate text of validation error message for Address Line 1 field");
@@ -898,8 +889,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(29));
+        createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt("Max length" + ActionHelper.generateRandomName(119, 119));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine2ValidationError_Lbl(), "Validate presence of validation error message for Address Line 2 field");
         softAssert.assertEquals(createNewOrderPage.getText_DropDetailsAddressLine2ValidationError_Lbl(), "Can be at max 128", "Validate text of validation error message for Address Line 2 field");
@@ -949,7 +939,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_DropDetailsCity_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(25));
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt("Max length" + ActionHelper.generateRandomName(55, 55));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCityValidationError_Lbl(), "Validate presence of validation error message for City field");
         softAssert.assertEquals(createNewOrderPage.getText_DropDetailsCityValidationError_Lbl(), "Can be at max 64", "Validate validation error message for City field");
@@ -1000,7 +990,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
-        createNewOrderPage.fillWithClear_DropDetailsState_Txt("Max length" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(25));
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt("Max length" + ActionHelper.generateRandomName(55, 55));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsStateValidationError_Lbl(), "Validate presence of validation error message for State field");
         softAssert.assertEquals(createNewOrderPage.getText_DropDetailsStateValidationError_Lbl(), "Can be at max 64", "Validate validation error message for State field");
@@ -1069,12 +1059,11 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.selectByValue_DropDetailsCountry_Select(faker.country().name());
         createNewOrderPage.fillWithClear_DropDetailsAddressLine1_Txt(faker.address().buildingNumber());
         createNewOrderPage.fillWithClear_DropDetailsAddressLine2_Txt(faker.address().buildingNumber());
-        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().state());
-        createNewOrderPage.fillWithClear_DropDetailsPostalCode_Txt(faker.address().city());
+        createNewOrderPage.fillWithClear_DropDetailsState_Txt(faker.address().state());
+        createNewOrderPage.fillWithClear_DropDetailsCity_Txt(faker.address().city());
         createNewOrderPage.click_DropDetailsClearAll_Btn();
 
         softAssert.assertEquals(createNewOrderPage.getValue_DropDetailsPostalCode_Txt(), "", "Validate value of Postal Code field");
-        softAssert.assertEquals(createNewOrderPage.getFirstSelectedOption_DropDetailsCountry_Select(), "", "Validate value of Country field");
         softAssert.assertEquals(createNewOrderPage.getValue_DropDetailsAddressLine1_Txt(), "", "Validate value of Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getValue_DropDetailsAddressLine2_Txt(), "", "Validate value of Address Line 2 field");
         softAssert.assertEquals(createNewOrderPage.getValue_DropDetailsState_Txt(), "", "Validate value of State field");
@@ -1124,7 +1113,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1160,7 +1148,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1196,7 +1183,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1232,7 +1218,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1269,7 +1254,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1306,7 +1290,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1343,7 +1326,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         String orderId = faker.idNumber().valid();
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1367,7 +1349,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
 
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
 
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(faker.address().zipCode());
         createNewOrderPage.selectByVisibleText_PickupDetailsCountry_Select(faker.country().name());
@@ -1463,10 +1444,10 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt("Max length" + ActionHelper.getRandomNumberString(15));
+        createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt("Max length" + ActionHelper.generateRandomName(15, 15));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Validate presence of validation error message for Facility Name field");
-        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Can be at max 25", "Validate validation error message for Facility Name field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Can be at max 24", "Validate validation error message for Facility Name field");
         softAssert.assertAll();
     }
 
@@ -1517,10 +1498,10 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityFacilityId_Txt("Max length" + ActionHelper.getRandomNumberString(15));
+        createNewOrderPage.fillWithClear_AddFacilityFacilityId_Txt("Max length" + ActionHelper.generateRandomName(15, 15));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityIdValidationMsg_Lbl(), "Validate presence of validation error message for Facility Id field");
-        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityIdValidationMsg_Lbl(), "Can be at max 25", "Validate validation error message for Facility Id field");
+        softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityIdValidationMsg_Lbl(), "Can be at max 24", "Validate validation error message for Facility Id field");
         softAssert.assertAll();
     }
 
@@ -1572,7 +1553,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(ActionHelper.getRandomNumberString(11));
+        createNewOrderPage.fillWithClear_AddFacilityPostalCode_Txt(ActionHelper.generateRandomName(11, 11));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl(), "Validate presence of validation toast message for Postal Code field");
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityPostalCodeValidationMsg_Lbl(), "Validate presence of validation error message for Postal Code field");
@@ -1646,7 +1627,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        softAssert.assertTrue(createNewOrderPage.isEnabled_AddFacilityCountry_Txt(), "Validate Country dropdown is disabled");
+        softAssert.assertTrue(createNewOrderPage.isClickable_AddFacilityCountry_Txt(), "Validate Country dropdown is disabled");
         softAssert.assertAll();
     }
 
@@ -1697,8 +1678,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityAddressLine1_Txt("Max Length:" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30));
+        createNewOrderPage.fillWithClear_AddFacilityAddressLine1_Txt("Max Length:" + ActionHelper.generateRandomName(121, 121));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine1ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine1ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 1 field");
@@ -1753,8 +1733,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityAddressLine2_Txt("Max Length:" + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30)
-                + ActionHelper.getRandomNumberString(30) + ActionHelper.getRandomNumberString(30));
+        createNewOrderPage.fillWithClear_AddFacilityAddressLine2_Txt("Max Length:" + ActionHelper.generateRandomName(121, 121));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityAddressLine2ValidationMsg_Lbl(), "Validate presence of validation error message for Address Line 2 field");
         softAssert.assertEquals(createNewOrderPage.getText_AddFacilityAddressLine2ValidationMsg_Lbl(), "Not correct format", "Validate text of validation error message for Address Line 2 field");
@@ -1771,7 +1750,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
 
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(faker.idNumber().valid());
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
-        createNewOrderPage.select_OrderDetailsTeam_Dropdown(Constants.TEAM);
         createNewOrderPage.fill_PickupDetailsContactName_Txt(faker.name().fullName());
         createNewOrderPage.fill_PickupDetailsContactNumber_Txt(faker.phoneNumber().cellPhone());
         createNewOrderPage.set_PickUpFacility_TextBox();

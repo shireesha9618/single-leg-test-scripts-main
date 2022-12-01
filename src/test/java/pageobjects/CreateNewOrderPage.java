@@ -7,6 +7,7 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -78,17 +79,17 @@ public class CreateNewOrderPage {
     private final Locator pickupDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter state']]/following-sibling::span"));
     private final Locator pickupDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter city']]/following-sibling::span"));
 
-    private final Locator dropDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Name*']])[2]/following-sibling::span"));
-    private final Locator dropDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Number*']])[2]/following-sibling::span"));
-    private final Locator dropDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']])[2]/following-sibling::span"));
-    private final Locator dropDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter postal code*']])[2]/following-sibling::span"));
-    private final Locator dropDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter country'])[2]/following-sibling::span"));
-    private final Locator dropDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 1']])[2]/following-sibling::span"));
-    private final Locator dropDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 2']])[2]/following-sibling::span"));
-    private final Locator dropDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter state']])[2]/following-sibling::span"));
-    private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter city']])[2]/following-sibling::span"));
+    private final Locator dropDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Name*']])[2]/following-sibling::p"));
+    private final Locator dropDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Number*']])[2]/following-sibling::p"));
+    private final Locator dropDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']])[2]/following-sibling::p"));
+    private final Locator dropDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter postal code*']])[2]/following-sibling::p"));
+    private final Locator dropDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter country'])[2]/following-sibling::p"));
+    private final Locator dropDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 1']])[2]/following-sibling::p"));
+    private final Locator dropDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 2']])[2]/following-sibling::p"));
+    private final Locator dropDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter state']])[2]/following-sibling::P"));
+    private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter city']])[2]/following-sibling::p"));
 
-    private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']/following-sibling::span"));
+    private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']/following-sibling::p"));
 
     private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option ant-select-item-option-active']//p"));
 
@@ -184,6 +185,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_OrderDetailsOrderId_Txt(String value) {
+        Utility.selectAllAndClear(orderDetailsOrderId_Txt.getBy());
         ActionHelper.fillWithClear(orderDetailsOrderId_Txt.getBy(), value);
     }
 
@@ -204,6 +206,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_OrderDetailsScannableBarcodeNumber_Txt(String value) {
+        Utility.selectAllAndClear(orderDetailsScannableBarcodeNumber_Txt.getBy());
         ActionHelper.fillWithClear(orderDetailsScannableBarcodeNumber_Txt.getBy(), value);
     }
 
@@ -224,6 +227,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_OrderDetailsOrderDescription_Txt(String value) {
+        Utility.selectAllAndClear(orderDetailsOrderDescription_Txt.getBy());
         ActionHelper.fillWithClear(orderDetailsOrderDescription_Txt.getBy(), value);
     }
 
@@ -248,6 +252,7 @@ public class CreateNewOrderPage {
     }
 
     public void select_OrderDetailsTeam_Dropdown(String input) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(orderDetailsTeam_Dropdown);
         ActionHelper.sendKeys(orderDetailsTeam_Dropdown, Keys.chord(input, Keys.ENTER));
     }
@@ -269,6 +274,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsContactName_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsContactName_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsContactName_Txt.getBy(), value);
     }
 
@@ -289,6 +295,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsContactNumber_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsContactNumber_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsContactNumber_Txt.getBy(), value);
     }
 
@@ -321,6 +328,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsPostalCode_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsPostalCode_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsPostalCode_Txt.getBy(), value);
     }
 
@@ -365,6 +373,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsAddressLine1_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsAddressLine1_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsAddressLine1_Txt.getBy(), value);
     }
 
@@ -385,6 +394,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsAddressLine2_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsAddressLine2_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsAddressLine2_Txt.getBy(), value);
     }
 
@@ -405,6 +415,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsState_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsState_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsState_Txt.getBy(), value);
     }
 
@@ -425,6 +436,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PickupDetailsCity_Txt(String value) {
+        Utility.selectAllAndClear(pickupDetailsCity_Txt.getBy());
         ActionHelper.fillWithClear(pickupDetailsCity_Txt.getBy(), value);
     }
 
@@ -465,6 +477,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsContactName_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsContactName_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsContactName_Txt.getBy(), value);
     }
 
@@ -485,6 +498,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsContactNumber_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsContactNumber_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsContactNumber_Txt.getBy(), value);
     }
 
@@ -517,6 +531,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsPostalCode_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsPostalCode_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsPostalCode_Txt.getBy(), value);
     }
 
@@ -561,6 +576,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsAddressLine1_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsAddressLine1_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsAddressLine1_Txt.getBy(), value);
     }
 
@@ -581,6 +597,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsAddressLine2_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsAddressLine2_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsAddressLine2_Txt.getBy(), value);
     }
 
@@ -601,6 +618,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsState_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsState_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsState_Txt.getBy(), value);
     }
 
@@ -621,6 +639,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_DropDetailsCity_Txt(String value) {
+        Utility.selectAllAndClear(dropDetailsCity_Txt.getBy());
         ActionHelper.fillWithClear(dropDetailsCity_Txt.getBy(), value);
     }
 
@@ -681,6 +700,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_PaymentDetailsOrderAmount_Txt(String value) {
+        Utility.selectAllAndClear(paymentDetailsOrderAmount_Txt.getBy());
         ActionHelper.fillWithClear(paymentDetailsOrderAmount_Txt.getBy(), value);
     }
 
@@ -921,6 +941,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityFacilityName_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityFacilityName_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityFacilityName_Txt.getBy(), value);
     }
 
@@ -941,10 +962,12 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityFacilityId_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityFacilityId_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityFacilityId_Txt.getBy(), value);
     }
 
     public void clear_AddFacilityFacilityId_Txt() {
+        Utility.selectAllAndClear(addFacilityFacilityId_Txt.getBy());
         ActionHelper.clear(addFacilityFacilityId_Txt.getBy());
     }
 
@@ -961,6 +984,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityPostalCode_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityPostalCode_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityPostalCode_Txt.getBy(), value);
     }
 
@@ -981,6 +1005,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityCountry_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityCountry_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityCountry_Txt.getBy(), value);
     }
 
@@ -992,8 +1017,8 @@ public class CreateNewOrderPage {
         return ActionHelper.getAttribute(addFacilityCountry_Txt, "value");
     }
 
-    public boolean isEnabled_AddFacilityCountry_Txt() {
-        return ActionHelper.isEnabled(addFacilityCountry_Txt.getBy());
+    public boolean isClickable_AddFacilityCountry_Txt() {
+        return ActionHelper.findElement(addFacilityCountry_Txt.getBy()).getAttribute("class").contains("disabled") ? false : true;
     }
 
     public boolean isPresent_AddFacilityAddressLine1_Txt() {
@@ -1005,6 +1030,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityAddressLine1_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityAddressLine1_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityAddressLine1_Txt.getBy(), value);
     }
 
@@ -1025,6 +1051,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityAddressLine2_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityAddressLine2_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityAddressLine2_Txt.getBy(), value);
     }
 
@@ -1045,6 +1072,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityState_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityState_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityState_Txt.getBy(), value);
     }
 
@@ -1065,6 +1093,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityCity_Txt(String value) {
+        Utility.selectAllAndClear(addFacilityCity_Txt.getBy());
         ActionHelper.fillWithClear(addFacilityCity_Txt.getBy(), value);
     }
 
@@ -1081,11 +1110,13 @@ public class CreateNewOrderPage {
     }
 
     public void click_AddFacilityCreateBtn_WithWait() {
+        Utility.scrollUsingJS(addFacilityCreate_Btn.getBy());
         ActionHelper.click(addFacilityCreate_Btn);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void click_AddFacilityCreate_Btn() {
+        Utility.scrollUsingJS(addFacilityCreate_Btn.getBy());
         ActionHelper.click(addFacilityCreate_Btn);
     }
 
@@ -1170,7 +1201,7 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl() {
-        return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl);
+        return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl, 5000);
     }
 
     public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
@@ -1197,12 +1228,12 @@ public class CreateNewOrderPage {
     }
 
     public void set_PickUpFacility_TextBox() {
-        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
     }
 
     public void set_DropFacility_TextBox() {
-        ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
     }
 
