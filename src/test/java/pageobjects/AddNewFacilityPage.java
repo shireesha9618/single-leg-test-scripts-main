@@ -272,7 +272,7 @@ public class AddNewFacilityPage {
         String postalCode = getPostalCode();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
-        System.out.println("aslkdjfal "+ facilityId);
+
         createNewFacility.put("facilityName", facilityName);
         createNewFacility.put("facilityId", facilityId);
         createNewFacility.put("postalCode", postalCode);
