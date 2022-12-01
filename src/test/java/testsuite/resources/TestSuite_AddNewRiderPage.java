@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import pageobjects.AddNewRiderPage;
 import pageobjects.CommonActions;
 import pageobjects.RidersPage;
-import java.util.ArrayList;
 
 public class TestSuite_AddNewRiderPage extends BaseTestClass {
     RidersPage ridersPage = RidersPage.getInstance();
@@ -47,7 +46,7 @@ public class TestSuite_AddNewRiderPage extends BaseTestClass {
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Header Is Present As expected");
         softAssert.assertTrue(addNewRiderPage.isPresent_AddNewRiderBreadcrumbMenu_Lbl(), "Add New User link in breadcrumb is present as expected");
-        softAssert.assertEquals(DriverManager.getDriver().getCurrentUrl(), "https://" + Constants.ENV + ".preprod.fxtrt.io/application/riders/add/", "URL is matched as expected");
+        softAssert.assertEquals(DriverManager.getDriver().getCurrentUrl(), Constants.Urls.BASE_URL+ "riders/add/", "URL is matched as expected");
         softAssert.assertAll();
     }
 
@@ -68,10 +67,7 @@ public class TestSuite_AddNewRiderPage extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
-        ArrayList<String> dataForMinimum = new ArrayList<String>();
-        dataForMinimum.add(ActionHelper.generateRandomName(1, 1));
-        dataForMinimum.add(String.valueOf(ActionHelper.getRandomNumber(1)));
-        dataForMinimum.add("@");
+        String[] dataForMinimum = {"a","1","@"};
         for (String value : dataForMinimum) {
             addNewRiderPage.fill_RiderFirstName_Txt(value);
             softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Only A-Z, a-z, min: 2, max: 36", "First Name Validation Message Is Matched As Expected");
@@ -84,28 +80,20 @@ public class TestSuite_AddNewRiderPage extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
-        ArrayList<String> dataForMaximum = new ArrayList<String>();
-        dataForMaximum.add(ActionHelper.generateRandomName(37, 40));
-        dataForMaximum.add(sampleData.number().digits(37));
-        dataForMaximum.add("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        String[] dataForMaximum = {ActionHelper.generateRandomName(37,40),String.valueOf(sampleData.number().digits(37)),"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
         for (String value : dataForMaximum) {
             addNewRiderPage.fill_RiderFirstName_Txt(value);
             softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Only A-Z, a-z, min: 2, max: 36", "First Name Validation Message Is Matched As Expected");
         }
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_050, Verify The Validation Functionality For First Name In Add New Rider Page  other than Alphabet")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_050, Verify The Validation Functionality For First Name In Add New Rider Page other than Alphabet")
     public void TC_Riders_050_Verify_The_Validation_Functionality_For_First_Name_In_Add_New_Rider_Page_Other_Than_Alphabet() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
-        ArrayList<String> dataForSpecialCharacters = new ArrayList<String>();
-        dataForSpecialCharacters.add("@@@@@");
-        dataForSpecialCharacters.add("aa112");
-        dataForSpecialCharacters.add("aa!@$");
-        dataForSpecialCharacters.add("11223");
-        dataForSpecialCharacters.add("aa1@1$");
+        String[] dataForSpecialCharacters = {"@@@@@","aa112","aa!@$","11223"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fill_RiderFirstName_Txt(value);
             softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Only A-Z, a-z, min: 2, max: 36", "First Name Validation Message Is Matched As Expected");
