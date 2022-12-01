@@ -102,7 +102,7 @@ public class AddNewFacilityPage {
     }
 
     public void fill_FacilityName_Txt(String facilityName) {
-        ActionHelper.fillWithClear(facilityName_Txt.getBy(), facilityName);
+        ActionHelper.sendKeysWithClear(facilityName_Txt.getBy(), facilityName);
     }
 
     public boolean isEnabled_FacilityName_Txt() {
@@ -267,12 +267,14 @@ public class AddNewFacilityPage {
 
     public HashMap<String, String> createFacility() {
         HashMap<String, String> createNewFacility = new HashMap<>();
-        String facilityName = "facility" + sampleData.name().lastName();
+        String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
+        String facilityId = getText_FacilityId_Txt();
         String postalCode = getPostalCode();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
-
+        System.out.println("aslkdjfal "+ facilityId);
         createNewFacility.put("facilityName", facilityName);
+        createNewFacility.put("facilityId", facilityId);
         createNewFacility.put("postalCode", postalCode);
         createNewFacility.put("addressLine1", addressLine1);
         createNewFacility.put("addressLine2", addressLine2);
@@ -304,5 +306,9 @@ public class AddNewFacilityPage {
         ActionHelper.waitForLoaderToHide();
 
         return updateFacility;
+    }
+
+    public String getText_FacilityId_Txt() {
+        return ActionHelper.getAttribute(facilityId_Txt, "value");
     }
 }

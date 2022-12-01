@@ -86,6 +86,7 @@ public class FacilitiesPage {
     private final Locator userProfile_Btn = Locator.builder().withWeb(By.id("headlessui-menu-button-1"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
+    private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
 
     public static FacilitiesPage getInstance() {
         if (_instance == null) _instance = new FacilitiesPage();
@@ -129,7 +130,9 @@ public class FacilitiesPage {
     }
 
     public void fill_Search_Txt(String facilityName) {
-        ActionHelper.fillWithClear(search_Txt.getBy(), facilityName);
+        ActionHelper.waitUntilElementVisible(search_Txt.getBy());
+        ActionHelper.sendKeysWithClear(search_Txt.getBy(), facilityName);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_Status_DropDown() {
@@ -629,6 +632,7 @@ public class FacilitiesPage {
     }
 
     public HashMap<String, String> getData_TableFirstData() {
+        ActionHelper.waitUntilElementVisible(tableDataFacilityId_Lbl.getBy());
         HashMap<String, String> tableData = new HashMap<>();
         String facilityId = getText_TableDataFacilityId_Lbl();
         String facilityName = getText_TableDataFacilityName_Lbl();
@@ -646,5 +650,20 @@ public class FacilitiesPage {
 
         ActionHelper.waitForLoaderToHide();
         return tableData;
+    }
+
+    public void click_Status_RadioBtn(String input) {
+        ActionHelper.click(status_DropDown);
+        List<WebElement> list = ActionHelper.findElements(status_RadioBtn.getBy());
+        for (WebElement element : list) {
+            String statusTxt = element.getText();
+            if (statusTxt.toLowerCase().contains(input.toLowerCase())) {
+                Utility.clickRadio(element);
+                break;
+            }
+        }
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(status_DropDown);
+        ActionHelper.waitForLoaderToHide();
     }
 }
