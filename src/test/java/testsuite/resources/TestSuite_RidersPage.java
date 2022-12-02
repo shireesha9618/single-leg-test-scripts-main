@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
 import utility.Utility;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
     CommonActions commonActions = CommonActions.getInstance();
     AddNewRiderPage addNewRiderPage = AddNewRiderPage.getInstance();
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_01, Verify The UI Of Riders Page")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_01, Verify The UI Of Riders Page")
     public void TC_Riders_01_Verify_The_UI_Of_Riders_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -37,7 +38,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_02, Verify The UI Of Table Present In Riders Page")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_02, Verify The UI Of Table Present In Riders Page")
     public void TC_Riders_02_Verify_The_UI_Of_Table_Present_In_Riders_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -54,7 +55,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_03, Verify The UI Of More Actions button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_03, Verify The UI Of More Actions button")
     public void TC_Riders_03_Verify_The_UI_Of_More_Actions_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -68,7 +69,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_06, Verify The UI Of Status button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_06, Verify The UI Of Status button")
     public void TC_Riders_06_Verify_The_UI_Of_Status_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -85,7 +86,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_07_08_09_010_011_012_013_014, Verify The Functionality Of Filter The Rider With All Status")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_07_08_09_010_011_012_013_014, Verify The Functionality Of Filter The Rider With All Status")
     public void TC_Riders_07_08_09_010_011_012_013_014_Verify_The_Functionality_Of_Filter_The_Rider_With_All_Status() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -100,7 +101,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_15, Verify The Functionality Of ClearSelection In Status")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_15, Verify The Functionality Of ClearSelection In Status")
     public void TC_Riders_15_Verify_The_Functionality_Of_ClearSelection_In_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -116,7 +117,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_022,  Verify The Functionality Of Modify Columns For More Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_022,  Verify The Functionality Of Modify Columns For More Actions Button")
     public void TC_Riders_22_Verify_The_Functionality_Of_ModifyColumns_For_More_Actions_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -139,7 +140,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_023, Verify The Functionality Of Select All Of Modify Columns For More Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_023, Verify The Functionality Of Select All Of Modify Columns For More Actions Button")
     public void TC_Riders_23_Verify_The_Functionality_Of_Select_All_Of_Modify_Columns_For_MoreActions_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -155,7 +156,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_024, Verify The Functionality Of Drag The Position Of Modify Columns For Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_024, Verify The Functionality Of Drag The Position Of Modify Columns For Actions Button")
     public void TC_Riders_24_Verify_The_Functionality_Of_Drag_The_Position_Of_Modify_Columns_For_More_Actions_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -174,7 +175,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_025, Verify The Functionality Of Checkbox And X Of Modify Columns For Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_025, Verify The Functionality Of Checkbox And X Of Modify Columns For Actions Button")
     public void TC_Riders_25_Verify_The_Functionality_Of_Checkbox_And_X_Of_Modify_Columns_For_Actions_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -190,7 +191,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_026, Verify The Functionality Of Search Bar Of Modify Columns For Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_026, Verify The Functionality Of Search Bar Of Modify Columns For Actions Button")
     public void TC_Riders_26_Verify_The_Functionality_Of_Search_Bar_Of_Modify_Columns_For_Actions_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -213,7 +214,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_027, Verify The Functionality Of Cancel Button Of Modify Columns For More Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_027, Verify The Functionality Of Cancel Button Of Modify Columns For More Actions Button")
     public void TC_Riders_027_Verify_The_Functionality_Of_Cancel_Button_Of_Modify_Columns_For_More_Actions_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -224,7 +225,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_28, Verify The Functionality Of Save Button Of Modify Columns For More Actions Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_28, Verify The Functionality Of Save Button Of Modify Columns For More Actions Button")
     public void TC_Riders_028_Verify_The_Functionality_Of_Save_Button_Of_Modify_Columns_For_More_Actions_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -255,7 +256,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "Riders_29, Verify Functionality Of Next Page Pagination Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "Riders_29, Verify Functionality Of Next Page Pagination Button")
     public void TC_Riders_29_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -268,7 +269,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_30, Verify Functionality Of Previous Page Pagination Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_30, Verify Functionality Of Previous Page Pagination Button")
     public void TC_Riders_30_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -283,7 +284,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_31 Verify Functionality Of Vertically Scroll Of Rider Table Using Mouse Scroll Wheel")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_31 Verify Functionality Of Vertically Scroll Of Rider Table Using Mouse Scroll Wheel")
     public void TC_Riders_031_Verify_Functionality_Of_Vertically_Scroll_Of_Rider_Table_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -294,7 +295,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_32, Verify Functionality Of Vertically Scroll Of Rider Table Using Keyboard")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_32, Verify Functionality Of Vertically Scroll Of Rider Table Using Keyboard")
     public void TC_Riders_032_Verify_Functionality_Of_Vertically_Scroll_Of_Rider_Table_Using_Keyboard() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -305,7 +306,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_33, Verify Displaying Of Rider Table Records As Per Pagination Value")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_33, Verify Displaying Of Rider Table Records As Per Pagination Value")
     public void TC_Riders_033_Verify_Displaying_Of_Rider_Table_Records_As_Per_Pagination_Value() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -324,7 +325,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_34, Verify Functionality Of Pagination Paging Block")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_34, Verify Functionality Of Pagination Paging Block")
     public void TC_Riders_034_Verify_Functionality_Of_Pagination_Paging_Block() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
@@ -342,7 +343,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_35, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_35, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
     public void TC_Riders_035_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -362,8 +363,8 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_36, Verify Functionality Of Pagination Paging Block With Next 5 pages And Previous 5 pages Button")
-    public void TC_Riders_36_Verify_Functionality_Of_Pagination_Paging_Block_With_Next5pages_And_Previous5pages_Button(){
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_36, Verify Functionality Of Pagination Paging Block With Next 5 pages And Previous 5 pages Button")
+    public void TC_Riders_36_Verify_Functionality_Of_Pagination_Paging_Block_With_Next5pages_And_Previous5pages_Button() {
         commonActions.coverUserJourneyTillRiders();
         ridersPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
         ridersPage.select_PaginationBlockList_Lbl("5");
@@ -374,7 +375,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         JarvisAssert.assertNotEquals(twentyFirstRecord, twentySixthRecord, "The Two Record Names Didn't Matched As Expected");
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_37, Verify Functionality Of Pagination Per Page With Paging Block And Next Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_37, Verify Functionality Of Pagination Per Page With Paging Block And Next Button")
     public void TC_Riders_37_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -394,7 +395,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_38, Verify The Functionality Of New Rider Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_38, Verify The Functionality Of New Rider Button")
     public void TC_Riders_038_Verify_The_Functionality_Of_New_Rider_Button() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -407,7 +408,7 @@ public class TestSuite_RidersPage extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS}, description = "TC_040, Verify The Functionality Of CheckBox Present In Riders Table for any record")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_040, Verify The Functionality Of CheckBox Present In Riders Table for any record")
     public void TC_Riders_040_Verify_The_Functionality_Of_CheckBox_Present_In_Riders_Table_For_Any_Record() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
