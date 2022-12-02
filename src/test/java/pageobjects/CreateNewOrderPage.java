@@ -1303,4 +1303,22 @@ public class CreateNewOrderPage {
     public boolean isPresent_SamePickupAndDropFacilityToastMsg_Lbl() {
         return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, 5000);
     }
+
+    public void fillPickupDetailsWithCustomData(){
+        fillWithClear_PickupDetailsPostalCode_Txt(sampleData.address().zipCode());
+        selectByVisibleText_PickupDetailsCountry_Select(sampleData.country().name());
+        fillWithClear_PickupDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
+        fillWithClear_PickupDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
+        fillWithClear_PickupDetailsState_Txt(sampleData.address().state());
+        fillWithClear_PickupDetailsCity_Txt(sampleData.address().city());
+    }
+
+    public void fillDropDetailsWithCustomData(){
+        fillWithClear_DropDetailsPostalCode_Txt(sampleData.address().zipCode());
+        selectByVisibleText_DropDetailsCountry_Select(sampleData.country().name());
+        fillWithClear_DropDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
+        fillWithClear_DropDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
+        fillWithClear_DropDetailsState_Txt(sampleData.address().state());
+        fillWithClear_DropDetailsCity_Txt(sampleData.address().city());
+    }
 }
