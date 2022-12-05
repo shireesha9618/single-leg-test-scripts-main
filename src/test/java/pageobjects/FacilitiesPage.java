@@ -61,7 +61,7 @@ public class FacilitiesPage {
     private final Locator tableColumnNameUpdatedAt = Locator.builder().withWeb(By.xpath("//th[text()='Updated At']"));
     private final Locator tableColumnNameCreatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Created By']"));
     private final Locator tableColumnNameUpdatedBy = Locator.builder().withWeb(By.xpath("//th[text()='Updated By']"));
-    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("(//span[@class='ant-checkbox'])[1]"));
+    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("(//tr[2]//span)[1]"));
     private final Locator tableDataCheckBox_List = Locator.builder().withWeb(By.xpath("//label[contains(@class,'ant-checkbox')]"));
     private final Locator tableDataEdit_Link = Locator.builder().withWeb(By.xpath("(//p[text()='Edit'])[1]"));
     private final Locator tableDataFacilityId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
@@ -78,7 +78,7 @@ public class FacilitiesPage {
     private final Locator paginationBlockList_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
     private final Locator prev_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
-    private final Locator deactivate_Btn = Locator.builder().withWeb(By.xpath("//p[@class='text-black text-sm font-medium']"));
+    private final Locator deactivate_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-3']/button"));
     private final Locator deactivateFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Deactivate Facility']"));
     private final Locator deactivateFacilityCancel_Btn = Locator.builder().withWeb(By.xpath("//div[@class='w-full flex justify-center items-center scale-100']//p[text()='Cancel']"));
     private final Locator deactivateFacilityDeactivate_Btn = Locator.builder().withWeb(By.xpath("//div[@class='w-full flex justify-center items-center scale-100']//p[text()='Deactivate']"));
@@ -452,7 +452,8 @@ public class FacilitiesPage {
     }
 
     public void click_TableData_CheckBox() {
-        ActionHelper.click(tableData_CheckBox);
+        if (!isChecked_CheckBox())
+            ActionHelper.click(tableData_CheckBox);
         ActionHelper.waitForLoaderToHide();
     }
 
@@ -546,15 +547,15 @@ public class FacilitiesPage {
         return dataSize[0].replace(" ", "");
     }
 
-    public void selectPaginationBlock(String pageNo) {
-        for(WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
-            if(element.getAttribute("title").equals(pageNo)) ActionHelper.click(element);
+    public void selectPaginationBlock(int pageNo) {
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
+            if (element.getAttribute("title").equals(String.valueOf(pageNo))) ActionHelper.click(element);
         ActionHelper.waitForLoaderToHide();
     }
 
-    public boolean isPaginationBlockSelected(String label) {
+    public boolean isPaginationBlockSelected(int label) {
         for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
-            if (element.getAttribute("title").equals(label) && element.getAttribute("class").contains("item-active"))
+            if (element.getAttribute("title").equals(String.valueOf(label)) && element.getAttribute("class").contains("item-active"))
                 return true;
         return false;
     }
@@ -613,6 +614,7 @@ public class FacilitiesPage {
 
     public void click_DeactivateFacilityDeactivate_Btn() {
         ActionHelper.click(deactivateFacilityDeactivate_Btn);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_UserProfile_Btn() {
@@ -664,6 +666,17 @@ public class FacilitiesPage {
         }
         ActionHelper.waitForLoaderToHide();
         ActionHelper.click(status_DropDown);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public boolean isChecked_CheckBox() {
+        WebElement element = ActionHelper.findElement(tableData_CheckBox);
+        return element.getAttribute("class").contains("checked");
+    }
+
+    public void click_TableData_ToUnCheck_CheckBox() {
+        if (isChecked_CheckBox())
+            ActionHelper.click(tableData_CheckBox);
         ActionHelper.waitForLoaderToHide();
     }
 }

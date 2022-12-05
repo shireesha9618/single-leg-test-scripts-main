@@ -39,6 +39,7 @@ public class AddNewFacilityPage {
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
+    private final Locator validationMsg_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Required']"));
 
     Faker sampleData = new Faker();
 
@@ -310,5 +311,9 @@ public class AddNewFacilityPage {
 
     public String getText_FacilityId_Txt() {
         return ActionHelper.getAttribute(facilityId_Txt, "value");
+    }
+
+    public boolean isPresent_ValidationMsg_Lbl() {
+        return ActionHelper.isPresent(validationMsg_Lbl);
     }
 }

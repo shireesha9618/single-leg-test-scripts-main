@@ -3,14 +3,14 @@ package testsuite.resources;
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
 import constants.TestGroup;
-import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
+import utility.Utility;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -112,6 +112,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         String facilityName = addNewFacilityPage.createFacility().get("facilityName");
+        addNewFacilityPage.click_Create_Btn();
+        ActionHelper.waitForLoaderToHide();
         facilitiesPage.fill_Search_Txt(facilityName);
         softAssert.assertTrue(facilitiesPage.isPresent_TableDataFacilityName_Lbl(), "Facility Name Data In The Table Is Present As Expected");
         softAssert.assertEquals(facilitiesPage.getText_TableDataFacilityName_Lbl(), facilityName, "Facility Name Is Matched As Expected");
@@ -125,6 +127,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         String facilityId = addNewFacilityPage.createFacility().get("facilityId");
+        addNewFacilityPage.click_Create_Btn();
+        ActionHelper.waitForLoaderToHide();
         facilitiesPage.fill_Search_Txt(facilityId);
         softAssert.assertTrue(facilitiesPage.isPresent_TableDataFacilityId_Lbl(), "Facility Id Data In The Table Is Present As Expected");
         softAssert.assertEquals(facilitiesPage.getText_TableDataFacilityId_Lbl(), facilityId, "Facility Id Is Matched As Expected");
@@ -227,6 +231,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         HashMap<String, String> createFacilityDetails = new HashMap<>(addNewFacilityPage.createFacility());
+        addNewFacilityPage.click_Create_Btn();
+        ActionHelper.waitForLoaderToHide();
         HashMap<String, String> getFacilityDetails = new HashMap<>(facilitiesPage.getData_TableFirstData());
 
         softAssert.assertEquals(createFacilityDetails.get("facilityName"), getFacilityDetails.get("facilityName"), "Facility Name Is Matched As Expected");
