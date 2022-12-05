@@ -58,8 +58,8 @@ public class RidersPage {
     private final Locator ridersTableRiderNameColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][2]/p"));
     private final Locator ridersTablePhoneNumberColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][3]"));
     private final Locator ridersTableStatusColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][4]"));
-    private final Locator ridersTableEditColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][5]"));
-    private final Locator ridersTableTeamsColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][6]"));
+    private final Locator ridersTableEditColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][6]"));
+    private final Locator ridersTableTeamsColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][5]"));
     private final Locator paginationDropdown_Btn = Locator.builder().withWeb(By.xpath(" //li/div/div[@class='ant-select-selector']"));
     private final Locator paginationSelectedItem_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'pagination')]//span[@title]"));
     private final Locator paginationPerPageOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),' / page')]"));
@@ -81,7 +81,6 @@ public class RidersPage {
     private final Locator paginationPage5Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='5']/p"));
     private final Locator paginationPrevious5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Previous 5 Pages']//a"));
     private final Locator paginationNext5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Next 5 Pages']//a"));
-
     public static RidersPage getInstance() {
         if (_instance == null)
             _instance = new RidersPage();
@@ -583,7 +582,7 @@ public class RidersPage {
     }
 
     public String getText_TableDataRiderName_Lbl() {
-        return ActionHelper.getText(tableDataRiderName_Lbl);
+        return ActionHelper.getText(tableDataRiderName_Lbl.getBy());
     }
 
     public void check_TableData_CheckBox(int index) {
@@ -638,7 +637,7 @@ public class RidersPage {
         return ActionHelper.isPresent(state_TextBox);
     }
 
-    public void click_SelectState_DropDown(){
+    public void getTxt_SelectState_DropDown(String state){
         ActionHelper.click(state_TextBox);
     }
 

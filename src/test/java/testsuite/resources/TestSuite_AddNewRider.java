@@ -12,7 +12,7 @@ import pageobjects.AddNewRiderPage;
 import pageobjects.CommonActions;
 import pageobjects.RidersPage;
 
-public class TestSuite_AddNewRiderPage extends BaseTestClass {
+public class TestSuite_AddNewRider extends BaseTestClass {
     RidersPage ridersPage = RidersPage.getInstance();
     AddNewRiderPage addNewRiderPage = AddNewRiderPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();

@@ -10,7 +10,7 @@ import pageobjects.RiderEditPage;
 import pageobjects.RidersPage;
 
 
-public class TestSuite_RiderEditPage extends BaseTestClass {
+public class TestSuite_EditRider extends BaseTestClass {
     RiderEditPage riderEditPage = RiderEditPage.getInstance();
     RidersPage ridersPage = RidersPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();

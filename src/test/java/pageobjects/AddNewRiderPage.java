@@ -24,7 +24,6 @@ public class AddNewRiderPage {
     private final Locator firstNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='First Name*']/following-sibling::p"));
     private final Locator teamsDropDown_TextBox = Locator.builder().withWeb(By.xpath("//span[text()='Select Teams']"));
     private final Locator lastNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Last Name*']/following-sibling::p"));
-
     Faker sampleData = new Faker();
 
     public static AddNewRiderPage getInstance() {
@@ -108,11 +107,11 @@ public class AddNewRiderPage {
         ActionHelper.fillWithClear(firstName_Txt.getBy(), input);
     }
 
-    public void fill_RiderLastName_Txt(String input) {
+    public void set_RiderLastName_TxtBox(String input) {
         ActionHelper.fillWithClear(lastName_Txt.getBy(), input);
     }
 
-    public void fill_PhoneNumber_Txt(String phoneNumber) {
+    public void set_PhoneNumber_TxtBox(String phoneNumber) {
         ActionHelper.fillWithClear(phoneNumber_Txt.getBy(), phoneNumber);
     }
 
