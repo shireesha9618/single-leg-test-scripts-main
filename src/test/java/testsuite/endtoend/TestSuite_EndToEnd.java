@@ -80,7 +80,7 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         createOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
         String orderAmount = sampleData.number().digits(3);
         createOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(orderAmount);
-        createOrderPage.click_Create_Btn();
+        createOrderPage.click_CreateBtn_WithWait();
         viewOrdersPage.click_Refresh_Btn();
         HashMap<String, String> orderSummaryAfterOrderCreation = viewOrdersPage.getOrderSummary();
 
