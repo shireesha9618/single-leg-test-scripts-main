@@ -1,5 +1,6 @@
 package utility;
 
+import com.github.javafaker.Faker;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
@@ -328,5 +329,11 @@ public class Utility {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    public static String generateRandomString(int length) {
+        String output = "";
+        while (output.length() < length) output = output + new Faker().address().fullAddress();
+        return output.substring(0, length);
     }
 }
