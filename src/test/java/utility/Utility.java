@@ -336,4 +336,9 @@ public class Utility {
         while (output.length() < length) output = output + new Faker().address().fullAddress();
         return output.substring(0, length);
     }
+
+    public static boolean isChecked_Input_CheckBox(By by) {
+        WebElement webElement = ActionHelper.findElement(by);
+        return webElement.getAttribute("class").contains("checked");
+    }
 }
