@@ -2,6 +2,7 @@ package pageobjects;
 
 import constants.Constants;
 import framework.common.assertion.JarvisAssert;
+import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -86,12 +87,16 @@ public class CommonActions {
     }
 
     public void click_Skip_Btn() {
-        ActionHelper.waitForLoaderToHide();
-        String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
-        WebElement element = (WebElement) js.executeScript(skipButton);
-        if (element.isDisplayed())
-            element.click();
+        try {
+            ActionHelper.waitForLoaderToHide();
+            String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
+            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+            WebElement element = (WebElement) js.executeScript(skipButton);
+            if (element.isDisplayed())
+                element.click();
+        } catch (Exception e) {
+            ExtentLogger.logPass(e.toString());
+        }
     }
 
     public void coverJourneyTillFacility() {
