@@ -103,7 +103,7 @@ public class CommonActions {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
-        ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
+        HomePage.getInstance().click_FacilitiesMenuItem_Btn();
     }
 
     public void coverJourneyTillRider() {
@@ -123,7 +123,7 @@ public class CommonActions {
     }
 
     public String getText_PaginationCurrentlyShowingCount_Lbl() {
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        waitTillLoaderTxtDisappears();
         return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[1];
     }
 
@@ -161,13 +161,13 @@ public class CommonActions {
     public void chooseNoOfRecordToBeDisplayed(int noOfData) {
         click_PageSize_Txt();
         ActionHelper.click(ActionHelper.findElement(By.xpath(chooseNoOfRecordToBeDisplayed.replace("ab", String.valueOf(noOfData)))));
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        waitTillLoaderDisappears();
     }
 
     public void select_PaginationBlock_Txt(int pageNo) {
         for (WebElement element : ActionHelper.findElements(paginationBlockList_Txt))
             if (element.getAttribute("title").equals(String.valueOf(pageNo))) ActionHelper.click(element);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        waitTillLoaderDisappears();
     }
 
     public boolean isPaginationBlockSelected(int label) {

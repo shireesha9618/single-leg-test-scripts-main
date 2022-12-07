@@ -6,9 +6,9 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import utility.Utility;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class AddNewFacilityPage {
     private static AddNewFacilityPage _instance;
@@ -268,18 +268,11 @@ public class AddNewFacilityPage {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public String get_PostalCode_Txt() {
-        String[] postalCode = {"201301", "506001", "110001", "201313", "845305", "233001", "225001", "243601", "204101", "221002",
-                "450331", "464001", "462026", "456006", "416416", "641001", "638455", "571201", "580001", "743425", "700027", "788701", "781301"};
-        int randomPostalCode = new Random().nextInt(postalCode.length);
-        return postalCode[randomPostalCode];
-    }
-
     public HashMap<String, String> fill_AddNewFacility_Details() {
         HashMap<String, String> fillFacilityDetails = new HashMap<>();
         String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
         String facilityId = getText_FacilityId_Txt();
-        String postalCode = get_PostalCode_Txt();
+        String postalCode = Utility.get_PostalCode_Txt();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
 
@@ -293,14 +286,14 @@ public class AddNewFacilityPage {
         fill_PostalCode_Txt(postalCode);
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+
         return fillFacilityDetails;
     }
 
     public HashMap<String, String> updateFacility() {
         DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
-        String postalCode = get_PostalCode_Txt();
+        String postalCode = Utility.get_PostalCode_Txt();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
 
@@ -311,7 +304,6 @@ public class AddNewFacilityPage {
         fill_PostalCode_Txt(postalCode);
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
-        CommonActions.getInstance().waitTillLoaderDisappears();
 
         return updateFacility;
     }

@@ -243,7 +243,6 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertTrue(addNewFacilityPage.isDisabled_Country_Txt(), "Country Text Field Is Disabled As Expected");
 
         HashMap<String, String> getUpdatedFacilityDetails = new HashMap<>(addNewFacilityPage.updateFacility());
-        CommonActions.getInstance().waitTillLoaderDisappears();
         addNewFacilityPage.click_Save_Btn();
         HashMap<String, String> updatedData = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
         softAssert.assertEquals(updatedData.get("facilityId"), getFacilityDetails.get("facilityId"), "Facility Id Is Matched Before And After Update Facility As Expected");
@@ -428,7 +427,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String facilityId = facilitiesPage.getData_TableFirstData_List().get("facilityId");
         facilitiesPage.click_TableDataEdit_Link();
         softAssert.assertEquals(addNewFacilityPage.getText_EditFacilityHeader_Lbl(), "Edit Facility", "Edit Facility Header Is Matched As Expected");
-        String newPostalCode = addNewFacilityPage.get_PostalCode_Txt();
+        String newPostalCode = Utility.get_PostalCode_Txt();
         String newAddressLine1 = sampleData.address().streetName();
         addNewFacilityPage.fill_PostalCode_Txt(newPostalCode);
         addNewFacilityPage.fill_AddressLine1_Txt(newAddressLine1);
@@ -626,7 +625,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_Deactivate_Btn();
         softAssert.assertTrue(facilitiesPage.isPresent_DeactivateFacilityHeader_Lbl(), "Deactivate Facility Header Is Present As Expected");
         softAssert.assertEquals(facilitiesPage.getText_DeactivateFacilityHeader_Lbl(), "Deactivate Facility", "Deactivate Facility Header Is Matched With Header As Expected");
-        softAssert.assertTrue(facilitiesPage.isPresent_DeactivateFacilityDeactivate_Btn(), "Cancel Button In Deactivate Page Is Present As Expected");
+        softAssert.assertTrue(facilitiesPage.isPresent_DeactivateFacilityCancel_Btn(), "Cancel Button In Deactivate Page Is Present As Expected");
         softAssert.assertTrue(facilitiesPage.isPresent_DeactivateFacilityDeactivate_Btn(), "Deactivate Button In Deactivate Page Is Present As Expected");
         softAssert.assertAll();
     }
@@ -719,15 +718,15 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_043_Verify_The_Functionality_Of_Cancel_Button_In_Add_New_Facility_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        HashMap<String, String> getFacilityTableDetails = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
+        HashMap<String, String> expectedFacilityTableDetails = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
         facilitiesPage.click_NewFacility_Btn();
         addNewFacilityPage.click_Cancel_Btn();
-        HashMap<String, String> getNewFacilityTableDetails = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
-        softAssert.assertEquals(getFacilityTableDetails.get("facilityId"), getNewFacilityTableDetails.get("facilityId"), "Facility Id Is Not Changed As Expected");
-        softAssert.assertEquals(getFacilityTableDetails.get("facilityName"), getNewFacilityTableDetails.get("facilityName"), "Facility Name Is Not Changed As Expected");
-        softAssert.assertEquals(getFacilityTableDetails.get("postalCode"), getNewFacilityTableDetails.get("postalCode"), "Postal Code Is Not Changed As Expected");
-        softAssert.assertEquals(getFacilityTableDetails.get("city"), getNewFacilityTableDetails.get("city"), "City Name Is Not Changed As Expected");
-        softAssert.assertEquals(getFacilityTableDetails.get("state"), getNewFacilityTableDetails.get("state"), "State Name Is Not Changed As Expected");
+        HashMap<String, String> actualFacilityTableDetails = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
+        softAssert.assertEquals(expectedFacilityTableDetails.get("facilityId"), actualFacilityTableDetails.get("facilityId"), "Facility Id Is Not Changed As Expected");
+        softAssert.assertEquals(expectedFacilityTableDetails.get("facilityName"), actualFacilityTableDetails.get("facilityName"), "Facility Name Is Not Changed As Expected");
+        softAssert.assertEquals(expectedFacilityTableDetails.get("postalCode"), actualFacilityTableDetails.get("postalCode"), "Postal Code Is Not Changed As Expected");
+        softAssert.assertEquals(expectedFacilityTableDetails.get("city"), actualFacilityTableDetails.get("city"), "City Name Is Not Changed As Expected");
+        softAssert.assertEquals(expectedFacilityTableDetails.get("state"), actualFacilityTableDetails.get("state"), "State Name Is Not Changed As Expected");
         softAssert.assertAll();
     }
 
@@ -738,7 +737,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         softAssert.assertEquals(addNewFacilityPage.getText_AddNewFacilityHeader_Lbl(), "Add New Facility", "Add New Facility Header Is Matched As Expected");
-        addNewFacilityPage.fill_PostalCode_Txt(addNewFacilityPage.get_PostalCode_Txt());
+        addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
         addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
         addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
         CommonActions.getInstance().waitTillLoaderDisappears();

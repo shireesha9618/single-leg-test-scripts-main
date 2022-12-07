@@ -192,8 +192,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
-        ActionHelper.waitUntilElementVisible(statusDropDownClearSelection_Btn.getBy());
-        return ActionHelper.isPresent(statusDropDownClearSelection_Btn);
+        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, 5000);
     }
 
     public void click_StatusDropDownClearSelection_Btn() {
@@ -241,7 +240,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsSelectAll_Btn() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsSelectAll_Btn);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsSelectAll_Btn, 2000);
     }
 
     public void click_MoreActionsDropDownModifyColumnsSelectAll_Btn() {
@@ -257,7 +256,6 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnFacilityName_CheckBox() {
-        ActionHelper.waitUntilElementVisible(moreActionsDropDownModifyColumnFacilityName_CheckBox.getBy());
         return ActionHelper.isPresent(moreActionsDropDownModifyColumnFacilityName_CheckBox);
     }
 
@@ -540,12 +538,10 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_DeactivateFacilityHeader_Lbl() {
-        ActionHelper.waitUntilElementVisible(deactivateFacilityHeader_Lbl.getBy());
-        return ActionHelper.isPresent(deactivateFacilityHeader_Lbl);
+        return ActionHelper.isPresent(deactivateFacilityHeader_Lbl, 2000);
     }
 
     public String getText_DeactivateFacilityHeader_Lbl() {
-        ActionHelper.waitUntilElementVisible(deactivateFacilityHeader_Lbl.getBy());
         return ActionHelper.getText(deactivateFacilityHeader_Lbl);
     }
 
@@ -558,8 +554,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_DeactivateFacilityDeactivate_Btn() {
-        ActionHelper.waitUntilElementVisible(deactivateFacilityDeactivate_Btn.getBy());
-        return ActionHelper.isPresent(deactivateFacilityDeactivate_Btn);
+        return ActionHelper.isPresent(deactivateFacilityDeactivate_Btn, 2000);
     }
 
     public void click_DeactivateFacilityDeactivate_Btn() {
@@ -584,7 +579,6 @@ public class FacilitiesPage {
     }
 
     public HashMap<String, String> getData_TableFirstData_List() {
-        ActionHelper.waitUntilElementVisible(tableDataFacilityId_Lbl.getBy());
         HashMap<String, String> tableData = new HashMap<>();
         String facilityId = getText_TableDataFacilityId_Lbl();
         String facilityName = getText_TableDataFacilityName_Lbl();
@@ -614,7 +608,6 @@ public class FacilitiesPage {
                 break;
             }
         }
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(status_DropDown);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }

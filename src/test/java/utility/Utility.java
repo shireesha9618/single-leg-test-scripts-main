@@ -23,10 +23,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utility {
@@ -340,5 +337,12 @@ public class Utility {
     public static boolean isChecked_Input_CheckBox(By by) {
         WebElement webElement = ActionHelper.findElement(by);
         return webElement.getAttribute("class").contains("checked");
+    }
+
+    public static String get_PostalCode_Txt() {
+        String[] postalCode = {"201301", "506001", "110001", "201313", "845305", "233001", "225001", "243601", "204101", "221002",
+                "450331", "464001", "462026", "456006", "416416", "641001", "638455", "571201", "580001", "743425", "700027", "788701", "781301"};
+        int randomPostalCode = new Random().nextInt(postalCode.length);
+        return postalCode[randomPostalCode];
     }
 }
