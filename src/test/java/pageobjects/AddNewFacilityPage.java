@@ -268,7 +268,7 @@ public class AddNewFacilityPage {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public HashMap<String, String> fill_AddNewFacility_Details() {
+    public HashMap<String, String> createNewFacility() {
         HashMap<String, String> fillFacilityDetails = new HashMap<>();
         String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
         String facilityId = getText_FacilityId_Txt();
@@ -287,6 +287,8 @@ public class AddNewFacilityPage {
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
 
+        click_Create_Btn();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return fillFacilityDetails;
     }
 

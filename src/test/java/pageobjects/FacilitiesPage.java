@@ -594,7 +594,6 @@ public class FacilitiesPage {
         tableData.put("city", city);
         tableData.put("state", state);
 
-        CommonActions.getInstance().waitTillLoaderDisappears();
         return tableData;
     }
 
