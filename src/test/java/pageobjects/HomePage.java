@@ -3,7 +3,6 @@ package pageobjects;
 import base.BaseTestClass;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
-import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -64,13 +63,11 @@ public class HomePage extends BaseTestClass {
         ActionHelper.waitUntilElementVisible(viewOrderMenuItem_Btn.getBy());
         ActionHelper.click(viewOrderMenuItem_Btn);
         CommonActions.getInstance().click_Skip_Btn();
-        DriverManager.getDriver().navigate().refresh();
-        CommonActions.getInstance().click_Skip_Btn();
     }
 
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img,2000);
+        return ActionHelper.isPresent(delhiveryLogo_Img, 2000);
     }
 
     public void click_DelhiveryLogo_Img() {

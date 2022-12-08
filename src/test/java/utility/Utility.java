@@ -5,6 +5,7 @@ import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
+import org.joda.time.DateTime;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -23,8 +24,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
@@ -94,7 +97,7 @@ public class Utility {
         return ThreadLocalRandom.current().nextInt(start, end + 1);
     }
 
-    public static String fillPlaceholderValueInXpath(Locator locator, String value) {
+    public static Locator fillPlaceholderValueInXpath(Locator locator, String value) {
         String xpathSubStrings[] = locator.getBy().toString().split(" ");
         xpathSubStrings[xpathSubStrings.length - 1] = xpathSubStrings[xpathSubStrings.length - 1].replace(
                 "PLACEHOLDER", value);
@@ -104,7 +107,7 @@ public class Utility {
             if (xpath == "") xpath = xpathSubStrings[i];
             else xpath = xpath + " " + xpathSubStrings[i];
         }
-        return xpath;
+        return Locator.builder().withWeb(By.xpath(xpath));
     }
 
     public static void checkCheckbox(By by) {
@@ -271,6 +274,18 @@ public class Utility {
         });
     }
 
+    public static void clickIgnoringStaleElementReferenceException(By by, int index, int pollingInterval) {
+        Wait<WebDriver> wait = new FluentWait<>(DriverManager.getDriver())
+                .withTimeout(Duration.ofSeconds(DriverManager.getExplicitWait()))
+                .pollingEvery(Duration.ofSeconds(pollingInterval))
+                .ignoring(ElementClickInterceptedException.class, StaleElementReferenceException.class);
+
+        wait.until(driver -> {
+            driver.findElements(by).get(index).click();
+            return true;
+        });
+    }
+
     public static void refreshPage() {
         DriverManager.getDriver().navigate().refresh();
     }
@@ -336,4 +351,61 @@ public class Utility {
         while (output.length() < length) output = output + new Faker().address().fullAddress();
         return output.substring(0, length);
     }
+
+    public static String addNumbersInStringFormat(String... nos) {
+        int total = 0;
+        for (String no : nos) total = total + Integer.parseInt(no);
+        return String.valueOf(total);
+    }
+
+    public static String getNextMonth(String month) {
+        List<String> monthsList = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        int index = (monthsList.indexOf(month) + 1) % monthsList.size();
+        return monthsList.get(index);
+    }
+
+    public static String getPreviousMonth(String month) {
+        List<String> monthsList = List.of("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        int index = (monthsList.indexOf(month) + monthsList.size() - 1) % monthsList.size();
+        return monthsList.get(index);
+    }
+
+    public static String getNextYear(String year) {
+        return String.valueOf(Integer.parseInt(year) + 1);
+    }
+
+    public static String getPreviousYear(String year) {
+        return String.valueOf(Integer.parseInt(year) - 1);
+    }
+
+    public static String getCustomCurrentDateFormatter(String format) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
+        return LocalDate.now().format(formatter);
+    }
+
+    public static boolean isChecked_Input_CheckBox(By by) {
+        return isChecked_Input_CheckBox(ActionHelper.findElement(by));
+    }
+
+    public static boolean isChecked_Input_CheckBox(WebElement element) {
+        return element.getAttribute("class").contains("checked");
+    }
+
+    public static void sendKeysWithClear(WebElement element, String input) {
+        if (input.length() >= 1) {
+            element.click();
+            element.sendKeys(new CharSequence[]{Keys.chord(new CharSequence[]{Keys.CONTROL, "a"})});
+            element.sendKeys(new CharSequence[]{Keys.BACK_SPACE});
+            element.sendKeys(new CharSequence[]{input});
+        }
+    }
+
+    public static int getCurrentHourOfDay() {
+        return new DateTime().getHourOfDay();
+    }
+
+    public static int getCurrentMinuteOfHour() {
+        return new DateTime().getMinuteOfHour();
+    }
+
 }

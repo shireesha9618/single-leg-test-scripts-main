@@ -10,4 +10,5 @@ public class TestGroup {
     public static final String FACILITY = "facility";
     public static final String RIDERS = "riders";
     public static final String CREATE_NEW_ORDER = "createNewOrder";
+    public static final String VIEW_ORDERS = "viewOrders";
 }

@@ -5,11 +5,14 @@ import framework.common.assertion.JarvisAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
-import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import utility.Utility;
+
+import java.util.List;
 
 import static utility.Utility.acceptAlertIfPresent;
 
@@ -17,8 +20,13 @@ public class CommonActions {
     private static CommonActions _instance;
     private final Locator loader_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Loading...']"));
     private final Locator paginationCurrentlyShowingAndTotalCount_Lbl = Locator.builder().withWeb(By.className("ant-pagination-total-text"));
+    private final Locator paginationSelectedItem_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'pagination')]//span[@title]"));
     private final Locator paginationNext_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
     private final Locator paginationPrevious_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
+    private final Locator paginationResults_Lbl = Locator.builder().withWeb(By.cssSelector(".ant-pagination-total-text"));
+    private final Locator paginationPerPageOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[contains( text(), ' / page')]"));
+    private final Locator paginationBlockList_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
+    private final Locator showingNoOfRecords_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(text() ,'Showing')]"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
@@ -79,6 +87,13 @@ public class CommonActions {
         HomePage.getInstance().openCreateOrderPage();
     }
 
+    public void coverJourneyTillViewOrder() {
+        performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        HomePage.getInstance().openViewOrderPage();
+    }
+
     public void waitTillLoaderTxtDisappears() {
         ActionHelper.waitForElementToHide(loader_Txt);
     }
@@ -105,12 +120,6 @@ public class CommonActions {
         HomePage.getInstance().openRidersPage();
     }
 
-    public void coverJourneyTillViewOrder() {
-        performCommonAction();
-        click_Skip_Btn();
-        HomePage.getInstance().openViewOrderPage();
-    }
-
     public Boolean isPresent_Skip_Btn() {
         return ActionHelper.isPresent(skip_Btn, 3000);
     }
@@ -119,6 +128,24 @@ public class CommonActions {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[1];
     }
+
+    public String getText_PaginationTotalCount_Lbl() {
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[3];
+    }
+
+    public boolean isPresent_PaginationSelectedItem_Lbl() {
+        return ActionHelper.isPresent(paginationSelectedItem_Lbl);
+    }
+
+    public void click_PaginationSelectedItem_Lbl() {
+        ActionHelper.click(paginationSelectedItem_Lbl);
+    }
+
+    public String getText_PaginationSelectedItem_Lbl() {
+        return ActionHelper.getText(paginationSelectedItem_Lbl);
+    }
+
 
     public boolean isPresent_PaginationNext_Btn() {
         return ActionHelper.isPresent(paginationNext_Btn);
@@ -135,4 +162,61 @@ public class CommonActions {
     public void click_PaginationPrevious_Btn() {
         ActionHelper.click(paginationPrevious_Btn);
     }
+
+    public boolean isPresent_PaginationResults_Lbl() {
+        return ActionHelper.isPresent(paginationResults_Lbl);
+    }
+
+    public String getText_PaginationResults_Lbl() {
+        return ActionHelper.getText(paginationResults_Lbl);
+    }
+
+    public String getText_PaginationPerPageOptionsList_Lbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl).get(index));
+    }
+
+    public List<String> getText_PaginationPerPageOptionsList_Lbl() {
+        return Utility.getText_ListOfWebElements(paginationPerPageOptionsList_Lbl.getBy());
+    }
+
+    public void chooseNoOfRecordsToBeDisplayedPerPage(int no) {
+        click_PaginationSelectedItem_Lbl();
+        Utility.clickWebElementContainingText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl), String.valueOf(no));
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void selectPaginationBlock(String label) {
+        ActionHelper.scrollTillElement(paginationBlockList_Lbl.getBy());
+        ActionHelper.waitUntilElementClickable(paginationBlockList_Lbl);
+        int index = 0;
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl)) {
+            if (element.getAttribute("title").equals(label)) break;
+            index++;
+        }
+        Utility.clickIgnoringStaleElementReferenceException(paginationBlockList_Lbl.getBy(), index, 5);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isPaginationBlockSelected(int index) {
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
+            if (element.getAttribute("title").equals(String.valueOf(index)) && element.getAttribute("class").contains("item-active"))
+                return true;
+        return false;
+    }
+
+    public String getText_ShowingNoOfRecords_Lbl() {
+        return ActionHelper.getText(showingNoOfRecords_Lbl);
+    }
+
+    public void choosePaginationOption(int pagination) {
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(ActionHelper.findElement(paginationSelectedItem_Lbl)).click().build().perform();
+        for (WebElement options : ActionHelper.findElements(paginationPerPageOptionsList_Lbl)) {
+            if (options.getText().equals(pagination + " / page")) {
+                actions.moveToElement(options).click().build().perform();
+                break;
+            }
+        }
+    }
+
 }
