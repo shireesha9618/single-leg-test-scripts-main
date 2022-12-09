@@ -2,6 +2,7 @@ package testsuite.resources;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
+import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 import pageobjects.*;
 import utility.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     FacilitiesPage facilitiesPage = FacilitiesPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
     AddNewFacilityPage addNewFacilityPage = AddNewFacilityPage.getInstance();
+    HomePage homePage = HomePage.getInstance();
     Faker sampleData = new Faker();
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
@@ -239,7 +242,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertTrue(!addNewFacilityPage.isEnabled_FacilityId_Txt(), "Facility Id Text Field Is Disabled As Expected");
         softAssert.assertTrue(addNewFacilityPage.isDisabled_Country_Txt(), "Country Text Field Is Disabled As Expected");
 
-        HashMap<String, String> getUpdatedFacilityDetails = new HashMap<>(addNewFacilityPage.updateFacility());
+        HashMap<String, String> getUpdatedFacilityDetails = new HashMap<>(addNewFacilityPage.fillEditFacilityPage());
         addNewFacilityPage.click_Save_Btn();
         HashMap<String, String> updatedData = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
         softAssert.assertEquals(updatedData.get("facilityId"), getFacilityDetails.get("facilityId"), "Facility Id Is Matched Before And After Update Facility As Expected");
@@ -279,7 +282,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String facilityState = getDataFromTable.get("state");
         facilitiesPage.click_TableDataEdit_Link();
 
-        HashMap<String, String> fillData = new HashMap<>(addNewFacilityPage.updateFacility());
+        HashMap<String, String> fillData = new HashMap<>(addNewFacilityPage.fillEditFacilityPage());
         addNewFacilityPage.click_Cancel_Btn();
         String updatedFacilityPostalCode = fillData.get("postalCode");
         String updatedFacilityCity = fillData.get("city");

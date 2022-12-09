@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -82,6 +83,7 @@ public class FacilitiesPage {
     private final Locator userProfile_Btn = Locator.builder().withWeb(By.id("headlessui-menu-button-1"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
+    private final Locator tableColumnSelectAll_CheckBox = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell ant-table-selection-column']"));
 
     public static FacilitiesPage getInstance() {
         if (_instance == null) _instance = new FacilitiesPage();

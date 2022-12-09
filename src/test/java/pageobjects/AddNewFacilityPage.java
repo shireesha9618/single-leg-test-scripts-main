@@ -42,7 +42,7 @@ public class AddNewFacilityPage {
     private final Locator facilityNameErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']/../following-sibling::div//p"));
     private final Locator facilityIdErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility ID*']/../following-sibling::div//p"));
     private final Locator postalCodeErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']/../following-sibling::div//p"));
-    private final Locator popUpErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[@id='__next']/div/div"));
+    private final Locator popUpErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md max-w-md')]"));
     private final Locator addressLine1ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']/../following-sibling::div//p"));
     private final Locator addressLine2ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']/../following-sibling::div//p"));
     private final Locator stateErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='State*']/../following-sibling::div//p"));
@@ -150,7 +150,6 @@ public class AddNewFacilityPage {
 
     public void fill_PostalCode_Txt(String postalCode) {
         ActionHelper.sendKeysWithClear(postalCode_Txt.getBy(), Keys.chord(postalCode));
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public String getText_PostalCode_Txt() {
@@ -186,6 +185,7 @@ public class AddNewFacilityPage {
     }
 
     public void fill_AddressLine1_Txt(String addressLine1) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.sendKeysWithClear(addressLine1_Txt.getBy(), Keys.chord(addressLine1));
     }
 
@@ -288,11 +288,10 @@ public class AddNewFacilityPage {
         fill_AddressLine2_Txt(addressLine2);
 
         click_Create_Btn();
-        CommonActions.getInstance().waitTillLoaderDisappears();
         return fillFacilityDetails;
     }
 
-    public HashMap<String, String> updateFacility() {
+    public HashMap<String, String> fillEditFacilityPage() {
         DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
         String postalCode = Utility.get_PostalCode_Txt();
@@ -347,7 +346,7 @@ public class AddNewFacilityPage {
         return ActionHelper.getText(cityErrorMsg_Lbl);
     }
 
-    public String getText_popUpErrorMsg_Lbl() {
+    public String getText_PopUpErrorMsg_Lbl() {
         return ActionHelper.getText(popUpErrorMsg_Lbl);
     }
 }
