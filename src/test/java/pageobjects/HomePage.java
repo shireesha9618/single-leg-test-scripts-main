@@ -6,7 +6,11 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import utility.Utility;
+import utils.Utils;
+
+import java.util.List;
 
 public class HomePage extends BaseTestClass {
     private static HomePage _instance;
@@ -35,7 +39,8 @@ public class HomePage extends BaseTestClass {
     private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
     private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
-    private final Locator teamSlect_Btn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
+    private final Locator teamSelect_Btn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div/div"));
+    private final Locator teamSelect_List = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
 
     public static HomePage getInstance() {
         if (_instance == null)
@@ -137,6 +142,6 @@ public class HomePage extends BaseTestClass {
 
     public void selectTeam2(String input) {
         ActionHelper.waitForLoaderToHide();
-        Utility.select_FromDropDown_List(teamSelector_Dropdown.getBy(), teamSlect_Btn.getBy(), input);
+        Utility.select_FromDropDown_List(teamSelector_Dropdown.getBy(), teamSelect_Btn.getBy(), input);
     }
 }

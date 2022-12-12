@@ -35,7 +35,7 @@ on:
             required: true
           email_ids:
             description: 'Email id comma separated list for sending the report'
-            default: 'jagadeesh.m@delhivery.com,saurabh.anand@delhivery.com,ashish.chaudhary@delhivery.com,s.shireesha@delhivery.com,arpit.kishor@delhivery.com,shubhra.gupta@delhivery.com,ashish.ranjan@delhivery.com,pavan.bhat@delhivery.com,alexander.fehsenfeld@delhivery.com,derek.gordon@delhivery.com,james.chainey@delhivery.com,uday.anand@delhivery.com'
+            default: 'ashish.ranjan@delhivery.com,saurabh.anand@delhivery.com,jagadeesh.m@delhivery.com,shubhra.gupta@delhivery.com,arpit.kishor@delhivery.com,ashish.chaudhary@delhivery.com,s.shireesha@delhivery.com'
             required: false
             type: string
 

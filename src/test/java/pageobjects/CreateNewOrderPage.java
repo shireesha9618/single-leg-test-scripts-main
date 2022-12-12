@@ -1010,7 +1010,7 @@ public class CreateNewOrderPage {
     }
 
     public void set_PickUpFacility_TextBox() {
-        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.ENTER));
+        ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN,Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
     }
 

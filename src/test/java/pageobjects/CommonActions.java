@@ -2,12 +2,16 @@ package pageobjects;
 
 import constants.Constants;
 import framework.common.assertion.JarvisAssert;
+import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import io.github.sukgu.Shadow;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
 import static utility.Utility.acceptAlertIfPresent;
 
 public class CommonActions {
@@ -20,19 +24,17 @@ public class CommonActions {
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
     private final Locator loader_Img = Locator.builder().withWeb(By.cssSelector("*[class*='animate-spin']"));
+    private final Locator selectTeam1 = Locator.builder().withWeb(By.id("selectTeam"));
+    private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
 
     public static CommonActions getInstance() {
-        if (_instance == null)
-            _instance = new CommonActions();
+        if (_instance == null) _instance = new CommonActions();
         return _instance;
     }
 
-    public void performCommonAction() {
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        acceptAlertIfPresent();
-        waitTillLoaderDisappears();
-        checkAndPerformLogin();
-        waitTillLoaderDisappears();
+    public void selectTeamFromHeader(String input) {
+        ActionHelper.click(teamSelector_Dropdown);
+        ActionHelper.sendKeys(selectTeam1, Keys.chord(input, Keys.ENTER));
     }
 
     public void waitTillLoaderAppears() {
@@ -41,6 +43,14 @@ public class CommonActions {
 
     public void waitTillLoaderDisappears() {
         ActionHelper.waitForElementToHide(loader_Img);
+    }
+
+    public void performCommonAction() {
+        ActionHelper.getURL(Constants.Urls.BASE_URL);
+        acceptAlertIfPresent();
+        waitTillLoaderDisappears();
+        checkAndPerformLogin();
+        waitTillLoaderDisappears();
     }
 
     public void checkAndPerformLogin() {
@@ -66,7 +76,7 @@ public class CommonActions {
     public void coverJourneyTillCreateOrder() {
         performCommonAction();
         click_Skip_Btn();
-        HomePage.getInstance().selectTeam(Constants.TEAM);
+//        HomePage.getInstance().selectTeam(Constants.TEAM);
 //        HomePage.getInstance().openCreateOrderPage();
     }
 
@@ -75,12 +85,35 @@ public class CommonActions {
     }
 
     public void click_Skip_Btn() {
-        ActionHelper.waitForLoaderToHide();
-        Shadow shadow = new Shadow(DriverManager.getDriver());
-        WebElement element = shadow.findElement("button[type='button'][data-pfbind-text='footer.skipButton.text']");
-        String text = element.getText();
-        if (element.isDisplayed())
-            element.click();
+        try {
+            ActionHelper.waitForLoaderToHide();
+            String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
+            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+            WebElement element = (WebElement) js.executeScript(skipButton);
+            if (element.isDisplayed())
+                element.click();
+        } catch (Exception e) {
+            ExtentLogger.logPass(e.toString());
+        }
+    }
+
+    public void coverJourneyTillFacility() {
+        performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
+    }
+
+    public void coverJourneyTillRider() {
+        performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().openRidersPage();
+    }
+
+    public void coverJourneyTillViewOrder() {
+        performCommonAction();
+        click_Skip_Btn();
+        HomePage.getInstance().openViewOrderPage();
     }
 
     public Boolean isPresent_Skip_Btn() {

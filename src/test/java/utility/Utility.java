@@ -1,7 +1,6 @@
 package utility;
 
 import framework.common.logger.ExtentLogger;
-import framework.common.logger.Logger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -71,6 +70,7 @@ public class Utility {
     }
 
     public static List<String> getText_ListOfWebElements(By by) {
+        ActionHelper.gotoSleep(10000);
         return getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(by));
     }
 
@@ -303,7 +303,6 @@ public class Utility {
         Actions action = new Actions(DriverManager.getDriver());
         action.moveToElement(ActionHelper.findElement(dropDownBtn)).click().sendKeys(option).perform();
         for (WebElement optionFromList : ActionHelper.findElements(optionsList_Locator)) {
-            System.out.println("options123"+optionFromList.getText());
             if (optionFromList.getText().toLowerCase().contains(option.toLowerCase())) {
                 optionFromList.click();
                 break;

@@ -24,7 +24,6 @@ public class LoginPage extends BaseTestClass {
     private final Locator loginUserErrorMsg_Txt = Locator.builder().withWeb(By.xpath("//form[@name='myform']/div/span"));
     private final Locator userIdAfterLogin_Txt = Locator.builder().withWeb(By.id("mobileNumber"));
 
-
     public static LoginPage getInstance() {
         if (_instance == null)
             _instance = new LoginPage();
@@ -40,6 +39,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public void fill_Otp_Txt(String otp) {
+        otp=otp.substring(0,6);
         for (int i = 0; i < otp.length(); i++) {
             By by = By.id(otp_Txt.replace("xyz", String.valueOf(i)));
             ActionHelper.sendKeysWithClear(by, String.valueOf(otp.charAt(i)));
@@ -166,3 +166,4 @@ public class LoginPage extends BaseTestClass {
         return ActionHelper.getText(countryCode_Txt);
     }
 }
+

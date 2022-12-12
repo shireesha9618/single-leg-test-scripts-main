@@ -80,6 +80,8 @@ public class ViewOrderPage {
     private final Locator assignRiderDropDownManualAssign_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign']"));
     private final Locator assignRiderDropDownManualAssignAndStart_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign and Start']"));
     private final Locator assignRiderSearch_TextBox = Locator.builder().withWeb(By.xpath("//h4[text()='Rider*']/..//following-sibling::div//input"));
+    private final Locator resourceLeftMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
+    private final Locator facilitiesLeftSubMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
 
     public static ViewOrderPage getInstance() {
         if (_instance == null) {
@@ -89,7 +91,7 @@ public class ViewOrderPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl,5000);
+        return ActionHelper.isPresent(header_Lbl, 5000);
     }
 
     public String getText_Header_Lbl() {
@@ -698,4 +700,20 @@ public class ViewOrderPage {
         ActionHelper.sendKeys(assignRiderSearch_TextBox, input);
     }
 
+    public boolean isPresent_FacilitiesLeftSubMenuItem() {
+        return ActionHelper.isPresent(facilitiesLeftSubMenuItem);
+    }
+
+    public void click_ResourceLeftMenuItem() {
+        ActionHelper.click(resourceLeftMenuItem);
+    }
+
+    public void click_FacilitiesLeftSubMenuItem() {
+        if (isPresent_FacilitiesLeftSubMenuItem())
+            ActionHelper.click(facilitiesLeftSubMenuItem);
+        else {
+            click_ResourceLeftMenuItem();
+            ActionHelper.click(facilitiesLeftSubMenuItem);
+        }
+    }
 }
