@@ -39,6 +39,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public void fill_Otp_Txt(String otp) {
+        otp = otp.substring(0, 6);
         for (int i = 0; i < otp.length(); i++) {
             By by = By.id(otp_Txt.replace("xyz", String.valueOf(i)));
             ActionHelper.sendKeysWithClear(by, String.valueOf(otp.charAt(i)));

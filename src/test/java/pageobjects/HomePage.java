@@ -9,7 +9,6 @@ import org.openqa.selenium.Keys;
 
 public class HomePage extends BaseTestClass {
     private static HomePage _instance;
-
     private final Locator loginButton_Btn = Locator.builder().withWeb(By.id("loginButton"));
     private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
     private final Locator selectTeam_DropDown = Locator.builder().withWeb(By.id("selectTeam"));
@@ -70,7 +69,7 @@ public class HomePage extends BaseTestClass {
 
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img,2000);
+        return ActionHelper.isPresent(delhiveryLogo_Img, 2000);
     }
 
     public void click_DelhiveryLogo_Img() {
@@ -131,5 +130,18 @@ public class HomePage extends BaseTestClass {
 
     public Boolean isPresent_TeamDropdown_Txt() {
         return ActionHelper.isPresent(selectTeam_Txt, 4000);
+    }
+
+    public boolean isPresent_FacilitiesMenuItem_Btn() {
+        return ActionHelper.isPresent(facilitiesMenu_Btn);
+    }
+
+    public void click_FacilitiesMenuItem_Btn() {
+        if (isPresent_FacilitiesMenuItem_Btn())
+            ActionHelper.click(facilitiesMenu_Btn);
+        else {
+            click_Resources_Btn();
+            ActionHelper.click(facilitiesMenu_Btn);
+        }
     }
 }

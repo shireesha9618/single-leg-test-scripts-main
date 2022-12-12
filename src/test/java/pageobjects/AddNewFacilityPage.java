@@ -6,9 +6,9 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import utility.Utility;
 
 import java.util.HashMap;
-import java.util.Random;
 
 public class AddNewFacilityPage {
     private static AddNewFacilityPage _instance;
@@ -39,7 +39,14 @@ public class AddNewFacilityPage {
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
-
+    private final Locator facilityNameErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']/../following-sibling::div//p"));
+    private final Locator facilityIdErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility ID*']/../following-sibling::div//p"));
+    private final Locator postalCodeErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']/../following-sibling::div//p"));
+    private final Locator popUpErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md max-w-md')]"));
+    private final Locator addressLine1ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']/../following-sibling::div//p"));
+    private final Locator addressLine2ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']/../following-sibling::div//p"));
+    private final Locator stateErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='State*']/../following-sibling::div//p"));
+    private final Locator cityErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='City*']/../following-sibling::div//p"));
     Faker sampleData = new Faker();
 
     public static AddNewFacilityPage getInstance() {
@@ -126,7 +133,7 @@ public class AddNewFacilityPage {
     }
 
     public void fill_FacilityId_Txt(String facilityId) {
-        ActionHelper.fillWithClear(facilityId_Txt.getBy(), facilityId);
+        ActionHelper.sendKeysWithClear(facilityId_Txt.getBy(), Keys.chord(facilityId));
     }
 
     public boolean isPresent_AddressDetailsSubHeader_Lbl() {
@@ -178,6 +185,7 @@ public class AddNewFacilityPage {
     }
 
     public void fill_AddressLine1_Txt(String addressLine1) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.sendKeysWithClear(addressLine1_Txt.getBy(), Keys.chord(addressLine1));
     }
 
@@ -248,6 +256,7 @@ public class AddNewFacilityPage {
 
     public void click_Save_Btn() {
         ActionHelper.click(save_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Create_Btn() {
@@ -256,43 +265,36 @@ public class AddNewFacilityPage {
 
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-    public String getPostalCode() {
-        String[] postalCode = {"201301", "506001", "110001", "201313", "845305", "233001", "225001", "243601", "204101", "221002",
-                "450331", "464001", "462026", "456006", "416416", "641001", "638455", "571201", "580001", "743425", "700027", "788701", "781301"};
-        int randomPostalCode = new Random().nextInt(postalCode.length);
-        return postalCode[randomPostalCode];
-    }
-
-    public HashMap<String, String> createFacility() {
-        HashMap<String, String> createNewFacility = new HashMap<>();
+    public HashMap<String, String> createNewFacility() {
+        HashMap<String, String> fillFacilityDetails = new HashMap<>();
         String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
         String facilityId = getText_FacilityId_Txt();
-        String postalCode = getPostalCode();
+        String postalCode = Utility.get_PostalCode_Txt();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
 
-        createNewFacility.put("facilityName", facilityName);
-        createNewFacility.put("facilityId", facilityId);
-        createNewFacility.put("postalCode", postalCode);
-        createNewFacility.put("addressLine1", addressLine1);
-        createNewFacility.put("addressLine2", addressLine2);
+        fillFacilityDetails.put("facilityName", facilityName);
+        fillFacilityDetails.put("facilityId", facilityId);
+        fillFacilityDetails.put("postalCode", postalCode);
+        fillFacilityDetails.put("addressLine1", addressLine1);
+        fillFacilityDetails.put("addressLine2", addressLine2);
 
         fill_FacilityName_Txt(facilityName);
         fill_PostalCode_Txt(postalCode);
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
-        ActionHelper.waitForLoaderToHide();
+
         click_Create_Btn();
-        ActionHelper.waitForLoaderToHide();
-        return createNewFacility;
+        return fillFacilityDetails;
     }
 
-    public HashMap<String, String> updateFacility() {
+    public HashMap<String, String> fillEditFacilityPage() {
         DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
-        String postalCode = getPostalCode();
+        String postalCode = Utility.get_PostalCode_Txt();
         String addressLine1 = sampleData.address().streetName();
         String addressLine2 = sampleData.address().streetName();
 
@@ -303,12 +305,48 @@ public class AddNewFacilityPage {
         fill_PostalCode_Txt(postalCode);
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
-        ActionHelper.waitForLoaderToHide();
 
         return updateFacility;
     }
 
     public String getText_FacilityId_Txt() {
         return ActionHelper.getAttribute(facilityId_Txt, "value");
+    }
+
+    public String getText_FacilityNameErrorMsg_Lbl() {
+        ActionHelper.waitUntilElementVisible(facilityNameErrorMsg_Lbl.getBy());
+        return ActionHelper.getText(facilityNameErrorMsg_Lbl);
+    }
+
+    public String getText_FacilityIdErrorMsg_Lbl() {
+        return ActionHelper.getText(facilityIdErrorMsg_Lbl);
+    }
+
+    public String getText_PostalCodeErrorMsg_Lbl() {
+        return ActionHelper.getText(postalCodeErrorMsg_Lbl);
+    }
+
+    public boolean isPresent_PopUpErrorMsg_Lbl() {
+        return ActionHelper.isPresent(popUpErrorMsg_Lbl);
+    }
+
+    public String getText_AddressLine1ErrorMsg_Lbl() {
+        return ActionHelper.getText(addressLine1ErrorMsg_Lbl);
+    }
+
+    public String getText_AddressLine2ErrorMsg_Lbl() {
+        return ActionHelper.getText(addressLine2ErrorMsg_Lbl);
+    }
+
+    public String getText_StateErrorMsg_Lbl() {
+        return ActionHelper.getText(stateErrorMsg_Lbl);
+    }
+
+    public String getText_CityErrorMsg_Lbl() {
+        return ActionHelper.getText(cityErrorMsg_Lbl);
+    }
+
+    public String getText_PopUpErrorMsg_Lbl() {
+        return ActionHelper.getText(popUpErrorMsg_Lbl);
     }
 }
