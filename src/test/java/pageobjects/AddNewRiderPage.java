@@ -1,13 +1,9 @@
 package pageobjects;
 
 import com.github.javafaker.Faker;
-import framework.backend.APIResponseException;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 public class AddNewRiderPage {
     private static AddNewRiderPage _instance;
@@ -25,8 +21,11 @@ public class AddNewRiderPage {
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
     private final Locator addRider_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
-
+    private final Locator firstNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='First Name*']/following-sibling::p"));
+    private final Locator teamsDropDown_TextBox = Locator.builder().withWeb(By.xpath("//span[text()='Select Teams']"));
+    private final Locator lastNameValidation_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Last Name*']/following-sibling::p"));
     Faker sampleData = new Faker();
+
     public static AddNewRiderPage getInstance() {
         if (_instance == null)
             _instance = new AddNewRiderPage();
@@ -37,34 +36,42 @@ public class AddNewRiderPage {
         ActionHelper.waitForLoaderToHide();
         return ActionHelper.isPresent(header_Lbl, 3000);
     }
-    public String getText_Header_Txt(){
+
+    public String getText_Header_Txt() {
         return ActionHelper.getText(header_Lbl);
     }
 
     public boolean isPresent_HomeBreadcrumb_Lbl() {
         return ActionHelper.isPresent(homeBreadCrumb_Link);
     }
+
     public void click_HomeBreadcrumbMenu_Lbl() {
         ActionHelper.click(homeBreadCrumb_Link);
     }
+
     public boolean isPresent_RidersBreadcrumb_Lbl() {
         return ActionHelper.isPresent(ridersBreadCrumb_Link);
     }
+
     public void click_RidersBreadcrumbMenu_Lbl() {
         ActionHelper.click(ridersBreadCrumb_Link);
     }
-    public boolean isPresent_AddNewRiderBreadcrumbMenu_Lbl(){
+
+    public boolean isPresent_AddNewRiderBreadcrumbMenu_Lbl() {
         return ActionHelper.isPresent(addNewRiderBreadCrumb_Link);
     }
-    public void click_AddNewRiderBreadcrumbMenu_Lbl(){
+
+    public void click_AddNewRiderBreadcrumbMenu_Lbl() {
         ActionHelper.click(addNewRiderBreadCrumb_Link);
     }
+
     public boolean isPresent_Cancel_Btn() {
         return ActionHelper.isPresent(cancel_Btn);
     }
 
     public void click_Cancel_Btn() {
-        ActionHelper.click(cancel_Btn);}
+        ActionHelper.click(cancel_Btn);
+    }
 
     public boolean isPresent_AddRider_Btn() {
         return ActionHelper.isPresent(addRider_Btn);
@@ -74,32 +81,41 @@ public class AddNewRiderPage {
         ActionHelper.click(addRider_Btn);
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
-    public boolean isPresent_FirstName_TxtBox(){
+
+    public boolean isPresent_FirstName_TxtBox() {
         ActionHelper.waitUntilElementVisible(firstName_Txt.getBy());
         return ActionHelper.isPresent(firstName_Txt);
     }
-    public boolean isPresent_LastName_TxtBox(){
+
+    public boolean isPresent_LastName_TxtBox() {
         return ActionHelper.isPresent(lastName_Txt);
     }
-    public boolean isPresent_PhoneNumber_TxtBox(){
+
+    public boolean isPresent_PhoneNumber_TxtBox() {
         return ActionHelper.isPresent(phoneNumber_Txt);
     }
-    public boolean isPresent_UploadPhoto_Btn(){
+
+    public boolean isPresent_UploadPhoto_Btn() {
         return ActionHelper.isPresent(uploadPhoto_Btn);
     }
+
     public boolean isPresent_Teams_TxtBox() {
         return ActionHelper.isPresent(teams_Lbl);
     }
 
-    public void fill_RiderFirstName_Txt(String input) {
-        ActionHelper.sendKeysWithClear(firstName_Txt.getBy(), input);
+    public void set_RiderFirstName_TxtBox(String input) {
+        ActionHelper.fillWithClear(firstName_Txt.getBy(), input);
     }
 
-    public void fill_RiderLastName_Txt(String input) {
-        ActionHelper.sendKeysWithClear(lastName_Txt.getBy(), input);
+    public void set_RiderLastName_TxtBox(String input) {
+        ActionHelper.fillWithClear(lastName_Txt.getBy(), input);
     }
 
-    public void fill_PhoneNumber_Txt(String phoneNumber) {
-        ActionHelper.sendKeysWithClear(phoneNumber_Txt.getBy(), phoneNumber);
+    public void set_PhoneNumber_TxtBox(String phoneNumber) {
+        ActionHelper.fillWithClear(phoneNumber_Txt.getBy(), phoneNumber);
+    }
+
+    public String get_FirstNameValidation_Txt() {
+        return ActionHelper.getText(firstNameValidation_Txt);
     }
 }

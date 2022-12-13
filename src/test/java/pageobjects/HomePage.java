@@ -31,7 +31,7 @@ public class HomePage extends BaseTestClass {
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
     private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
     private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']/.."));
     private final Locator appsHeader_Lbl = Locator.builder().withWeb(By.xpath("//a[text()='Apps']"));

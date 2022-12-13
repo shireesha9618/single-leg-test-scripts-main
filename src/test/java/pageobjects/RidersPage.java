@@ -19,7 +19,7 @@ public class RidersPage {
     private final Locator search_Bar = Locator.builder().withWeb(By.xpath("//input[@id='search_ptp']"));
     private final Locator status_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='Status']"));
     private final Locator dropDownList_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
-    private final Locator statusDropDownAvailableValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='active:available']"));
+    private final Locator statusDropDownAvailableValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='active:available']"));
     private final Locator statusDropDownBusyValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='active:busy']"));
     private final Locator statusDropDownUnAvailableValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='active:unavailable']"));
     private final Locator statusDropDownAllocatedValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='active:allocated']"));
@@ -29,7 +29,7 @@ public class RidersPage {
     private final Locator statusDropDownOnboardingValue_Radio = Locator.builder().withWeb(By.xpath("//input[@value='onboarding:onboarding']"));
     private final Locator statusDropDownValueList_Lbl = Locator.builder().withWeb(By.xpath("//span[@class='ant-radio']/following-sibling::span"));
     private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Clear Selection']]"));
-    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("(//button[contains(@id,'headlessui-menu-button')]//p[text()='Teams']"));
+    private final Locator teams_DropDown = Locator.builder().withWeb(By.xpath("//button//p[text()='Teams']"));
     private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='More Actions']"));
     private final Locator exportCSV_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Export as CSV']"));
     private final Locator modifyColumns_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
@@ -58,22 +58,29 @@ public class RidersPage {
     private final Locator ridersTableRiderNameColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][2]/p"));
     private final Locator ridersTablePhoneNumberColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][3]"));
     private final Locator ridersTableStatusColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][4]"));
-    private final Locator ridersTableEditColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][5]"));
-    private final Locator ridersTableTeamsColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][6]"));
+    private final Locator ridersTableEditColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][6]"));
+    private final Locator ridersTableTeamsColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][5]"));
     private final Locator paginationDropdown_Btn = Locator.builder().withWeb(By.xpath(" //li/div/div[@class='ant-select-selector']"));
     private final Locator paginationSelectedItem_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'pagination')]//span[@title]"));
     private final Locator paginationPerPageOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),' / page')]"));
     private final Locator paginationBlockList_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(@class,'pagination-item')]"));
-    private final Locator paginationPage1Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='1']/p"));
-    private final Locator paginationPage2Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='2']/p"));
-    private final Locator paginationPage3Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='3']/p"));
     private final Locator moreActionsDropDownModifyColumnsLinkSelectedOptionsList_Label = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div/p"));
     private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
     private final Locator previous_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
     private final Locator edit_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Edit']"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
-
-
+    private final Locator tableDataRiderId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
+    private final Locator tableDataRiderName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
+    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("//td//label[@class='ant-checkbox-wrapper']"));
+    private final Locator changeStatus_Btn = Locator.builder().withWeb(By.xpath("//button//p[text()='Change Status']"));
+    private final Locator changeStatusHeader_Lbl = Locator.builder().withWeb(By.xpath("(//p[text()='Change Status'])[2]"));
+    private final Locator state_TextBox = Locator.builder().withWeb(By.xpath("//span[text()='Select State']"));
+    private final Locator stateHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='State']"));
+    private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='State']/../parent::div/following-sibling::div/button/p[text()='Cancel']"));
+    private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='State']/../parent::div/following-sibling::div/button/p[text()='Save']"));
+    private final Locator paginationPage5Block_Btn = Locator.builder().withWeb(By.xpath("//li[@title='5']/p"));
+    private final Locator paginationPrevious5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Previous 5 Pages']//a"));
+    private final Locator paginationNext5Pages_Btn = Locator.builder().withWeb(By.xpath("//li[@title='Next 5 Pages']//a"));
     public static RidersPage getInstance() {
         if (_instance == null)
             _instance = new RidersPage();
@@ -165,9 +172,8 @@ public class RidersPage {
     }
 
     public void click_StatusDropDownAvailableValue_Radio() {
+        Utility.clickRadio(statusDropDownAvailableValue_Radio.getBy());
         ActionHelper.waitForLoaderToHide();
-        ActionHelper.click(statusDropDownAvailableValue_Radio);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
 
     public boolean isEnabled_StatusDropDownBusyValue_Radio() {
@@ -536,7 +542,7 @@ public class RidersPage {
         ActionHelper.fillWithClear(moreActionsDropDownModifyColumnsLinkSearchBar_Txt.getBy(), input);
     }
 
-    public void chooseNoOfRecordsToBeDisplayedPerPage(int no) {
+    public void choose_NoOfRecordsToBeDisplayed_PerPage(int no) {
         ActionHelper.click(paginationSelectedItem_Lbl);
         Utility.clickWebElementContainingText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl), String.valueOf(no));
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
@@ -557,21 +563,6 @@ public class RidersPage {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
 
-    public void click_PaginationPage1Block_Btn() {
-        ActionHelper.click(paginationPage1Block_Btn);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
-    }
-
-    public void click_PaginationPage2Block_Btn() {
-        ActionHelper.click(paginationPage2Block_Btn);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
-    }
-
-    public void click_PaginationPage3Block_Btn() {
-        ActionHelper.click(paginationPage3Block_Btn);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
-    }
-
     public void click_Status_RadioBtn(String input) {
         open_Status_DropDown();
         List<WebElement> list = ActionHelper.findElements(status_RadioBtn.getBy());
@@ -588,5 +579,91 @@ public class RidersPage {
 
     public void open_Status_DropDown() {
         ActionHelper.click(status_DropDown);
+    }
+
+    public String getText_TableDataRiderName_Lbl() {
+        return ActionHelper.getText(tableDataRiderName_Lbl.getBy());
+    }
+
+    public void check_TableData_CheckBox(int index) {
+            ActionHelper.waitForLoaderToHide();
+            ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
+            Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
+    }
+
+    public void uncheck_TableData_CheckBox(int index) {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
+        Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
+    }
+
+    public boolean isPresent_ChangeStatus_Btn(){
+        return ActionHelper.isPresent(changeStatus_Btn);
+    }
+
+    public void click_ChangeStatus_Btn(){
+        ActionHelper.click(changeStatus_Btn);
+    }
+
+    public boolean isPresent_ChangeStatusHeader_Lbl(){
+        return ActionHelper.isPresent(changeStatusHeader_Lbl);
+    }
+
+    public String getText_ChangeStatusHeader_Lbl(){
+        return ActionHelper.getText(changeStatusHeader_Lbl);
+    }
+
+    public boolean isPresent_Cancel_Btn(){
+        return ActionHelper.isPresent(cancel_Btn);
+    }
+
+    public void click_Cancel_Btn(){
+        ActionHelper.click(cancel_Btn);
+    }
+
+    public boolean isPresent_Save_Btn(){
+        return ActionHelper.isPresent(save_Btn);
+    }
+
+    public void click_Save_Btn(){
+        ActionHelper.click(save_Btn);
+    }
+
+    public boolean isEnabled_Save_Btn(){
+        return ActionHelper.isEnabled(save_Btn.getBy());
+    }
+
+    public boolean isPresent_State_TextBox(){
+        return ActionHelper.isPresent(state_TextBox);
+    }
+
+    public void getTxt_SelectState_DropDown(String state){
+        ActionHelper.click(state_TextBox);
+    }
+
+    public void click_PaginationPageFifthBlock_Btn() {
+        ActionHelper.click(paginationPage5Block_Btn);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+    }
+
+    public void click_PaginationPreviousFivePages_Btn() {
+        ActionHelper.click(paginationPrevious5Pages_Btn);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void click_PaginationNextFivePages_Btn() {
+        ActionHelper.click(paginationNext5Pages_Btn);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void select_PaginationBlockList_Lbl(String pageNo) {
+        for(WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
+            if(element.getAttribute("title").equals(pageNo))
+                ActionHelper.click(element);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public List<String> getText_TableDataRiderName_List() {
+        return Utility.getText_ListOfWebElements(ridersTableRiderNameColumnList_Link.getBy());
     }
 }
