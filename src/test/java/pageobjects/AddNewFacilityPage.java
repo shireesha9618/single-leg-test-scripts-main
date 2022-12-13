@@ -273,8 +273,8 @@ public class AddNewFacilityPage {
         String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
         String facilityId = getText_FacilityId_Txt();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName();
-        String addressLine2 = sampleData.address().streetName();
+        String addressLine1 = sampleData.address().streetName().replace("'", "");
+        String addressLine2 = sampleData.address().streetName().replace("'", "");
 
         fillFacilityDetails.put("facilityName", facilityName);
         fillFacilityDetails.put("facilityId", facilityId);
@@ -295,8 +295,8 @@ public class AddNewFacilityPage {
         DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName();
-        String addressLine2 = sampleData.address().streetName();
+        String addressLine1 = sampleData.address().streetName().replace("'", "");
+        String addressLine2 = sampleData.address().streetName().replace("'", "");
 
         updateFacility.put("postalCode", postalCode);
         updateFacility.put("addressLine1", addressLine1);
