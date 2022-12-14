@@ -2,6 +2,7 @@ package pageobjects;
 
 import constants.Constants;
 import framework.common.assertion.JarvisAssert;
+import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -34,6 +35,9 @@ public class CommonActions {
     private final Locator loader_Img = Locator.builder().withWeb(By.cssSelector("*[class*='animate-spin']"));
     private final Locator selectTeam1 = Locator.builder().withWeb(By.id("selectTeam"));
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
+    private final Locator pageSize_Txt = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
+    private final Locator paginationBlockList_Txt = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
+    String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
 
     private final Locator calendarFromMonth_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[1]"));
     private final Locator calendarFromYear_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[2]"));
@@ -112,19 +116,23 @@ public class CommonActions {
     }
 
     public void click_Skip_Btn() {
-        ActionHelper.waitForLoaderToHide();
-        String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
-        WebElement element = (WebElement) js.executeScript(skipButton);
-        if (element.isDisplayed())
-            element.click();
+        try {
+            ActionHelper.waitForLoaderToHide();
+            String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
+            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+            WebElement element = (WebElement) js.executeScript(skipButton);
+            if (element.isDisplayed())
+                element.click();
+        } catch (Exception e) {
+            ExtentLogger.logPass(e.toString());
+        }
     }
 
     public void coverJourneyTillFacility() {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
-        ViewOrderPage.getInstance().click_FacilitiesLeftSubMenuItem();
+        HomePage.getInstance().click_FacilitiesMenuItem_Btn();
     }
 
     public void coverJourneyTillRider() {
@@ -138,7 +146,7 @@ public class CommonActions {
     }
 
     public String getText_PaginationCurrentlyShowingCount_Lbl() {
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        waitTillLoaderTxtDisappears();
         return ActionHelper.getText(paginationCurrentlyShowingAndTotalCount_Lbl).split(" ")[1];
     }
 
@@ -166,6 +174,7 @@ public class CommonActions {
 
     public void click_PaginationNext_Btn() {
         ActionHelper.click(paginationNext_Btn);
+        waitTillLoaderDisappears();
     }
 
     public boolean isPresent_PaginationPrevious_Btn() {
@@ -174,6 +183,39 @@ public class CommonActions {
 
     public void click_PaginationPrevious_Btn() {
         ActionHelper.click(paginationPrevious_Btn);
+        waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_PageSize_Txt() {
+        return ActionHelper.isPresent(pageSize_Txt);
+    }
+
+    public void click_PageSize_Txt() {
+        ActionHelper.click(pageSize_Txt);
+    }
+
+    public String getText_PageSize_Txt() {
+        String[] dataSize = ActionHelper.getText(pageSize_Txt).split("/");
+        return dataSize[0].replace(" ", "");
+    }
+
+    public void chooseNoOfRecordToBeDisplayed(int noOfData) {
+        click_PageSize_Txt();
+        ActionHelper.click(ActionHelper.findElement(By.xpath(chooseNoOfRecordToBeDisplayed.replace("ab", String.valueOf(noOfData)))));
+        waitTillLoaderDisappears();
+    }
+
+    public void select_PaginationBlock_Txt(int pageNo) {
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Txt))
+            if (element.getAttribute("title").equals(String.valueOf(pageNo))) ActionHelper.click(element);
+        waitTillLoaderDisappears();
+    }
+
+    public boolean isPaginationBlockSelected(int label) {
+        for (WebElement element : ActionHelper.findElements(paginationBlockList_Txt))
+            if (element.getAttribute("title").equals(String.valueOf(label)) && element.getAttribute("class").contains("item-active"))
+                return true;
+        return false;
     }
 
     public boolean isPresent_PaginationResults_Lbl() {
@@ -208,13 +250,6 @@ public class CommonActions {
         }
         Utility.clickIgnoringStaleElementReferenceException(paginationBlockList_Lbl.getBy(), index, 5);
         CommonActions.getInstance().waitTillLoaderDisappears();
-    }
-
-    public boolean isPaginationBlockSelected(int index) {
-        for (WebElement element : ActionHelper.findElements(paginationBlockList_Lbl))
-            if (element.getAttribute("title").equals(String.valueOf(index)) && element.getAttribute("class").contains("item-active"))
-                return true;
-        return false;
     }
 
     public String getText_ShowingNoOfRecords_Lbl() {

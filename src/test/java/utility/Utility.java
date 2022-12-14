@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
@@ -350,6 +351,13 @@ public class Utility {
         String output = "";
         while (output.length() < length) output = output + new Faker().address().fullAddress();
         return output.substring(0, length);
+    }
+
+    public static String get_PostalCode_Txt() {
+        String[] postalCode = {"201301", "506001", "110001", "201313", "845305", "233001", "225001", "243601", "204101", "221002",
+                "450331", "464001", "462026", "456006", "416416", "641001", "638455", "571201", "580001", "743425", "700027", "788701", "781301"};
+        int randomPostalCode = new Random().nextInt(postalCode.length);
+        return postalCode[randomPostalCode];
     }
 
     public static String addNumbersInStringFormat(String... nos) {

@@ -2,8 +2,6 @@ package pageobjects;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
-import jdk.jshell.execution.Util;
-import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -77,8 +75,6 @@ public class ViewOrderPage {
     private final Locator assignRiderDropDownManualAssign_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign']"));
     private final Locator assignRiderDropDownManualAssignAndStart_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Assign and Start']"));
     private final Locator assignRiderSearch_TextBox = Locator.builder().withWeb(By.xpath("//h4[text()='Rider*']/..//following-sibling::div//input"));
-    private final Locator resourceLeftMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
-    private final Locator facilitiesLeftSubMenuItem = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
 
     private final Locator assignRiderDropDownAutomaticAssignmentHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Assign Rider']"));
     private final Locator assignRiderDropDownAutomaticAssignmentSearchBar_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Search by Rider Name']"));
@@ -671,23 +667,6 @@ public class ViewOrderPage {
         return ActionHelper.getText(firstElementNoOfShipment_Lbl);
     }
 
-    public boolean isPresent_FacilitiesLeftSubMenuItem() {
-        return ActionHelper.isPresent(facilitiesLeftSubMenuItem);
-    }
-
-    public void click_ResourceLeftMenuItem() {
-        ActionHelper.click(resourceLeftMenuItem);
-    }
-
-    public void click_FacilitiesLeftSubMenuItem() {
-        if (isPresent_FacilitiesLeftSubMenuItem())
-            ActionHelper.click(facilitiesLeftSubMenuItem);
-        else {
-            click_ResourceLeftMenuItem();
-            ActionHelper.click(facilitiesLeftSubMenuItem);
-        }
-    }
-
     public void clickAndChoose_PaginationDropDownOptions_Btn(int pagination) {
         waitTillAllOrdersAreLoaded();
         CommonActions.getInstance().choosePaginationOption(pagination);
@@ -847,7 +826,7 @@ public class ViewOrderPage {
         return ActionHelper.getText(assignRiderDropDownAutomaticAssignmentAssignRiders_Btn);
     }
 
-    public boolean isPresent_ItsEmptyHereMsg_Lbl(){
+    public boolean isPresent_ItsEmptyHereMsg_Lbl() {
         return ActionHelper.isPresent(itsEmptyHereMsg_Lbl, 5000);
     }
 
