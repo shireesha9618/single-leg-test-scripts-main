@@ -22,7 +22,7 @@ public class RiderEditPage {
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']//p"));
     private final Locator editRiderCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
-    private final Locator updatedSuccessfully_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[text()='Updated Successfully']"));
+    private final Locator updatedSuccessfully_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Updated Successfully']"));
     Faker sampleData = new Faker();
 
     public static RiderEditPage getInstance() {

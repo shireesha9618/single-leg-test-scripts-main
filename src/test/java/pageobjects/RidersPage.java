@@ -90,7 +90,7 @@ public class RidersPage {
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
     private final Locator teamSelect_List = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
     private final Locator tableDataCheckBox_Checked = Locator.builder().withWeb(By.xpath("//span[@class='ant-checkbox ant-checkbox-checked']"));
-
+    private final Locator selectAll_CheckBox = Locator.builder().withWeb(By.xpath("//span[@class='select-all']"));
 
     public static RidersPage getInstance() {
         if (_instance == null)
@@ -99,7 +99,6 @@ public class RidersPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        ActionHelper.waitForLoaderToHide();
         return ActionHelper.isPresent(header_Lbl, 5000);
     }
 
@@ -563,7 +562,6 @@ public class RidersPage {
     }
 
     public List<WebElement> getElements_RiderTableRiderIdColumnList_Link() {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilAllElementsVisible(ridersTableRiderIdColumnList_Link.getBy());
         return ActionHelper.findElements(ridersTableRiderIdColumnList_Link.getBy());
     }
@@ -600,13 +598,11 @@ public class RidersPage {
     }
 
     public void check_TableData_CheckBox(int index) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
         Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
     }
 
     public void uncheck_TableData_CheckBox(int index) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilElementVisible(tableDataCheckBox_Checked.getBy());
         Utility.checkCheckbox(ActionHelper.findElements(tableDataCheckBox_Checked.getBy()).get(index));
     }
@@ -704,16 +700,6 @@ public class RidersPage {
         ActionHelper.click(teams_DropDown);
     }
 
-    public void validate_Teams_CheckBox(String team) {
-        if (!isPresent_EmptyTable_Txt()) {
-            for (String value : getTxt_RidersTableTeamsColumnList_Link())
-                JarvisAssert.assertEquals(value, team, "For All Record As Expected");
-        } else {
-            JarvisAssert.assertTrue(isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            JarvisAssert.assertEquals(getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-    }
-
     public boolean isPresent_TableDataRiderName_Lbl() {
         return ActionHelper.isPresent(tableDataRiderName_Lbl);
     }
@@ -743,7 +729,6 @@ public class RidersPage {
     }
 
     public void click_ridersTableCheckBoxList_Link() {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(ridersTableCheckBoxList_Link);
     }
 
@@ -777,5 +762,13 @@ public class RidersPage {
         click_CheckBoxChangeStatus_Btn();
         Utility.select_FromDropDown_List(state_TextBox.getBy(), selectState_DropDown.getBy(), menuItem);
         click_Cancel_Btn();
+    }
+
+    public boolean isPresent_SelectAll_CheckBox() {
+      return ActionHelper.isPresent(selectAll_CheckBox);
+    }
+
+    public void click_SelectAll_CheckBox() {
+        ActionHelper.click(selectAll_CheckBox);
     }
 }

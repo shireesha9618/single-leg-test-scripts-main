@@ -32,7 +32,7 @@ public class TestSuite_Riders extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_RidersBreadcrumb_Lbl(), "Check Visibility Of Breadcrumb Menu");
         softAssert.assertTrue(ridersPage.isPresent_Status_Btn(), "Check Visibility Of Status");
         softAssert.assertTrue(ridersPage.isPresent_MoreActions_Btn(), "Check Visibility Of More Actions Button");
-        softAssert.assertTrue(ridersPage.isPresent_Teams_DropDown(), "Check Visibility Of Teams Button");
+        softAssert.assertTrue(ridersPage.isPresent_Teams_DropDown(), "Check Visibility Of Teams DropDown");
         softAssert.assertTrue(ridersPage.isPresent_NewRider_Btn(), "Check Visibility Of New Rider Button");
         softAssert.assertTrue(ridersPage.isPresent_Search_Bar(), "Check Visibility Of Search Bar");
         softAssert.assertAll();
@@ -424,6 +424,8 @@ public class TestSuite_Riders extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header is Present As Expected");
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
+        softAssert.assertTrue(ridersPage.isPresent_SelectAll_CheckBox(),"Select All CheckBox Is Present As Expected");
+        ridersPage.click_SelectAll_CheckBox();
         softAssert.assertTrue(ridersPage.isPresent_ChangeStatus_Btn(), "Change Status Button is Present as Expected");
         softAssert.assertAll();
     }
@@ -447,41 +449,36 @@ public class TestSuite_Riders extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_Teams_CheckBox(Constants.TEAM);
-        ridersPage.validate_Teams_CheckBox(Constants.TEAM);
+        if (!ridersPage.isPresent_EmptyTable_Txt()) {
+            List<String> allTeams = ridersPage.getTxt_RidersTableTeamsColumnList_Link();
+            for (String teams : allTeams) {
+                softAssert.assertEquals(teams, Constants.TEAM, "For All Record As Expected ");
+            }
+        }
+        else {
+            softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
+            softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
+        }
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_074, Verify The Dock Functionality For Resources Menu Button")
-    public void TC_Riders_074_Verify_The_Dock_Functionality_For_Resources_Menu_Button() {
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_074, Verify The Dock And UnDock Functionality For Resources Menu Button")
+    public void TC_Riders_074_075_Verify_The_Dock_And_UnDock_Functionality_For_Resources_Menu_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        homePage.expand_ResourcesMenu_Btn();
-        softAssert.assertTrue(homePage.isPresent_RidersMenu_Btn(), "Riders Menu Button  Is Present As Expected");
+        CommonActions.getInstance().coverUserJourneyTillRiders();
+        homePage.click_Resources_Btn();
+        softAssert.assertTrue(!homePage.isPresent_RidersMenu_Btn(), "Riders Menu Button Is Not Present As Expected");
+        softAssert.assertTrue(!homePage.isPresent_FacilitiesMenu_Btn(), "Facilities Menu Button Is Not Present As Expected");
+        homePage.click_Resources_Btn();
+        softAssert.assertTrue(homePage.isPresent_RidersMenu_Btn(), "Riders Menu Button Is Present As Expected");
         softAssert.assertTrue(homePage.isPresent_FacilitiesMenu_Btn(), "Facilities Menu Button Is Present As Expected");
-        softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_075, Verify The UnDock Functionality For Resources Menu Button")
-    public void TC_Riders_075_Verify_The_UnDock_Functionality_For_Resources_Menu_Button() {
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        homePage.expand_ResourcesMenu_Btn();
-        softAssert.assertTrue(homePage.isPresent_RidersMenu_Btn(), "Riders Menu Button  Is Present As Expected");
-        softAssert.assertTrue(homePage.isPresent_FacilitiesMenu_Btn(), "Facilities Menu Button Is Present As Expected");
-        homePage.collapse_ResourcesMenu_Btn();
-        softAssert.assertTrue(!homePage.isPresent_RidersMenu_Btn(), "Riders Menu Button  Is Present As Expected");
-        softAssert.assertTrue(!homePage.isPresent_FacilitiesMenu_Btn(), "Facilities Menu Button Is Present As Expected");
         softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_076, Verify The Functionality Dock and Undock of Left Panel")
     public void TC_Riders_076_Verify_The_Functionality_Of_Dock_And_UnDock_Of_Left_Panel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        commonActions.click_Skip_Btn();
+        CommonActions.getInstance().coverUserJourneyTillRiders();
         homePage.unExpand_LeftPanel_Btn();
         softAssert.assertTrue(!homePage.isPresent_OrdersMenu_Btn(), "Orders Icon Is Present As Expected");
         softAssert.assertTrue(!homePage.isPresent_DispatchMenu_Btn(), "Dispatch Icon Is Present As Expected");
@@ -500,9 +497,7 @@ public class TestSuite_Riders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_077, Verify The Functionality of Open Menu Button")
     public void TC_Riders_077_Verify_The_Functionality_Of_Open_Menu_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        commonActions.click_Skip_Btn();
+        CommonActions.getInstance().coverUserJourneyTillRiders();
         homePage.click_OpenMenu_Btn();
         softAssert.assertTrue(homePage.isPresent_AppsHeader_Lbl(), "Header Is Present As Expected");
         softAssert.assertTrue(homePage.isPresent_OpenMenuOrders_Btn(), "Orders Open Menu Button Is Present As Expected");
@@ -520,9 +515,7 @@ public class TestSuite_Riders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_078, Verify The Functionality of Cross Button Of Open Menu")
     public void TC_Riders_078_Verify_The_Functionality_Of_Cross_Button_Of_Open_Menu() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        commonActions.click_Skip_Btn();
+        CommonActions.getInstance().coverUserJourneyTillRiders();
         homePage.click_OpenMenu_Btn();
         softAssert.assertTrue(homePage.isPresent_AppsHeader_Lbl(), "Apps Header Is Present As Expected");
         homePage.click_OpenMenuCross_Btn();
@@ -533,9 +526,7 @@ public class TestSuite_Riders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_079, Verify The Functionality of Work Flow Button")
     public void TC_Riders_079_Verify_The_Functionality_Of_Work_Flow_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        commonActions.click_Skip_Btn();
+        CommonActions.getInstance().coverUserJourneyTillRiders();
         homePage.click_DelhiveryLogo_Img();
         softAssert.assertTrue(homePage.isPresent_AllAppsHeader_Lbl(), "All Apps Header Is Present As Expected");
         softAssert.assertTrue(homePage.isPresent_WorkFlowOrders_Btn(), "Orders Button Is Present As Expected");
@@ -551,9 +542,7 @@ public class TestSuite_Riders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_080, Verify The Functionality Of Riders Button Of Work Flow")
     public void TC_Riders_080_Verify_The_Functionality_Of_Riders_Button_Of_Work_Flow() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        ActionHelper.getURL(Constants.Urls.BASE_URL);
-        commonActions.checkAndPerformLogin();
-        commonActions.click_Skip_Btn();
+        CommonActions.getInstance().coverUserJourneyTillRiders();
         homePage.click_DelhiveryLogo_Img();
         softAssert.assertTrue(homePage.isPresent_WorkflowRiders_Btn(), "Riders Button Is Present As Expected");
         homePage.click_WorkFlowRiders_Btn();

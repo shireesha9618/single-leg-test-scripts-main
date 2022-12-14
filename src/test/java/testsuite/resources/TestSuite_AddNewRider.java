@@ -44,10 +44,12 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(!addNewRiderPage.isPresent_AddNewRiderBreadcrumbMenu_Lbl(), "Add New Rider link in breadcrumb is not present as expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Header Is Present As expected");
         softAssert.assertTrue(addNewRiderPage.isPresent_AddNewRiderBreadcrumbMenu_Lbl(), "Add New User link in breadcrumb is present as expected");
         softAssert.assertEquals(DriverManager.getDriver().getCurrentUrl(), Constants.Urls.BASE_URL + "riders/add/", "URL is matched as expected");
+
         softAssert.assertAll();
     }
 
@@ -56,9 +58,11 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         addNewRiderPage.click_AddRider_Btn();
         softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Required", "First Name Validation Message Is Matched As Expected");
+
         softAssert.assertAll();
     }
 
@@ -67,6 +71,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         String[] dataForMinimum = {"a", "1", "@"};
         for (String value : dataForMinimum) {
@@ -83,6 +88,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
+
         String[] dataForMaximum = {Utils.generateRandomName(37, 40), String.valueOf(sampleData.number().digits(37)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_RiderFirstName_TxtBox(value);
@@ -96,6 +102,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "11223"};
         for (String value : dataForSpecialCharacters) {
@@ -110,10 +117,13 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.click_AddRider_Btn();
         softAssert.assertEquals(addNewRiderPage.get_LastNameValidation_Txt(), "Required", "Last Name Validation Message Is Matched As Expected");
+
         softAssert.assertAll();
     }
 
@@ -123,6 +133,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
+
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
         String[] dataForMinimum = {"a", "1", "@"};
         for (String value : dataForMinimum) {
@@ -137,9 +148,11 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
         String[] dataForMaximum = {Utils.generateRandomName(37, 40), String.valueOf(sampleData.number().digits(37)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
+
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_RiderLastName_TxtBox(value);
             softAssert.assertEquals(addNewRiderPage.get_LastNameValidation_Txt(), "Only A-Z, a-z, min: 2, max: 36", "Last Name Validation Message Is Matched As Expected");
@@ -152,8 +165,10 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "11223"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fillWithClear_RiderLastName_TxtBox(value);
@@ -167,10 +182,13 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.click_AddRider_Btn();
         softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(), "Required", "Phone Number Validation Message Is Matched as expected");
+
         softAssert.assertAll();
     }
 
@@ -178,8 +196,10 @@ public class TestSuite_AddNewRider extends BaseTestClass {
     public void TC_Riders_056_Verify_The_Validation_Functionality_For_Phone_Number_In_Add_New_Rider_Page_For_Minimum_Character() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
+
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
+
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
         String[] dataForMinimum = {"1", "22", "333", "1234", "123456789"};
         for (String value : dataForMinimum) {
@@ -194,8 +214,10 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         String[] dataForMaximum = {String.valueOf(sampleData.number().digits(15)), String.valueOf(sampleData.number().digits(25))};
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
@@ -208,9 +230,11 @@ public class TestSuite_AddNewRider extends BaseTestClass {
     public void TC_Riders_058_Verify_The_Validation_Functionality_For_Phone_Number_In_Add_New_Rider_Page_For_Alphabets() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
+
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "1122@"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
@@ -224,11 +248,16 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
+
         ridersPage.click_NewRider_Btn();
+
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
         addNewRiderPage.click_AddRider_Btn();
+
         softAssert.assertEquals(addNewRiderPage.get_TeamsValidation_Txt(), "Please add atleast one", "Teams Validation Message Is Matched as expected");
+
         softAssert.assertAll();
+
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ADD_NEW_RIDER_PAGE}, description = "TC_060, Verify The Functionality of Teams Dropdown in Add New Rider Page")
@@ -238,10 +267,13 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.select_TeamsDropDown_Btn(Constants.TEAM);
         softAssert.assertEquals(addNewRiderPage.get_TeamsDropDownList_Txt(), "QATeam", "Team Name Is Matched As Expected");
+
         addNewRiderPage.click_RemoveTeamCross_Btn();
         softAssert.assertTrue(!addNewRiderPage.isPresent_TeamsDropDownList_Txt(), "QATeam Is Not Present As Expected");
+
         softAssert.assertAll();
     }
 
@@ -252,11 +284,13 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.click_AddRider_Btn();
         softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Required", "First Name Validation Message Is Matched As Expected");
         softAssert.assertEquals(addNewRiderPage.get_LastNameValidation_Txt(), "Required", "Last Name Validation Message Is Matched As Expected");
         softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(), "Required", "Phone Number Validation Message Is Matched as expected");
         softAssert.assertEquals(addNewRiderPage.get_TeamsValidation_Txt(), "Please add atleast one", "Teams Validation Message Is Matched as expected");
+
         softAssert.assertAll();
     }
 
@@ -267,12 +301,14 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.fillWithClear_RiderFirstName_TxtBox(sampleData.name().firstName());
         addNewRiderPage.fillWithClear_RiderLastName_TxtBox(sampleData.name().lastName());
         addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(sampleData.number().digits(10));
         addNewRiderPage.click_Cancel_Btn();
         softAssert.assertTrue(!addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Not Present As Expected");
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
+
         softAssert.assertAll();
     }
 
@@ -283,6 +319,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Riders Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
+
         addNewRiderPage.fillWithClear_RiderFirstName_TxtBox(sampleData.name().firstName());
         addNewRiderPage.fillWithClear_RiderLastName_TxtBox(sampleData.name().lastName());
         addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(sampleData.number().digits(10));
@@ -291,9 +328,11 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         addNewRiderPage.click_AddRider_Btn();
         softAssert.assertEquals(addNewRiderPage.getText_Msg_Lbl(), "Created Successfully", "Message Is Matched As Expected");
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
+
         ridersPage.fillWithClear_Search_Txt(riderName);
         softAssert.assertTrue(ridersPage.isPresent_TableDataRiderName_Lbl(), "Rider Is Present As Expected");
         softAssert.assertEquals(ridersPage.getSize_RidersTableRiderName(), 1, "One Record Is As Expected");
+
         softAssert.assertAll();
     }
 }
