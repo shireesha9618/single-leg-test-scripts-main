@@ -18,7 +18,6 @@ public class HomePage extends BaseTestClass {
     private final Locator orderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
     private final Locator createOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
     private final Locator viewOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
-
     private final Locator ordersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
     private final Locator createOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
     private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
@@ -30,9 +29,32 @@ public class HomePage extends BaseTestClass {
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Settings']"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
-    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
+    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.xpath("//img[@alt='Workflow']"));
     private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
+    private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']/.."));
+    private final Locator appsHeader_Lbl = Locator.builder().withWeb(By.xpath("//a[text()='Apps']"));
+    private final Locator ordersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Orders']"));
+    private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Create Orders']"));
+    private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='View Orders']"));
+    private final Locator routingOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));
+    private final Locator dispatchOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));
+    private final Locator ridersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Riders']"));
+    private final Locator facilitiesOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Facilities']"));
+    private final Locator teamsOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Teams']"));
+    private final Locator settingsOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Settings']"));
+    private final Locator singleLeg_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Single Leg']"));
+    private final Locator openMenuCross_Btn = Locator.builder().withWeb(By.xpath("(//button[@type='button'])[1]"));
+    private final Locator workFlowAllAppsHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='All Apps']"));
+    private final Locator workFlowOrders_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Orders']"));
+    private final Locator workFlowRouting_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Routing']"));
+    private final Locator workFlowDispatch_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Dispatch']"));
+    private final Locator workFlowRiders_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Riders']"));
+    private final Locator workFlowFacilities_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Facilities']"));
+    private final Locator workFlowTeams_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Teams']"));
+    private final Locator workFlowSettings_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Settings']"));
+    private final Locator leftPanel_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-base')]"));
+
 
     public static HomePage getInstance() {
         if (_instance == null)
@@ -50,7 +72,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void selectTeam(String input) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(teamSelector_Dropdown);
         ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
     }
@@ -69,12 +91,12 @@ public class HomePage extends BaseTestClass {
 
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img, 2000);
+        return ActionHelper.isPresent(delhiveryLogo_Img, 4000);
     }
 
     public void click_DelhiveryLogo_Img() {
-        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(delhiveryLogo_Img);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_UserProfile_Img() {
@@ -132,16 +154,130 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(selectTeam_Txt, 4000);
     }
 
-    public boolean isPresent_FacilitiesMenuItem_Btn() {
+    public boolean isPresent_OpenMenuOrders_Btn() {
+        return ActionHelper.isPresent(ordersOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuRouting_Btn() {
+        return ActionHelper.isPresent(routingOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuDispatch_Btn() {
+        return ActionHelper.isPresent(dispatchOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuRiders_Btn() {
+        return ActionHelper.isPresent(ridersOpenMenu_Btn);
+    }
+
+    public void click_OpenMenuRiders_Btn() {
+        ActionHelper.click(ridersOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuFacilities_Btn() {
+        return ActionHelper.isPresent(facilitiesOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuTeams_Btn() {
+        return ActionHelper.isPresent(teamsOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuSettings_Btn() {
+        return ActionHelper.isPresent(settingsOpenMenu_Btn);
+    }
+
+    public boolean isPresent_AppsHeader_Lbl() {
+        return ActionHelper.isPresent(appsHeader_Lbl);
+    }
+
+    public boolean isPresent_OpenMenu_Btn() {
+        return ActionHelper.isPresent(openMenu_Btn, 3000);
+    }
+
+    public void click_OpenMenu_Btn() {
+        ActionHelper.click(openMenu_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_OpenMenuCross_Btn() {
+        ActionHelper.click(openMenuCross_Btn);
+    }
+
+    public boolean isPresent_AllAppsHeader_Lbl() {
+        return ActionHelper.isPresent(workFlowAllAppsHeader_Lbl);
+    }
+
+    public boolean isPresent_WorkFlowOrders_Btn() {
+        return ActionHelper.isPresent(workFlowOrders_Btn);
+    }
+
+    public boolean isPresent_WorkFlowRouting_Btn() {
+        return ActionHelper.isPresent(workFlowRouting_Btn);
+    }
+
+    public boolean isPresent_WorkFlowDispatch_Btn() {
+        return ActionHelper.isPresent(workFlowDispatch_Btn);
+    }
+
+    public boolean isPresent_WorkflowRiders_Btn() {
+        return ActionHelper.isPresent(workFlowRiders_Btn);
+    }
+
+    public void click_WorkFlowRiders_Btn() {
+        ActionHelper.click(workFlowRiders_Btn);
+    }
+
+    public boolean isPresent_WorkFlowFacilities_Btn() {
+        return ActionHelper.isPresent(workFlowFacilities_Btn);
+    }
+
+    public boolean isPresent_WorkFlowTeams_Btn() {
+        return ActionHelper.isPresent(workFlowTeams_Btn);
+    }
+
+    public boolean isPresent_WorkFlowSettings_Btn() {
+        return ActionHelper.isPresent(workFlowSettings_Btn);
+    }
+
+    public void expand_ResourcesMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(resourcesMenu_Btn);
+    }
+
+    public void collapse_ResourcesMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(resourcesMenu_Btn);
+    }
+
+    public boolean isPresent_FacilitiesMenu_Btn() {
         return ActionHelper.isPresent(facilitiesMenu_Btn);
     }
 
-    public void click_FacilitiesMenuItem_Btn() {
-        if (isPresent_FacilitiesMenuItem_Btn())
-            ActionHelper.click(facilitiesMenu_Btn);
-        else {
-            click_Resources_Btn();
-            ActionHelper.click(facilitiesMenu_Btn);
-        }
+    public boolean isPresent_leftPanel_Btn() {
+        return ActionHelper.isPresent(leftPanel_Btn, 6000);
+    }
+
+    public void expand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
+    }
+
+    public void unExpand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
+    }
+
+    public boolean isPresent_OrdersMenu_Btn() {
+        return ActionHelper.isPresent(ordersMenu_Btn);
+    }
+
+    public boolean isPresent_DispatchMenu_Btn() {
+        return ActionHelper.isPresent(dispatchMenu_Btn);
+    }
+
+    public boolean isPresent_TeamsMenu_Btn() {
+        return ActionHelper.isPresent(teamsMenu_Btn);
+    }
+
+    public boolean isPresent_SettingsMenu_Btn() {
+        return ActionHelper.isPresent(settingsMenu_Btn);
     }
 }
