@@ -5,6 +5,7 @@ import framework.common.assertion.JarvisAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
+import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -33,6 +34,18 @@ public class CommonActions {
     private final Locator loader_Img = Locator.builder().withWeb(By.cssSelector("*[class*='animate-spin']"));
     private final Locator selectTeam1 = Locator.builder().withWeb(By.id("selectTeam"));
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
+
+    private final Locator calendarFromMonth_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[1]"));
+    private final Locator calendarFromYear_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[2]"));
+    private final Locator calendarToMonth_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[2]/button[1]"));
+    private final Locator calendarToYear_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[2]/button[2]"));
+    private final Locator calendarPreviousYear_Btn = Locator.builder().withWeb(By.xpath("//span[@class='ant-picker-super-prev-icon']"));
+    private final Locator calendarPreviousMonth_Btn = Locator.builder().withWeb(By.xpath("//span[@class='ant-picker-prev-icon']"));
+    private final Locator calendarNextMonth_Btn = Locator.builder().withWeb(By.xpath("(//span[@class='ant-picker-next-icon'])[last()]"));
+    private final Locator calendarNextYear_Btn = Locator.builder().withWeb(By.xpath("(//span[@class='ant-picker-super-next-icon'])[last()]"));
+    private final Locator calendarMonth_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-month-btn']"));
+    private final Locator calendarYear_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-year-btn']"));
+    private final Locator calendarChooseDateMonthYear_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[@title='PLACEHOLDER']"));
 
     public static CommonActions getInstance() {
         if (_instance == null) _instance = new CommonActions();
@@ -217,6 +230,134 @@ public class CommonActions {
                 break;
             }
         }
+    }
+
+    public String getText_CalendarFromMonth_Btn() {
+        return ActionHelper.getText(calendarFromMonth_Btn);
+    }
+
+    public String getText_CalendarFromYear_Btn() {
+        return ActionHelper.getText(calendarFromYear_Btn);
+    }
+
+    public String getText_CalendarToMonth_Btn() {
+        return ActionHelper.getText(calendarToMonth_Btn);
+    }
+
+    public String getText_CalendarToYear_Btn() {
+        return ActionHelper.getText(calendarToYear_Btn);
+    }
+
+    public boolean isPresent_CalendarPreviousYear_Btn() {
+        return ActionHelper.isPresent(calendarPreviousYear_Btn);
+    }
+
+    public void click_CalendarPreviousYear_Btn() {
+        ActionHelper.click(calendarPreviousYear_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_CalendarPreviousYear_Btn() {
+        return ActionHelper.getText(calendarPreviousYear_Btn);
+    }
+
+    public boolean isPresent_CalendarPreviousMonth_Btn() {
+        return ActionHelper.isPresent(calendarPreviousMonth_Btn);
+    }
+
+    public void click_CalendarPreviousMonth_Btn() {
+        ActionHelper.click(calendarPreviousMonth_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_CalendarPreviousMonth_Btn() {
+        return ActionHelper.getText(calendarPreviousMonth_Btn);
+    }
+
+    public boolean isPresent_CalendarNextMonth_Btn() {
+        return ActionHelper.isPresent(calendarNextMonth_Btn);
+    }
+
+    public void click_CalendarNextMonth_Btn() {
+        ActionHelper.click(calendarNextMonth_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_CalendarNextMonth_Btn() {
+        return ActionHelper.getText(calendarNextMonth_Btn);
+    }
+
+    public boolean isPresent_CalendarNextYear_Btn() {
+        return ActionHelper.isPresent(calendarNextYear_Btn);
+    }
+
+    public void click_CalendarNextYear_Btn() {
+        ActionHelper.click(calendarNextYear_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_CalendarNextYear_Btn() {
+        return ActionHelper.getText(calendarNextYear_Btn);
+    }
+
+    public boolean isPresent_calendarMonth_Btn() {
+        return ActionHelper.isPresent(calendarMonth_Btn);
+    }
+
+    public void click_calendarMonth_Btn() {
+        ActionHelper.click(calendarMonth_Btn);
+    }
+
+    public String getText_calendarMonth_Btn() {
+        return ActionHelper.getText(calendarMonth_Btn);
+    }
+
+    public boolean isPresent_calendarYear_Btn() {
+        return ActionHelper.isPresent(calendarYear_Btn);
+    }
+
+    public void click_calendarYear_Btn() {
+        ActionHelper.click(calendarYear_Btn);
+    }
+
+    public String getText_calendarYear_Btn() {
+        return ActionHelper.getText(calendarYear_Btn);
+    }
+
+    public boolean isPresent_calendarChooseDateMonthYear_Btn() {
+        return ActionHelper.isPresent(calendarChooseDateMonthYear_Btn);
+    }
+
+    public void click_calendarChooseDateMonthYear_Btn() {
+        ActionHelper.click(calendarChooseDateMonthYear_Btn);
+    }
+
+    public String getText_calendarChooseDateMonthYear_Btn() {
+        return ActionHelper.getText(calendarChooseDateMonthYear_Btn);
+    }
+
+    public void fillDatesInCalendar(String inputFromDate, String inputToDate) {
+        DateTime dateToBeSelected = new DateTime(inputFromDate);
+        while (Integer.parseInt(getText_CalendarFromYear_Btn()) > dateToBeSelected.getYear())
+            click_CalendarPreviousYear_Btn();
+        while (Integer.parseInt(getText_CalendarFromYear_Btn()) < dateToBeSelected.getYear())
+            click_CalendarNextYear_Btn();
+        while (Utility.mapMonthNameToNo(getText_CalendarFromMonth_Btn()) > dateToBeSelected.getMonthOfYear())
+            click_CalendarPreviousYear_Btn();
+        while (Utility.mapMonthNameToNo(getText_CalendarFromMonth_Btn()) < dateToBeSelected.getMonthOfYear())
+            click_CalendarNextYear_Btn();
+        ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputFromDate));
+        CommonActions.getInstance().waitTillLoaderDisappears();
+
+        dateToBeSelected = new DateTime(inputToDate);
+        while (Integer.parseInt(getText_CalendarToYear_Btn()) < dateToBeSelected.getYear())
+            click_CalendarNextYear_Btn();
+        while (Utility.mapMonthNameToNo(getText_CalendarToMonth_Btn()) > dateToBeSelected.getMonthOfYear())
+            click_CalendarPreviousYear_Btn();
+        while (Utility.mapMonthNameToNo(getText_CalendarToMonth_Btn()) < dateToBeSelected.getMonthOfYear())
+            click_CalendarNextYear_Btn();
+        ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
 }

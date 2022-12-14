@@ -2,10 +2,12 @@ package testsuite.order;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
+import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
+import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
@@ -274,17 +276,17 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
 
         viewOrderPage.click_FromDateField_Txt();
-        String currentFromYear = viewOrderPage.getText_CalendarFromYear_Btn();
-        String currentToYear = viewOrderPage.getText_CalendarToYear_Btn();
-        viewOrderPage.click_CalendarNextYear_Btn();
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromYear_Btn(), Utility.getNextYear(currentFromYear), "Validate the value of From Year");
-        softAssert.assertEquals(viewOrderPage.getText_CalendarToYear_Btn(), Utility.getNextYear(currentToYear), "Validate the value of To Year");
+        String currentFromYear = commonActions.getText_CalendarFromYear_Btn();
+        String currentToYear = commonActions.getText_CalendarToYear_Btn();
+        commonActions.click_CalendarNextYear_Btn();
+        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), Utility.getNextYear(currentFromYear), "Validate the value of From Year");
+        softAssert.assertEquals(commonActions.getText_CalendarToYear_Btn(), Utility.getNextYear(currentToYear), "Validate the value of To Year");
 
-        currentFromYear = viewOrderPage.getText_CalendarFromYear_Btn();
-        currentToYear = viewOrderPage.getText_CalendarToYear_Btn();
-        viewOrderPage.click_CalendarPreviousYear_Btn();
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromYear_Btn(), Utility.getPreviousYear(currentFromYear), "Validate the value of From Year");
-        softAssert.assertEquals(viewOrderPage.getText_CalendarToYear_Btn(), Utility.getPreviousYear(currentToYear), "Validate the value of To Year");
+        currentFromYear = commonActions.getText_CalendarFromYear_Btn();
+        currentToYear = commonActions.getText_CalendarToYear_Btn();
+        commonActions.click_CalendarPreviousYear_Btn();
+        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), Utility.getPreviousYear(currentFromYear), "Validate the value of From Year");
+        softAssert.assertEquals(commonActions.getText_CalendarToYear_Btn(), Utility.getPreviousYear(currentToYear), "Validate the value of To Year");
         softAssert.assertAll();
     }
 
@@ -308,17 +310,17 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
 
         viewOrderPage.click_FromDateField_Txt();
-        String currentFromMonth = viewOrderPage.getText_CalendarFromMonth_Btn();
-        String currentToMonth = viewOrderPage.getText_CalendarToMonth_Btn();
-        viewOrderPage.click_CalendarNextMonth_Btn();
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromMonth_Btn(), Utility.getNextMonth(currentFromMonth), "Validate the value of From Month");
-        softAssert.assertEquals(viewOrderPage.getText_CalendarToMonth_Btn(), Utility.getNextMonth(currentToMonth), "Validate the value of To Month");
+        String currentFromMonth = commonActions.getText_CalendarFromMonth_Btn();
+        String currentToMonth = commonActions.getText_CalendarToMonth_Btn();
+        commonActions.click_CalendarNextMonth_Btn();
+        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), Utility.getNextMonth(currentFromMonth), "Validate the value of From Month");
+        softAssert.assertEquals(commonActions.getText_CalendarToMonth_Btn(), Utility.getNextMonth(currentToMonth), "Validate the value of To Month");
 
-        currentFromMonth = viewOrderPage.getText_CalendarFromMonth_Btn();
-        currentToMonth = viewOrderPage.getText_CalendarToMonth_Btn();
-        viewOrderPage.click_CalendarPreviousMonth_Btn();
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromMonth_Btn(), Utility.getPreviousMonth(currentFromMonth), "Validate the value of From Month");
-        softAssert.assertEquals(viewOrderPage.getText_CalendarToMonth_Btn(), Utility.getPreviousMonth(currentToMonth), "Validate the value of To Month");
+        currentFromMonth = commonActions.getText_CalendarFromMonth_Btn();
+        currentToMonth = commonActions.getText_CalendarToMonth_Btn();
+        commonActions.click_CalendarPreviousMonth_Btn();
+        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), Utility.getPreviousMonth(currentFromMonth), "Validate the value of From Month");
+        softAssert.assertEquals(commonActions.getText_CalendarToMonth_Btn(), Utility.getPreviousMonth(currentToMonth), "Validate the value of To Month");
         softAssert.assertAll();
     }
 
@@ -332,8 +334,8 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertEquals(viewOrderPage.getValue_FromDateField_Txt(), ActionHelper.getCustomPreviousDateFormatter("yyyy-MM-dd", 1), "Validate from date value");
         softAssert.assertEquals(viewOrderPage.getValue_ToDateField_Txt(), Utility.getCustomCurrentDateFormatter("yyyy-MM-dd"), "Validate to date value");
         viewOrderPage.click_FromDateField_Txt();
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromMonth_Btn(), ActionHelper.getCurrentMonthName().substring(0, 3), "Validate current month being displayed in from month");
-        softAssert.assertEquals(viewOrderPage.getText_CalendarFromYear_Btn(), String.valueOf(ActionHelper.getCurrentYear()), "Validate current year being displayed in from year");
+        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), ActionHelper.getCurrentMonthName().substring(0, 3), "Validate current month being displayed in from month");
+        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), String.valueOf(ActionHelper.getCurrentYear()), "Validate current year being displayed in from year");
         softAssert.assertAll();
     }
 
@@ -346,7 +348,8 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
 
-        viewOrderPage.fillDatesInCalendar(fromDate, toDate);
+        viewOrderPage.click_FromDateField_Txt();
+        commonActions.fillDatesInCalendar(fromDate, toDate);
         softAssert.assertEquals(viewOrderPage.getValue_FromDateField_Txt(), fromDate, "Validate from date");
         softAssert.assertEquals(viewOrderPage.getValue_ToDateField_Txt(), toDate, "Validate to date");
         if (viewOrderPage.getList_TabHeaderOrderId_ListLink().size() > 0) {
@@ -367,13 +370,13 @@ public class TestSuite_ViewOrders extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_021, Verify Order Table Record With Closure Date")
     public void TC_CreateNewOrder_021_Verify_Order_Table_Record_With_Closure_Date() {
-        String fromDate = "2022-09-20";
-        String toDate = "2022-10-20";
+        String fromDate = Utility.getPreviousYear(String.valueOf(ActionHelper.getCurrentYear())) + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentDay();
+        String toDate = ActionHelper.getCurrentYear() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentDay();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
 
-        viewOrderPage.fillDatesInCalendar(fromDate, toDate);
+        commonActions.fillDatesInCalendar(fromDate, toDate);
         softAssert.assertEquals(viewOrderPage.getValue_FromDateField_Txt(), fromDate, "Validate from date");
         softAssert.assertEquals(viewOrderPage.getValue_ToDateField_Txt(), toDate, "Validate to date");
         int size = viewOrderPage.getList_TabHeaderOrderId_ListLink().size();
@@ -647,7 +650,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         viewOrderPage.checkCheckbox_TabHeaderCheckbox_ListCheckbox(0);
         viewOrderPage.click_AssignRider_DropDown();
         viewOrderPage.click_AssignRiderDropDownManual_Opt();
-        viewOrderPage.set_AssignRiderDropDownManualRider_DropDown();
+        viewOrderPage.set_AssignRiderDropDownManualRider_DropDown("Rider");
         viewOrderPage.click_AssignRiderDropDownManualAssign_Btn();
         softAssert.assertTrue(viewOrderPage.isPresent_DispatchCreationInProgressPopUpMsg_Lbl(), "Validate presence of Dispatch Creation In Progress popup");
         softAssert.assertTrue(viewOrderPage.isPresent_DispatchCreatedPopUpMsg_Lbl(), "Validate presence of Dispatch Created popup");
@@ -665,7 +668,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         viewOrderPage.checkCheckbox_TabHeaderCheckbox_ListCheckbox(0);
         viewOrderPage.click_AssignRider_DropDown();
         viewOrderPage.click_AssignRiderDropDownManual_Opt();
-        viewOrderPage.set_AssignRiderDropDownManualRider_DropDown();
+        viewOrderPage.set_AssignRiderDropDownManualRider_DropDown("Rider");
         viewOrderPage.click_AssignRiderDropDownManualAssignAndStart_Btn();
         softAssert.assertTrue(viewOrderPage.isPresent_DispatchCreationInProgressPopUpMsg_Lbl(), "Validate presence of Dispatch Creation In Progress popup");
         softAssert.assertTrue(viewOrderPage.isPresent_DispatchPublishedPopUpMsg_Lbl(), "Validate presence of Dispatch Published popup");
@@ -1068,7 +1071,9 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
         orderDetailPage.click_CancelOrder_Btn();
         softAssert.assertTrue(orderDetailPage.isPresent_CancelOrderBtnHeader_Lbl(), "Check Visibility of Header for Cancel Order pop up");
+        softAssert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains(Constants.Urls.BASE_URL + "orders/detail/?id=orders:"), "Validate current url");
         orderDetailPage.click_CancelOrderBtnCancelOrder_Btn();
+        softAssert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains(Constants.Urls.BASE_URL + "orders/detail/?id=orders:"), "Validate current url");
         softAssert.assertTrue(orderDetailPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(orderDetailPage.getText_Status_Lbl(), "Cancelled", "Validate order status");
         softAssert.assertAll();
@@ -1083,6 +1088,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         viewOrderPage.click_NewOrder_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        softAssert.assertTrue(DriverManager.getDriver().getCurrentUrl().contains(Constants.Urls.BASE_URL + "orders/add/"), "Validate current url");
         softAssert.assertAll();
     }
 
