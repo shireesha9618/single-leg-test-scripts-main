@@ -159,9 +159,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Active");
-        List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
-        for (String status : facilityTableStatusList)
-            softAssert.assertEquals(status, "Active", "Active Status Is Present As Expected");
+        if(facilitiesPage.isPresent_EmptyTableMsg_Lbl()){
+            softAssert.assertEquals(facilitiesPage.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+        }else{
+            List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
+            for (String status : facilityTableStatusList)
+                softAssert.assertEquals(status, "Active", "Active Status Is Present As Expected");
+        }
         softAssert.assertAll();
     }
 
@@ -171,9 +176,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Pause");
-        List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
-        for (String status : facilityTableStatusList)
-            softAssert.assertEquals(status, "Pause", "Pause Status Is Present As Expected");
+        if(facilitiesPage.isPresent_EmptyTableMsg_Lbl()){
+            softAssert.assertEquals(facilitiesPage.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+        }else {
+            List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
+            for (String status : facilityTableStatusList)
+                softAssert.assertEquals(status, "Pause", "Pause Status Is Present As Expected");
+        }
         softAssert.assertAll();
     }
 
@@ -183,9 +193,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Onboarding");
-        List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
-        for (String status : facilityTableStatusList)
-            softAssert.assertEquals(status, "Onboarding", "Onboarding Status Is Present As Expected");
+        if(facilitiesPage.isPresent_EmptyTableMsg_Lbl()){
+            softAssert.assertEquals(facilitiesPage.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+        }else {
+            List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
+            for (String status : facilityTableStatusList)
+                softAssert.assertEquals(status, "Onboarding", "Onboarding Status Is Present As Expected");
+        }
         softAssert.assertAll();
     }
 
@@ -195,9 +210,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Deboard");
-        List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
-        for (String status : facilityTableStatusList)
-            softAssert.assertEquals(status, "Deboard", "Deboard Status Is Present As Expected");
+        if(facilitiesPage.isPresent_EmptyTableMsg_Lbl()){
+            softAssert.assertEquals(facilitiesPage.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+        }else {
+            List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
+            for (String status : facilityTableStatusList)
+                softAssert.assertEquals(status, "Deboard", "Deboard Status Is Present As Expected");
+        }
         softAssert.assertAll();
     }
 
@@ -207,9 +227,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Inactive");
-        List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
-        for (String status : facilityTableStatusList)
-            softAssert.assertEquals(status, "Inactive", "Inactive Status Is Present As Expected");
+        if(facilitiesPage.isPresent_EmptyTableMsg_Lbl()){
+            softAssert.assertEquals(facilitiesPage.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+        }else {
+            List<String> facilityTableStatusList = facilitiesPage.getList_TableDataList_Lbl("STATUS");
+            for (String status : facilityTableStatusList)
+                softAssert.assertEquals(status, "Inactive", "Inactive Status Is Present As Expected");
+        }
         softAssert.assertAll();
     }
 
@@ -266,6 +291,8 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_015_Verify_The_UI_Of_Edit_Facility() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
+        facilitiesPage.click_NewFacility_Btn();
+        addNewFacilityPage.createNewFacility();
         facilitiesPage.click_TableDataEdit_Link();
 
         softAssert.assertTrue(!addNewFacilityPage.isEnabled_FacilityName_Txt(), "Facility Name Text Field Is Disabled As Expected");
@@ -284,10 +311,10 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_016_Verify_The_Functionality_Of_Cancel_Button_Of_Edit_Facility() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        HashMap<String, String> getDataFromTable = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
-        String facilityPostalCode = getDataFromTable.get("postalCode");
-        String facilityCity = getDataFromTable.get("city");
-        String facilityState = getDataFromTable.get("state");
+        facilitiesPage.click_NewFacility_Btn();
+        String facilityName = addNewFacilityPage.createNewFacility().get("facilityName");
+
+        facilitiesPage.fill_Search_Txt(facilityName);
         facilitiesPage.click_TableDataEdit_Link();
 
         HashMap<String, String> fillData = new HashMap<>(addNewFacilityPage.fillEditFacilityPage());
@@ -296,6 +323,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String updatedFacilityCity = fillData.get("city");
         String updatedFacilityState = fillData.get("state");
 
+        facilitiesPage.fill_Search_Txt(facilityName);
         HashMap<String, String> getNewDataFromTable = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
         String newFacilityPostalCode = getNewDataFromTable.get("postalCode");
         String newFacilityCity = getNewDataFromTable.get("city");
@@ -306,9 +334,6 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertTrue(!newFacilityCity.equals(updatedFacilityCity), "Facility City Name Did Not Matched As Expected");
         softAssert.assertTrue(!newFacilityState.equals(updatedFacilityState), "Facility State Name Did Not Matched As Expected");
 
-        softAssert.assertEquals(newFacilityPostalCode, facilityPostalCode, "Facility Postal Code Is Matched As Expected");
-        softAssert.assertEquals(newFacilityCity, facilityCity, "Facility City Is Matched As Expected");
-        softAssert.assertEquals(newFacilityState, facilityState, "Facility State Is Matched As Expected");
         softAssert.assertAll();
     }
 
@@ -340,6 +365,35 @@ public class TestSuite_Facilities extends BaseTestClass {
         List<String> actualList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
         for (int i = 0; i < expectedList.size(); i++)
             softAssert.assertEquals(expectedList.get(i), actualList.get(i), "Drag Options Are In The Same Order As Expected");
+        facilitiesPage.click_MoreActionsDropDownModifyColumnSave_Btn();
+
+        facilitiesPage.click_MoreActions_DropDown();
+        facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
+        expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        temp = expectedList.get(3);
+        expectedList.add(3, expectedList.get(5));
+        expectedList.remove(5);
+        expectedList.add(5, temp);
+        expectedList.remove(5);
+        facilitiesPage.dragAndDrop_MoreActionsDropDownModifyColumnDragOptionsList_Lbl(3, 5);
+        actualList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        for (int i = 0; i < expectedList.size(); i++)
+            softAssert.assertEquals(expectedList.get(i), actualList.get(i), "Drag Options Are In The Same Order As Expected");
+        facilitiesPage.click_MoreActionsDropDownModifyColumnSave_Btn();
+
+        facilitiesPage.click_MoreActions_DropDown();
+        facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
+        expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        temp = expectedList.get(5);
+        expectedList.add(5, expectedList.get(6));
+        expectedList.remove(6);
+        expectedList.add(6, temp);
+        expectedList.remove(7);
+        facilitiesPage.dragAndDrop_MoreActionsDropDownModifyColumnDragOptionsList_Lbl(5, 6);
+        actualList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        for (int i = 0; i < expectedList.size(); i++)
+            softAssert.assertEquals(expectedList.get(i), actualList.get(i), "Drag Options Are In The Same Order As Expected");
+
         softAssert.assertAll();
     }
 
@@ -421,9 +475,9 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_025_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
-        String firstElement = facilitiesPage.getText_TableData_Lbl("FACILITY NAME");
+        String currentPaginationCount = commonActions.getText_PaginationCurrentlyShowingCount_Lbl();
         commonActions.click_PaginationNext_Btn();
-        softAssert.assertTrue(!facilitiesPage.getText_TableData_Lbl("FACILITY NAME").equals(firstElement), "First Data Of Current Page And First Data Of Next Page Didn't Matched As Expected ");
+        softAssert.assertTrue(!commonActions.getText_PaginationCurrentlyShowingCount_Lbl().equals(currentPaginationCount), "Current Page Count Is Different In Both Pages As Expected ");
         softAssert.assertAll();
     }
 
@@ -432,6 +486,8 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_017_Verify_The_Functionality_Of_Save_Button_Of_Edit_Facilities() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
+        facilitiesPage.click_NewFacility_Btn();
+        addNewFacilityPage.createNewFacility();
         String facilityId = facilitiesPage.getData_TableFirstData_List().get("facilityId");
         facilitiesPage.click_TableDataEdit_Link();
         softAssert.assertEquals(addNewFacilityPage.getText_EditFacilityHeader_Lbl(), "Edit Facility", "Edit Facility Header Is Matched As Expected");
@@ -479,9 +535,9 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_026_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
         commonActions.coverJourneyTillFacility();
         commonActions.click_PaginationNext_Btn();
-        String sixthElement = facilitiesPage.getText_TableData_Lbl("FACILITY NAME");
+        String currentPaginationCount = commonActions.getText_PaginationCurrentlyShowingCount_Lbl();
         commonActions.click_PaginationPrevious_Btn();
-        JarvisAssert.assertNotEquals(facilitiesPage.getText_TableData_Lbl("FACILITY NAME"), sixthElement, "First Data Of Current Page And First Data Of Next Page Are Different As Expected ");
+        JarvisAssert.assertNotEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), currentPaginationCount, "Current Page Count Is Than Previous Page As Expected ");
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
@@ -627,6 +683,8 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_038_Verify_The_Functionality_Of_Deactivate_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
+        facilitiesPage.click_NewFacility_Btn();
+        addNewFacilityPage.createNewFacility();
         facilitiesPage.click_TableData_CheckBox();
         facilitiesPage.click_Deactivate_Btn();
         softAssert.assertTrue(facilitiesPage.isPresent_DeactivateFacilityHeader_Lbl(), "Deactivate Facility Header Is Present As Expected");
@@ -722,6 +780,9 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_043_Verify_The_Functionality_Of_Cancel_Button_In_Add_New_Facility_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
+        facilitiesPage.click_NewFacility_Btn();
+        String facilityName = addNewFacilityPage.createNewFacility().get("facilityName");
+        facilitiesPage.fill_Search_Txt(facilityName);
         HashMap<String, String> expectedFacilityTableDetails = new HashMap<>(facilitiesPage.getData_TableFirstData_List());
         facilitiesPage.click_NewFacility_Btn();
         addNewFacilityPage.click_Cancel_Btn();
@@ -749,7 +810,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    /*@Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
         FileUtils.cleanDirectory(new File(System.getProperty("user.dir") + "\\temp\\"));
@@ -757,7 +818,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownExportAsCSV_Link();
         JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
-    }
+    }*/
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_035, Verify The Functionality Of CheckBox Present In Facility Table Heading")
@@ -855,7 +916,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
         addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
         addNewFacilityPage.click_Create_Btn();
-        softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Required", "Required Mandatory Message Appeared As Expected");
+        softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Required", "Postal Code Required Mandatory Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_StateErrorMsg_Lbl(), "Required", "State Required Mandatory Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_CityErrorMsg_Lbl(), "Required", "City Required Mandatory Message Appeared As Expected");
         softAssert.assertAll();
@@ -1046,7 +1107,12 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_064_Verify_The_Functionality_Of_Add_New_Facility_Page_With_Duplicate_Facility_ID() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
+
+        facilitiesPage.click_NewFacility_Btn();
+        String facilityName = addNewFacilityPage.createNewFacility().get("facilityName");
+        facilitiesPage.fill_Search_Txt(facilityName);
         String duplicateFacilityId = facilitiesPage.getData_TableFirstData_List().get("facilityId");
+
         facilitiesPage.click_NewFacility_Btn();
         String expectedErrorPopMsg = "In participant create request, participant with given unique code is already exists";
         addNewFacilityPage.fill_FacilityName_Txt("Facility " + sampleData.name().lastName());
@@ -1065,12 +1131,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
-        String facilityName = "Facility " + sampleData.name().lastName().replace("'", "");
-        addNewFacilityPage.fill_FacilityName_Txt(facilityName);
-        addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
-        addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
-        addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
-        addNewFacilityPage.click_Create_Btn();
+        String facilityName = addNewFacilityPage.createNewFacility().get("facilityName");
         facilitiesPage.fill_Search_Txt(facilityName);
         softAssert.assertTrue(facilitiesPage.isPresent_TableData_Lbl("FACILITY NAME"), "Facility Name Data In The Table Is Present As Expected");
         softAssert.assertEquals(facilitiesPage.getText_TableData_Lbl("FACILITY NAME"), facilityName, "Facility Name Is Matched As Expected");

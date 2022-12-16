@@ -104,6 +104,7 @@ public class CommonActions {
         click_Skip_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().click_FacilitiesMenuItem_Btn();
+        waitTillLoaderDisappears();
     }
 
     public void coverJourneyTillRider() {

@@ -75,6 +75,8 @@ public class FacilitiesPage {
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
     private final Locator tableColumnSelectAll_CheckBox = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell ant-table-selection-column']"));
+    private final Locator emptyTableMsg_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//h3"));
+    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//td//td"));
     String elementInFirstRow = "//tr[2]/td[index]";
     String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
 
@@ -121,8 +123,7 @@ public class FacilitiesPage {
     }
 
     public void fill_Search_Txt(String facilityName) {
-        ActionHelper.waitUntilElementVisible(search_Txt.getBy());
-        ActionHelper.sendKeysWithClear(search_Txt.getBy(), facilityName);
+        ActionHelper.fillWithClear(search_Txt.getBy(), facilityName);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
@@ -143,7 +144,7 @@ public class FacilitiesPage {
     }
 
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy());
+        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy(),4000);
     }
 
     public void click_StatusDropDownActiveValue_Radio() {
@@ -453,8 +454,8 @@ public class FacilitiesPage {
     }
 
     public void click_TableDataEdit_Link() {
-        ActionHelper.waitUntilElementVisible(tableDataEdit_Link.getBy());
         ActionHelper.click(tableDataEdit_Link);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public List<WebElement> getList_FacilityTableFacilityId_Lbl() {
@@ -515,7 +516,7 @@ public class FacilitiesPage {
         HashMap<String, String> tableData = new HashMap<>();
         String facilityId = getText_TableData_Lbl("FACILITY ID");
         String facilityName = getText_TableData_Lbl("FACILITY NAME");
-        String postalCode = getText_TableData_Lbl("POSTAL CODE"); /*getText_TableDataPostalCode_Lbl()*/
+        String postalCode = getText_TableData_Lbl("POSTAL CODE");
         ;
         String address = getText_TableData_Lbl("ADDRESS");
         String city = getText_TableData_Lbl("CITY");
@@ -600,5 +601,17 @@ public class FacilitiesPage {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
         Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
         return ActionHelper.isPresent(data);
+    }
+
+    public boolean isPresent_EmptyTableMsg_Lbl() {
+        return ActionHelper.isPresent(emptyTableMsg_Lbl, 4000);
+    }
+
+    public String getText_EmptyTableMsg_Lbl() {
+        return ActionHelper.getText(emptyTableMsg_Lbl);
+    }
+
+    public boolean isPresent_AddFacility_Btn() {
+        return ActionHelper.isPresent(addFacility_Btn);
     }
 }

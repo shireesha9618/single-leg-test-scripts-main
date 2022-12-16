@@ -24,7 +24,7 @@ public class AddNewFacilityPage {
     private final Locator facilityId_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Facility ID']"));
     private final Locator addressDetailsSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Details']"));
     private final Locator postalCode_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']"));
-    private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Postal Code']"));
+    private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
     private final Locator country_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Country*']"));
     private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-selector']//input[@disabled='']"));
 
@@ -38,7 +38,7 @@ public class AddNewFacilityPage {
     private final Locator state_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter State']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
-    private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
+    private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']/.."));
     private final Locator facilityNameErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']/../following-sibling::div//p"));
     private final Locator facilityIdErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility ID*']/../following-sibling::div//p"));
     private final Locator postalCodeErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']/../following-sibling::div//p"));
@@ -185,7 +185,6 @@ public class AddNewFacilityPage {
     }
 
     public void fill_AddressLine1_Txt(String addressLine1) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.sendKeysWithClear(addressLine1_Txt.getBy(), Keys.chord(addressLine1));
     }
 
@@ -265,7 +264,6 @@ public class AddNewFacilityPage {
 
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public HashMap<String, String> createNewFacility() {
@@ -284,15 +282,16 @@ public class AddNewFacilityPage {
 
         fill_FacilityName_Txt(facilityName);
         fill_PostalCode_Txt(postalCode);
+        CommonActions.getInstance().waitTillLoaderDisappears();
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
 
         click_Create_Btn();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return fillFacilityDetails;
     }
 
     public HashMap<String, String> fillEditFacilityPage() {
-        DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
         String postalCode = Utility.get_PostalCode_Txt();
         String addressLine1 = sampleData.address().streetName().replace("'", "");
@@ -303,6 +302,7 @@ public class AddNewFacilityPage {
         updateFacility.put("addressLine2", addressLine2);
 
         fill_PostalCode_Txt(postalCode);
+        CommonActions.getInstance().waitTillLoaderDisappears();
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
 
