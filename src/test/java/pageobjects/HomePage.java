@@ -18,26 +18,27 @@ public class HomePage extends BaseTestClass {
     private final Locator orderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
     private final Locator createOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
     private final Locator viewOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
-
-    private final Locator ordersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
-    private final Locator createOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
-    private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
-    private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
-    private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
-    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Riders']"));
-    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
-    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Teams']"));
+    private final Locator ordersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='Orders']"));
+    private final Locator createOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='Create Orders']"));
+    private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='View Orders']"));
+    private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-1']//p[text()='Dispatch']"));
+    private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Resources']"));
+    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Riders']"));
+    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Facilities']"));
+    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-3']//p[text()='Teams']"));
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Settings']"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
-    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
+    private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.xpath("//img[@alt='Workflow']"));
     private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
     private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']/.."));
     private final Locator appsHeader_Lbl = Locator.builder().withWeb(By.xpath("//a[text()='Apps']"));
     private final Locator ordersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Orders']"));
-    private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/add/']"));
-    private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/']"));
+    //    private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/add/']"));
+//    private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/']"));
+    private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Create Orders']"));
+    private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='View Orders']"));
     private final Locator routingOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));
     private final Locator dispatchOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));
     private final Locator ridersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Riders']"));
@@ -73,7 +74,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void selectTeam(String input) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(teamSelector_Dropdown);
         ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
     }
@@ -85,19 +86,19 @@ public class HomePage extends BaseTestClass {
     public void openViewOrderPage() {
         ActionHelper.waitUntilElementVisible(viewOrderMenuItem_Btn.getBy());
         ActionHelper.click(viewOrderMenuItem_Btn);
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
         DriverManager.getDriver().navigate().refresh();
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
 
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img, 2000);
+        return ActionHelper.isPresent(delhiveryLogo_Img, 4000);
     }
 
     public void click_DelhiveryLogo_Img() {
-        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(delhiveryLogo_Img);
+        ActionHelper.waitForLoaderToHide();
     }
 
     public boolean isPresent_UserProfile_Img() {
@@ -155,19 +156,6 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(selectTeam_Txt, 4000);
     }
 
-    public boolean isPresent_FacilitiesMenuItem_Btn() {
-        return ActionHelper.isPresent(facilitiesMenu_Btn);
-    }
-
-    public void click_FacilitiesMenuItem_Btn() {
-        if (isPresent_FacilitiesMenuItem_Btn())
-            ActionHelper.click(facilitiesMenu_Btn);
-        else {
-            click_Resources_Btn();
-            ActionHelper.click(facilitiesMenu_Btn);
-        }
-    }
-
     public boolean isPresent_OpenMenuOrders_Btn() {
         return ActionHelper.isPresent(ordersOpenMenu_Btn);
     }
@@ -192,11 +180,6 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(facilitiesOpenMenu_Btn);
     }
 
-    public void click_OpenMenuFacility_Btn() {
-        ActionHelper.click(facilitiesOpenMenu_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
-    }
-
     public boolean isPresent_OpenMenuTeams_Btn() {
         return ActionHelper.isPresent(teamsOpenMenu_Btn);
     }
@@ -215,11 +198,11 @@ public class HomePage extends BaseTestClass {
 
     public void click_OpenMenu_Btn() {
         ActionHelper.click(openMenu_Btn);
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void click_OpenMenuCross_Btn() {
-        ActionHelper.isPresent(openMenuCross_Btn);
+        ActionHelper.click(openMenuCross_Btn);
     }
 
     public boolean isPresent_AllAppsHeader_Lbl() {
@@ -238,7 +221,8 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(workFlowDispatch_Btn);
     }
 
-    public boolean isPresent_WorkFlowRiders_Btn() {
+    public boolean isPresent_WorkflowRiders_Btn() {
+
         return ActionHelper.isPresent(workFlowRiders_Btn);
     }
 
@@ -248,11 +232,6 @@ public class HomePage extends BaseTestClass {
 
     public boolean isPresent_WorkFlowFacilities_Btn() {
         return ActionHelper.isPresent(workFlowFacilities_Btn);
-    }
-
-    public void click_WorkFlowFacilities_Btn() {
-        ActionHelper.click(workFlowFacilities_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_WorkFlowTeams_Btn() {
@@ -268,7 +247,7 @@ public class HomePage extends BaseTestClass {
         ActionHelper.click(resourcesMenu_Btn);
     }
 
-    public void unExpand_ResourcesMenu_Btn() {
+    public void collapse_ResourcesMenu_Btn() {
         ActionHelper.waitForLoaderToHide();
         ActionHelper.click(resourcesMenu_Btn);
     }
@@ -277,15 +256,15 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(facilitiesMenu_Btn);
     }
 
-    public boolean isPresent_LeftPanel_Btn() {
-        return ActionHelper.isPresent(leftPanel_Btn, 5000);
+    public boolean isPresent_leftPanel_Btn() {
+        return ActionHelper.isPresent(leftPanel_Btn, 6000);
     }
 
-    public void expand_LeftPanel_Btn() {
+    public void unDock_LeftPanel_Btn() {
         ActionHelper.click(leftPanel_Btn);
     }
 
-    public void unExpand_LeftPanel_Btn() {
+    public void dock_LeftPanel_Btn() {
         ActionHelper.click(leftPanel_Btn);
     }
 
@@ -303,6 +282,50 @@ public class HomePage extends BaseTestClass {
 
     public boolean isPresent_SettingsMenu_Btn() {
         return ActionHelper.isPresent(settingsMenu_Btn);
+    }
+
+    public boolean isPresent_FacilitiesMenuItem_Btn() {
+        return ActionHelper.isPresent(facilitiesMenu_Btn);
+    }
+
+    public void click_FacilitiesMenuItem_Btn() {
+        if (isPresent_FacilitiesMenuItem_Btn())
+            ActionHelper.click(facilitiesMenu_Btn);
+        else {
+            click_Resources_Btn();
+            ActionHelper.click(facilitiesMenu_Btn);
+        }
+    }
+
+    public void click_OpenMenuFacility_Btn() {
+        ActionHelper.click(facilitiesOpenMenu_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_WorkFlowRiders_Btn() {
+        return ActionHelper.isPresent(workFlowRiders_Btn);
+    }
+
+    public void click_WorkFlowFacilities_Btn() {
+        ActionHelper.click(workFlowFacilities_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void unExpand_ResourcesMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(resourcesMenu_Btn);
+    }
+
+    public boolean isPresent_LeftPanel_Btn() {
+        return ActionHelper.isPresent(leftPanel_Btn, 5000);
+    }
+
+    public void expand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
+    }
+
+    public void unExpand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
     }
 
     public boolean isPresent_OpenMenuCreateOrders_Btn() {
