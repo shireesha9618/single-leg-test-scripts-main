@@ -18,14 +18,14 @@ public class HomePage extends BaseTestClass {
     private final Locator orderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
     private final Locator createOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
     private final Locator viewOrderMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
-    private final Locator ordersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Orders']"));
-    private final Locator createOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create Orders']"));
-    private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='View Orders']"));
-    private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
-    private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Resources']"));
-    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Riders']"));
-    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
-    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Teams']"));
+    private final Locator ordersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='Orders']"));
+    private final Locator createOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='Create Orders']"));
+    private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='View Orders']"));
+    private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-1']//p[text()='Dispatch']"));
+    private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Resources']"));
+    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Riders']"));
+    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Facilities']"));
+    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-3']//p[text()='Teams']"));
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Settings']"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
@@ -258,11 +258,11 @@ public class HomePage extends BaseTestClass {
         return ActionHelper.isPresent(leftPanel_Btn, 6000);
     }
 
-    public void expand_LeftPanel_Btn() {
+    public void unDock_LeftPanel_Btn() {
         ActionHelper.click(leftPanel_Btn);
     }
 
-    public void unExpand_LeftPanel_Btn() {
+    public void dock_LeftPanel_Btn() {
         ActionHelper.click(leftPanel_Btn);
     }
 

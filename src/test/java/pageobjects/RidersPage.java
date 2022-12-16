@@ -99,7 +99,8 @@ public class RidersPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        return ActionHelper.isPresent(header_Lbl);
     }
 
     public boolean isPresent_HomeBreadcrumb_Lbl() {
@@ -302,10 +303,12 @@ public class RidersPage {
     }
 
     public void click_Next_Btn() {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(next_Btn);
     }
 
     public void click_Previous_Btn() {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(previous_Btn);
     }
 
@@ -562,7 +565,7 @@ public class RidersPage {
     }
 
     public List<WebElement> getElements_RiderTableRiderIdColumnList_Link() {
-        ActionHelper.waitUntilAllElementsVisible(ridersTableRiderIdColumnList_Link.getBy());
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.findElements(ridersTableRiderIdColumnList_Link.getBy());
     }
 

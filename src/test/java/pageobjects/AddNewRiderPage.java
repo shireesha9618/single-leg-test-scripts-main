@@ -44,8 +44,8 @@ public class AddNewRiderPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        ActionHelper.waitForLoaderToHide();
-        return ActionHelper.isPresent(header_Lbl, 3000);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        return ActionHelper.isPresent(header_Lbl);
     }
 
     public String getText_Header_Txt() {

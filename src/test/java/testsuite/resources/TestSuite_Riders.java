@@ -479,13 +479,13 @@ public class TestSuite_Riders extends BaseTestClass {
     public void TC_Riders_076_Verify_The_Functionality_Of_Dock_And_UnDock_Of_Left_Panel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverUserJourneyTillRiders();
-        homePage.unExpand_LeftPanel_Btn();
+        homePage.dock_LeftPanel_Btn();
         softAssert.assertTrue(!homePage.isPresent_OrdersMenu_Btn(), "Orders Icon Is Present As Expected");
         softAssert.assertTrue(!homePage.isPresent_DispatchMenu_Btn(), "Dispatch Icon Is Present As Expected");
         softAssert.assertTrue(!homePage.isPresent_ResourcesMenu_Btn(), "Resources Icon Is Present As Expected");
         softAssert.assertTrue(!homePage.isPresent_TeamsMenu_Btn(), "Teams Icon Is Present As Expected");
         softAssert.assertTrue(!homePage.isPresent_SettingsMenu_Btn(), "Settings Icon Is Present As Expected");
-        homePage.expand_LeftPanel_Btn();
+        homePage.unDock_LeftPanel_Btn();
         softAssert.assertTrue(homePage.isPresent_OrdersMenu_Btn(), "Orders Menu Button Along With Icon Is Present As Expected");
         softAssert.assertTrue(homePage.isPresent_DispatchMenu_Btn(), "Dispatch Menu Button Along With Icon Is Present As Expected");
         softAssert.assertTrue(homePage.isPresent_ResourcesMenu_Btn(), "Resources Menu Button Along With Icon Is Present As Expected");
