@@ -62,10 +62,10 @@ public class CommonActions {
 
     public void coverUserJourneyTillRiders() {
         performCommonAction();
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         click_Skip_Btn();
         HomePage.getInstance().openRidersPage();
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         JarvisAssert.assertTrue(RidersPage.getInstance().isPresent_Header_Lbl());
     }
 

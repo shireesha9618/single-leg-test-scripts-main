@@ -1,8 +1,10 @@
 package pageobjects;
 
+import com.github.javafaker.Faker;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+
 
 public class RiderEditPage {
     private static RiderEditPage _instance;
@@ -21,6 +23,7 @@ public class RiderEditPage {
     private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']//p"));
     private final Locator editRiderCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
     private final Locator updatedSuccessfully_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Updated Successfully']"));
+    Faker sampleData = new Faker();
 
     public static RiderEditPage getInstance() {
         if (_instance == null)
@@ -33,7 +36,8 @@ public class RiderEditPage {
     }
 
     public void click_Cancel_Btn() {
-        ActionHelper.click(editRiderCancel_Btn);}
+        ActionHelper.click(editRiderCancel_Btn);
+    }
 
     public boolean isPresent_Save_Btn() {
         return ActionHelper.isPresent(editRiderSave_Btn);
@@ -100,18 +104,35 @@ public class RiderEditPage {
         return ActionHelper.getText(updatedSuccessfully_Txt);
     }
 
-    public String getText_FirstName_TxtBox(){
+    public String getText_FirstName_TxtBox() {
         return ActionHelper.getText(firstName_Txt);
     }
 
-    public String getText_LastName_TxtBox(){
+    public String getText_LastName_TxtBox() {
         return ActionHelper.getText(lastName_Txt);
     }
 
-    public String getText_PhoneNumber_TxtBox(){
+    public String getText_PhoneNumber_TxtBox() {
         return ActionHelper.getText(phoneNumber_Lbl);
     }
-    public String getText_Teams_TxtBox(){
+
+    public String getText_Teams_TxtBox() {
         return ActionHelper.getText(teams_Lbl);
+    }
+
+    public void fillWithClear_RiderFirstName_TxtBox(String input) {
+        ActionHelper.fillWithClear(firstName_Txt.getBy(), input);
+    }
+
+    public void fillWithClear_RiderLastName_TxtBox(String input) {
+        ActionHelper.fillWithClear(lastName_Txt.getBy(), input);
+    }
+
+    public String get_FirstName_Txt() {
+        return ActionHelper.getAttribute(firstName_Txt, "value");
+    }
+
+    public String get_LastName_Txt() {
+        return ActionHelper.getAttribute(lastName_Txt, "value");
     }
 }
