@@ -14,7 +14,6 @@ import java.util.List;
 
 public class HomePage extends BaseTestClass {
     private static HomePage _instance;
-
     private final Locator loginButton_Btn = Locator.builder().withWeb(By.id("loginButton"));
     private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
     private final Locator selectTeam_DropDown = Locator.builder().withWeb(By.xpath("//input[@id='selectTeam']"));
@@ -37,7 +36,7 @@ public class HomePage extends BaseTestClass {
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
     private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
-    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-otp-email"));
+    private final Locator loginWithEmail_Lnk = Locator.builder().withWeb(By.id("zocial-oidc-email"));
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
     private final Locator teamSelect_Btn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div/div"));
     private final Locator teamSelect_List = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
@@ -58,7 +57,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void selectTeam(String input) {
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(teamSelector_Dropdown);
         ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
     }
@@ -143,5 +142,22 @@ public class HomePage extends BaseTestClass {
     public void selectTeam2(String input) {
         ActionHelper.waitForLoaderToHide();
         Utility.select_FromDropDown_List(teamSelector_Dropdown.getBy(), teamSelect_Btn.getBy(), input);
+    }
+
+    public boolean isPresent_FacilitiesMenuItem_Btn() {
+        return ActionHelper.isPresent(facilitiesMenu_Btn);
+    }
+
+    public void click_FacilitiesMenuItem_Btn() {
+        if (isPresent_FacilitiesMenuItem_Btn())
+            ActionHelper.click(facilitiesMenu_Btn);
+        else {
+            click_Resources_Btn();
+            ActionHelper.click(facilitiesMenu_Btn);
+        }
+    }
+
+    public void openTeamsPage() {
+        ActionHelper.click(teamsMenu_Btn);
     }
 }
