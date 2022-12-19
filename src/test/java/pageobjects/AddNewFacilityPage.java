@@ -47,6 +47,7 @@ public class AddNewFacilityPage {
     private final Locator addressLine2ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']/../following-sibling::div//p"));
     private final Locator stateErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='State*']/../following-sibling::div//p"));
     private final Locator cityErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='City*']/../following-sibling::div//p"));
+    private final Locator duplicateIdErrorMsgPopUp_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),'code is already exists')]"));
     Faker sampleData = new Faker();
 
     public static AddNewFacilityPage getInstance() {
@@ -348,5 +349,9 @@ public class AddNewFacilityPage {
 
     public String getText_PopUpErrorMsg_Lbl() {
         return ActionHelper.getText(popUpErrorMsg_Lbl);
+    }
+
+    public String getText_DuplicateIdErrorMsgPopUp_Lbl() {
+        return ActionHelper.getText(duplicateIdErrorMsgPopUp_Lbl);
     }
 }

@@ -7,7 +7,6 @@ import constants.TestGroup;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.*;
@@ -476,6 +475,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertEqualsIgnoreCase(headList.get(0), facilitiesPage.getText_TableColumnNameStatus_Lbl(), "Status Appears On 0th Position As Expected");
         softAssert.assertEqualsIgnoreCase(headList.get(1), facilitiesPage.getText_TableColumnNameAddress_Lbl(), "Address Appears On 1st Position As Expected");
         softAssert.assertEqualsIgnoreCase(headList.get(2), facilitiesPage.getText_TableColumnNameCity_Lbl(), "City Appears On 2nd Position As Expected");
+
+        facilitiesPage.click_MoreActions_DropDown();
+        facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
+        facilitiesPage.click_MoreActionsDropDownModifyColumnCreatedBy_CheckBox();
+        facilitiesPage.click_MoreActionsDropDownModifyColumnUpdatedBy_CheckBox();
+        facilitiesPage.click_MoreActionsDropDownModifyColumnFacilityId_CheckBox();
+        facilitiesPage.click_moreActionsDropDownModifyColumnFacilityName_CheckBox();
+        facilitiesPage.click_MoreActionsDropDownModifyColumnSave_Btn();
         softAssert.assertAll();
     }
 
@@ -829,7 +836,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    /*@Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
         new File(System.getProperty("user.dir") + "\\temp\\");
@@ -837,7 +844,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownExportAsCSV_Link();
         JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
-    }*/
+    }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_035, Verify The Functionality Of CheckBox Present In Facility Table Heading")
@@ -998,6 +1005,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_NewFacility_Btn();
         addNewFacilityPage.fill_FacilityName_Txt("Facility " + sampleData.name().lastName());
         addNewFacilityPage.fill_PostalCode_Txt(validPostalCode);
+        commonActions.waitTillLoaderDisappears();
         addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
         addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
         softAssert.assertTrue(!addNewFacilityPage.isPresent_PopUpErrorMsg_Lbl(), "Pop Up Error Message Is Not Present As Expected");
@@ -1139,11 +1147,9 @@ public class TestSuite_Facilities extends BaseTestClass {
         String expectedErrorPopMsg = "In participant create request, participant with given unique code is already exists";
         addNewFacilityPage.fill_FacilityName_Txt("Facility " + sampleData.name().lastName());
         addNewFacilityPage.fill_FacilityId_Txt(duplicateFacilityId);
-        addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
-        addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
-        addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
+        addNewFacilityPage.fillEditFacilityPage();
         addNewFacilityPage.click_Create_Btn();
-        softAssert.assertEquals(addNewFacilityPage.getText_PopUpErrorMsg_Lbl(), expectedErrorPopMsg, "Duplicate Validation Error Message Appeared As Expected");
+        softAssert.assertEquals(addNewFacilityPage.getText_DuplicateIdErrorMsgPopUp_Lbl(), expectedErrorPopMsg, "Duplicate Id Validation Error Message Appeared As Expected");
         softAssert.assertAll();
     }
 
