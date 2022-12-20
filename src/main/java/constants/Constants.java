@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class Constants {
 
-    public static final String MOBILE_NO = "+918377095609";
+    public static final String MOBILE_NO = "8377095609";
     public static final String FACILITY_NAME = "Test Hub";
     public static final String EMAIL_ID = "feautomationuser@gmail.com";
     public static final String EMAIL_PASSWORD = "ceeqdbpbodukvahm";

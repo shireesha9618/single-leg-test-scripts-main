@@ -23,13 +23,11 @@ public class CreateNewOrderPage {
     private final Locator homeBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/']/p[text()='Home']"));
     private final Locator orderListBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/orders/']/p[text()='Order List']"));
     private final Locator createOrderBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/orders/add/']/p[text()='Create Order']"));
-
     private final Locator orderDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Order Details']"));
     private final Locator orderDetailsOrderId_Txt = Locator.builder().withWeb(By.xpath("//input[@name='orderId']"));
     private final Locator orderDetailsScannableBarcodeNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='barcodeNumber']"));
-    private final Locator orderDetailsOrderDescription_Txt = Locator.builder().withWeb(By.xpath("//textarea[@name='orderDescription']"));
+    private final Locator orderDetailsOrderDescription_Txt = Locator.builder().withWeb(By.xpath("//input[@name='orderDescription']"));
     private final Locator orderDetailsTeam_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[2]"));
-
     private final Locator pickupDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Pickup Details']"));
     private final Locator pickupDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='contactName']"));
     private final Locator pickupDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='primaryMobile']"));
@@ -41,7 +39,6 @@ public class CreateNewOrderPage {
     private final Locator pickupDetailsState_Txt = Locator.builder().withWeb(By.xpath("//input[@name='state']"));
     private final Locator pickupDetailsCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='city']"));
     private final Locator pickupDetailsClearAll_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Clear All']"));
-
     private final Locator dropDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Drop Details']"));
     private final Locator dropDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropContactName']"));
     private final Locator dropDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPrimaryMobile']"));
@@ -53,22 +50,17 @@ public class CreateNewOrderPage {
     private final Locator dropDetailsState_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropState']"));
     private final Locator dropDetailsCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropCity']"));
     private final Locator dropDetailsClearAll_Btn = Locator.builder().withWeb(By.xpath("(//div[text()='Clear All'])[2]"));
-
     private final Locator paymentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Payment Details']"));
     private final Locator paymentDetailsPaymentType_Select = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']"));
     private final Locator paymentDetailsOrderAmount_Txt = Locator.builder().withWeb(By.xpath("//input[@name='paymentDetails.orderAmount']"));
-
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
-
     private final Locator successToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Order Creation Success']"));
     private final Locator duplicateOrderIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Duplicate clientOrderId']"));
     private final Locator samePickupAndDropFacilityToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Drop facility needs to be different from Pickup facility']"));
-
     private final Locator orderDetailsOrderIdValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter order id']]/following-sibling::span"));
     private final Locator orderDetailsOrderDescriptionValidationError_Lbl = Locator.builder().withWeb(By.xpath("//textarea[@placeholder='Enter order description']/following-sibling::span"));
     private final Locator orderDetailsTeamValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[label[text()='Team*']]//input/following-sibling::span"));
-
     private final Locator pickupDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter Contact Name*']]/following-sibling::span"));
     private final Locator pickupDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter Contact Number*']]/following-sibling::span"));
     private final Locator pickupDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']]/following-sibling::span"));
@@ -78,7 +70,6 @@ public class CreateNewOrderPage {
     private final Locator pickupDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter address line 2']]/following-sibling::span"));
     private final Locator pickupDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter state']]/following-sibling::span"));
     private final Locator pickupDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter city']]/following-sibling::span"));
-
     private final Locator dropDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Name*']])[2]/following-sibling::p"));
     private final Locator dropDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Number*']])[2]/following-sibling::p"));
     private final Locator dropDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']])[2]/following-sibling::p"));
@@ -88,28 +79,10 @@ public class CreateNewOrderPage {
     private final Locator dropDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 2']])[2]/following-sibling::p"));
     private final Locator dropDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter state']])[2]/following-sibling::P"));
     private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter city']])[2]/following-sibling::p"));
-
     private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']/following-sibling::p"));
-
-    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option ant-select-item-option-active']//p"));
-
-    private final Locator addFacilityFacilityName_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.name']"));
-    private final Locator addFacilityFacilityId_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.ID']"));
-    private final Locator addFacilityPostalCode_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
-    private final Locator addFacilityAddressLine1_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine1']"));
-    private final Locator addFacilityAddressLine2_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.addressLine2']"));
     private final Locator addFacilityState_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.state']"));
-    private final Locator addFacilityCity_TxtBox = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.city']"));
-    private final Locator addFacilityFacilityNameRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='basicDetails.name']"));
-    private final Locator addFacilityPostalCodeRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.postalCode']"));
-    private final Locator addFacilityAddressLine1RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine1']"));
-    private final Locator addFacilityAddressLine2RequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.addressLine2']"));
-    private final Locator addFacilityStateRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.state']"));
-    private final Locator addFacilityCityRequiredMandatory_Msg = Locator.builder().withWeb(By.xpath("//p[text()='Required']/..//input[@name='addressDetails.city']"));
     private final Locator addFacilityCreateFacility_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Create']/..)[1]"));
-    private final Locator addFacilityCancelFacility_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Cancel']/..)[1]"));
     private final Locator message_Lbl = Locator.builder().withWeb(By.xpath("//div[@id='__next']/div/div"));
-
     private final Locator addNewFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Add New Facility']"));
     private final Locator addFacilityFacilityName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.name']"));
     private final Locator addFacilityFacilityId_Txt = Locator.builder().withWeb(By.xpath("//input[@name='basicDetails.ID']"));
@@ -121,7 +94,6 @@ public class CreateNewOrderPage {
     private final Locator addFacilityCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.city']"));
     private final Locator addFacilityCreate_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Create']]"));
     private final Locator addFacilityCancel_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Cancel']]"));
-
     private final Locator addFacilityFacilityNameValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='basicDetails.name']]/following-sibling::p"));
     private final Locator addFacilityFacilityIdValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='basicDetails.ID']]/following-sibling::p"));
     private final Locator addFacilityPostalCodeValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.postalCode']]/following-sibling::p"));
@@ -1162,11 +1134,13 @@ public class CreateNewOrderPage {
         fillWithClear_AddFacilityAddressLine1_Txt(addressLine1);
         fillWithClear_AddFacilityAddressLine2_Txt(addressLine2);
     }
+
     public void click_AddFacilityCreateFacility_Btn() {
         Actions actions = new Actions(DriverManager.getDriver());
         actions.sendKeys(Keys.PAGE_DOWN).build().perform();
         ActionHelper.click(addFacilityCreateFacility_Btn);
     }
+
     public Boolean isPresent_AddFacilityFacilityNameValidationMsg_Lbl() {
         return ActionHelper.isPresent(addFacilityFacilityNameValidationMsg_Lbl);
     }
@@ -1321,8 +1295,8 @@ public class CreateNewOrderPage {
     }
 
     public Boolean isPresent_Message_Lbl() {
-            return ActionHelper.isPresent(message_Lbl, 2000);
-        }
+        return ActionHelper.isPresent(message_Lbl, 2000);
+    }
 
 
     public boolean isPresent_SuccessToastMsg_Lbl() {
@@ -1337,7 +1311,7 @@ public class CreateNewOrderPage {
         return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, 5000);
     }
 
-    public void fillPickupDetailsWithCustomData(){
+    public void fillPickupDetailsWithCustomData() {
         fillWithClear_PickupDetailsPostalCode_Txt(sampleData.address().zipCode());
         selectByVisibleText_PickupDetailsCountry_Select(sampleData.country().name());
         fillWithClear_PickupDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
@@ -1346,7 +1320,7 @@ public class CreateNewOrderPage {
         fillWithClear_PickupDetailsCity_Txt(sampleData.address().city());
     }
 
-    public void fillDropDetailsWithCustomData(){
+    public void fillDropDetailsWithCustomData() {
         fillWithClear_DropDetailsPostalCode_Txt(sampleData.address().zipCode());
         selectByVisibleText_DropDetailsCountry_Select(sampleData.country().name());
         fillWithClear_DropDetailsAddressLine1_Txt(sampleData.address().buildingNumber());

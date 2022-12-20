@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import static utility.Utility.acceptAlertIfPresent;
 
@@ -27,6 +28,8 @@ public class CommonActions {
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
     private final Locator pageSize_Txt = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
     private final Locator paginationBlockList_Txt = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
+    private final Locator moreActionsDropDownModifyColumnsLinkSelectAll_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'px')]/button[1]/p"));
+    private final Locator moreActionsDropDownModifyColumnsLinkSave_Btn = Locator.builder().withWeb(By.xpath("//button//p[text()='Save']"));
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
 
     public static CommonActions getInstance() {
@@ -62,10 +65,10 @@ public class CommonActions {
 
     public void coverUserJourneyTillRiders() {
         performCommonAction();
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         click_Skip_Btn();
         HomePage.getInstance().openRidersPage();
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         JarvisAssert.assertTrue(RidersPage.getInstance().isPresent_Header_Lbl());
     }
 
@@ -181,5 +184,11 @@ public class CommonActions {
         performCommonAction();
         click_Skip_Btn();
         HomePage.getInstance().openTeamsPage();
+    }
+    public void resetColumns() {
+        TeamsPage.getInstance().clickAndChoose_MoreActionsDropDownMenuOptions_Btn("Modify Columns");
+        ActionHelper.click(moreActionsDropDownModifyColumnsLinkSelectAll_Btn);
+        new Actions(DriverManager.getDriver()).sendKeys(Keys.PAGE_DOWN).sendKeys(Keys.PAGE_DOWN).build().perform();
+        ActionHelper.click(moreActionsDropDownModifyColumnsLinkSave_Btn);
     }
 }
