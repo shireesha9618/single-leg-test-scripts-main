@@ -6,6 +6,7 @@ import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
+import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -159,8 +160,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Active");
         if (commonActions.isPresent_EmptyTableMsg_Lbl()) {
-            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
-            softAssert.assertTrue(commonActions.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
             List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
@@ -176,8 +177,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Pause");
         if (commonActions.isPresent_EmptyTableMsg_Lbl()) {
-            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
-            softAssert.assertTrue(commonActions.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
             List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
@@ -193,8 +194,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Onboarding");
         if (commonActions.isPresent_EmptyTableMsg_Lbl()) {
-            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
-            softAssert.assertTrue(commonActions.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
             List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
@@ -210,8 +211,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Deboard");
         if (commonActions.isPresent_EmptyTableMsg_Lbl()) {
-            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
-            softAssert.assertTrue(commonActions.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
             List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
@@ -227,8 +228,8 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_Status_RadioBtn("Inactive");
         if (commonActions.isPresent_EmptyTableMsg_Lbl()) {
-            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Message Is Matched As Expected");
-            softAssert.assertTrue(commonActions.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
+            softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
+            softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
             List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
@@ -358,6 +359,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         List<String> expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        ExtentLogger.logPass("Dragging 0th Position Table Column to 1st Position");
         String temp = expectedList.get(0);
         expectedList.add(0, expectedList.get(1));
         expectedList.remove(1);
@@ -372,11 +374,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        ExtentLogger.logPass("Dragging 3rd Position Table Column To 5th Position");
         temp = expectedList.get(3);
-        expectedList.add(3, expectedList.get(5));
+        expectedList.add(3, expectedList.get(4));
+        expectedList.remove(4);
+        expectedList.add(4, expectedList.get(5));
         expectedList.remove(5);
         expectedList.add(5, temp);
-        expectedList.remove(5);
+        expectedList.remove(6);
         facilitiesPage.dragAndDrop_MoreActionsDropDownModifyColumnDragOptionsList_Lbl(3, 5);
         actualList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
         for (int i = 0; i < expectedList.size(); i++)
@@ -386,6 +391,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
+        ExtentLogger.logPass("Dragging 5th Position Table Column To 6th Position");
         temp = expectedList.get(5);
         expectedList.add(5, expectedList.get(6));
         expectedList.remove(6);

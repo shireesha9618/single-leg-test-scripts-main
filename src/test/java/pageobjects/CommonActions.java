@@ -31,7 +31,6 @@ public class CommonActions {
     private final Locator pageSize_Txt = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
     private final Locator paginationBlockList_Txt = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
     private final Locator emptyTableMsg_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//h3"));
-    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//td//td"));
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
     String elementInFirstRow = "//tr[2]/td[index]";
     String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
@@ -221,9 +220,5 @@ public class CommonActions {
 
     public String getText_EmptyTableMsg_Lbl() {
         return ActionHelper.getText(emptyTableMsg_Lbl);
-    }
-
-    public boolean isPresent_AddFacility_Btn() {
-        return ActionHelper.isPresent(addFacility_Btn);
     }
 }

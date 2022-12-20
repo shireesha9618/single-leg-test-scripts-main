@@ -35,8 +35,6 @@ public class HomePage extends BaseTestClass {
     private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']/.."));
     private final Locator appsHeader_Lbl = Locator.builder().withWeb(By.xpath("//a[text()='Apps']"));
     private final Locator ordersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Orders']"));
-    //    private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/add/']"));
-//    private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[@href='https://alpha.preprod.fxtrt.io/application/orders/']"));
     private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Create Orders']"));
     private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='View Orders']"));
     private final Locator routingOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));

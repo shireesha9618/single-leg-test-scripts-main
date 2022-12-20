@@ -45,7 +45,7 @@ public class FacilitiesPage {
     private final Locator moreActionsDropDownModifyColumnUpdatedAt_CheckBox = Locator.builder().withWeb(By.id("Updated At"));
     private final Locator moreActionsDropDownModifyColumnCreatedBy_CheckBox = Locator.builder().withWeb(By.id("Created By"));
     private final Locator moreActionsDropDownModifyColumnUpdatedBy_CheckBox = Locator.builder().withWeb(By.id("Updated By"));
-    private final Locator moreActionsDropDownModifyColumnDragOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div"));
+    private final Locator moreActionsDropDownModifyColumnDragOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div"));
     private final Locator moreActionsDropDownModifyColumnCheckBoxDataList_CheckBox = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-2 items-center']"));
     private final Locator moreActionDropDownModifyColumnCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator moreActionsDropDownModifyColumnSave_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
@@ -75,6 +75,7 @@ public class FacilitiesPage {
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
     private final Locator tableColumnSelectAll_CheckBox = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell ant-table-selection-column']"));
+    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//td//td"));
     CommonActions commonActions = CommonActions.getInstance();
 
     public static FacilitiesPage getInstance() {
@@ -120,7 +121,7 @@ public class FacilitiesPage {
     }
 
     public void fill_Search_Txt(String facilityName) {
-        ActionHelper.fillWithClear(search_Txt.getBy(), facilityName);
+        ActionHelper.sendKeysWithClear(search_Txt.getBy(), facilityName);
         commonActions.waitTillLoaderDisappears();
     }
 
@@ -514,7 +515,6 @@ public class FacilitiesPage {
         String facilityId = commonActions.getText_TableData_Lbl("FACILITY ID");
         String facilityName = commonActions.getText_TableData_Lbl("FACILITY NAME");
         String postalCode = commonActions.getText_TableData_Lbl("POSTAL CODE");
-        ;
         String address = commonActions.getText_TableData_Lbl("ADDRESS");
         String city = commonActions.getText_TableData_Lbl("CITY");
         String state = commonActions.getText_TableData_Lbl("STATE");
@@ -568,5 +568,9 @@ public class FacilitiesPage {
             classList.add(element.get(i).getAttribute("class"));
         }
         return classList;
+    }
+
+    public boolean isPresent_AddFacility_Btn() {
+        return ActionHelper.isPresent(addFacility_Btn);
     }
 }
