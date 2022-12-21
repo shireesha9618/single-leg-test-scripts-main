@@ -416,4 +416,12 @@ public class Utility {
         return new DateTime().getMinuteOfHour();
     }
 
+    public static boolean isRadioSelected(By by) {
+        return isRadioSelected(ActionHelper.findElement(by));
+    }
+
+    public static boolean isRadioSelected(WebElement element) {
+        return element.isSelected();
+    }
+
 }

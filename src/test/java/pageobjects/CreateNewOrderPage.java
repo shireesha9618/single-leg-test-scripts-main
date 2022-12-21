@@ -14,7 +14,10 @@ import org.testng.Assert;
 import utility.Utility;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreateNewOrderPage {
     private static CreateNewOrderPage _instance;
@@ -27,36 +30,69 @@ public class CreateNewOrderPage {
     private final Locator orderDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Order Details']"));
     private final Locator orderDetailsOrderId_Txt = Locator.builder().withWeb(By.xpath("//input[@name='orderId']"));
     private final Locator orderDetailsScannableBarcodeNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='barcodeNumber']"));
-    private final Locator orderDetailsOrderDescription_Txt = Locator.builder().withWeb(By.xpath("//textarea[@name='orderDescription']"));
+    private final Locator orderDetailsOrderDescription_Txt = Locator.builder().withWeb(By.xpath("//input[@name='orderDescription']"));
     private final Locator orderDetailsTeam_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[2]"));
+    private final Locator orderDetailsTotalWeight_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Total Weight (kg)']/following-sibling::div/div/input[@placeholder='Total Weight']"));
+    private final Locator orderDetailsTotalVolume_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Total Volume (cu.cm)']/following-sibling::div/div/input[@placeholder='Total Volume']"));
+
+    private final Locator shipmentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Shipment Details']"));
+    private final Locator shipmentDetailsShipmentID_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1]/div//div/input[@placeholder='Enter Shipment ID']"));
+    private final Locator shipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description']"));
+    private final Locator shipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input[@placeholder='Enter Weight']"));
+    private final Locator shipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input[@placeholder='Enter Volume']"));
+    private final Locator shipmentDetailsDimensionsLength_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='l']"));
+    private final Locator shipmentDetailsDimensionsBreadth_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='b']"));
+    private final Locator shipmentDetailsDimensionsHeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='h']"));
+    private final Locator shipmentDetailsDelete_Btn = Locator.builder().withWeb(By.xpath("//td[div//input[@placeholder='h']]/following-sibling::td"));
+    private final Locator shipmentDetailsTableColumnShipmentID_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1][text()]"));
+    private final Locator shipmentDetailsTableColumnDescription_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2][text()]"));
+    private final Locator shipmentDetailsTableColumnWeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3][text()]"));
+    private final Locator shipmentDetailsTableColumnVolume_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4][text()]"));
+    private final Locator shipmentDetailsTableColumnDimensionsLength_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[1][text()]"));
+    private final Locator shipmentDetailsTableColumnDimensionsBreadth_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[2][text()]"));
+    private final Locator shipmentDetailsTableColumnDimensionsHeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[3][text()]"));
+    private final Locator shipmentDetailsTableColumnDelete_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]/div"));
+    private final Locator shipmentDetailsAddShipment_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Add Shipment']"));
 
     private final Locator pickupDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Pickup Details']"));
+    private final Locator pickupDetailsFacilityStore_Radio = Locator.builder().withWeb(By.xpath("//input[@value='pickupStore']"));
+    private final Locator pickupDetailsCustomAddress_Radio = Locator.builder().withWeb(By.xpath("//input[@value='pickupAaddress']"));
     private final Locator pickupDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='contactName']"));
     private final Locator pickupDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='primaryMobile']"));
     private final Locator pickupDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::div//input[@type='search']"));
     private final Locator pickupDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='postalCode']"));
-    private final Locator pickupDetailsCountry_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter country']"));
+    private final Locator pickupDetailsCountry_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter Country']"));
     private final Locator pickupDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressLine1']"));
     private final Locator pickupDetailsAddressLine2_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressLine2']"));
     private final Locator pickupDetailsState_Txt = Locator.builder().withWeb(By.xpath("//input[@name='state']"));
     private final Locator pickupDetailsCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='city']"));
+    private final Locator pickupDetailsPickupDate_Txt = Locator.builder().withWeb(By.xpath("//input[@name='pickupDate']"));
+    private final Locator pickupDetailsPickupSlotFrom_Txt = Locator.builder().withWeb(By.xpath("//input[@name='pickupSlotFrom']"));
+    private final Locator pickupDetailsPickupSlotTo_Txt = Locator.builder().withWeb(By.xpath("//input[@name='pickupSlotTo']"));
     private final Locator pickupDetailsClearAll_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Clear All']"));
 
     private final Locator dropDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Drop Details']"));
+    private final Locator dropDetailsFacilityStore_Radio = Locator.builder().withWeb(By.xpath("//input[@value='store']"));
+    private final Locator dropDetailsCustomAddress_Radio = Locator.builder().withWeb(By.xpath("//input[@value='address']"));
     private final Locator dropDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropContactName']"));
     private final Locator dropDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPrimaryMobile']"));
     private final Locator dropDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//input[@type='search'])[2]"));
     private final Locator dropDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPostalCode']"));
-    private final Locator dropDetailsCountry_Select = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter country'])[2]"));
+    private final Locator dropDetailsCountry_Select = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter Country'])[2]"));
     private final Locator dropDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropAddressLine1']"));
     private final Locator dropDetailsAddressLine2_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropAddressLine2']"));
     private final Locator dropDetailsState_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropState']"));
     private final Locator dropDetailsCity_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropCity']"));
+    private final Locator dropDetailsDropDate_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropDate']"));
+    private final Locator dropDetailsDropSlotFrom_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropSlotFrom']"));
+    private final Locator dropDetailsDropSlotTo_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropSlotTo']"));
     private final Locator dropDetailsClearAll_Btn = Locator.builder().withWeb(By.xpath("(//div[text()='Clear All'])[2]"));
 
+    private final Locator selectAFacilityDropdownOptions_ListBtn = Locator.builder().withWeb(By.xpath("(//div[@class='rc-virtual-list'])[last()]//p"));
+
     private final Locator paymentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Payment Details']"));
-    private final Locator paymentDetailsPaymentType_Select = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']"));
-    private final Locator paymentDetailsOrderAmount_Txt = Locator.builder().withWeb(By.xpath("//input[@name='paymentDetails.orderAmount']"));
+    private final Locator paymentDetailsPaymentType_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Select Payment Type']"));
+    private final Locator paymentDetailsOrderAmount_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Order Amount']"));
 
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
@@ -64,32 +100,37 @@ public class CreateNewOrderPage {
     private final Locator successToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Order Creation Success']"));
     private final Locator duplicateOrderIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Duplicate clientOrderId']"));
     private final Locator samePickupAndDropFacilityToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Drop facility needs to be different from Pickup facility']"));
+    private final Locator onlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Only prepaid orders allowed for multiple shipments']"));
 
-    private final Locator orderDetailsOrderIdValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter order id']]/following-sibling::span"));
-    private final Locator orderDetailsOrderDescriptionValidationError_Lbl = Locator.builder().withWeb(By.xpath("//textarea[@placeholder='Enter order description']/following-sibling::span"));
+    private final Locator orderDetailsOrderIdValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='orderId']]/following-sibling::p"));
+    private final Locator orderDetailsOrderDescriptionValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='orderDescription']]/following-sibling::p"));
     private final Locator orderDetailsTeamValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[label[text()='Team*']]//input/following-sibling::span"));
 
-    private final Locator pickupDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter Contact Name*']]/following-sibling::span"));
-    private final Locator pickupDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter Contact Number*']]/following-sibling::span"));
-    private final Locator pickupDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']]/following-sibling::span"));
-    private final Locator pickupDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter postal code*']]/following-sibling::span"));
-    private final Locator pickupDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter country']/following-sibling::span"));
-    private final Locator pickupDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter address line 1']]/following-sibling::span"));
-    private final Locator pickupDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter address line 2']]/following-sibling::span"));
-    private final Locator pickupDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter state']]/following-sibling::span"));
-    private final Locator pickupDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@placeholder='Enter city']]/following-sibling::span"));
+    private final Locator shipmentDetailsValidationError_Lbl = Locator.builder().withWeb(By.xpath("//button[p//span[text()='Add Shipment']]/preceding-sibling::p"));
 
-    private final Locator dropDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Name*']])[2]/following-sibling::p"));
-    private final Locator dropDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter Contact Number*']])[2]/following-sibling::p"));
-    private final Locator dropDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//span[input[@type='search']])[2]/following-sibling::p"));
-    private final Locator dropDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter postal code*']])[2]/following-sibling::p"));
-    private final Locator dropDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter country'])[2]/following-sibling::p"));
-    private final Locator dropDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 1']])[2]/following-sibling::p"));
-    private final Locator dropDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter address line 2']])[2]/following-sibling::p"));
-    private final Locator dropDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter state']])[2]/following-sibling::P"));
-    private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//div[div/input[@placeholder='Enter city']])[2]/following-sibling::p"));
+    private final Locator pickupDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='contactName']]/following-sibling::p"));
+    private final Locator pickupDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/div/input[@name='primaryMobile']]/following-sibling::p"));
+    private final Locator pickupDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::p"));
+    private final Locator pickupDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='postalCode']]/following-sibling::p"));
+    private final Locator pickupDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter Country']/following-sibling::p"));
+    private final Locator pickupDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressLine1']]/following-sibling::p"));
+    private final Locator pickupDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressLine2']]/following-sibling::p"));
+    private final Locator pickupDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='state']]/following-sibling::p"));
+    private final Locator pickupDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='city']]/following-sibling::p"));
+    private final Locator pickupDetailsPickupDateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='pickupDate']]/following-sibling::p"));
 
-    private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@name='paymentDetails.paymentType']/following-sibling::p"));
+    private final Locator dropDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropContactName']]/following-sibling::p"));
+    private final Locator dropDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/div/input[@name='dropPrimaryMobile']]/following-sibling::p"));
+    private final Locator dropDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::p)[2]"));
+    private final Locator dropDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropPostalCode']]/following-sibling::p"));
+    private final Locator dropDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter Country']/following-sibling::p)[2]"));
+    private final Locator dropDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropAddressLine1']]/following-sibling::p"));
+    private final Locator dropDetailsAddressLine2ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropAddressLine2']]/following-sibling::p"));
+    private final Locator dropDetailsStateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropState']]/following-sibling::p"));
+    private final Locator dropDetailsCityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropCity']]/following-sibling::p"));
+    private final Locator dropDetailsDropDateValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='dropDate']]/following-sibling::p"));
+
+    private final Locator paymentDetailsPaymentTypeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@placeholder='Select Payment Type']/following-sibling::p"));
 
     private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option ant-select-item-option-active']//p"));
 
@@ -114,6 +155,8 @@ public class CreateNewOrderPage {
     private final Locator addFacilityCityValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressDetails.city']]/following-sibling::p"));
 
     private final Locator addFacilityPinCodeDataNotFoundToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Pincode data not found.']"));
+    private final Locator addShipmentRequiredParamShipmentIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Required Param Shipment Id']"));
+    private final Locator addShipmentRequiredParamDescriptionToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Required Param Description']"));
 
     Faker sampleData = new Faker();
 
@@ -768,6 +811,14 @@ public class CreateNewOrderPage {
         return ActionHelper.getText(orderDetailsTeamValidationError_Lbl);
     }
 
+    public boolean isPresent_ShipmentDetailsValidationError_Lbl() {
+        return ActionHelper.isPresent(shipmentDetailsValidationError_Lbl);
+    }
+
+    public String getText_ShipmentDetailsValidationError_Lbl() {
+        return ActionHelper.getText(shipmentDetailsValidationError_Lbl);
+    }
+
     public boolean isPresent_PickupDetailsContactNameValidationError_Lbl() {
         return ActionHelper.isPresent(pickupDetailsContactNameValidationError_Lbl);
     }
@@ -840,6 +891,14 @@ public class CreateNewOrderPage {
         return ActionHelper.getText(pickupDetailsCityValidationError_Lbl);
     }
 
+    public boolean isPresent_PickupDetailsPickupDateValidationError_Lbl() {
+        return ActionHelper.isPresent(pickupDetailsPickupDateValidationError_Lbl);
+    }
+
+    public String getText_PickupDetailsPickupDateValidationError_Lbl() {
+        return ActionHelper.getText(pickupDetailsPickupDateValidationError_Lbl);
+    }
+
     public boolean isPresent_DropDetailsContactNameValidationError_Lbl() {
         return ActionHelper.isPresent(dropDetailsContactNameValidationError_Lbl);
     }
@@ -910,6 +969,14 @@ public class CreateNewOrderPage {
 
     public String getText_DropDetailsCityValidationError_Lbl() {
         return ActionHelper.getText(dropDetailsCityValidationError_Lbl);
+    }
+
+    public boolean isPresent_DropDetailsDropDateValidationError_Lbl() {
+        return ActionHelper.isPresent(dropDetailsDropDateValidationError_Lbl);
+    }
+
+    public String getText_DropDetailsDropDateValidationError_Lbl() {
+        return ActionHelper.getText(dropDetailsDropDateValidationError_Lbl);
     }
 
     public boolean isPresent_PaymentDetailsPaymentTypeValidationError_Lbl() {
@@ -1204,6 +1271,14 @@ public class CreateNewOrderPage {
         return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl, 5000);
     }
 
+    public boolean isPresent_AddShipmentRequiredParamShipmentIdToastMsg_Lbl() {
+        return ActionHelper.isPresent(addShipmentRequiredParamShipmentIdToastMsg_Lbl, 5000);
+    }
+
+    public boolean isPresent_AddShipmentRequiredParamDescriptionToastMsg_Lbl() {
+        return ActionHelper.isPresent(addShipmentRequiredParamDescriptionToastMsg_Lbl, 5000);
+    }
+
     public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         if (input.equalsIgnoreCase("Pickup"))
@@ -1235,6 +1310,36 @@ public class CreateNewOrderPage {
     public void set_DropFacility_TextBox() {
         ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         ActionHelper.waitForLoaderToHide();
+    }
+
+    public void set_PickUpFacility_TextBox(String value) {
+        ActionHelper.click(pickupDetailsSelectAFacility_Dropdown);
+        Utility.clickWebElementMatchingText(ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()), value);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public void set_DropFacility_TextBox(String value) {
+        ActionHelper.click(dropDetailsSelectAFacility_Dropdown);
+        Utility.clickWebElementMatchingText(ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()), value);
+        ActionHelper.waitForLoaderToHide();
+    }
+
+    public String setPickUpFacilityByIndex(int index) {
+        ActionHelper.click(pickupDetailsSelectAFacility_Dropdown);
+        WebElement element = ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()).get(index);
+        String text = ActionHelper.getText(element);
+        ActionHelper.click(element);
+        ActionHelper.waitForLoaderToHide();
+        return text;
+    }
+
+    public String setDropFacilityByIndex(int index) {
+        ActionHelper.click(dropDetailsSelectAFacility_Dropdown);
+        WebElement element = ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()).get(index);
+        String text = ActionHelper.getText(element);
+        ActionHelper.click(element);
+        ActionHelper.waitForLoaderToHide();
+        return text;
     }
 
     public void fill_Pickup_Details(String postalCode, String addressLine1, String addressLine2) {
@@ -1304,7 +1409,11 @@ public class CreateNewOrderPage {
         return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, 5000);
     }
 
-    public void fillPickupDetailsWithCustomData(){
+    public boolean isPresent_OnlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl() {
+        return ActionHelper.isPresent(onlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl, 5000);
+    }
+
+    public void fillPickupDetailsWithCustomData() {
         fillWithClear_PickupDetailsPostalCode_Txt(sampleData.address().zipCode());
         selectByVisibleText_PickupDetailsCountry_Select(sampleData.country().name());
         fillWithClear_PickupDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
@@ -1313,12 +1422,680 @@ public class CreateNewOrderPage {
         fillWithClear_PickupDetailsCity_Txt(sampleData.address().city());
     }
 
-    public void fillDropDetailsWithCustomData(){
+    public void fillDropDetailsWithCustomData() {
         fillWithClear_DropDetailsPostalCode_Txt(sampleData.address().zipCode());
         selectByVisibleText_DropDetailsCountry_Select(sampleData.country().name());
         fillWithClear_DropDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
         fillWithClear_DropDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
         fillWithClear_DropDetailsState_Txt(sampleData.address().state());
         fillWithClear_DropDetailsCity_Txt(sampleData.address().city());
+    }
+
+    public boolean isPresent_OrderDetailsTotalWeight_Txt() {
+        return ActionHelper.isPresent(orderDetailsTotalWeight_Txt);
+    }
+
+    public void fill_OrderDetailsTotalWeight_Txt(String value) {
+        ActionHelper.fill(orderDetailsTotalWeight_Txt, value);
+    }
+
+    public void fillWithClear_OrderDetailsTotalWeight_Txt(String value) {
+        ActionHelper.fillWithClear(orderDetailsTotalWeight_Txt.getBy(), value);
+    }
+
+    public void clear_OrderDetailsTotalWeight_Txt() {
+        ActionHelper.clear(orderDetailsTotalWeight_Txt.getBy());
+    }
+
+    public String getValue_OrderDetailsTotalWeight_Txt() {
+        return ActionHelper.getAttribute(orderDetailsTotalWeight_Txt, "value");
+    }
+
+    public boolean isPresent_OrderDetailsTotalVolume_Txt() {
+        return ActionHelper.isPresent(orderDetailsTotalVolume_Txt);
+    }
+
+    public void fill_OrderDetailsTotalVolume_Txt(String value) {
+        ActionHelper.fill(orderDetailsTotalVolume_Txt, value);
+    }
+
+    public void fillWithClear_OrderDetailsTotalVolume_Txt(String value) {
+        ActionHelper.fillWithClear(orderDetailsTotalVolume_Txt.getBy(), value);
+    }
+
+    public void clear_OrderDetailsTotalVolume_Txt() {
+        ActionHelper.clear(orderDetailsTotalVolume_Txt.getBy());
+    }
+
+    public String getValue_OrderDetailsTotalVolume_Txt() {
+        return ActionHelper.getAttribute(orderDetailsTotalVolume_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsHeader_Lbl() {
+        return ActionHelper.isPresent(shipmentDetailsHeader_Lbl);
+    }
+
+    public String getText_ShipmentDetailsHeader_Lbl() {
+        return ActionHelper.getText(shipmentDetailsHeader_Lbl);
+    }
+
+    public boolean isPresent_ShipmentDetailsShipmentID_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsShipmentID_Txt);
+    }
+
+    public void fill_ShipmentDetailsShipmentID_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsShipmentID_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsShipmentID_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsShipmentID_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsShipmentID_Txt() {
+        ActionHelper.clear(shipmentDetailsShipmentID_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsShipmentID_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsShipmentID_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsDescription_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsDescription_Txt);
+    }
+
+    public void fill_ShipmentDetailsDescription_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsDescription_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsDescription_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsDescription_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsDescription_Txt() {
+        ActionHelper.clear(shipmentDetailsDescription_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsDescription_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsDescription_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsWeight_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsWeight_Txt);
+    }
+
+    public void fill_ShipmentDetailsWeight_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsWeight_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsWeight_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsWeight_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsWeight_Txt() {
+        ActionHelper.clear(shipmentDetailsWeight_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsWeight_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsWeight_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsVolume_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsVolume_Txt);
+    }
+
+    public void fill_ShipmentDetailsVolume_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsVolume_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsVolume_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsVolume_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsVolume_Txt() {
+        ActionHelper.clear(shipmentDetailsVolume_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsVolume_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsVolume_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsDimensionsLength_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsDimensionsLength_Txt);
+    }
+
+    public void fill_ShipmentDetailsDimensionsLength_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsDimensionsLength_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsDimensionsLength_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsDimensionsLength_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsDimensionsLength_Txt() {
+        ActionHelper.clear(shipmentDetailsDimensionsLength_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsDimensionsLength_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsDimensionsLength_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsDimensionsBreadth_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsDimensionsBreadth_Txt);
+    }
+
+    public void fill_ShipmentDetailsDimensionsBreadth_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsDimensionsBreadth_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsDimensionsBreadth_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsDimensionsBreadth_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsDimensionsBreadth_Txt() {
+        ActionHelper.clear(shipmentDetailsDimensionsBreadth_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsDimensionsBreadth_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsDimensionsBreadth_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsDimensionsHeight_Txt() {
+        return ActionHelper.isPresent(shipmentDetailsDimensionsHeight_Txt);
+    }
+
+    public void fill_ShipmentDetailsDimensionsHeight_Txt(String value) {
+        ActionHelper.fill(shipmentDetailsDimensionsHeight_Txt, value);
+    }
+
+    public void fillWithClear_ShipmentDetailsDimensionsHeight_Txt(String value) {
+        ActionHelper.fillWithClear(shipmentDetailsDimensionsHeight_Txt.getBy(), value);
+    }
+
+    public void clear_ShipmentDetailsDimensionsHeight_Txt() {
+        ActionHelper.clear(shipmentDetailsDimensionsHeight_Txt.getBy());
+    }
+
+    public String getValue_ShipmentDetailsDimensionsHeight_Txt() {
+        return ActionHelper.getAttribute(shipmentDetailsDimensionsHeight_Txt, "value");
+    }
+
+    public boolean isPresent_ShipmentDetailsDelete_Btn() {
+        return ActionHelper.isPresent(shipmentDetailsDelete_Btn);
+    }
+
+    public void click_ShipmentDetailsDelete_Btn() {
+        ActionHelper.click(shipmentDetailsDelete_Btn);
+    }
+
+    public String getText_ShipmentDetailsDelete_Btn() {
+        return ActionHelper.getText(shipmentDetailsDelete_Btn);
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnShipmentID_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnShipmentID_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnShipmentID_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnShipmentID_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnShipmentID_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnShipmentID_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnDescription_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDescription_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnDescription_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDescription_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnDescription_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDescription_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnWeight_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnWeight_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnWeight_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnVolume_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnVolume_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnVolume_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnDimensionsLength_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsLength_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnDimensionsLength_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsLength_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnDimensionsLength_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsLength_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnDimensionsBreadth_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsBreadth_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnDimensionsBreadth_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsBreadth_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnDimensionsBreadth_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsBreadth_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnDimensionsHeight_ListLbl() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsHeight_ListLbl.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnDimensionsHeight_ListLbl() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsHeight_ListLbl.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnDimensionsHeight_ListLbl(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDimensionsHeight_ListLbl.getBy()).get(index));
+    }
+
+    public List<WebElement> getList_ShipmentDetailsTableColumnDelete_ListBtn() {
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDelete_ListBtn.getBy());
+    }
+
+    public List<String> getText_ShipmentDetailsTableColumnDelete_ListBtn() {
+        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDelete_ListBtn.getBy()));
+    }
+
+    public String getText_ShipmentDetailsTableColumnDelete_ListBtn(int index) {
+        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDelete_ListBtn.getBy()).get(index));
+    }
+
+    public void click_ShipmentDetailsTableColumnDelete_ListBtn(int index) {
+        ActionHelper.click(ActionHelper.findElements(shipmentDetailsTableColumnDelete_ListBtn.getBy()).get(index));
+    }
+
+    public boolean isPresent_ShipmentDetailsAddShipment_Btn() {
+        return ActionHelper.isPresent(shipmentDetailsAddShipment_Btn);
+    }
+
+    public void click_ShipmentDetailsAddShipment_Btn() {
+        ActionHelper.click(shipmentDetailsAddShipment_Btn);
+    }
+
+    public String getText_ShipmentDetailsAddShipment_Btn() {
+        return ActionHelper.getText(shipmentDetailsAddShipment_Btn);
+    }
+
+    public boolean isPresent_PickupDetailsFacilityStore_Radio() {
+        return ActionHelper.isPresent(pickupDetailsFacilityStore_Radio);
+    }
+
+    public void click_PickupDetailsFacilityStore_Radio() {
+        ActionHelper.click(pickupDetailsFacilityStore_Radio);
+    }
+
+    public boolean isRadioSelected_PickupDetailsFacilityStore_Radio() {
+        return Utility.isRadioSelected(pickupDetailsFacilityStore_Radio.getBy());
+    }
+
+    public boolean isPresent_PickupDetailsCustomAddress_Radio() {
+        return ActionHelper.isPresent(pickupDetailsCustomAddress_Radio);
+    }
+
+    public void click_PickupDetailsCustomAddress_Radio() {
+        ActionHelper.click(pickupDetailsCustomAddress_Radio);
+    }
+
+    public boolean isRadioSelected_PickupDetailsCustomAddress_Radio() {
+        return Utility.isRadioSelected(pickupDetailsCustomAddress_Radio.getBy());
+    }
+
+    public boolean isPresent_PickupDetailsPickupDate_Txt() {
+        return ActionHelper.isPresent(pickupDetailsPickupDate_Txt);
+    }
+
+    public void fill_PickupDetailsPickupDate_Txt(String value) {
+        ActionHelper.fill(pickupDetailsPickupDate_Txt, value);
+    }
+
+    public void fillWithClear_PickupDetailsPickupDate_Txt(String value) {
+        ActionHelper.fillWithClear(pickupDetailsPickupDate_Txt.getBy(), value);
+    }
+
+    public void clear_PickupDetailsPickupDate_Txt() {
+        ActionHelper.clear(pickupDetailsPickupDate_Txt.getBy());
+    }
+
+    public String getValue_PickupDetailsPickupDate_Txt() {
+        return ActionHelper.getAttribute(pickupDetailsPickupDate_Txt, "value");
+    }
+
+    public boolean isPresent_PickupDetailsPickupSlotFrom_Txt() {
+        return ActionHelper.isPresent(pickupDetailsPickupSlotFrom_Txt);
+    }
+
+    public void fill_PickupDetailsPickupSlotFrom_Txt(String value) {
+        ActionHelper.fill(pickupDetailsPickupSlotFrom_Txt, value);
+    }
+
+    public void fillWithClear_PickupDetailsPickupSlotFrom_Txt(String value) {
+        ActionHelper.fillWithClear(pickupDetailsPickupSlotFrom_Txt.getBy(), value);
+    }
+
+    public void clear_PickupDetailsPickupSlotFrom_Txt() {
+        ActionHelper.clear(pickupDetailsPickupSlotFrom_Txt.getBy());
+    }
+
+    public String getValue_PickupDetailsPickupSlotFrom_Txt() {
+        return ActionHelper.getAttribute(pickupDetailsPickupSlotFrom_Txt, "value");
+    }
+
+    public boolean isPresent_PickupDetailsPickupSlotTo_Txt() {
+        return ActionHelper.isPresent(pickupDetailsPickupSlotTo_Txt);
+    }
+
+    public void fill_PickupDetailsPickupSlotTo_Txt(String value) {
+        ActionHelper.fill(pickupDetailsPickupSlotTo_Txt, value);
+    }
+
+    public void fillWithClear_PickupDetailsPickupSlotTo_Txt(String value) {
+        ActionHelper.fillWithClear(pickupDetailsPickupSlotTo_Txt.getBy(), value);
+    }
+
+    public void clear_PickupDetailsPickupSlotTo_Txt() {
+        ActionHelper.clear(pickupDetailsPickupSlotTo_Txt.getBy());
+    }
+
+    public String getValue_PickupDetailsPickupSlotTo_Txt() {
+        return ActionHelper.getAttribute(pickupDetailsPickupSlotTo_Txt, "value");
+    }
+
+    public boolean isPresent_DropDetailsFacilityStore_Radio() {
+        return ActionHelper.isPresent(dropDetailsFacilityStore_Radio);
+    }
+
+    public void click_DropDetailsFacilityStore_Radio() {
+        ActionHelper.click(dropDetailsFacilityStore_Radio);
+    }
+
+    public boolean isRadioSelected_DropDetailsFacilityStore_Radio() {
+        return Utility.isRadioSelected(dropDetailsFacilityStore_Radio.getBy());
+    }
+
+    public boolean isPresent_DropDetailsCustomAddress_Radio() {
+        return ActionHelper.isPresent(dropDetailsCustomAddress_Radio);
+    }
+
+    public void click_DropDetailsCustomAddress_Radio() {
+        ActionHelper.click(dropDetailsCustomAddress_Radio);
+    }
+
+    public boolean isRadioSelected_DropDetailsCustomAddress_Radio() {
+        return Utility.isRadioSelected(dropDetailsCustomAddress_Radio.getBy());
+    }
+
+    public boolean isPresent_DropDetailsDropDate_Txt() {
+        return ActionHelper.isPresent(dropDetailsDropDate_Txt);
+    }
+
+    public void fill_DropDetailsDropDate_Txt(String value) {
+        ActionHelper.fill(dropDetailsDropDate_Txt, value);
+    }
+
+    public void fillWithClear_DropDetailsDropDate_Txt(String value) {
+        ActionHelper.fillWithClear(dropDetailsDropDate_Txt.getBy(), value);
+    }
+
+    public void clear_DropDetailsDropDate_Txt() {
+        ActionHelper.clear(dropDetailsDropDate_Txt.getBy());
+    }
+
+    public String getValue_DropDetailsDropDate_Txt() {
+        return ActionHelper.getAttribute(dropDetailsDropDate_Txt, "value");
+    }
+
+    public boolean isPresent_DropDetailsDropSlotFrom_Txt() {
+        return ActionHelper.isPresent(dropDetailsDropSlotFrom_Txt);
+    }
+
+    public void fill_DropDetailsDropSlotFrom_Txt(String value) {
+        ActionHelper.fill(dropDetailsDropSlotFrom_Txt, value);
+    }
+
+    public void fillWithClear_DropDetailsDropSlotFrom_Txt(String value) {
+        ActionHelper.fillWithClear(dropDetailsDropSlotFrom_Txt.getBy(), value);
+    }
+
+    public void clear_DropDetailsDropSlotFrom_Txt() {
+        ActionHelper.clear(dropDetailsDropSlotFrom_Txt.getBy());
+    }
+
+    public String getValue_DropDetailsDropSlotFrom_Txt() {
+        return ActionHelper.getAttribute(dropDetailsDropSlotFrom_Txt, "value");
+    }
+
+    public boolean isPresent_DropDetailsDropSlotTo_Txt() {
+        return ActionHelper.isPresent(dropDetailsDropSlotTo_Txt);
+    }
+
+    public void fill_DropDetailsDropSlotTo_Txt(String value) {
+        ActionHelper.fill(dropDetailsDropSlotTo_Txt, value);
+    }
+
+    public void fillWithClear_DropDetailsDropSlotTo_Txt(String value) {
+        ActionHelper.fillWithClear(dropDetailsDropSlotTo_Txt.getBy(), value);
+    }
+
+    public void clear_DropDetailsDropSlotTo_Txt() {
+        ActionHelper.clear(dropDetailsDropSlotTo_Txt.getBy());
+    }
+
+    public String getValue_DropDetailsDropSlotTo_Txt() {
+        return ActionHelper.getAttribute(dropDetailsDropSlotTo_Txt, "value");
+    }
+
+    public boolean isEnabled_PickupDetailsContactName_Txt() {
+        return ActionHelper.findElement(pickupDetailsContactName_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsContactNumber_Txt() {
+        return ActionHelper.findElement(pickupDetailsContactNumber_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsSelectAFacility_Dropdown() {
+        return ActionHelper.findElement(pickupDetailsSelectAFacility_Dropdown).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsPostalCode_Txt() {
+        return ActionHelper.findElement(pickupDetailsPostalCode_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsCountry_Select() {
+        return ActionHelper.findElement(pickupDetailsCountry_Select).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsAddressLine1_Txt() {
+        return ActionHelper.findElement(pickupDetailsAddressLine1_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsAddressLine2_Txt() {
+        return ActionHelper.findElement(pickupDetailsAddressLine2_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsState_Txt() {
+        return ActionHelper.findElement(pickupDetailsState_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsCity_Txt() {
+        return ActionHelper.findElement(pickupDetailsCity_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsPickupDate_Txt() {
+        return ActionHelper.findElement(pickupDetailsPickupDate_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsPickupSlotFrom_Txt() {
+        return ActionHelper.findElement(pickupDetailsPickupSlotFrom_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_PickupDetailsPickupSlotTo_Txt() {
+        return ActionHelper.findElement(pickupDetailsPickupSlotTo_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsContactName_Txt() {
+        return ActionHelper.findElement(dropDetailsContactName_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsContactNumber_Txt() {
+        return ActionHelper.findElement(dropDetailsContactNumber_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsSelectAFacility_Dropdown() {
+        return ActionHelper.findElement(dropDetailsSelectAFacility_Dropdown).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsPostalCode_Txt() {
+        return ActionHelper.findElement(dropDetailsPostalCode_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsCountry_Select() {
+        return ActionHelper.findElement(dropDetailsCountry_Select).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsAddressLine1_Txt() {
+        return ActionHelper.findElement(dropDetailsAddressLine1_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsAddressLine2_Txt() {
+        return ActionHelper.findElement(dropDetailsAddressLine2_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsState_Txt() {
+        return ActionHelper.findElement(dropDetailsState_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsCity_Txt() {
+        return ActionHelper.findElement(dropDetailsCity_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsDropDate_Txt() {
+        return ActionHelper.findElement(dropDetailsDropDate_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsDropSlotFrom_Txt() {
+        return ActionHelper.findElement(dropDetailsDropSlotFrom_Txt).isEnabled();
+    }
+
+    public boolean isEnabled_DropDetailsDropSlotTo_Txt() {
+        return ActionHelper.findElement(dropDetailsDropSlotTo_Txt).isEnabled();
+    }
+
+    public Map<String, String> addOrderDetails() {
+        Map<String, String> finalData = new HashMap<>();
+        finalData.put("orderId", ActionHelper.getRandomNumberString(5));
+        finalData.put("description", sampleData.artist().name());
+        fillWithClear_OrderDetailsOrderId_Txt(finalData.get("orderId"));
+        fillWithClear_OrderDetailsOrderDescription_Txt(finalData.get("description"));
+        return finalData;
+    }
+
+
+    public List<Map<String, String>> addShipmentDetails(int shipmentCount) {
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < shipmentCount; i++) {
+            map.put("shipmentId", ActionHelper.getRandomNumberString(5));
+            map.put("description", sampleData.artist().name());
+            fillWithClear_ShipmentDetailsShipmentID_Txt(map.get("shipmentId"));
+            fillWithClear_ShipmentDetailsDescription_Txt(map.get("description"));
+            click_ShipmentDetailsAddShipment_Btn();
+            list.add(Map.copyOf(map));
+            map.clear();
+        }
+        return list;
+    }
+
+    public Map<String, String> addFacilityPickupDetails() {
+        Map<String, String> finalData = new HashMap<>();
+        ActionHelper.scrollTillElement(pickupDetailsHeader_Lbl.getBy());
+        click_PickupDetailsFacilityStore_Radio();
+        finalData.put("contactName", sampleData.artist().name());
+        finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
+        fillWithClear_PickupDetailsContactName_Txt(finalData.get("contactName"));
+        fillWithClear_PickupDetailsContactNumber_Txt(finalData.get("contactNumber"));
+        finalData.put("facility", setPickUpFacilityByIndex(0));
+        finalData.put("pickupDate", ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
+        fill_PickupDetailsPickupDate_Txt(finalData.get("pickupDate"));
+        return finalData;
+    }
+
+    public Map<String, String> addFacilityPickupDetails(String pickupDate) {
+        Map<String, String> finalData = new HashMap<>();
+        ActionHelper.scrollTillElement(pickupDetailsHeader_Lbl.getBy());
+        click_PickupDetailsFacilityStore_Radio();
+        finalData.put("contactName", sampleData.artist().name());
+        finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
+        fillWithClear_PickupDetailsContactName_Txt(finalData.get("contactName"));
+        fillWithClear_PickupDetailsContactNumber_Txt(finalData.get("contactNumber"));
+        finalData.put("facility", setPickUpFacilityByIndex(0));
+        finalData.put("pickupDate", pickupDate);
+        fill_PickupDetailsPickupDate_Txt(pickupDate);
+        return finalData;
+    }
+
+    public Map<String, String> addFacilityDropDetails() {
+        Map<String, String> finalData = new HashMap<>();
+        ActionHelper.scrollTillElement(dropDetailsHeader_Lbl.getBy());
+        click_DropDetailsFacilityStore_Radio();
+        finalData.put("contactName", sampleData.artist().name());
+        finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
+        fillWithClear_DropDetailsContactName_Txt(finalData.get("contactName"));
+        fillWithClear_DropDetailsContactNumber_Txt(finalData.get("contactNumber"));
+        finalData.put("facility", setDropFacilityByIndex(1));
+        finalData.put("dropDate", ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
+        fill_DropDetailsDropDate_Txt(finalData.get("dropDate"));
+        return finalData;
+    }
+
+    public Map<String, String> addFacilityDropDetails(String dropDate) {
+        Map<String, String> finalData = new HashMap<>();
+        ActionHelper.scrollTillElement(dropDetailsHeader_Lbl.getBy());
+        click_DropDetailsFacilityStore_Radio();
+        finalData.put("contactName", sampleData.artist().name());
+        finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
+        fillWithClear_DropDetailsContactName_Txt(finalData.get("contactName"));
+        fillWithClear_DropDetailsContactNumber_Txt(finalData.get("contactNumber"));
+        finalData.put("facility", setDropFacilityByIndex(1));
+        finalData.put("dropDate", dropDate);
+        fill_DropDetailsDropDate_Txt(dropDate);
+        return finalData;
+    }
+
+    public String addPaymentDetails(String paymentType) {
+        String amount= null;
+        ActionHelper.scrollTillElement(paymentDetailsHeader_Lbl.getBy());
+        selectByVisibleText_PaymentDetailsPaymentType_Select(paymentType);
+        if(!paymentType.equals("Prepaid")) {
+            amount = ActionHelper.getRandomNumberString(3);
+            fillWithClear_PaymentDetailsOrderAmount_Txt(amount);
+        }
+        return amount;
     }
 }
