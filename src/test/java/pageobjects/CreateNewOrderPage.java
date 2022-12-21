@@ -776,7 +776,7 @@ public class CreateNewOrderPage {
         ActionHelper.click(create_Btn);
         Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
         CommonActions.getInstance().waitTillLoaderDisappears();
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
 
     public void click_Create_Btn() {
