@@ -768,7 +768,7 @@ public class RidersPage {
     }
 
     public boolean isPresent_SelectAll_CheckBox() {
-      return ActionHelper.isPresent(selectAll_CheckBox);
+        return ActionHelper.isPresent(selectAll_CheckBox);
     }
 
     public void click_SelectAll_CheckBox() {

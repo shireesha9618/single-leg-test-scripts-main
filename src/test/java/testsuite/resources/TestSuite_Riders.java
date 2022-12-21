@@ -424,7 +424,7 @@ public class TestSuite_Riders extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header is Present As Expected");
         softAssert.assertEquals(ridersPage.getText_RidersHeader_Lbl(), "Riders", "Riders Header is Matched As Expected");
-        softAssert.assertTrue(ridersPage.isPresent_SelectAll_CheckBox(),"Select All CheckBox Is Present As Expected");
+        softAssert.assertTrue(ridersPage.isPresent_SelectAll_CheckBox(), "Select All CheckBox Is Present As Expected");
         ridersPage.click_SelectAll_CheckBox();
         softAssert.assertTrue(ridersPage.isPresent_ChangeStatus_Btn(), "Change Status Button is Present as Expected");
         softAssert.assertAll();
@@ -454,8 +454,7 @@ public class TestSuite_Riders extends BaseTestClass {
             for (String teams : allTeams) {
                 softAssert.assertEquals(teams, Constants.TEAM, "For All Record As Expected ");
             }
-        }
-        else {
+        } else {
             softAssert.assertTrue(ridersPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
             softAssert.assertEquals(ridersPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
         }

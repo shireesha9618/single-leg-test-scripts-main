@@ -237,7 +237,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "1122@"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
-            softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(),"Not correct format","Phone Number Validation Message Is Matched as expected");
+            softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(), "Not correct format", "Phone Number Validation Message Is Matched as expected");
         }
         softAssert.assertAll();
     }

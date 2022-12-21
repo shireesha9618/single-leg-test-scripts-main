@@ -10,6 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import utility.Utility;
+
+import java.util.List;
 
 import static utility.Utility.acceptAlertIfPresent;
 
@@ -27,7 +30,10 @@ public class CommonActions {
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
     private final Locator pageSize_Txt = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
     private final Locator paginationBlockList_Txt = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
+    private final Locator emptyTableMsg_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//h3"));
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
+    String elementInFirstRow = "//tr[2]/td[index]";
+    String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
 
     public static CommonActions getInstance() {
         if (_instance == null) _instance = new CommonActions();
@@ -62,22 +68,22 @@ public class CommonActions {
 
     public void coverUserJourneyTillRiders() {
         performCommonAction();
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        click_Skip_Btn();
+        waitTillLoaderDisappears();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().openRidersPage();
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        waitTillLoaderDisappears();
         JarvisAssert.assertTrue(RidersPage.getInstance().isPresent_Header_Lbl());
     }
 
     public void coverJourneyTillDispatches() {
         performCommonAction();
-        click_Skip_Btn();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().openDispatchListPage();
     }
 
     public void coverJourneyTillCreateOrder() {
         performCommonAction();
-        click_Skip_Btn();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().openCreateOrderPage();
     }
@@ -86,7 +92,7 @@ public class CommonActions {
         ActionHelper.waitForElementToHide(loader_Txt);
     }
 
-    public void click_Skip_Btn() {
+    public void click_SkipIfPresent_Btn() {
         try {
             ActionHelper.waitForLoaderToHide();
             String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
@@ -101,20 +107,21 @@ public class CommonActions {
 
     public void coverJourneyTillFacility() {
         performCommonAction();
-        click_Skip_Btn();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().click_FacilitiesMenuItem_Btn();
+        waitTillLoaderDisappears();
     }
 
     public void coverJourneyTillRider() {
         performCommonAction();
-        click_Skip_Btn();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().openRidersPage();
     }
 
     public void coverJourneyTillViewOrder() {
         performCommonAction();
-        click_Skip_Btn();
+        click_SkipIfPresent_Btn();
         HomePage.getInstance().openViewOrderPage();
     }
 
@@ -175,5 +182,43 @@ public class CommonActions {
             if (element.getAttribute("title").equals(String.valueOf(label)) && element.getAttribute("class").contains("item-active"))
                 return true;
         return false;
+    }
+
+    public int indexOfTableColumnName(String input) {
+        int index = 0;
+        List<WebElement> columName = ActionHelper.findElements(By.xpath("//tr[1]/th"));
+        for (WebElement element : columName) {
+            if (element.getText().equals(input)) {
+                index = columName.indexOf(element);
+                break;
+            }
+        }
+        return index + 1;
+    }
+
+    public String getText_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+        return ActionHelper.getText(data);
+    }
+
+    public List<String> getList_TableDataList_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
+        return Utility.getText_ListOfWebElements(ActionHelper.findElements(data));
+    }
+
+    public boolean isPresent_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+        return ActionHelper.isPresent(data);
+    }
+
+    public boolean isPresent_EmptyTableMsg_Lbl() {
+        return ActionHelper.isPresent(emptyTableMsg_Lbl, 4000);
+    }
+
+    public String getText_EmptyTableMsg_Lbl() {
+        return ActionHelper.getText(emptyTableMsg_Lbl);
     }
 }
