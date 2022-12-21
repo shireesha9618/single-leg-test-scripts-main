@@ -359,7 +359,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         List<String> expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
-        ExtentLogger.logPass("Dragging 0th Position Table Column to 1st Position");
+        ExtentLogger.logInfo("Dragging 0th Position Table Column to 1st Position");
         String temp = expectedList.get(0);
         expectedList.add(0, expectedList.get(1));
         expectedList.remove(1);
@@ -374,7 +374,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
-        ExtentLogger.logPass("Dragging 3rd Position Table Column To 5th Position");
+        ExtentLogger.logInfo("Dragging 3rd Position Table Column To 5th Position");
         temp = expectedList.get(3);
         expectedList.add(3, expectedList.get(4));
         expectedList.remove(4);
@@ -391,7 +391,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownModifyColumns_Link();
         expectedList = facilitiesPage.getText_MoreActionsDropDownModifyColumnDragOptionsList_Lbl();
-        ExtentLogger.logPass("Dragging 5th Position Table Column To 6th Position");
+        ExtentLogger.logInfo("Dragging 5th Position Table Column To 6th Position");
         temp = expectedList.get(5);
         expectedList.add(5, expectedList.get(6));
         expectedList.remove(6);
