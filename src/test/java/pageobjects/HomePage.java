@@ -27,7 +27,7 @@ public class HomePage extends BaseTestClass {
     private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Riders']"));
     private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Facilities']"));
     private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Teams']"));
-    private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Settings']"));
+    private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.id("secondarySidebar-0"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
     private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.id("//img[@alt='Workflow']"));
@@ -143,5 +143,13 @@ public class HomePage extends BaseTestClass {
             click_Resources_Btn();
             ActionHelper.click(facilitiesMenu_Btn);
         }
+    }
+
+    public boolean isPresent_SettingsMenu_Btn() {
+        return ActionHelper.isPresent(settingsMenu_Btn);
+    }
+
+    public String getText_SettingsMenu_Btn() {
+        return ActionHelper.getText(settingsMenu_Btn);
     }
 }
