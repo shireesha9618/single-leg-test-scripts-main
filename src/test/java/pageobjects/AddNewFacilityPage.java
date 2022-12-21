@@ -3,7 +3,6 @@ package pageobjects;
 import com.github.javafaker.Faker;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
-import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import utility.Utility;
