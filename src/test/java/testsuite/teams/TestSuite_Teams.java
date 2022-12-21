@@ -65,10 +65,10 @@ public class TestSuite_Teams extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.TEAMS}, description = "TC_05, Verify The Functionality Of Search Bar")
     public void TC_Teams_005_Verify_The_Functionality_Of_Search_Bar() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        commonActions.coverJourneyTillTeams();
+        HashMap<String,String> teamData= teamsPage.createNewTeam();
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
-        teamsPage.set_SearchTeam_TextBox(Constants.TEAM);
-        softAssert.assertEquals(teamsPage.get_size(), 1, "matched");
+        teamsPage.set_SearchTeam_TextBox(teamData.get("teamName"));
+        softAssert.assertEquals(commonActions.get_TableData_Count(), 1, "Data count is matched as expected");
         softAssert.assertAll();
     }
 
@@ -91,7 +91,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_07_08_09_010_011_Verify_The_Functionality_Of_Filter_The_Teams_With_All_Status() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         String[] statusList = {"Active", "Pause", "Deboard", "Inactive", "Terminal", "Onboarding"};
         for (String status : statusList) {
             ExtentLogger.logPass("Validating" + status + "Status radiobutton");
@@ -122,7 +122,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_013_Verify_The_Functionality_Of_Edit_Button_In_Teams_Page() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamDetails.get("teamName"));
         teamsPage.click_Edit_Btn(0);
         softAssert.assertTrue(TeamEditPage.getInstance().isPresent_Header_lbl(), "Edit team Header is present as expected");
@@ -135,7 +135,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_014_Verify_The_UI_Of_Edit_Teams() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamDetails.get("teamName"));
         teamsPage.click_Edit_Btn(0);
         softAssert.assertTrue(TeamEditPage.getInstance().isPresent_Header_lbl(), "Edit team Header is present as expected");
@@ -148,7 +148,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_015_Verify_The_Functionality_Of_Cancel_Button_Of_Edit_Teams() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamDetails.get("teamName"));
         teamsPage.click_Edit_Btn(0);
         softAssert.assertTrue(TeamEditPage.getInstance().isPresent_Header_lbl(), "Edit team Header is present as expected");
@@ -186,7 +186,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_018_Verify_The_Functionality_Of_Select_All_Of_Modify_Columns_For_MoreActions_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Text Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.click_MoreActions_Dropdown();
         teamsPage.click_MoreActionsDropDownModifyColumns_Link();
         teamsPage.click_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn();
@@ -236,7 +236,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_021_Verify_The_Functionality_Of_Search_Bar_Of_Modify_Columns_For_Actions_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.clickAndChoose_MoreActionsDropDownMenuOptions_Btn("Modify Columns");
         teamsPage.fill_EditColumnsSearch_Txt("Test");
         softAssert.assertTrue(!teamsPage.isPresent_EdiColumnName_Lbl("Team Id"), "Validate presence of Rider Name Checkbox");

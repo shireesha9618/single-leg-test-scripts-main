@@ -56,6 +56,7 @@ public class TeamsPage extends BaseTestClass {
     private final Locator moreActionsDropDownModifyColumnsLinkStatus_Checkbox = Locator.builder().withWeb(By.xpath("//input[@id='Status']"));
     private final Locator moreActionsDropDownModifyColumnsStatusCross_Icon = Locator.builder().withWeb(By.xpath("//div[@data-rbd-drag-handle-draggable-id='Status']/button"));
     private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
+    private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
 
     public static TeamsPage getInstance() {
         if (_instance == null)

@@ -68,7 +68,7 @@ public class TestSuite_Login extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         ActionHelper.getURL(Constants.Urls.BASE_URL);
         loginPage.performLoginWithEmail(Constants.EMAIL_ID, Constants.EMAIL_PASSWORD);
-        commonActions.click_Skip_Btn();
+        commonActions.click_SkipIfPresent_Btn();
         softAssert.assertTrue(homePage.isPresent_UserProfile_Img(),"Menu Button is Present as expected");
         loginPage.performLogout();
         softAssert.assertTrue(loginPage.isPresent_LoginWithEmail_Lnk(), "Login with email is present as expected");
@@ -228,7 +228,7 @@ public class TestSuite_Login extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         ActionHelper.getURL(Constants.Urls.BASE_URL);
         loginPage.performLoginWithEmail(Constants.EMAIL_ID, Constants.EMAIL_PASSWORD);
-        commonActions.click_Skip_Btn();
+        commonActions.click_SkipIfPresent_Btn();
         loginPage.performLogout();
         softAssert.assertTrue(loginPage.isPresent_LoginWithEmail_Lnk(), "Login with email is present as expected");
         softAssert.assertTrue(loginPage.isPresent_LoginWithOtp_Lnk(), "Login with OTP is present as expected");
