@@ -835,14 +835,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         facilitiesPage.click_NewFacility_Btn();
         softAssert.assertEquals(addNewFacilityPage.getText_AddNewFacilityHeader_Lbl(), "Add New Facility", "Add New Facility Header Is Matched As Expected");
         addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
-        addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName().replace("'", ""));
-        addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName().replace("'", ""));
+        addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", ""));
+        addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", ""));
         addNewFacilityPage.click_Create_Btn();
         softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Required", "Facility Name Required Error Message Appeared As Expected");
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
         new File(System.getProperty("user.dir") + "\\temp\\");
@@ -852,7 +852,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_035, Verify The Functionality Of CheckBox Present In Facility Table Heading")
     public void TC_Facility_035_Verify_The_Functionality_Of_CheckBox_Present_In_Facility_Table_Heading() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -877,7 +877,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         for (String facilityName : facilityNameSampleData) {
             addNewFacilityPage.fill_FacilityName_Txt(facilityName);
             addNewFacilityPage.click_Create_Btn();
-            softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Should be minimum 2", "Facility Name Minimum Character Error Message Appeared As Expected");
+            softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Should be minimum 3", "Facility Name Minimum Character Error Message Appeared As Expected");
         }
         softAssert.assertAll();
     }
@@ -891,7 +891,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertEquals(addNewFacilityPage.getText_AddNewFacilityHeader_Lbl(), "Add New Facility", "Add New Facility Header Is Matched As Expected");
         addNewFacilityPage.fill_FacilityName_Txt(Utility.generateRandomString(50));
         addNewFacilityPage.click_Create_Btn();
-        softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Can be at max 24", "Facility Name Maximum Character Error Message Is Present As Expected");
+        softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Can be at max 32", "Facility Name Maximum Character Error Message Is Present As Expected");
         softAssert.assertAll();
     }
 
@@ -918,7 +918,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         for (String facilityId : sampleData) {
             addNewFacilityPage.fill_FacilityId_Txt(facilityId);
             addNewFacilityPage.click_Create_Btn();
-            softAssert.assertEquals(addNewFacilityPage.getText_FacilityIdErrorMsg_Lbl(), "Should be minimum 2", "Facility Id Minimum Character Error Message Appeared As Expected");
+            softAssert.assertEquals(addNewFacilityPage.getText_FacilityIdErrorMsg_Lbl(), "Should be minimum 3", "Facility Id Minimum Character Error Message Appeared As Expected");
         }
         softAssert.assertAll();
     }
@@ -933,7 +933,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertEquals(addNewFacilityPage.getText_AddNewFacilityHeader_Lbl(), "Add New Facility", "Add New Facility Header Is Matched As Expected");
         addNewFacilityPage.fill_FacilityId_Txt(sampleFacilityId);
         addNewFacilityPage.click_Create_Btn();
-        softAssert.assertEquals(addNewFacilityPage.getText_FacilityIdErrorMsg_Lbl(), "Can be at max 24", "Facility Id Maximum Character Error Message Appeared As Expected");
+        softAssert.assertEquals(addNewFacilityPage.getText_FacilityIdErrorMsg_Lbl(), "Can be at max 32", "Facility Id Maximum Character Error Message Appeared As Expected");
         softAssert.assertAll();
     }
 
@@ -968,7 +968,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             addNewFacilityPage.fill_PostalCode_Txt(postalCode);
             softAssert.assertEquals(addNewFacilityPage.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appears As Expected");
             addNewFacilityPage.click_Create_Btn();
-            softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Should be minimum 6", "Postal Code Minimum Character Error Message Appeared As Expected");
+            softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Not correct format", "Postal Code Minimum Character Error Message Appeared As Expected");
         }
         softAssert.assertAll();
     }
@@ -982,7 +982,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         addNewFacilityPage.fill_PostalCode_Txt(String.valueOf(sampleData.number().digits(15)));
         softAssert.assertEquals(addNewFacilityPage.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appeared As Expected");
         addNewFacilityPage.click_Create_Btn();
-        softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Can be at max 6", "Postal Code Maximum Character Error Message Appeared As Expected");
+        softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Not correct format", "Postal Code Maximum Character Error Message Appeared As Expected");
         softAssert.assertAll();
     }
 
@@ -1087,11 +1087,17 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_060_Verify_The_Validation_Functionality_For_AddressLine2_In_Add_New_Facility_Page_For_Empty_Field() {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
-        addNewFacilityPage.fill_FacilityName_Txt("Facility " + sampleData.name().lastName());
+        String facilityName = "Facility " + sampleData.name().lastName().replaceAll("[^a-zA-Z0-9]","");
+        String facilityId = addNewFacilityPage.getText_FacilityId_Txt();
+        addNewFacilityPage.fill_FacilityName_Txt(facilityName);
         addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
+        commonActions.waitTillLoaderDisappears();
         addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
         addNewFacilityPage.click_Create_Btn();
-        JarvisAssert.assertEquals(addNewFacilityPage.getText_AddressLine2ErrorMsg_Lbl(), "Required", "Address Line 2 Required Error Message Appeared As Expected");
+        commonActions.waitTillLoaderDisappears();
+
+        facilitiesPage.fill_Search_Txt(facilityName);
+        JarvisAssert.assertEquals(commonActions.getText_TableData_Lbl("FACILITY ID"), facilityId, "Facility Is Created With Empty Address Line 2 As Expected");
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
@@ -1132,7 +1138,6 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertEquals(addNewFacilityPage.getText_FacilityNameErrorMsg_Lbl(), "Required", "Facility Name Required Error Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Required", "Postal Code Required Error Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_AddressLine1ErrorMsg_Lbl(), "Required", "Address Line 1 Required Error Message Appeared As Expected");
-        softAssert.assertEquals(addNewFacilityPage.getText_AddressLine2ErrorMsg_Lbl(), "Required", "Address Line 2 Required Error Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_StateErrorMsg_Lbl(), "Required", "State Required Error Message Appeared As Expected");
         softAssert.assertEquals(addNewFacilityPage.getText_CityErrorMsg_Lbl(), "Required", "City Required Error Message Appeared As Expected");
         softAssert.assertAll();
