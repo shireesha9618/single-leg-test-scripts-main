@@ -849,7 +849,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownExportAsCSV_Link();
-        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
+        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"), "facilities_list.csv", 10));
     }
 
     @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
