@@ -117,11 +117,6 @@ public class TeamsPage extends BaseTestClass {
         ActionHelper.gotoSleep(10000);
     }
 
-    public int get_size() {
-        List<WebElement> data = ActionHelper.findElements(searchTeam_TextBox.getBy());
-        return data.size();
-    }
-
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
         return ActionHelper.isEnabled(statusDropDownValue_Radio.getBy(), 4000);
     }
