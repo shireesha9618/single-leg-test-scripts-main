@@ -22,6 +22,10 @@ public class SettingsWorkflowPage {
         return ActionHelper.isPresent(workflowHeader_Lbl);
     }
 
+    public String getText_WorkflowHeader_Lbl() {
+        return ActionHelper.getText(workflowHeader_Lbl);
+    }
+
     public boolean isPresent_workflowBreadCrumb_Link() {
         return ActionHelper.isPresent(workflowBreadCrumb_Link);
     }

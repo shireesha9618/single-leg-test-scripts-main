@@ -8,7 +8,7 @@ public class SettingsPage {
     private static SettingsPage _instance;
     private final Locator settingPageHeader_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//p[text()='Settings']"));
     private final Locator settingBreadCrumb_Link = Locator.builder().withWeb(By.id("/settings"));
-    private final Locator general_Link = Locator.builder().withWeb(By.xpath("//p[text()='abc']/ancestor::a"));
+    private final Locator general_Link = Locator.builder().withWeb(By.xpath("//p[text()='General']/ancestor::a"));
     private final Locator workflow_Link = Locator.builder().withWeb(By.xpath("//p[text()='Workflow']/ancestor::a"));
     private final Locator users_Link = Locator.builder().withWeb(By.xpath("//p[text()='Users']/ancestor::a"));
     CommonActions commonActions = CommonActions.getInstance();

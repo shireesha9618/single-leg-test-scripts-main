@@ -79,7 +79,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithEmail_Lnk() {
-        return ActionHelper.isPresent(loginWithEmail_Lnk, 3000);
+        return ActionHelper.isPresent(loginWithEmail_Lnk,5000);
     }
 
     public boolean isPresent_LoginOTPIncorrectErrorMsg_Txt() {
@@ -139,7 +139,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithOtp_Lnk() {
-        return ActionHelper.isPresent(loginWithOTP_Lnk);
+        return ActionHelper.isPresent(loginWithOTP_Lnk,5000);
     }
 
     public String getText_PlaceHolder_Txt() {
