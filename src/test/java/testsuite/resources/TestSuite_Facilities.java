@@ -842,14 +842,14 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
         new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"));
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownExportAsCSV_Link();
-        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"), "facilities_list.csv", 10));
+        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
     }
 
     @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
