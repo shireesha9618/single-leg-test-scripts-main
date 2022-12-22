@@ -305,4 +305,17 @@ public class HomePage extends BaseTestClass {
     public void openTeamsPage() {
         ActionHelper.click(teamsMenu_Btn);
     }
+
+    public void click_TeamsMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(teamsMenu_Btn);
+    }
+
+    public void click_OpenMenuTeams_Btn() {
+        ActionHelper.click(teamsOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowTeams_Btn() {
+        ActionHelper.click(workFlowTeams_Btn);
+    }
 }
