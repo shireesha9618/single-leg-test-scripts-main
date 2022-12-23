@@ -2089,10 +2089,10 @@ public class CreateNewOrderPage {
     }
 
     public String addPaymentDetails(String paymentType) {
-        String amount= null;
+        String amount = null;
         ActionHelper.scrollTillElement(paymentDetailsHeader_Lbl.getBy());
         selectByVisibleText_PaymentDetailsPaymentType_Select(paymentType);
-        if(!paymentType.equals("Prepaid")) {
+        if (!paymentType.equals("Prepaid")) {
             amount = ActionHelper.getRandomNumberString(3);
             fillWithClear_PaymentDetailsOrderAmount_Txt(amount);
         }

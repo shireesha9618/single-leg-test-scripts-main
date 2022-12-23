@@ -1667,8 +1667,8 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactNumber_Txt(), "Check Contact Number should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsSelectAFacility_Dropdown(), "Check Select A Facility should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupDate_Txt(), "Check Pickup Date should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Flot From should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Flot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Slot To should be editable");
 
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPostalCode_Txt() == false, "Check Postal Code shouldn't be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCountry_Select() == false, "Check Country shouldn't be editable");
@@ -1694,8 +1694,8 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactName_Txt(), "Check Contact Name should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactNumber_Txt(), "Check Contact Number should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupDate_Txt(), "Check Pickup Date should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Flot From should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Flot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Slot To should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPostalCode_Txt(), "Check Postal Code should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCountry_Select(), "Check Country should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsAddressLine1_Txt(), "Check Address Line 1 should be editable");
@@ -1723,8 +1723,8 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactName_Txt(), "Check Contact Name should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactNumber_Txt(), "Check Contact Number should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropDate_Txt(), "Check Drop Date should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Flot From should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Flot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Slot To should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsPostalCode_Txt(), "Check Postal Code should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCountry_Select(), "Check Country should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsAddressLine1_Txt(), "Check Address Line 1 should be editable");
@@ -1752,8 +1752,8 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactNumber_Txt(), "Check Contact Number should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsSelectAFacility_Dropdown(), "Check Select A Facility should be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropDate_Txt(), "Check Drop Date should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Flot From should be editable");
-        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Flot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Slot To should be editable");
 
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsPostalCode_Txt() == false, "Check Postal Code shouldn't be editable");
         softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCountry_Select() == false, "Check Country shouldn't be editable");

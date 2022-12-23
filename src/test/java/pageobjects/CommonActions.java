@@ -377,39 +377,39 @@ public class CommonActions {
         return ActionHelper.getText(calendarNextYear_Btn);
     }
 
-    public boolean isPresent_calendarMonth_Btn() {
+    public boolean isPresent_CalendarMonth_Btn() {
         return ActionHelper.isPresent(calendarMonth_Btn);
     }
 
-    public void click_calendarMonth_Btn() {
+    public void click_CalendarMonth_Btn() {
         ActionHelper.click(calendarMonth_Btn);
     }
 
-    public String getText_calendarMonth_Btn() {
+    public String getText_CalendarMonth_Btn() {
         return ActionHelper.getText(calendarMonth_Btn);
     }
 
-    public boolean isPresent_calendarYear_Btn() {
+    public boolean isPresent_CalendarYear_Btn() {
         return ActionHelper.isPresent(calendarYear_Btn);
     }
 
-    public void click_calendarYear_Btn() {
+    public void click_CalendarYear_Btn() {
         ActionHelper.click(calendarYear_Btn);
     }
 
-    public String getText_calendarYear_Btn() {
+    public String getText_CalendarYear_Btn() {
         return ActionHelper.getText(calendarYear_Btn);
     }
 
-    public boolean isPresent_calendarChooseDateMonthYear_Btn() {
+    public boolean isPresent_CalendarChooseDateMonthYear_Btn() {
         return ActionHelper.isPresent(calendarChooseDateMonthYear_Btn);
     }
 
-    public void click_calendarChooseDateMonthYear_Btn() {
+    public void click_CalendarChooseDateMonthYear_Btn() {
         ActionHelper.click(calendarChooseDateMonthYear_Btn);
     }
 
-    public String getText_calendarChooseDateMonthYear_Btn() {
+    public String getText_CalendarChooseDateMonthYear_Btn() {
         return ActionHelper.getText(calendarChooseDateMonthYear_Btn);
     }
 
