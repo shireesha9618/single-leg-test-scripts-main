@@ -29,7 +29,7 @@ public class AddNewFacilityPage {
 
     private final Locator addressLine1_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']"));
     private final Locator addressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Address Line 1']"));
-    private final Locator addressLine2_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']"));
+    private final Locator addressLine2_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2']"));
     private final Locator addressLine2_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Address Line 2']"));
     private final Locator city_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='City*']"));
     private final Locator city_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter City']"));
@@ -268,11 +268,11 @@ public class AddNewFacilityPage {
 
     public HashMap<String, String> createNewFacility() {
         HashMap<String, String> fillFacilityDetails = new HashMap<>();
-        String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
+        String facilityName = "facility" + sampleData.name().lastName().replaceAll("[^a-zA-Z0-9]", "");
         String facilityId = getText_FacilityId_Txt();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName().replace("'", "");
-        String addressLine2 = sampleData.address().streetName().replace("'", "");
+        String addressLine1 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
+        String addressLine2 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
 
         fillFacilityDetails.put("facilityName", facilityName);
         fillFacilityDetails.put("facilityId", facilityId);
@@ -294,8 +294,8 @@ public class AddNewFacilityPage {
     public HashMap<String, String> fillEditFacilityPage() {
         HashMap<String, String> updateFacility = new HashMap<>();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName().replace("'", "");
-        String addressLine2 = sampleData.address().streetName().replace("'", "");
+        String addressLine1 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
+        String addressLine2 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
 
         updateFacility.put("postalCode", postalCode);
         updateFacility.put("addressLine1", addressLine1);

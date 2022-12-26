@@ -774,4 +774,10 @@ public class RidersPage {
     public void click_SelectAll_CheckBox() {
         ActionHelper.click(selectAll_CheckBox);
     }
+
+    public boolean validateTeamsTableRecordEqualsToPerPaginationOptions() {
+        ActionHelper.waitUntilAllElementsVisible(ridersTableRiderIdColumnList_Link.getBy());
+        String getTextPaginationSelectedItem_Lbl[] = ActionHelper.findElement(paginationSelectedItem_Lbl).getText().split(" ");
+        return (getElements_RiderTableRiderIdColumnList_Link().size() <= Integer.parseInt(getTextPaginationSelectedItem_Lbl[0]));
+    }
 }
