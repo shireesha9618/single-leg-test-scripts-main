@@ -1,20 +1,20 @@
-package pageobjects;
+package pageobjects.settings;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
 
-public class SettingsWorkflowPage {
-    private static SettingsWorkflowPage _instance;
+public class WorkflowPage {
+    private static WorkflowPage _instance;
     private final Locator workflowHeader_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//p[text()='Workflow']"));
     private final Locator workflowBreadCrumb_Link = Locator.builder().withWeb(By.id("/settings/[ptpType]"));
     private final Locator executionTask_Link = Locator.builder().withWeb(By.xpath("//p[text()='Execution Task']/ancestor::a"));
     private final Locator objectiveWorkflow_Link = Locator.builder().withWeb(By.xpath("//p[text()='Objective Workflow']/ancestor::a"));
     private final Locator jobWorkflow_Link = Locator.builder().withWeb(By.xpath("//p[text()='Job Workflow']/ancestor::a"));
 
-    public static SettingsWorkflowPage getInstance() {
+    public static WorkflowPage getInstance() {
         if(_instance == null)
-            _instance = new SettingsWorkflowPage();
+            _instance = new WorkflowPage();
         return _instance;
     }
 

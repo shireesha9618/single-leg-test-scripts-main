@@ -1,8 +1,9 @@
-package pageobjects;
+package pageobjects.settings;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import pageobjects.CommonActions;
 
 public class SettingsPage {
     private static SettingsPage _instance;

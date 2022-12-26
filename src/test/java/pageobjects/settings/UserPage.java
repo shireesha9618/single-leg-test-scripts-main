@@ -1,16 +1,16 @@
-package pageobjects;
+package pageobjects.settings;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
 
-public class SettingsUserPage {
-    private static SettingsUserPage _instance;
+public class UserPage {
+    private static UserPage _instance;
     private final Locator userHeader_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//p[text()='Users']"));
 
-    public static SettingsUserPage getInstance() {
+    public static UserPage getInstance() {
         if(_instance == null)
-            _instance = new SettingsUserPage();
+            _instance = new UserPage();
         return _instance;
     }
 

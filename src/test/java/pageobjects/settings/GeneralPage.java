@@ -1,11 +1,11 @@
-package pageobjects;
+package pageobjects.settings;
 
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
 
-public class SettingsGeneralPage {
-    private static SettingsGeneralPage _instance;
+public class GeneralPage {
+    private static GeneralPage _instance;
     private final Locator generalHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2"));
     private final Locator generalBreadCrumb_Link = Locator.builder().withWeb(By.id("/settings/generalSettings/systemPreferences"));
     private final Locator subHeaderOrganizationDetail_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Organization Details']"));
@@ -50,9 +50,9 @@ public class SettingsGeneralPage {
     private final Locator routing_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Routing ']"));
     private final Locator routing_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Routing ']/following-sibling::p"));
 
-    public static SettingsGeneralPage getInstance(){
+    public static GeneralPage getInstance(){
         if(_instance == null)
-            _instance = new SettingsGeneralPage();
+            _instance = new GeneralPage();
         return _instance;
     }
 

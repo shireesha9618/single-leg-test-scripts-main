@@ -6,6 +6,10 @@ import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
 import org.testng.annotations.Test;
 import pageobjects.*;
+import pageobjects.settings.GeneralPage;
+import pageobjects.settings.SettingsPage;
+import pageobjects.settings.UserPage;
+import pageobjects.settings.WorkflowPage;
 
 public class TestSuite_Settings extends BaseTestClass {
     CommonActions commonActions = CommonActions.getInstance();
@@ -34,7 +38,7 @@ public class TestSuite_Settings extends BaseTestClass {
         commonActions.coverJourneyTillSettings();
         String expectedSettingHeader = settingsPage.getText_SettingPageHeader_Lbl();
         settingsPage.click_General_Link();
-        softAssert.assertTrue(SettingsGeneralPage.getInstance().isPresent_GeneralHeader_Lbl(), "General Header Label Is Present As Expected");
+        softAssert.assertTrue(GeneralPage.getInstance().isPresent_GeneralHeader_Lbl(), "General Header Label Is Present As Expected");
         settingsPage.click_settingBreadCrumb_Link();
         softAssert.assertEquals(settingsPage.getText_SettingPageHeader_Lbl(), expectedSettingHeader, "Settings Header Label Is Matched As Expected");
         softAssert.assertEquals(commonActions.getCurrentPageUrl(), settingPageUrl, "Settings Page URL Is Matched With Expected URl As Expected");
@@ -48,8 +52,8 @@ public class TestSuite_Settings extends BaseTestClass {
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "generalSettings/systemPreferences/";
         settingsPage.click_General_Link();
-        softAssert.assertTrue(SettingsGeneralPage.getInstance().isPresent_GeneralHeader_Lbl(), "General Header Label Is Present As Expected");
-        softAssert.assertEquals(SettingsGeneralPage.getInstance().getText_GeneralHeader_Lbl(), "General", "General Header Label Is Matched As Expected");
+        softAssert.assertTrue(GeneralPage.getInstance().isPresent_GeneralHeader_Lbl(), "General Header Label Is Present As Expected");
+        softAssert.assertEquals(GeneralPage.getInstance().getText_GeneralHeader_Lbl(), "General", "General Header Label Is Matched As Expected");
         softAssert.assertEquals(commonActions.getCurrentPageUrl(), expectedGeneralPageURL, "General Page URL Is Matched As Expected");
         softAssert.assertAll();
     }
@@ -61,8 +65,8 @@ public class TestSuite_Settings extends BaseTestClass {
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "workflow/";
         settingsPage.click_Workflow_Link();
-        softAssert.assertTrue(SettingsWorkflowPage.getInstance().isPresent_WorkflowHeader_Lbl(), "Workflow Header Label Is Present As Expected");
-        softAssert.assertEquals(SettingsWorkflowPage.getInstance().getText_WorkflowHeader_Lbl(), "Workflow", "Workflow Header Label Is Matched As Expected");
+        softAssert.assertTrue(WorkflowPage.getInstance().isPresent_WorkflowHeader_Lbl(), "Workflow Header Label Is Present As Expected");
+        softAssert.assertEquals(WorkflowPage.getInstance().getText_WorkflowHeader_Lbl(), "Workflow", "Workflow Header Label Is Matched As Expected");
         softAssert.assertEquals(commonActions.getCurrentPageUrl(), expectedGeneralPageURL, "Workflow Page URL Is Matched As Expected");
         softAssert.assertAll();
     }
@@ -74,8 +78,8 @@ public class TestSuite_Settings extends BaseTestClass {
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "users/list/?ptpType=workflow";
         settingsPage.click_Users_Link();
-        softAssert.assertTrue(SettingsUserPage.getInstance().isPresent_UserHeader_Lbl(), "Users Header Label Is Present As Expected");
-        softAssert.assertEquals(SettingsUserPage.getInstance().getText_UserHeader_Lbl(), "Users", "Users Header Label Is Matched As Expected");
+        softAssert.assertTrue(UserPage.getInstance().isPresent_UserHeader_Lbl(), "Users Header Label Is Present As Expected");
+        softAssert.assertEquals(UserPage.getInstance().getText_UserHeader_Lbl(), "Users", "Users Header Label Is Matched As Expected");
         softAssert.assertEquals(commonActions.getCurrentPageUrl(), expectedGeneralPageURL, "Users Page URL Is Matched As Expected");
         softAssert.assertAll();
     }
