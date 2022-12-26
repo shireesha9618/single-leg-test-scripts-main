@@ -16,4 +16,5 @@ public class TestGroup {
     public static final String RIDERS = "riders";
     public static final String SETTING = "setting";
     public static final String WORKFLOW_SETTING = "workflowsetting";
+    public static final String VIEW_ORDERS = "viewOrders";
 }
