@@ -1,7 +1,6 @@
 package testsuite.teams;
 
 import base.BaseTestClass;
-import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
@@ -45,8 +44,8 @@ public class TestSuite_Teams extends BaseTestClass {
                 "CREATED BY", "UPDATED BY"));
         Collections.sort(actualTabHeadersLabels);
         Collections.sort(expectedTabHeaders);
-        for (int size = 0; size < actualTabHeadersLabels.size(); size++) {
-            softAssert.assertEquals(actualTabHeadersLabels.get(size), expectedTabHeaders.get(size), "Table Header label is matched as expected " + expectedTabHeaders.get(size));
+        for (int record = 0; record < actualTabHeadersLabels.size(); record++) {
+            softAssert.assertEquals(actualTabHeadersLabels.get(record), expectedTabHeaders.get(record), "Table Header label is matched as expected " + expectedTabHeaders.get(record));
         }
         softAssert.assertAll();
     }
@@ -65,7 +64,7 @@ public class TestSuite_Teams extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.TEAMS}, description = "TC_05, Verify The Functionality Of Search Bar")
     public void TC_Teams_005_Verify_The_Functionality_Of_Search_Bar() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        HashMap<String,String> teamData= teamsPage.createNewTeam();
+        HashMap<String, String> teamData = teamsPage.createNewTeam();
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamData.get("teamName"));
         softAssert.assertEquals(commonActions.get_TableData_Count(), 1, "Data count is matched as expected");
@@ -112,8 +111,8 @@ public class TestSuite_Teams extends BaseTestClass {
             teamsPage.validate_Status_RadioBtn(status);
             teamsPage.click_StatusDropDownClearSelection_Btn();
             List<String> currentStatusList = teamsPage.getTxt_TeamsTableStatusColumnList_Link();
-            for (int i = 0; i < initialStatusList.size(); i++)
-                softAssert.assertEquals(currentStatusList.get(i), initialStatusList.get(i), "Validate Status is the same as initial values");
+            for (int record = 0; record < initialStatusList.size(); record++)
+                softAssert.assertEquals(currentStatusList.get(record), initialStatusList.get(record), "Validate Status is the same as initial values");
         }
         softAssert.assertAll();
     }
@@ -276,8 +275,8 @@ public class TestSuite_Teams extends BaseTestClass {
                 "CREATED BY", "UPDATED BY"));
         Collections.sort(actualTabHeadersLabels);
         Collections.sort(expectedTabHeaders);
-        for (int size = 0; size < actualTabHeadersLabels.size(); size++) {
-            softAssert.assertEquals(actualTabHeadersLabels.get(size), expectedTabHeaders.get(size), "Table Header label is matched as expected " + expectedTabHeaders.get(size));
+        for (int record = 0; record < actualTabHeadersLabels.size(); record++) {
+            softAssert.assertEquals(actualTabHeadersLabels.get(record), expectedTabHeaders.get(record), "Table Header label is matched as expected " + expectedTabHeaders.get(record));
         }
         teamsPage.clickAndChoose_MoreActionsDropDownMenuOptions_Btn("Modify Columns");
         teamsPage.click_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn();
@@ -290,8 +289,8 @@ public class TestSuite_Teams extends BaseTestClass {
         List<String> expectedTabHeadersAfter = new ArrayList<>(List.of("TEAM NAME", "# OF TEAM MANAGERS", "# OF RIDERS", "UPDATED AT", "CREATED BY", "UPDATED BY"));
         Collections.sort(actualTabHeadersLabelsAfter);
         Collections.sort(expectedTabHeadersAfter);
-        for (int size = 0; size < actualTabHeadersLabelsAfter.size(); size++) {
-            softAssert.assertEquals(actualTabHeadersLabelsAfter.get(size), expectedTabHeadersAfter.get(size), "After Uncheck Table Header label is matched as expected " + expectedTabHeadersAfter.get(size));
+        for (int record = 0; record < actualTabHeadersLabelsAfter.size(); record++) {
+            softAssert.assertEquals(actualTabHeadersLabelsAfter.get(record), expectedTabHeadersAfter.get(record), "After Uncheck Table Header label is matched as expected " + expectedTabHeadersAfter.get(record));
         }
         commonActions.resetColumns();
         softAssert.assertAll();

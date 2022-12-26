@@ -1,7 +1,7 @@
 platform: web
-environment: beta
+environment: alpha
 infra: local
-browserType: chrome
+browserType: chromeheadless
 cloud: saucelabs
 threads: 1
 implicitWaitInSeconds: 5
