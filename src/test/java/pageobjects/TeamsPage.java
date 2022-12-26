@@ -237,16 +237,6 @@ public class TeamsPage extends BaseTestClass {
         return ActionHelper.isPresent(emptyTable_Txt);
     }
 
-    public void validate_Status_RadioBtn(String status) {
-        if (!isPresent_EmptyTable_Txt()) {
-            for (String value : getTxt_RidersTableStatusColumnList_Link())
-                JarvisAssert.assertEquals(value, status, status + " Status Is Present As Expected");
-        } else {
-            JarvisAssert.assertTrue(isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            JarvisAssert.assertEquals(getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
-    }
-
     public ArrayList<String> getTxt_RidersTableStatusColumnList_Link() {
         List<WebElement> statusRecord = ActionHelper.findElements(teamsTableStatusColumnList_Link);
         ArrayList<String> allStatus = new ArrayList<>();

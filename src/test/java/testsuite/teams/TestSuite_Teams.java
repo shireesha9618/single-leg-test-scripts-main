@@ -95,7 +95,13 @@ public class TestSuite_Teams extends BaseTestClass {
         for (String status : statusList) {
             ExtentLogger.logPass("Validating" + status + "Status radiobutton");
             teamsPage.click_Status_RadioBtn(status);
-            teamsPage.validate_Status_RadioBtn(status);
+            if (!teamsPage.isPresent_EmptyTable_Txt()) {
+                for (String value : teamsPage.getTxt_RidersTableStatusColumnList_Link())
+                    softAssert.assertEquals(value, status, status + " Status Is Present As Expected");
+            } else {
+                softAssert.assertTrue(teamsPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
+                softAssert.assertEquals(teamsPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
+            }
         }
         softAssert.assertAll();
     }
@@ -108,7 +114,13 @@ public class TestSuite_Teams extends BaseTestClass {
         String[] statusList = {"Active", "Pause", "Deboard", "Inactive", "Terminal", "Onboarding"};
         for (String status : statusList) {
             teamsPage.click_Status_RadioBtn(status);
-            teamsPage.validate_Status_RadioBtn(status);
+            if (!teamsPage.isPresent_EmptyTable_Txt()) {
+                for (String value : teamsPage.getTxt_RidersTableStatusColumnList_Link())
+                    softAssert.assertEquals(value, status, status + " Status Is Present As Expected");
+            } else {
+                softAssert.assertTrue(teamsPage.isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
+                softAssert.assertEquals(teamsPage.getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
+            }
             teamsPage.click_StatusDropDownClearSelection_Btn();
             List<String> currentStatusList = teamsPage.getTxt_TeamsTableStatusColumnList_Link();
             for (int record = 0; record < initialStatusList.size(); record++)
