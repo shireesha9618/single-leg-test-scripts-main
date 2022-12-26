@@ -66,6 +66,14 @@ public class WorkflowExecutionTaskStartPage {
     }
 
     public List<String> getList_ReasonCodeSubHeaderSuccessList_Lbl() {
-      return Utility.getText_ListOfWebElements(ActionHelper.findElements(reasonCodeSubHeaderSuccessList_Lbl));
+      return Utility.getText_ListOfWebElements(reasonCodeSubHeaderSuccessList_Lbl.getBy());
+    }
+
+    public boolean isPresent_ReasonCodeSubHeaderFailureList_Lbl() {
+        return ActionHelper.isPresent(reasonCodeSubHeaderFailureList_Lbl);
+    }
+
+    public List<String> getList_ReasonCodeSubHeaderFailureList_Lbl() {
+        return Utility.getText_ListOfWebElements(reasonCodeSubHeaderFailureList_Lbl.getBy());
     }
 }
