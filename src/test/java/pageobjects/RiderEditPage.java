@@ -17,7 +17,7 @@ public class RiderEditPage {
     private final Locator lastName_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Last Name*']"));
     private final Locator lastName_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Last Name']"));
     private final Locator phoneNumber_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Phone Number*']"));
-    private final Locator phoneNumber_Txt = Locator.builder().withWeb(By.xpath("(//label[text()='Phone Number*']/..//input[@type='text'])[2]"));
+    private final Locator phoneNumber_Txt = Locator.builder().withWeb(By.xpath("(//input[contains(@type,'number')]"));
     private final Locator teams_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Teams*']"));
     private final Locator uploadPhoto_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'ant-upload')]"));
     private final Locator editRiderSave_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']//p"));

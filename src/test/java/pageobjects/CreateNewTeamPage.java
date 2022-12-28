@@ -19,6 +19,8 @@ public class CreateNewTeamPage {
     private final Locator createNewTeam_BreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/teams/add']"));
     private final Locator teamNameValidation_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='Name*']/../following-sibling::div//p"));
     private final Locator teamIDValidation_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='ID*']/../following-sibling::div//p"));
+    private final Locator createdSuccessfullyMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[text()='Created Successfully']"));
+    private final Locator errorMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[contains(text(), 'In participant')]"));
 
     public static CreateNewTeamPage getInstance() {
         if (_instance == null) {
@@ -52,8 +54,7 @@ public class CreateNewTeamPage {
     }
 
     public Boolean isPresent_Header_lbl() {
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        return ActionHelper.isPresent(header_Lbl);
+        return ActionHelper.isPresent(header_Lbl,3000);
     }
 
     public boolean isPresent_Cancel_Btn() {
@@ -117,5 +118,15 @@ public class CreateNewTeamPage {
 
     public String get_IDValidation_Txt() {
         return ActionHelper.getText(teamIDValidation_Txt);
+    }
+
+    public String getText_ErrorMsg_Lbl() {
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        return ActionHelper.getText(errorMsg_Txt);
+    }
+
+    public void fillWithClear_Rider_TxtBox(String input) {
+        Utility.selectAllAndClear(selectRider_Dropdown.getBy());
+        ActionHelper.fillWithClear(selectRider_Dropdown.getBy(), input);
     }
 }

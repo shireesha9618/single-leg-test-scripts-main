@@ -89,7 +89,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         ridersPage.click_NewRider_Btn();
 
-        String[] dataForMaximum = {Utils.generateRandomName(37, 40), String.valueOf(sampleData.number().digits(37)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
+        String[] dataForMaximum = {Utils.generateRandomName(129, 130), String.valueOf(sampleData.number().digits(130)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_RiderFirstName_TxtBox(value);
             softAssert.assertEquals(addNewRiderPage.get_FirstNameValidation_Txt(), "Not correct format", "First Name Validation Message Is Matched As Expected");
@@ -151,7 +151,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
 
         ridersPage.click_NewRider_Btn();
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
-        String[] dataForMaximum = {Utils.generateRandomName(37, 40), String.valueOf(sampleData.number().digits(37)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
+        String[] dataForMaximum = {Utils.generateRandomName(129, 130), String.valueOf(sampleData.number().digits(130)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
 
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_RiderLastName_TxtBox(value);
@@ -201,7 +201,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         ridersPage.click_NewRider_Btn();
 
         softAssert.assertTrue(addNewRiderPage.isPresent_Header_Lbl(), "Add New Rider Header Is Present As Expected");
-        String[] dataForMinimum = {"1", "a", "@", "1234", "123456789"};
+        String[] dataForMinimum = {"1", "1234", "123456789"};
         for (String value : dataForMinimum) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
             softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(), "Not correct format", "Phone Number Validation Message Is Matched as expected");
@@ -220,13 +220,13 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         String[] dataForMaximum = {Utils.generateRandomName(37, 40), String.valueOf(sampleData.number().digits(37)), "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"};
         for (String value : dataForMaximum) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
-            softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(), "Not correct format", "Phone Number Validation Message Is Matched as expected");
+            softAssert.assertEquals(addNewRiderPage.get_PhoneNumber_Txt(), "", "Phone Number Is Not Accepting Alphabets And Special Characters As Expected");
         }
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ADD_NEW_RIDER_PAGE}, description = "TC_058, Verify The Validation Functionality For Phone Number In Add New Rider Page For Other Than Alphabet")
-    public void TC_Riders_058_Verify_The_Validation_Functionality_For_Phone_Number_In_Add_New_Rider_Page_For_Other_Than_Alphabet() {
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ADD_NEW_RIDER_PAGE}, description = "TC_058, Verify The Validation Functionality For Phone Number In Add New Rider Page For Alphabets")
+    public void TC_Riders_058_Verify_The_Validation_Functionality_For_Phone_Number_In_Add_New_Rider_Page_For_Alphabets() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
 
@@ -237,7 +237,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "1122@"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
-            softAssert.assertEquals(addNewRiderPage.get_PhoneNumberValidation_Txt(),"Not correct format","Phone Number Validation Message Is Matched as expected");
+            softAssert.assertEquals(addNewRiderPage.get_PhoneNumber_Txt(),"","Phone Number Is Not Accepting Alphabets And Special Characters As Expected");
         }
         softAssert.assertAll();
     }

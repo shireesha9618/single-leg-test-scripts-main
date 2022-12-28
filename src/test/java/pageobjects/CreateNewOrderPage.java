@@ -7,7 +7,6 @@ import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -724,7 +723,7 @@ public class CreateNewOrderPage {
         ActionHelper.click(create_Btn);
         Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
         CommonActions.getInstance().waitTillLoaderDisappears();
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
 
     public void click_Create_Btn() {

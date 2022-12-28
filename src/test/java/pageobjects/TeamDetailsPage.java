@@ -33,4 +33,16 @@ public class TeamDetailsPage extends BaseTestClass {
     public boolean isPresent_Edit_Btn() {
         return ActionHelper.isPresent(edit_Btn);
     }
+
+    public void click_Edit_Btn(){
+        ActionHelper.click(edit_Btn);
+    }
+
+    public boolean isPresent_TeamDetailsBreadCrumb_Link(){
+        return ActionHelper.isPresent(teamDetailsBreadCrumb_Link);
+    }
+
+    public void click_TeamsBreadCrumb_Link(){
+        ActionHelper.click(teams_BreadCrumb_Link);
+    }
 }

@@ -1,12 +1,8 @@
 package testsuite.teams;
 
 import base.BaseTestClass;
-import com.google.api.services.gmail.Gmail;
-import constants.Constants;
 import constants.TestGroup;
-import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
-import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -14,7 +10,6 @@ import pageobjects.*;
 import utility.Utility;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -335,7 +330,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_026_Verify_Functionality_Of_Vertically_Scroll_Of_Teams_Table_Using_Mouse_Scroll_Wheel() {
         CommonActions.getInstance().coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(10);
+        commonActions.chooseNoOfRecordToBeDisplayed(10);
         List<WebElement> elements = teamsPage.getElements_TeamsTableTeamIdColumnList_Link();
         Utility.validatePageScrollDown(elements.get(elements.size() - 1));
         softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 3000), "Validate last element is present");
@@ -346,7 +341,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_027_Verify_Functionality_Of_Vertically_Scroll_Of_Teams_Table_Using_Keyboard() {
         CommonActions.getInstance().coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(10);
+        commonActions.chooseNoOfRecordToBeDisplayed(10);
         List<WebElement> elements = teamsPage.getElements_TeamsTableTeamIdColumnList_Link();
         Utility.scrollDownUsingKeyboardKey(10);
         softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 3000), "Validate last element is present");
@@ -357,17 +352,16 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_028_Verify_Displaying_Of_Teams_Table_Records_As_Per_Pagination_Value() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillTeams();
-
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(10);
+        commonActions.chooseNoOfRecordToBeDisplayed(10);
         softAssert.assertTrue(teamsPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 10 Record Present As Expected");
 
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(20);
+        commonActions.chooseNoOfRecordToBeDisplayed(20);
         softAssert.assertTrue(teamsPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 20 Record Present As Expected");
 
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(50);
+        commonActions.chooseNoOfRecordToBeDisplayed(50);
         softAssert.assertTrue(teamsPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 50 Record Present As Expected");
 
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
         softAssert.assertTrue(teamsPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 5 Record Present As Expected");
         softAssert.assertAll();
     }
@@ -376,17 +370,18 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_029_Verify_Functionality_Of_Pagination_Paging_Block() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillTeams();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(20);
+        commonActions.chooseNoOfRecordToBeDisplayed(50);
         List<WebElement> webElement = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link());
         String firstBlockElement = webElement.get(0).getText();
         String secondBlockElement = webElement.get(5).getText();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
-        teamsPage.select_PaginationBlockList_Lbl("1");
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
+        commonActions.select_PaginationBlock_Txt(1);
         String webElementForFirstBlock = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(webElementForFirstBlock, firstBlockElement, "Pagination First Block Record Is Matched As Expected");
 
-        teamsPage.select_PaginationBlockList_Lbl("2");
+        commonActions.select_PaginationBlock_Txt(2);
         String webElementForSecondBlock = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
+
         softAssert.assertEquals(webElementForSecondBlock, secondBlockElement, "Pagination Second Block Record Is Matched As Expected");
         softAssert.assertAll();
     }
@@ -395,18 +390,19 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_030_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
         CommonActions.getInstance().coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
-        teamsPage.click_Next_Btn();
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
+        commonActions.click_PaginationNext_Btn();
         List<WebElement> webElementAfterNext = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link());
         String nextBlockElement = webElementAfterNext.get(0).getText();
-        teamsPage.click_Previous_Btn();
+        commonActions.click_PaginationPrevious_Btn();
         List<WebElement> webElementAfterPrevious = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link());
         String prevBlockElement = webElementAfterPrevious.get(0).getText();
-        teamsPage.select_PaginationBlockList_Lbl("2");
+
+        commonActions.select_PaginationBlock_Txt(2);
         String webElementForSecondBlock = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(webElementForSecondBlock, nextBlockElement, "Pagination Second Block Record Is Matched With Next As Expected");
 
-        teamsPage.select_PaginationBlockList_Lbl("1");
+        commonActions.select_PaginationBlock_Txt(1);
         String webElementForFirstBlock = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(webElementForFirstBlock, prevBlockElement, "Pagination First Block Record Is Matched With Previous As Expected");
         softAssert.assertAll();
@@ -416,19 +412,19 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_031_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
         CommonActions.getInstance().coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(10);
+        commonActions.chooseNoOfRecordToBeDisplayed(10);
         String elementAfterTenthPagination = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(5).getText();
-        teamsPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
         String elementAfterFifthPagination = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
-        teamsPage.click_Next_Btn();
+        commonActions.click_PaginationNext_Btn();
         String elementAfterNext = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(elementAfterTenthPagination, elementAfterNext, "Pagination 10 Per Page Record Is Matched With Next As Expected");
 
-        teamsPage.click_Previous_Btn();
+        commonActions.click_PaginationPrevious_Btn();
         String elementAfterPrev = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(elementAfterFifthPagination, elementAfterPrev, "Pagination 5 Per Page Record Is Matched With Prev As Expected");
 
-        teamsPage.select_PaginationBlockList_Lbl("2");
+        commonActions.select_PaginationBlock_Txt(2);
         String elementForSecondBlock = new ArrayList<>(teamsPage.getElements_TeamsTableTeamIdColumnList_Link()).get(0).getText();
         softAssert.assertEquals(elementForSecondBlock, elementAfterNext, "Pagination 2 Block Record Is Matched With Next As Expected");
         softAssert.assertAll();
@@ -451,10 +447,10 @@ public class TestSuite_Teams extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_033, Verify The UI Of Table Record")
     public void TC_Teams_033_Verify_The_UI_Of_Table_Record() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        HashMap<String, String> teamsDetails = teamsPage.createNewTeam();
-        String teamName = teamsDetails.get("teamName");
-
         commonActions.coverJourneyTillTeams();
+        teamsPage.click_NewTeam_Btn();
+
+        String teamName = teamsPage.createNewTeam().get("teamName");
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(teamsPage.getText_TeamsTableTeamNameColumnList_Link().equals(teamName), "Team Name in Teams table is matched as expected");
 
@@ -552,10 +548,10 @@ public class TestSuite_Teams extends BaseTestClass {
         teamsPage.check_TableData_CheckBox(0);
         softAssert.assertTrue(teamsPage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
 
-        teamsPage.click_Deactivate_Btn();
+        TeamsPage.getInstance().click_Deactivate_Btn();
         softAssert.assertEquals(teamsPage.getText_DeactivateTeamHeader_Lbl(), "Deactivate Team", "Deactivate Team Header Is Matched With Header As Expected");
 
-        teamsPage.click_DeactivateTeamDeactivate_Btn();
+        TeamsPage.getInstance().click_DeactivateTeamDeactivate_Btn();
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Teams Header Is Present As Expected");
         softAssert.assertEquals(commonActions.getText_TableData_Lbl("STATUS"), "Inactive", "Status Changed To Inactive As Expected");
         softAssert.assertAll();

@@ -3,7 +3,6 @@ package pageobjects;
 import com.github.javafaker.Faker;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
-import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import utility.Utility;
@@ -24,13 +23,13 @@ public class AddNewFacilityPage {
     private final Locator facilityId_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Facility ID']"));
     private final Locator addressDetailsSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Details']"));
     private final Locator postalCode_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']"));
-    private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Postal Code']"));
+    private final Locator postalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressDetails.postalCode']"));
     private final Locator country_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Country*']"));
     private final Locator country_Txt = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-selector']//input[@disabled='']"));
 
     private final Locator addressLine1_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']"));
     private final Locator addressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Address Line 1']"));
-    private final Locator addressLine2_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']"));
+    private final Locator addressLine2_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2']"));
     private final Locator addressLine2_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Address Line 2']"));
     private final Locator city_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='City*']"));
     private final Locator city_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter City']"));
@@ -38,7 +37,7 @@ public class AddNewFacilityPage {
     private final Locator state_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter State']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator save_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
-    private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']"));
+    private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']/.."));
     private final Locator facilityNameErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']/../following-sibling::div//p"));
     private final Locator facilityIdErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility ID*']/../following-sibling::div//p"));
     private final Locator postalCodeErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']/../following-sibling::div//p"));
@@ -47,6 +46,7 @@ public class AddNewFacilityPage {
     private final Locator addressLine2ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']/../following-sibling::div//p"));
     private final Locator stateErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='State*']/../following-sibling::div//p"));
     private final Locator cityErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='City*']/../following-sibling::div//p"));
+    private final Locator duplicateIdErrorMsgPopUp_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),'code is already exists')]"));
     Faker sampleData = new Faker();
 
     public static AddNewFacilityPage getInstance() {
@@ -185,7 +185,6 @@ public class AddNewFacilityPage {
     }
 
     public void fill_AddressLine1_Txt(String addressLine1) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.sendKeysWithClear(addressLine1_Txt.getBy(), Keys.chord(addressLine1));
     }
 
@@ -265,16 +264,15 @@ public class AddNewFacilityPage {
 
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public HashMap<String, String> createNewFacility() {
         HashMap<String, String> fillFacilityDetails = new HashMap<>();
-        String facilityName = "facility" + sampleData.name().lastName().replace("'", "");
+        String facilityName = "facility" + sampleData.name().lastName().replaceAll("[^a-zA-Z0-9]", "");
         String facilityId = getText_FacilityId_Txt();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName();
-        String addressLine2 = sampleData.address().streetName();
+        String addressLine1 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
+        String addressLine2 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
 
         fillFacilityDetails.put("facilityName", facilityName);
         fillFacilityDetails.put("facilityId", facilityId);
@@ -284,25 +282,27 @@ public class AddNewFacilityPage {
 
         fill_FacilityName_Txt(facilityName);
         fill_PostalCode_Txt(postalCode);
+        CommonActions.getInstance().waitTillLoaderDisappears();
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
 
         click_Create_Btn();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return fillFacilityDetails;
     }
 
     public HashMap<String, String> fillEditFacilityPage() {
-        DriverManager.getDriver().navigate().refresh();
         HashMap<String, String> updateFacility = new HashMap<>();
         String postalCode = Utility.get_PostalCode_Txt();
-        String addressLine1 = sampleData.address().streetName();
-        String addressLine2 = sampleData.address().streetName();
+        String addressLine1 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
+        String addressLine2 = sampleData.address().streetName().replaceAll("[^a-zA-Z0-9]", "");
 
         updateFacility.put("postalCode", postalCode);
         updateFacility.put("addressLine1", addressLine1);
         updateFacility.put("addressLine2", addressLine2);
 
         fill_PostalCode_Txt(postalCode);
+        CommonActions.getInstance().waitTillLoaderDisappears();
         fill_AddressLine1_Txt(addressLine1);
         fill_AddressLine2_Txt(addressLine2);
 
@@ -348,5 +348,9 @@ public class AddNewFacilityPage {
 
     public String getText_PopUpErrorMsg_Lbl() {
         return ActionHelper.getText(popUpErrorMsg_Lbl);
+    }
+
+    public String getText_DuplicateIdErrorMsgPopUp_Lbl() {
+        return ActionHelper.getText(duplicateIdErrorMsgPopUp_Lbl);
     }
 }

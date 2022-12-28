@@ -311,17 +311,16 @@ public class TestSuite_Riders extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverUserJourneyTillRiders();
         ridersPage.choose_NoOfRecordsToBeDisplayed_PerPage(10);
-        String[] records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
-        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Table Has Not More Than 10 Record Present As Expected");
+        softAssert.assertTrue(ridersPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 10 Record Present As Expected");
+
         ridersPage.choose_NoOfRecordsToBeDisplayed_PerPage(20);
-        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
-        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Table Has Not More Than 20 Record Present As Expected");
+        softAssert.assertTrue(ridersPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 20 Record Present As Expected");
+
         ridersPage.choose_NoOfRecordsToBeDisplayed_PerPage(50);
-        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
-        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Table Has Not More Than 50 Record Present As Expected");
+        softAssert.assertTrue(ridersPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 50 Record Present As Expected");
+
         ridersPage.choose_NoOfRecordsToBeDisplayed_PerPage(5);
-        records = commonActions.getText_PaginationCurrentlyShowingCount_Lbl().split("-");
-        softAssert.assertEquals(ridersPage.getElements_RiderTableRiderIdColumnList_Link().size(), Integer.parseInt(records[1]) - Integer.parseInt(records[0]) + 1, "Table Has Not More Than 5 Record Present As Expected");
+        softAssert.assertTrue(ridersPage.validateTeamsTableRecordEqualsToPerPaginationOptions(), "Table Has Not More Than 5 Record Present As Expected");
         softAssert.assertAll();
     }
 
@@ -418,7 +417,7 @@ public class TestSuite_Riders extends BaseTestClass {
         softAssert.assertTrue(ridersPage.isPresent_ChangeStatus_Btn(), "Change Status Button is Present as Expected");
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_039, Verify The Functionality Of Select All CheckBox Present In Riders Table Heading")
+    @Test(enabled = false,groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.RIDERS_PAGE}, description = "TC_039, Verify The Functionality Of Select All CheckBox Present In Riders Table Heading")
     public void TC_Riders_039_Verify_The_Functionality_Of_Select_All_CheckBox_Present_In_Riders_Table_Heading() {
         commonActions.coverUserJourneyTillRiders();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -452,7 +451,7 @@ public class TestSuite_Riders extends BaseTestClass {
         if (!ridersPage.isPresent_EmptyTable_Txt()) {
             List<String> allTeams = ridersPage.getTxt_RidersTableTeamsColumnList_Link();
             for (String teams : allTeams) {
-                softAssert.assertEquals(teams, Constants.TEAM, "For All Record As Expected ");
+                softAssert.assertTrue(teams.contains(Constants.TEAM), "For All Record As Expected ");
             }
         }
         else {

@@ -27,7 +27,7 @@ public class FacilitiesPage {
     private final Locator statusDropDownInactiveValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='inactive:inactive']"));
     private final Locator statusDropDownTerminalValue_Radio = Locator.builder().withWeb(By.xpath("//input[@type='radio' and @value='inactive:terminal']"));
     private final Locator statusDropDownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//button/p[text()='Clear Selection']"));
-    private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//button/p[text()='More Actions']"));
+    private final Locator moreActions_DropDown = Locator.builder().withWeb(By.xpath("//p[text()='More Actions']/.."));
     private final Locator moreActionsDropDownExportAsCSV_Link = Locator.builder().withWeb(By.xpath("//a[text()='Export as CSV']"));
     private final Locator moreActionsDropDownModifyColumns_Link = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
 
@@ -45,7 +45,7 @@ public class FacilitiesPage {
     private final Locator moreActionsDropDownModifyColumnUpdatedAt_CheckBox = Locator.builder().withWeb(By.id("Updated At"));
     private final Locator moreActionsDropDownModifyColumnCreatedBy_CheckBox = Locator.builder().withWeb(By.id("Created By"));
     private final Locator moreActionsDropDownModifyColumnUpdatedBy_CheckBox = Locator.builder().withWeb(By.id("Updated By"));
-    private final Locator moreActionsDropDownModifyColumnDragOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div"));
+    private final Locator moreActionsDropDownModifyColumnDragOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div"));
     private final Locator moreActionsDropDownModifyColumnCheckBoxDataList_CheckBox = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-2 items-center']"));
     private final Locator moreActionDropDownModifyColumnCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator moreActionsDropDownModifyColumnSave_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save']"));
@@ -65,16 +65,7 @@ public class FacilitiesPage {
     private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("(//tr[2]//span)[1]"));
     private final Locator tableDataCheckBox_List = Locator.builder().withWeb(By.xpath("//label[contains(@class,'ant-checkbox')]"));
     private final Locator tableDataEdit_Link = Locator.builder().withWeb(By.xpath("(//p[text()='Edit'])[1]"));
-    private final Locator tableDataFacilityId_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[2]"));
-    private final Locator tableDataFacilityName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
-    private final Locator tableDataFacilityStatus_Lbl = Locator.builder().withWeb(By.xpath("(//td[@class='ant-table-cell']//h6)[1]"));
-    private final Locator tableDataPostalCode_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[8]"));
-    private final Locator tableDataAddress_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[5]"));
-    private final Locator tableDataCity_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[6]"));
-    private final Locator tableDataState_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[7]"));
     private final Locator facilityTableFacilityIdList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[2]"));
-    private final Locator facilityTableStatusList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[4]"));
-    private final Locator facilityTableFacilityNameList_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//td[3]"));
     private final Locator deactivate_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex space-x-3']/button"));
     private final Locator deactivateFacilityHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Deactivate Facility']"));
     private final Locator deactivateFacilityCancel_Btn = Locator.builder().withWeb(By.xpath("//div[@class='w-full flex justify-center items-center scale-100']//p[text()='Cancel']"));
@@ -84,6 +75,8 @@ public class FacilitiesPage {
     private final Locator logout_Btn = Locator.builder().withWeb(By.id("headlessui-menu-item-15"));
     private final Locator status_RadioBtn = Locator.builder().withWeb(By.xpath("//label[@class='ant-radio-wrapper']/span[2]"));
     private final Locator tableColumnSelectAll_CheckBox = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell ant-table-selection-column']"));
+    private final Locator addFacility_Btn = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//td//td"));
+    CommonActions commonActions = CommonActions.getInstance();
 
     public static FacilitiesPage getInstance() {
         if (_instance == null) _instance = new FacilitiesPage();
@@ -120,20 +113,20 @@ public class FacilitiesPage {
 
     public void click_NewFacility_Btn() {
         ActionHelper.click(newFacility_Btn);
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Search_Txt() {
-        return ActionHelper.isPresent(search_Txt);
+        return ActionHelper.isPresent(search_Txt, 5000);
     }
 
     public void fill_Search_Txt(String facilityName) {
-        ActionHelper.waitUntilElementVisible(search_Txt.getBy());
         ActionHelper.sendKeysWithClear(search_Txt.getBy(), facilityName);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Status_DropDown() {
-        return ActionHelper.isPresent(status_DropDown);
+        return ActionHelper.isPresent(status_DropDown, 2000);
     }
 
     public void click_Status_DropDown() {
@@ -149,12 +142,12 @@ public class FacilitiesPage {
     }
 
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy());
+        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy(), 4000);
     }
 
     public void click_StatusDropDownActiveValue_Radio() {
         Utility.clickRadio(statusDropDownActiveValue_Radio.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownPauseValue_Radio() {
@@ -163,7 +156,7 @@ public class FacilitiesPage {
 
     public void click_StatusDropDownPauseValue_Radio() {
         Utility.clickRadio(statusDropDownPauseValue_Radio.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownDeboardValue_Radio() {
@@ -172,7 +165,7 @@ public class FacilitiesPage {
 
     public void click_StatusDropDownDeboardValue_Radio() {
         Utility.clickRadio(statusDropDownDeboardValue_Radio.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownInactiveValue_Radio() {
@@ -181,7 +174,7 @@ public class FacilitiesPage {
 
     public void click_StatusDropDownInactiveValue_Radio() {
         Utility.clickRadio(statusDropDownInactiveValue_Radio.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownTerminalValue_Radio() {
@@ -190,7 +183,7 @@ public class FacilitiesPage {
 
     public void click_StatusDropDownTerminalValue_Radio() {
         Utility.clickRadio(statusDropDownTerminalValue_Radio.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
@@ -369,6 +362,7 @@ public class FacilitiesPage {
 
     public void click_MoreActionsDropDownModifyColumnSave_Btn() {
         ActionHelper.click(moreActionsDropDownModifyColumnSave_Btn);
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableColumnNames_List() {
@@ -450,7 +444,7 @@ public class FacilitiesPage {
     public void click_TableData_CheckBox() {
         if (!isChecked_FirstData_CheckBox())
             Utility.checkCheckbox(tableData_CheckBox.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableDataEdit_Link() {
@@ -458,76 +452,12 @@ public class FacilitiesPage {
     }
 
     public void click_TableDataEdit_Link() {
-        ActionHelper.waitUntilElementVisible(tableDataEdit_Link.getBy());
         ActionHelper.click(tableDataEdit_Link);
-    }
-
-    public boolean isPresent_TableDataFacilityId_Lbl() {
-        return ActionHelper.isPresent(tableDataFacilityId_Lbl);
-    }
-
-    public String getText_TableDataFacilityId_Lbl() {
-        return ActionHelper.getText(tableDataFacilityId_Lbl);
-    }
-
-    public boolean isPresent_TableDataFacilityName_Lbl() {
-        return ActionHelper.isPresent(tableDataFacilityName_Lbl);
-    }
-
-    public String getText_TableDataFacilityName_Lbl() {
-        return ActionHelper.getText(tableDataFacilityName_Lbl);
-    }
-
-    public boolean isPresent_TableDataFacilityStatus_Lbl() {
-        return ActionHelper.isPresent(tableDataFacilityStatus_Lbl);
-    }
-
-    public String getText_TableDataFacilityStatus_Lbl() {
-        return ActionHelper.getText(tableDataFacilityStatus_Lbl);
-    }
-
-    public boolean isPresent_TableDataPostalCode_Lbl() {
-        return ActionHelper.isPresent(tableDataPostalCode_Lbl);
-    }
-
-    public String getText_TableDataPostalCode_Lbl() {
-        return ActionHelper.getText(tableDataPostalCode_Lbl);
-    }
-
-    public boolean isPresent_TableDataAddress_Lbl() {
-        return ActionHelper.isPresent(tableDataAddress_Lbl);
-    }
-
-    public String getText_TableDataAddress_Lbl() {
-        return ActionHelper.getText(tableDataAddress_Lbl);
-    }
-
-    public boolean isPresent_TableDataCity_Lbl() {
-        return ActionHelper.isPresent(tableDataCity_Lbl);
-    }
-
-    public String getText_TableDataCity_Lbl() {
-        return ActionHelper.getText(tableDataCity_Lbl);
-    }
-
-    public boolean isPresent_TableDataState_Lbl() {
-        return ActionHelper.isPresent(tableDataState_Lbl);
-    }
-
-    public String getText_TableDataState_Lbl() {
-        return ActionHelper.getText(tableDataState_Lbl);
+        commonActions.waitTillLoaderDisappears();
     }
 
     public List<WebElement> getList_FacilityTableFacilityId_Lbl() {
         return ActionHelper.findElements(facilityTableFacilityIdList_Lbl.getBy());
-    }
-
-    public List<String> getList_FacilityTableStatus_Lbl() {
-        return Utility.getText_ListOfWebElements(facilityTableStatusList_Lbl.getBy());
-    }
-
-    public List<String> getList_FacilityTableFacilityName_Lbl() {
-        return Utility.getText_ListOfWebElements(facilityTableFacilityNameList_Lbl.getBy());
     }
 
     public boolean isPresent_Deactivate_Btn() {
@@ -536,7 +466,7 @@ public class FacilitiesPage {
 
     public void click_Deactivate_Btn() {
         ActionHelper.click(deactivate_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_DeactivateFacilityHeader_Lbl() {
@@ -561,7 +491,7 @@ public class FacilitiesPage {
 
     public void click_DeactivateFacilityDeactivate_Btn() {
         ActionHelper.click(deactivateFacilityDeactivate_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isPresent_UserProfile_Btn() {
@@ -582,12 +512,12 @@ public class FacilitiesPage {
 
     public HashMap<String, String> getData_TableFirstData_List() {
         HashMap<String, String> tableData = new HashMap<>();
-        String facilityId = getText_TableDataFacilityId_Lbl();
-        String facilityName = getText_TableDataFacilityName_Lbl();
-        String postalCode = getText_TableDataPostalCode_Lbl();
-        String address = getText_TableDataAddress_Lbl();
-        String city = getText_TableDataCity_Lbl();
-        String state = getText_TableDataState_Lbl();
+        String facilityId = commonActions.getText_TableData_Lbl("FACILITY ID");
+        String facilityName = commonActions.getText_TableData_Lbl("FACILITY NAME");
+        String postalCode = commonActions.getText_TableData_Lbl("POSTAL CODE");
+        String address = commonActions.getText_TableData_Lbl("ADDRESS");
+        String city = commonActions.getText_TableData_Lbl("CITY");
+        String state = commonActions.getText_TableData_Lbl("STATE");
 
         tableData.put("facilityId", facilityId);
         tableData.put("facilityName", facilityName);
@@ -610,7 +540,7 @@ public class FacilitiesPage {
             }
         }
         ActionHelper.click(status_DropDown);
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isChecked_FirstData_CheckBox() {
@@ -620,6 +550,27 @@ public class FacilitiesPage {
     public void click_TableDataToUnCheck_CheckBox() {
         if (isChecked_FirstData_CheckBox())
             Utility.checkCheckbox(tableData_CheckBox.getBy());
-        CommonActions.getInstance().waitTillLoaderDisappears();
+        commonActions.waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_TableColumnSelectAll_CheckBox() {
+        return ActionHelper.isPresent(tableColumnSelectAll_CheckBox);
+    }
+
+    public void check_TableColumnSelectAll_CheckBox() {
+        Utility.checkCheckbox(tableColumnSelectAll_CheckBox.getBy());
+    }
+
+    public List<String> getClass_CheckBox_List() {
+        List<WebElement> element = ActionHelper.findElements(By.xpath("//label[contains(@class,'ant-checkbox')]"));
+        List<String> classList = new ArrayList<>(element.size());
+        for (int i = 0; i < element.size(); i++) {
+            classList.add(element.get(i).getAttribute("class"));
+        }
+        return classList;
+    }
+
+    public boolean isPresent_AddFacility_Btn() {
+        return ActionHelper.isPresent(addFacility_Btn);
     }
 }

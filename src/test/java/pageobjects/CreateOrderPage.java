@@ -171,10 +171,10 @@ public class CreateOrderPage {
     public void click_Submit_Btn() {
         ActionHelper.waitForLoaderToHide();
         ActionHelper.click(submit_Btn);
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
         ActionHelper.waitForLoaderToHide();
         DriverManager.getDriver().navigate().refresh();
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
 
     public void set_DropMobileNumber_TextBox(String dropMobileNumber) {

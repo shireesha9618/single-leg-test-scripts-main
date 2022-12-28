@@ -48,6 +48,7 @@ public class HomePage extends BaseTestClass {
     private final Locator settingsOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Settings']"));
     private final Locator singleLeg_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Single Leg']"));
     private final Locator openMenuCross_Btn = Locator.builder().withWeb(By.xpath("(//button[@type='button'])[1]"));
+    private final Locator workFlowOs1_Link = Locator.builder().withWeb(By.xpath("//header//img[@alt='Workflow']"));
     private final Locator workFlowAllAppsHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='All Apps']"));
     private final Locator workFlowOrders_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Orders']"));
     private final Locator workFlowRouting_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Routing']"));
@@ -86,9 +87,9 @@ public class HomePage extends BaseTestClass {
     public void openViewOrderPage() {
         ActionHelper.waitUntilElementVisible(viewOrderMenuItem_Btn.getBy());
         ActionHelper.click(viewOrderMenuItem_Btn);
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
         DriverManager.getDriver().navigate().refresh();
-        CommonActions.getInstance().click_Skip_Btn();
+        CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
 
 
@@ -303,6 +304,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void openTeamsPage() {
+        ActionHelper.waitUntilElementClickable(teamsMenu_Btn);
         ActionHelper.click(teamsMenu_Btn);
     }
 
@@ -317,5 +319,53 @@ public class HomePage extends BaseTestClass {
 
     public void click_WorkFlowTeams_Btn() {
         ActionHelper.click(workFlowTeams_Btn);
+    }
+
+    public void click_OpenMenuFacility_Btn() {
+        ActionHelper.click(facilitiesOpenMenu_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_WorkFlowRiders_Btn() {
+        return ActionHelper.isPresent(workFlowRiders_Btn);
+    }
+
+    public void click_WorkFlowFacilities_Btn() {
+        ActionHelper.click(workFlowFacilities_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void unExpand_ResourcesMenu_Btn() {
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.click(resourcesMenu_Btn);
+    }
+
+    public boolean isPresent_LeftPanel_Btn() {
+        return ActionHelper.isPresent(leftPanel_Btn, 5000);
+    }
+
+    public void expand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
+    }
+
+    public void unExpand_LeftPanel_Btn() {
+        ActionHelper.click(leftPanel_Btn);
+    }
+
+    public boolean isPresent_OpenMenuCreateOrders_Btn() {
+        return ActionHelper.isPresent(createOrdersOpenMenu_Btn);
+    }
+
+    public boolean isPresent_OpenMenuViewOrders_Btn() {
+        return ActionHelper.isPresent(viewOrdersOpenMenu_Btn);
+    }
+
+    public boolean isPresent_WorkFlowOs1_Link() {
+        return ActionHelper.isPresent(workFlowOs1_Link);
+    }
+
+    public void click_WorkFlowOs1_Link() {
+        ActionHelper.click(workFlowOs1_Link);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 }
