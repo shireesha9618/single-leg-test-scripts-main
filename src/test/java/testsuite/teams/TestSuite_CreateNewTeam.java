@@ -11,6 +11,7 @@ import pageobjects.CommonActions;
 import pageobjects.CreateNewTeamPage;
 import pageobjects.HomePage;
 import pageobjects.TeamsPage;
+import utility.Utility;
 import utils.Utils;
 
 import java.util.HashMap;
@@ -224,35 +225,26 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
 
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(commonActions.isPresent_TableData_Lbl("TEAM NAME"), "Team Name Data In The Table Is Present As Expected");
+        softAssert.assertTrue(commonActions.get_TableData_Count() >= 2, "More than two Record Is As Expected");
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_015, Verify The Functionality Of Create Team With Duplicate Team Name")
-    public void TC_Teams_015_Verify_The_Functionality_Of_Create_Team_With_Duplicate_Team_Name() {
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_015, Verify The Functionality Of Create Team With Duplicate Id Name")
+    public void TC_Teams_015_Verify_The_Functionality_Of_Create_Team_With_Duplicate_Id_Name() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
         String teamId = commonActions.getText_TableData_Lbl("TEAM ID");
 
         teamsPage.click_NewTeam_Btn();
-        createNewTeamPage.fillWithClear_TeamName_TxtBox(Utils.generateRandomName(129,130));
-        createNewTeamPage.fillWithClear_TeamName_TxtBox(teamId);
+        createNewTeamPage.fillWithClear_TeamName_TxtBox("Team" + Utility.generateRandomNoInRange(1, 1000));
+        createNewTeamPage.fillWithClear_TeamID_TxtBox(teamId);
         createNewTeamPage.click_Create_Btn();
+        createNewTeamPage.click_teamsBreadCrumb_Link();
 
-        teamsPage.fill_EditColumnsSearch_Txt(teamId);
+        teamsPage.fillWithClear_Search_Txt(teamId);
         softAssert.assertTrue(commonActions.isPresent_TableData_Lbl("TEAM ID"), "Team Id Data In The Table Is Present As Expected");
-        softAssert.assertEquals(teamsPage.get_size(), 1, "One Record Is As Expected");
+        softAssert.assertEquals(commonActions.get_TableData_Count(), 1, "One Record Is Visible As Expected");
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_012, Verify The Functionality Of Create Team With Duplicate Team Name")
-    public void TC_Teams_012_Verify_The_Functionality_Of_Rider_DropDown_Create_Teams_Page() {
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        commonActions.coverJourneyTillTeams();
-        teamsPage.click_NewTeam_Btn();
-        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(),"Create Teams Header Is Present As Expected");
-        softAssert.assertTrue(createNewTeamPage.isPresent_Rider_DropDown(),"Rider DropDown Is Present As Expected");
-        createNewTeamPage.fillWithClear_Rider_TxtBox("Arpit");
-        
-
-    }
 }

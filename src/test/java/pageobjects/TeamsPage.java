@@ -73,8 +73,9 @@ public class TeamsPage extends BaseTestClass {
     private final Locator teamsTableIDList_Link = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td/a"));
     private final Locator search_Bar = Locator.builder().withWeb(By.xpath("//input[@id='search_ptp']"));
     private final Locator tableDataTeamName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
+    private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
+    private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
     CommonActions commonActions = CommonActions.getInstance();
-
 
     public static TeamsPage getInstance() {
         if (_instance == null)
@@ -134,12 +135,7 @@ public class TeamsPage extends BaseTestClass {
 
     public void set_SearchTeam_TextBox(String input) {
         ActionHelper.sendKeysWithClear(searchTeam_TextBox.getBy(), input);
-        ActionHelper.gotoSleep(10000);
-    }
-
-    public int get_size() {
-        List<WebElement> data = ActionHelper.findElements(searchTeam_TextBox.getBy());
-        return data.size();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
@@ -152,7 +148,7 @@ public class TeamsPage extends BaseTestClass {
             if (element.getAttribute("value").equals(input))
                 Utility.clickRadio(statusDropDownValue_Radio.getBy());
         }
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownPauseValue_Radio() {
@@ -161,7 +157,7 @@ public class TeamsPage extends BaseTestClass {
 
     public void click_StatusDropDownPauseValue_Radio() {
         Utility.clickRadio(statusDropDownPauseValue_Radio.getBy());
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownDeBoardValue_Radio() {
@@ -170,7 +166,7 @@ public class TeamsPage extends BaseTestClass {
 
     public void click_StatusDropDownDeBoardValue_Radio() {
         Utility.clickRadio(statusDropDownDeBoardValue_Radio.getBy());
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownInactiveValue_Radio() {
@@ -179,7 +175,7 @@ public class TeamsPage extends BaseTestClass {
 
     public void click_StatusDropDownTerminalValue_Radio() {
         Utility.clickRadio(statusDropDownTerminalValue_Radio.getBy());
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public boolean isEnabled_StatusDropDownTerminalValue_Radio() {
@@ -188,13 +184,13 @@ public class TeamsPage extends BaseTestClass {
 
     public void click_StatusDropDownInactiveValue_Radio() {
         Utility.clickRadio(statusDropDownInactiveValue_Radio.getBy());
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public void click_StatusDropDownDeBoardingValue_Radio() {
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
         ActionHelper.click(statusDropDownDeboardingValue_Radio);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        commonActions.waitTillLoaderTxtDisappears();
     }
 
     public boolean isEnabled_StatusDropDownOnboardingValue_Radio() {
@@ -202,9 +198,9 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public void click_StatusDropDownOnboardingValue_Radio() {
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
         ActionHelper.click(statusDropDownOnboardingValue_Radio);
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        commonActions.waitTillLoaderTxtDisappears();
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
@@ -212,9 +208,9 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public void click_StatusDropDownClearSelection_Btn() {
-        TeamsPage.getInstance().open_Status_DropDown();
+        open_Status_DropDown();
         ActionHelper.click(statusDropDownClearSelection_Btn);
-        TeamsPage.getInstance().close_Status_DropDown();
+        close_Status_DropDown();
     }
 
     public boolean isPresent_Status_Btn() {
@@ -234,7 +230,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public ArrayList<String> getTxt_TeamsTableStatusColumnList_Link() {
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
         List<WebElement> statusRecord = ActionHelper.findElements(teamsTableStatusColumnList_Link);
         ArrayList<String> allStatus = new ArrayList<>();
         for (WebElement webElement : statusRecord) {
@@ -253,22 +249,12 @@ public class TeamsPage extends BaseTestClass {
                 break;
             }
         }
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
         close_Status_DropDown();
     }
 
     public boolean isPresent_EmptyTable_Txt() {
         return ActionHelper.isPresent(emptyTable_Txt);
-    }
-
-    public void validate_Status_RadioBtn(String status) {
-        if (!isPresent_EmptyTable_Txt()) {
-            for (String value : getTxt_RidersTableStatusColumnList_Link())
-                JarvisAssert.assertEquals(value, status, status + " Status Is Present As Expected");
-        } else {
-            JarvisAssert.assertTrue(isPresent_EmptyTable_Txt(), "Table Has No Record Empty Table");
-            JarvisAssert.assertEquals(getText_EmptyTable_Txt(), "It is Empty here", "Table Empty Is Matched As Expected");
-        }
     }
 
     public ArrayList<String> getTxt_RidersTableStatusColumnList_Link() {
@@ -287,7 +273,7 @@ public class TeamsPage extends BaseTestClass {
     public HashMap<String, String> createNewTeam() {
         HashMap<String, String> teamDetails = new HashMap<>();
         String teamName = "Team" + Utility.generateRandomNoInRange(1, 1000);
-        CommonActions.getInstance().coverJourneyTillTeams();
+        commonActions.coverJourneyTillTeams();
         TeamsPage.getInstance().click_NewTeam_Btn();
         CreateNewTeamPage.getInstance().set_TeamName_TextBox(teamName);
         teamDetails.put("teamId", CreateNewTeamPage.getInstance().get_TeamID_TextBox());
@@ -298,7 +284,7 @@ public class TeamsPage extends BaseTestClass {
 
     public void click_Edit_Btn(int index) {
         ActionHelper.click(ActionHelper.findElements(edit_Btn).get(index));
-        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        commonActions.waitTillLoaderDisappears();
     }
 
     public void clickAndChoose_MoreActionsDropDownMenuOptions_Btn(String menuItem) {
@@ -347,7 +333,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isPresent_EditColumnsHeader_Lbl() {
-        ActionHelper.waitForLoaderToHide();
+        commonActions.waitTillLoaderDisappears();
         return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkHeader_Lbl, 5000);
     }
 
@@ -471,7 +457,6 @@ public class TeamsPage extends BaseTestClass {
         return ActionHelper.getText(deactivateTeamHeader_Lbl);
     }
 
-
     public boolean isPresent_DeactivateTeamCancel_Btn() {
         return ActionHelper.isPresent(deactivateTeamCancel_Btn);
     }
@@ -521,5 +506,4 @@ public class TeamsPage extends BaseTestClass {
 
         return tableData;
     }
-
 }

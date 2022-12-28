@@ -21,7 +21,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
     TeamEditPage teamEditPage = TeamEditPage.getInstance();
     Faker sampleData = new Faker();
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_01, Verify The UI Of Team Details Page")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAM_DETAILS}, description = "TC_01, Verify The UI Of Team Details Page")
     public void TC_Teams_01_Verify_The_UI_Of_Teams_Details_Page() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -38,7 +38,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_02, Verify The Functionality Of Breadcrumb Menu For Create Teams Page")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAM_DETAILS}, description = "TC_02, Verify The Functionality Of Breadcrumb Menu For Create Teams Page")
     public void TC_Teams_02_Verify_The_Functionality_Of_Breadcrumb_Menu_For_Create_Teams_Page() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -58,7 +58,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_03, Verify The Functionality Of edit button in teams details page")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAM_DETAILS}, description = "TC_03, Verify The Functionality Of edit button in teams details page")
     public void TC_Teams_03_Verify_The_Functionality_Of_Edit_Button_In_Teams_Details_Page() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -77,7 +77,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_04,Verify The Functionality Of Cancel Button of Edit Teams")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAM_DETAILS}, description = "TC_04,Verify The Functionality Of Cancel Button of Edit Teams")
     public void TC_Teams_04_Verify_The_Functionality_Of_Cancel_Button_Of_Edit_Teams() {
         String teamName = sampleData.name().firstName();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -103,7 +103,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_05,Verify The Functionality Of Save Button of Edit Teams")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAM_DETAILS}, description = "TC_05,Verify The Functionality Of Save Button of Edit Teams")
     public void TC_Teams_05_Verify_The_Functionality_Of_Save_Button_Of_Edit_Teams() {
         String teamName = sampleData.name().firstName();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();

@@ -9,6 +9,7 @@ import framework.frontend.managers.DriverManager;
 import org.testng.annotations.Test;
 import pageobjects.AddNewRiderPage;
 import pageobjects.CommonActions;
+import pageobjects.HomePage;
 import pageobjects.RidersPage;
 import utils.Utils;
 
@@ -18,6 +19,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
     AddNewRiderPage addNewRiderPage = AddNewRiderPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
     Faker sampleData = new Faker();
+    HomePage homePage = HomePage.getInstance();
 
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ADD_NEW_RIDER_PAGE}, description = "TC_045, Verify The UI Of New Rider Button")
@@ -237,7 +239,7 @@ public class TestSuite_AddNewRider extends BaseTestClass {
         String[] dataForSpecialCharacters = {"@@@@@", "aa112", "aa!@$", "1122@"};
         for (String value : dataForSpecialCharacters) {
             addNewRiderPage.fillWithClear_PhoneNumber_TxtBox(value);
-            softAssert.assertEquals(addNewRiderPage.get_PhoneNumber_Txt(),"","Phone Number Is Not Accepting Alphabets And Special Characters As Expected");
+            softAssert.assertEquals(addNewRiderPage.get_PhoneNumber_Txt(), "", "Phone Number Is Not Accepting Alphabets And Special Characters As Expected");
         }
         softAssert.assertAll();
     }

@@ -3,6 +3,7 @@ package pageobjects;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import utility.Utility;
 
 public class CreateNewTeamPage {
@@ -21,6 +22,9 @@ public class CreateNewTeamPage {
     private final Locator teamIDValidation_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='ID*']/../following-sibling::div//p"));
     private final Locator createdSuccessfullyMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[text()='Created Successfully']"));
     private final Locator errorMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[contains(text(), 'In participant')]"));
+    private final Locator riderDropDown_Txt = Locator.builder().withWeb(By.xpath("//div//span[attribute::title]/span[text()]"));
+    private final Locator teamManagerDropDown_Txt = Locator.builder().withWeb(By.xpath("//div//span[attribute::title]/span[text()]"));
+
 
     public static CreateNewTeamPage getInstance() {
         if (_instance == null) {
@@ -54,7 +58,7 @@ public class CreateNewTeamPage {
     }
 
     public Boolean isPresent_Header_lbl() {
-        return ActionHelper.isPresent(header_Lbl,3000);
+        return ActionHelper.isPresent(header_Lbl, 3000);
     }
 
     public boolean isPresent_Cancel_Btn() {
@@ -126,7 +130,30 @@ public class CreateNewTeamPage {
     }
 
     public void fillWithClear_Rider_TxtBox(String input) {
-        Utility.selectAllAndClear(selectRider_Dropdown.getBy());
         ActionHelper.fillWithClear(selectRider_Dropdown.getBy(), input);
+    }
+
+    public void click_teamsBreadCrumb_Link() {
+        ActionHelper.click(teams_BreadCrumb_Link);
+    }
+
+    public boolean isPresent_TeamManagersDropDownList_Txt() {
+        return ActionHelper.isPresent(teamManagerDropDown_Txt);
+    }
+
+    public boolean isPresent_RidersDropDownList_Txt() {
+        return ActionHelper.isPresent(riderDropDown_Txt);
+    }
+
+    public void select_TeamManagerDropDown_Btn(String input) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.click(selectTeamManager_Dropdown);
+        ActionHelper.sendKeys(selectTeamManager_Dropdown, Keys.chord(input, Keys.ENTER));
+    }
+
+    public void select_RiderDropDown_Btn(String input) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.click(selectRider_Dropdown);
+        ActionHelper.sendKeys(selectRider_Dropdown, Keys.chord(input, Keys.ENTER));
     }
 }

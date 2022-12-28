@@ -254,9 +254,9 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsHeader_Lbl(), "Check Visibility of Pickup Details header");
-        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactName_Txt(), "Check Visibility of Contact Name text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNumber_Txt(), "Check Visibility of Contact Number text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsSelectAFacility_Dropdown(), "Check Visibility of Select A Facility text box");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsFacilityStore_Radio(), "Check Visibility of Facility Store radio");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCustomAddress_Radio(), "Check Visibility of Custom Address radio");
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_PickupDetailsFacilityStore_Radio(), "Validate Facility Store radio is already selected");
         softAssert.assertAll();
     }
 
@@ -658,16 +658,9 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsHeader_Lbl(), "Check Visibility of Drop Details header");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactName_Txt(), "Check Visibility of Contact Name text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactNumber_Txt(), "Check Visibility of Contact Number text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsSelectAFacility_Dropdown(), "Check Visibility of Select A Facility text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsPostalCode_Txt(), "Check Visibility of Postal Code text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCountry_Select(), "Check Visibility of Country dropdown");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine1_Txt(), "Check Visibility of Address Line 1 text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine2_Txt(), "Check Visibility of Address Line 2 text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsState_Txt(), "Check Visibility of State text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCity_Txt(), "Check Visibility of City text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsClearAll_Btn(), "Check Visibility of Clear All button");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsFacilityStore_Radio(), "Check Visibility of Facility Store radio");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCustomAddress_Radio(), "Check Visibility of Custom Address radio");
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_DropDetailsFacilityStore_Radio(), "Validate Facility Store radio is already selected");
         softAssert.assertAll();
     }
 
@@ -1656,5 +1649,440 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_SamePickupAndDropFacilityToastMsg_Lbl(), "Validate presence of Drop facility needs to be different from Pickup facility toast msg");
         softAssert.assertAll();
     }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_095, Verify The Functionality of Facility/Store radio button of Pickup Details")
+    public void TC_CreateNewOrder_095_Verify_The_Functionality_of_FacilityStore_radio_button_of_Pickup_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsHeader_Lbl(), "Check Visibility of Pickup Details header");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsFacilityStore_Radio(), "Check Visibility of Facility Store radio");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCustomAddress_Radio(), "Check Visibility of Custom Address radio");
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_PickupDetailsFacilityStore_Radio(), "Validate Facility Store radio is already selected");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactName_Txt(), "Check Contact Name should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactNumber_Txt(), "Check Contact Number should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsSelectAFacility_Dropdown(), "Check Select A Facility should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupDate_Txt(), "Check Pickup Date should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Slot To should be editable");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPostalCode_Txt() == false, "Check Postal Code shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCountry_Select() == false, "Check Country shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsAddressLine1_Txt() == false, "Check Address Line 1 shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsAddressLine2_Txt() == false, "Check Address Line 2 shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsState_Txt() == false, "Check State shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCity_Txt() == false, "Check City shouldn't be editable");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_096, Verify The Functionality of Custom Address radio button of Pickup Details")
+    public void TC_CreateNewOrder_096_Verify_The_Functionality_of_Custom_Address_radio_button_of_Pickup_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsHeader_Lbl(), "Check Visibility of Pickup Details header");
+        createNewOrderPage.click_PickupDetailsCustomAddress_Radio();
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_PickupDetailsCustomAddress_Radio(), "Validate Custom Address radio is selected");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactName_Txt(), "Check Contact Name should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsContactNumber_Txt(), "Check Contact Number should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupDate_Txt(), "Check Pickup Date should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotFrom_Txt(), "Check Pickup Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPickupSlotTo_Txt(), "Check Pickup Slot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsPostalCode_Txt(), "Check Postal Code should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCountry_Select(), "Check Country should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsAddressLine1_Txt(), "Check Address Line 1 should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsAddressLine2_Txt(), "Check Address Line 2 should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsState_Txt(), "Check State should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsCity_Txt(), "Check City should be editable");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_PickupDetailsSelectAFacility_Dropdown() == false, "Check Select A Facility shouldn't be editable");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_097, Verify The Functionality of Facility/Store radio button of Drop Details")
+    public void TC_CreateNewOrder_097_Verify_The_Functionality_of_FacilityStore_radio_button_of_Drop_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsHeader_Lbl(), "Check Visibility of Drop Details header");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsFacilityStore_Radio(), "Check Visibility of Facility Store radio");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCustomAddress_Radio(), "Check Visibility of Custom Address radio");
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_DropDetailsCustomAddress_Radio(), "Validate Custom Address radio is already selected");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactName_Txt(), "Check Contact Name should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactNumber_Txt(), "Check Contact Number should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropDate_Txt(), "Check Drop Date should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Slot To should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsPostalCode_Txt(), "Check Postal Code should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCountry_Select(), "Check Country should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsAddressLine1_Txt(), "Check Address Line 1 should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsAddressLine2_Txt(), "Check Address Line 2 should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsState_Txt(), "Check State should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCity_Txt(), "Check City should be editable");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsSelectAFacility_Dropdown() == false, "Check Select A Facility shouldn't be editable");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_098, Verify The Functionality of Custom Address radio button of Drop Details")
+    public void TC_CreateNewOrder_098_Verify_The_Functionality_of_Custom_Address_radio_button_of_Drop_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsHeader_Lbl(), "Check Visibility of Drop Details header");
+        createNewOrderPage.click_DropDetailsFacilityStore_Radio();
+        softAssert.assertTrue(createNewOrderPage.isRadioSelected_DropDetailsFacilityStore_Radio(), "Validate Facility Store radio is selected");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactName_Txt(), "Check Contact Name should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsContactNumber_Txt(), "Check Contact Number should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsSelectAFacility_Dropdown(), "Check Select A Facility should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropDate_Txt(), "Check Drop Date should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotFrom_Txt(), "Check Drop Slot From should be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsDropSlotTo_Txt(), "Check Drop Slot To should be editable");
+
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsPostalCode_Txt() == false, "Check Postal Code shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCountry_Select() == false, "Check Country shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsAddressLine1_Txt() == false, "Check Address Line 1 shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsAddressLine2_Txt() == false, "Check Address Line 2 shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsState_Txt() == false, "Check State shouldn't be editable");
+        softAssert.assertTrue(createNewOrderPage.isEnabled_DropDetailsCity_Txt() == false, "Check City shouldn't be editable");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_099, Verify The UI of Shipment Details of Create New Order Page")
+    public void TC_CreateNewOrder_099_Verify_The_UI_of_Shipment_Details_of_Create_New_Order_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsHeader_Lbl(), "Check Visibility of Shipment Details header");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsShipmentID_Txt(), "Check Visibility of Shipment ID field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDescription_Txt(), "Check Visibility of Description field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsWeight_Txt(), "Check Visibility of Weight field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsVolume_Txt(), "Check Visibility of Volume field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsLength_Txt(), "Check Visibility of Length field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsBreadth_Txt(), "Check Visibility of Breadth field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsHeight_Txt(), "Check Visibility of Height field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDelete_Btn(), "Check Visibility of Delete btn");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsAddShipment_Btn(), "Check Visibility of Add Shipment btn");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_100, Verify The Validation Functionality of Shipment Details for without entering mandatory fields ")
+    public void TC_CreateNewOrder_100_Verify_The_Validation_Functionality_of_Shipment_Details_for_without_entering_mandatory_fields() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_Create_Btn();
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderIdValidationError_Lbl(), "Validate presence of validation error message for Order Id field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescriptionValidationError_Lbl(), "Validate presence of validation error message for Order Description field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsValidationError_Lbl(), "Validate presence of validation error message for Shipment field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNameValidationError_Lbl(), "Validate presence of validation error message for Contact Name field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNumberValidationError_Lbl(), "Validate presence of validation error message for Contact Number field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsSelectAFacilityValidationError_Lbl(), "Validate presence of validation error message for Select A Facility field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsPostalCodeValidationError_Lbl() == false, "Validate absence of validation error message for Postal Code field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCountryValidationError_Lbl() == false, "Validate absence of validation error message for Country field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsAddressLine1ValidationError_Lbl() == false, "Validate absence of validation error message for Address Line 1 field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsStateValidationError_Lbl() == false, "Validate absence of validation error message for State field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCityValidationError_Lbl() == false, "Validate absence of validation error message for City field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsPickupDateValidationError_Lbl(), "Validate presence of validation error message for Pickup Date field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactNameValidationError_Lbl(), "Validate presence of validation error message for Contact Name field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactNumberValidationError_Lbl(), "Validate presence of validation error message for Contact Number field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsSelectAFacilityValidationError_Lbl() == false, "Validate absence of validation error message for Select A Facility field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsPostalCodeValidationError_Lbl(), "Validate presence of validation error message for Postal Code field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCountryValidationError_Lbl() == false, "Validate absence of validation error message for Country field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine1ValidationError_Lbl(), "Validate presence of validation error message for Address Line 1 field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsStateValidationError_Lbl(), "Validate presence of validation error message for State field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCityValidationError_Lbl(), "Validate presence of validation error message for City field");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsDropDateValidationError_Lbl(), "Validate presence of validation error message for Drop Date field");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_PaymentDetailsPaymentTypeValidationError_Lbl(), "Validate presence of validation error message for Payment Type field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_101, Verify The Functionality of Add Shipment button without entering Shipment Details ")
+    public void TC_CreateNewOrder_101_Verify_The_Functionality_of_Add_Shipment_button_without_entering_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        createNewOrderPage.click_ShipmentDetailsAddShipment_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddShipmentRequiredParamShipmentIdToastMsg_Lbl(), "Validate presence of toast error message for Shipment Id field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsShipmentID_Txt(ActionHelper.getRandomNumberString(5));
+        createNewOrderPage.click_ShipmentDetailsAddShipment_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_AddShipmentRequiredParamDescriptionToastMsg_Lbl(), "Validate presence of toast error message for Description field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_102, Verify The Functionality of Enter Shipment Id TextBox of Shipment Details ")
+    public void TC_CreateNewOrder_102_Verify_The_Functionality_of_Enter_Shipment_Id_TextBox_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        String input = ActionHelper.getRandomNumberString(5);
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsShipmentID_Txt(), input, "Validate text present in Shipment ID field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_103, Verify The Functionality of Enter Description TextBox of Shipment Details ")
+    public void TC_CreateNewOrder_103_Verify_The_Functionality_of_Enter_Description_TextBox_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+        String input = faker.artist().name();
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDescription_Txt(), input, "Validate text present in Description field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_104, Verify The Functionality of Weight TextBox of Shipment Details ")
+    public void TC_CreateNewOrder_104_Verify_The_Functionality_of_Weight_TextBox_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsWeight_Txt(), "0", "Validate text present in Weight field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsWeight_Txt("abcd");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsWeight_Txt(), "", "Validate text present in Weight field");
+        String input = String.valueOf(ActionHelper.generateRandomIntBetweenRange(1, 50));
+        createNewOrderPage.fillWithClear_ShipmentDetailsWeight_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsWeight_Txt(), input, "Validate text present in Weight field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_105, Verify The Functionality of Volume TextBox of Shipment Details ")
+    public void TC_CreateNewOrder_105_Verify_The_Functionality_of_Volume_TextBox_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsVolume_Txt(), "0", "Validate text present in Volume field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsVolume_Txt("abcd");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsVolume_Txt(), "", "Validate text present in Volume field");
+        String input = String.valueOf(ActionHelper.generateRandomIntBetweenRange(1, 50));
+        createNewOrderPage.fillWithClear_ShipmentDetailsVolume_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsVolume_Txt(), input, "Validate text present in Volume field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_106, Verify The Functionality of Dimensions TextBox of Shipment Details ")
+    public void TC_CreateNewOrder_106_Verify_The_Functionality_of_Dimensions_TextBox_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsLength_Txt(), "0", "Validate text present in Length field");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsBreadth_Txt(), "0", "Validate text present in Breadth field");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsHeight_Txt(), "0", "Validate text present in Height field");
+
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsLength_Txt("abcd");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsLength_Txt(), "", "Validate text present in Length field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsBreadth_Txt("abcd");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsBreadth_Txt(), "", "Validate text present in Breadth field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsHeight_Txt("abcd");
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsHeight_Txt(), "", "Validate text present in Height field");
+
+        String input = String.valueOf(ActionHelper.generateRandomIntBetweenRange(1, 50));
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsLength_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsLength_Txt(), input, "Validate text present in Length field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsBreadth_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsBreadth_Txt(), input, "Validate text present in Breadth field");
+        createNewOrderPage.fillWithClear_ShipmentDetailsDimensionsHeight_Txt(input);
+        softAssert.assertEquals(createNewOrderPage.getValue_ShipmentDetailsDimensionsHeight_Txt(), input, "Validate text present in Height field");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_107, Verify The Functionality of Add Shipment Button of Shipment Details ")
+    public void TC_CreateNewOrder_107_Verify_The_Functionality_of_Add_Shipment_Button_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        String shipmentId = ActionHelper.getRandomNumberString(5);
+        String description = faker.artist().name();
+        String weight = ActionHelper.getRandomNumberString(2);
+        String volume = ActionHelper.getRandomNumberString(3);
+
+        createNewOrderPage.fillWithClear_ShipmentDetailsShipmentID_Txt(shipmentId);
+        createNewOrderPage.fillWithClear_ShipmentDetailsDescription_Txt(description);
+        createNewOrderPage.fillWithClear_ShipmentDetailsWeight_Txt(weight);
+        createNewOrderPage.fillWithClear_ShipmentDetailsVolume_Txt(volume);
+        createNewOrderPage.click_ShipmentDetailsAddShipment_Btn();
+        softAssert.assertEquals(createNewOrderPage.getList_ShipmentDetailsTableColumnShipmentID_ListLbl().size(), 1, "Validate the count of rows in the table");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnShipmentID_ListLbl(0), shipmentId, "Validate Shipment ID");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnDescription_ListLbl(0), description, "Validate Description");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnWeight_ListLbl(0), weight, "Validate Weight");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnVolume_ListLbl(0), volume, "Validate Volume");
+        softAssert.assertEquals(createNewOrderPage.getList_ShipmentDetailsTableColumnDelete_ListBtn().size(), 1, "Validate delete button is present in first row");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_108, Verify The Functionality of Delete Button of Shipment Details ")
+    public void TC_CreateNewOrder_108_Verify_The_Functionality_of_Delete_Button_of_Shipment_Details() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        String shipmentId = ActionHelper.getRandomNumberString(5);
+        String description = faker.artist().name();
+        String weight = ActionHelper.getRandomNumberString(2);
+        String volume = ActionHelper.getRandomNumberString(3);
+
+        createNewOrderPage.fillWithClear_ShipmentDetailsShipmentID_Txt(shipmentId);
+        createNewOrderPage.fillWithClear_ShipmentDetailsDescription_Txt(description);
+        createNewOrderPage.fillWithClear_ShipmentDetailsWeight_Txt(weight);
+        createNewOrderPage.fillWithClear_ShipmentDetailsVolume_Txt(volume);
+        createNewOrderPage.click_ShipmentDetailsAddShipment_Btn();
+
+        softAssert.assertEquals(createNewOrderPage.getList_ShipmentDetailsTableColumnShipmentID_ListLbl().size(), 1, "Validate the count of rows in the table");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnShipmentID_ListLbl(0), shipmentId, "Validate Shipment ID");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnDescription_ListLbl(0), description, "Validate Description");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnWeight_ListLbl(0), weight, "Validate Weight");
+        softAssert.assertEquals(createNewOrderPage.getText_ShipmentDetailsTableColumnVolume_ListLbl(0), volume, "Validate Volume");
+        softAssert.assertEquals(createNewOrderPage.getList_ShipmentDetailsTableColumnDelete_ListBtn().size(), 1, "Validate delete button is present in first row");
+        createNewOrderPage.click_ShipmentDetailsTableColumnDelete_ListBtn(0);
+
+        softAssert.assertEquals(createNewOrderPage.getList_ShipmentDetailsTableColumnShipmentID_ListLbl().size(), 0, "Validate the count of rows in the table");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_117, Verify The Functionality of creating order with Single shipment ")
+    public void TC_CreateNewOrder_117_Verify_The_Functionality_of_creating_order_with_Single_shipment() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        createNewOrderPage.addOrderDetails();
+        createNewOrderPage.addShipmentDetails(1);
+        createNewOrderPage.addFacilityPickupDetails();
+        createNewOrderPage.addFacilityDropDetails();
+        createNewOrderPage.addPaymentDetails("Prepaid");
+        createNewOrderPage.click_Create_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_SuccessToastMsg_Lbl(), "Validate presence of Success toast msg");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_118, Verify The Functionality of creating order with multiple shipments of COD Payment type")
+    public void TC_CreateNewOrder_118_Verify_The_Functionality_of_creating_order_with_multiple_shipments_of_COD_Payment_type() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        createNewOrderPage.addOrderDetails();
+        createNewOrderPage.addShipmentDetails(2);
+        createNewOrderPage.addFacilityPickupDetails();
+        createNewOrderPage.addFacilityDropDetails();
+        createNewOrderPage.addPaymentDetails("Prepaid");
+        createNewOrderPage.click_Create_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_SuccessToastMsg_Lbl(), "Validate presence of Success toast msg");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_119, Verify The Functionality of creating order with multiple shipments of COD Payment type")
+    public void TC_CreateNewOrder_119_Verify_The_Functionality_of_creating_order_with_multiple_shipments_of_COD_Payment_type() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        createNewOrderPage.addOrderDetails();
+        createNewOrderPage.addShipmentDetails(2);
+        createNewOrderPage.addFacilityPickupDetails();
+        createNewOrderPage.addFacilityDropDetails();
+        createNewOrderPage.addPaymentDetails("Collect At Delivery");
+        createNewOrderPage.click_Create_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_OnlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl(), "Validate presence of error toast msg");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_120, Verify The Functionality of creating order with pickup date is greater than drop date")
+    public void TC_CreateNewOrder_120_Verify_The_Functionality_of_creating_order_with_pickup_date_is_greater_than_drop_date() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        createNewOrderPage.addOrderDetails();
+        createNewOrderPage.addShipmentDetails(1);
+        createNewOrderPage.addFacilityPickupDetails(ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
+        createNewOrderPage.addFacilityDropDetails(ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + (ActionHelper.getCurrentYear() - 1));
+        createNewOrderPage.addPaymentDetails("Collect At Delivery");
+        createNewOrderPage.click_Create_Btn();
+        softAssert.assertTrue(createNewOrderPage.isPresent_SuccessToastMsg_Lbl() == false, "Validate presence of error toast msg");
+        //ToDo: Expected toast msg is not currently available as this functionality is not working
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT},
+            description = "TC_121, Verify The Functionality of Total Weight and Total Volume fields")
+    public void TC_CreateNewOrder_121_Verify_The_Functionality_of_Total_Weight_and_Total_Volume_fields() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillCreateOrder();
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
+        softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
+        int totalWeight = 0;
+        int totalVolume = 0;
+        for (int i = 0; i < 2; i++) {
+            createNewOrderPage.fillWithClear_ShipmentDetailsShipmentID_Txt(ActionHelper.getRandomNumberString(5));
+            createNewOrderPage.fillWithClear_ShipmentDetailsDescription_Txt(faker.artist().name());
+            String weight = ActionHelper.getRandomNumberString(2);
+            String volume = ActionHelper.getRandomNumberString(3);
+            createNewOrderPage.fillWithClear_ShipmentDetailsWeight_Txt(weight);
+            createNewOrderPage.fillWithClear_ShipmentDetailsVolume_Txt(volume);
+            createNewOrderPage.click_ShipmentDetailsAddShipment_Btn();
+            totalWeight = totalWeight + Integer.parseInt(weight);
+            totalVolume = totalVolume + Integer.parseInt(volume);
+            softAssert.assertEquals(createNewOrderPage.getValue_OrderDetailsTotalWeight_Txt(), String.valueOf(totalWeight), "Validate total weight");
+            softAssert.assertEquals(createNewOrderPage.getValue_OrderDetailsTotalVolume_Txt(), String.valueOf(totalVolume), "Validate total volume");
+        }
+        softAssert.assertAll();
+    }
+
 
 }

@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TestSuite_EndToEnd extends BaseTestClass {
-    CreateNewOrderPage createOrderPage = CreateNewOrderPage.getInstance();
+    CreateNewOrderPage createNewOrderPage = CreateNewOrderPage.getInstance();
     ViewOrderPage viewOrdersPage = ViewOrderPage.getInstance();
     DispatchDetailPage dispatchDetailPage = DispatchDetailPage.getInstance();
     DispatchPage dispatchPage = DispatchPage.getInstance();
@@ -44,43 +44,43 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         HomePage.getInstance().openCreateOrderPage();
         String orderId = String.valueOf(sampleData.number().digits(10));
         String description = ActionHelper.generateRandomName(6, 6);
-        softAssert.assertTrue(createOrderPage.isPresent_Header_Lbl(), "Header Label is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_OrderDetailsOrderId_Txt(), "Order Id is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_OrderDetailsScannableBarcodeNumber_Txt(), "Barcode Number Text Box is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_OrderDetailsOrderDescription_Txt(), "Description textBox is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_OrderDetailsTeam_Dropdown(), "Team Dropdown is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_PickupDetailsContactName_Txt(), "Pickup Contact Name is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_PickupDetailsContactNumber_Txt(), "Primary Mobile Number is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_DropDetailsContactName_Txt(), "Drop Contact Name is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_DropDetailsContactNumber_Txt(), "Drop Primary Mobile Number is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_PaymentDetailsPaymentType_Select(), "Select Payment Type is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_PaymentDetailsOrderAmount_Txt(), "Order Amount is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_Create_Btn(), "Submit Button is present as expected");
-        softAssert.assertTrue(createOrderPage.isPresent_Cancel_Btn(), "Cancel button is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Header Label is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderId_Txt(), "Order Id is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsScannableBarcodeNumber_Txt(), "Barcode Number Text Box is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescription_Txt(), "Description textBox is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsTeam_Dropdown(), "Team Dropdown is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactName_Txt(), "Pickup Contact Name is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNumber_Txt(), "Primary Mobile Number is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactName_Txt(), "Drop Contact Name is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactNumber_Txt(), "Drop Primary Mobile Number is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PaymentDetailsPaymentType_Select(), "Select Payment Type is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_PaymentDetailsOrderAmount_Txt(), "Order Amount is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_Create_Btn(), "Submit Button is present as expected");
+        softAssert.assertTrue(createNewOrderPage.isPresent_Cancel_Btn(), "Cancel button is present as expected");
 
-        createOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
-        softAssert.assertTrue(createOrderPage.getValue_OrderDetailsScannableBarcodeNumber_Txt() != null, "Barcode Label is not null as expected");
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
+        softAssert.assertTrue(createNewOrderPage.getValue_OrderDetailsScannableBarcodeNumber_Txt() != null, "Barcode Label is not null as expected");
 
-        createOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(description);
-        createOrderPage.fill_PickupDetailsContactName_Txt(sampleData.name().firstName());
-        createOrderPage.fillWithClear_PickupDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
-        createOrderPage.validate_PickUpClear_Btn(Constants.PICKUP_PINCODE, "Building " + sampleData.number().digits(2), "Street" + sampleData.number().digits(2));
+        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(description);
+        createNewOrderPage.fill_PickupDetailsContactName_Txt(sampleData.name().firstName());
+        createNewOrderPage.fillWithClear_PickupDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
+        createNewOrderPage.validate_PickUpClear_Btn(Constants.PICKUP_PINCODE, "Building " + sampleData.number().digits(2), "Street" + sampleData.number().digits(2));
 
-//        createOrderPage.validateAndCreateFacility("Pickup", Constants.PICKUP_PINCODE);
-        createOrderPage.set_PickUpFacility_TextBox();
+        createNewOrderPage.validateAndCreateFacility("Pickup", Constants.PICKUP_PINCODE);
+        createNewOrderPage.set_PickUpFacility_TextBox();
 
-        createOrderPage.fillWithClear_DropDetailsContactName_Txt(sampleData.name().firstName());
-        createOrderPage.fillWithClear_DropDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
-        createOrderPage.validate_DropClearAll_Btn(Constants.PICKUP_PINCODE, "Building " + sampleData.number().digits(2), "Street " + sampleData.number().digits(2));
+        createNewOrderPage.fillWithClear_DropDetailsContactName_Txt(sampleData.name().firstName());
+        createNewOrderPage.fillWithClear_DropDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
+        createNewOrderPage.validate_DropClearAll_Btn(Constants.PICKUP_PINCODE, "Building " + sampleData.number().digits(2), "Street " + sampleData.number().digits(2));
 
-//        createOrderPage.validateAndCreateFacility("Drop", Constants.DROP_PINCODE);
-        createOrderPage.set_DropFacility_TextBox();
+        createNewOrderPage.validateAndCreateFacility("Drop", Constants.DROP_PINCODE);
+        createNewOrderPage.set_DropFacility_TextBox();
 
-        createOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
-        createOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
         String orderAmount = String.valueOf(sampleData.number().numberBetween(99,10000));
-        createOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(orderAmount);
-        createOrderPage.click_CreateBtn_WithWait();
+        createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(orderAmount);
+        createNewOrderPage.click_CreateBtn_WithWait();
         viewOrdersPage.click_Refresh_Btn();
         HashMap<String, String> orderSummaryAfterOrderCreation = viewOrdersPage.getOrderSummary();
 
@@ -153,5 +153,4 @@ public class TestSuite_EndToEnd extends BaseTestClass {
 
         softAssert.assertAll();
     }
-
 }

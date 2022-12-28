@@ -39,7 +39,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public void fill_Otp_Txt(String otp) {
-        otp=otp.substring(0,6);
+        otp = otp.substring(0, 6);
         for (int i = 0; i < otp.length(); i++) {
             By by = By.id(otp_Txt.replace("xyz", String.valueOf(i)));
             ActionHelper.sendKeysWithClear(by, String.valueOf(otp.charAt(i)));
@@ -79,7 +79,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithEmail_Lnk() {
-        return ActionHelper.isPresent(loginWithEmail_Lnk,5000);
+        return ActionHelper.isPresent(loginWithEmail_Lnk, 5000);
     }
 
     public boolean isPresent_LoginOTPIncorrectErrorMsg_Txt() {
@@ -139,7 +139,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithOtp_Lnk() {
-        return ActionHelper.isPresent(loginWithOTP_Lnk,5000);
+        return ActionHelper.isPresent(loginWithOTP_Lnk, 5000);
     }
 
     public String getText_PlaceHolder_Txt() {

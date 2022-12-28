@@ -22,10 +22,12 @@ public class TeamEditPage {
         }
         return _instance;
     }
+
     public Boolean isPresent_Header_lbl() {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
-        return ActionHelper.isPresent(header_Lbl);
+        return ActionHelper.isPresent(header_Lbl, 5000);
     }
+
     public void set_TeamName_TextBox(String teamName) {
         ActionHelper.sendKeysWithClear(teamName_TextBox.getBy(), teamName);
     }
@@ -35,12 +37,13 @@ public class TeamEditPage {
     }
 
     public String get_TeamName_TextBox() {
-        return ActionHelper.getAttribute(teamName_TextBox.getBy(),"value");
+        return ActionHelper.getAttribute(teamName_TextBox.getBy(), "value");
     }
 
     public String get_TeamID_TextBox() {
-        return ActionHelper.getAttribute(teamID_TextBox.getBy(),"value");
+        return ActionHelper.getAttribute(teamID_TextBox.getBy(), "value");
     }
+
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
     }
