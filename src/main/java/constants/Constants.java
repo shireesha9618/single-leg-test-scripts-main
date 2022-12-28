@@ -50,7 +50,7 @@ public class Constants {
     public static String ORDER_AMOUNT = Utils.getValueFromConfig("ORDER_AMOUNT");
     public static String TEAM = "QATeam";
     public static String PICKUP_PINCODE="208014";
-    public static String DROP_PINCODE="201301";
+    public static String DROP_PINCODE="281001";
 
     private Constants() {
 
