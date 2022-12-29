@@ -11,7 +11,7 @@ public class WorkflowExecutionTaskPage {
     private final Locator search_Txt = Locator.builder().withWeb(By.id("search"));
     private final Locator startMenuCard_Link = Locator.builder().withWeb(By.xpath("//a[contains(@href,'952f3754-12e8-5ff2-93a8-aca383d18e56')]"));
     private final Locator startMenuCardHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Start']"));
-    private final Locator startMenuCardEdit_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start']/../following-sibling::div/div"));
+    private final Locator startMenuCardEditReason_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start']/../following-sibling::div/div"));
 
     public static WorkflowExecutionTaskPage getInstance() {
         if(_instance == null)
@@ -59,11 +59,15 @@ public class WorkflowExecutionTaskPage {
         return ActionHelper.getText(startMenuCardHeader_Lbl);
     }
 
-    public boolean isPresent_StartMenuCardEdit_Btn() {
-        return ActionHelper.isPresent(startMenuCardEdit_Btn);
+    public boolean isPresent_StartMenuCardEditReason_Btn() {
+        return ActionHelper.isPresent(startMenuCardEditReason_Btn);
     }
 
-    public void click_StartMenuCardEdit_Btn() {
-        ActionHelper.click(startMenuCardEdit_Btn);
+    public void click_StartMenuCardEditReason_Btn() {
+        ActionHelper.click(startMenuCardEditReason_Btn);
+    }
+
+    public boolean isEnabled_StartMenuCardEditReason_Btn() {
+        return ActionHelper.isEnabled(startMenuCardEditReason_Btn.getBy());
     }
 }
