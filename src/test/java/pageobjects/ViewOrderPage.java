@@ -16,14 +16,11 @@ public class ViewOrderPage {
     private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//h1[text()='Orders']"));
     private final Locator homeBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/']/p[text()='Home']"));
     private final Locator orderListBreadcrumb_Link = Locator.builder().withWeb(By.xpath("//a[@href='/application/orders/']/p[text()='Order List']"));
-
     private final Locator newOrder_Btn = Locator.builder().withWeb(By.xpath("//span[text()='New Order']"));
-
     private final Locator assignRider_Btn = Locator.builder().withWeb(By.xpath("//div[text()='Assign Rider']"));
     private final Locator assignRider_DropDown = Locator.builder().withWeb(By.xpath("//div[text()='Assign Rider']//following-sibling::div"));
     private final Locator assignRiderDropDownManual_Opt = Locator.builder().withWeb(By.xpath("//p[text()='Manual']"));
     private final Locator assignRiderDropDownAutomatic_Opt = Locator.builder().withWeb(By.xpath("//p[text()='Automatic']"));
-
     private final Locator toBeAssigned_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='To be Assigned']/preceding-sibling::p"));
     private final Locator toBeDispatched_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='To be dispatched']/preceding-sibling::p"));
     private final Locator dispatched_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Dispatched']/preceding-sibling::p"));
@@ -32,7 +29,6 @@ public class ViewOrderPage {
     private final Locator remaining_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Remaining']/preceding-sibling::p"));
     private final Locator startDispatches_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start Dispatches']"));
     private final Locator trackDispatches_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Track Dispatches']"));
-
     private final Locator searchBar_Txt = Locator.builder().withWeb(By.id("search"));
     private final Locator status_Dropdown = Locator.builder().withWeb(By.xpath("//p[contains(text(), 'Status: ')]"));
     private final Locator statusDropdownCreated_Radio = Locator.builder().withWeb(By.xpath("//input[@value='inprogress:scheduled']"));
@@ -43,14 +39,12 @@ public class ViewOrderPage {
     private final Locator statusDropdownCancelled_Radio = Locator.builder().withWeb(By.xpath("//input[@value='closed:cancelled']"));
     private final Locator statusDropdownFailed_Radio = Locator.builder().withWeb(By.xpath("//input[@value='closed:undelivered']"));
     private final Locator statusDropdownClearSelection_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Clear Selection']"));
-
     private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[div[@id='wrapper']]/following-sibling::div//button/button/p"));
     private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='createdAt']"));
     private final Locator dateFilterDropdownClosureDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='updatedAt']"));
     private final Locator fromDateField_Txt = Locator.builder().withWeb(By.id("rangePicker"));
     private final Locator toDateField_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='End date']"));
     private final Locator refresh_Btn = Locator.builder().withWeb(By.id("refresh_Btn"));
-
     private final Locator tabHeader_ListLbl = Locator.builder().withWeb(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
     private final Locator tabHeaderCheckbox_ListCheckbox = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td//input"));
     private final Locator tabHeaderOrderId_ListLink = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td/a/a"));
@@ -64,11 +58,9 @@ public class ViewOrderPage {
     private final Locator tabHeaderDropPostalCode_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[10]/span"));
     private final Locator tabHeaderPaymentType_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[11]/div/h6"));
     private final Locator tabHeaderAmount_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[12]/span"));
-
     private final Locator firstElementOrderId_Txt = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[2]"));
     private final Locator firstElementStatus_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[3]"));
     private final Locator firstElementNoOfShipment_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[4]"));
-
     private final Locator assignRiderDropDownManualHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Manual Assignment']"));
     private final Locator assignRiderDropDownManualRider_DropDown = Locator.builder().withWeb(By.xpath("//div[h4[text()='Rider*']]/following-sibling::div//input[@type='search']"));
     private final Locator assignRiderDropDownManualRiderDropDownData_Lbl = Locator.builder().withWeb(By.xpath("(//div[@class='flex flex-col']/p[1])[1]"));
@@ -887,6 +879,4 @@ public class ViewOrderPage {
     public String getText_AssignRiderDropDownAutomaticAssignmentOK_Btn() {
         return ActionHelper.getText(assignRiderDropDownAutomaticAssignmentOK_Btn);
     }
-
-
 }

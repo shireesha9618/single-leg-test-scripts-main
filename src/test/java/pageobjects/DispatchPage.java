@@ -66,6 +66,7 @@ public class DispatchPage {
     }
 
     public String get_DispatchCount_Lbl() {
+        ActionHelper.waitUntilElementVisible(dispatchesCount_Lbl.getBy());
         return ActionHelper.getText(dispatchesCount_Lbl);
     }
 
