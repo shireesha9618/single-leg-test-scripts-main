@@ -11,20 +11,20 @@ public class CreateNewTeamPage {
     private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Create Teams']"));
     private final Locator teamName_TextBox = Locator.builder().withWeb(By.xpath("//input[@name='teamDetails.name']"));
     private final Locator teamID_TextBox = Locator.builder().withWeb(By.xpath("//input[@name='teamDetails.ID']"));
-    private final Locator selectTeamManager_Dropdown = Locator.builder().withWeb(By.xpath("//span[text()='Select Team Manager']"));
+    private final Locator selectTeamManager_Dropdown = Locator.builder().withWeb(By.xpath("//h4[text()='Team Manager']/../following-sibling::div//div[@class='ant-select-selector']"));
     private final Locator selectRider_Dropdown = Locator.builder().withWeb(By.xpath("//h4[text()='Rider']/../following-sibling::div//div[@class='ant-select-selector']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
-    private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/']"));
-    private final Locator teams_BreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/teams']"));
-    private final Locator createNewTeam_BreadCrumb_Link = Locator.builder().withWeb(By.xpath("//li[@id='/teams/add']"));
+    private final Locator homeBreadCrumb_Link = Locator.builder().withWeb(By.id("/"));
+    private final Locator teams_BreadCrumb_Link = Locator.builder().withWeb(By.id("/teams"));
+    private final Locator createNewTeam_BreadCrumb_Link = Locator.builder().withWeb(By.id("/teams/add"));
     private final Locator teamNameValidation_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='Name*']/../following-sibling::div//p"));
     private final Locator teamIDValidation_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='ID*']/../following-sibling::div//p"));
-    private final Locator createdSuccessfullyMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[text()='Created Successfully']"));
+    private final Locator createdSuccessfullyMsg_Txt = Locator.builder().withWeb(By.xpath("//div[text()='Created Successfully']"));
     private final Locator errorMsg_Txt = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//div[contains(text(), 'In participant')]"));
-    private final Locator riderDropDown_Txt = Locator.builder().withWeb(By.xpath("//div//span[attribute::title]/span[text()]"));
-    private final Locator teamManagerDropDown_Txt = Locator.builder().withWeb(By.xpath("//div//span[attribute::title]/span[text()]"));
-
+    private final Locator riderDropDown_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='Rider']/../following-sibling::div//span[attribute::title]/span[text()]"));
+    private final Locator teamManagerDropDown_Txt = Locator.builder().withWeb(By.xpath("//h4[text()='Team Manager']/../following-sibling::div//span[attribute::title]/span[text()]"));
+    private final Locator dropdown_List = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
 
     public static CreateNewTeamPage getInstance() {
         if (_instance == null) {
@@ -107,8 +107,7 @@ public class CreateNewTeamPage {
     }
 
     public void fillWithClear_TeamName_TxtBox(String input) {
-        Utility.selectAllAndClear(teamName_TextBox.getBy());
-        ActionHelper.fillWithClear(teamName_TextBox.getBy(), input);
+        ActionHelper.sendKeysWithClear(teamName_TextBox.getBy(),input);
     }
 
     public String get_NameValidation_Txt() {
@@ -116,8 +115,7 @@ public class CreateNewTeamPage {
     }
 
     public void fillWithClear_TeamID_TxtBox(String input) {
-        Utility.selectAllAndClear(teamID_TextBox.getBy());
-        ActionHelper.fillWithClear(teamID_TextBox.getBy(), input);
+        ActionHelper.sendKeysWithClear(teamID_TextBox.getBy(),input);
     }
 
     public String get_IDValidation_Txt() {
@@ -146,14 +144,10 @@ public class CreateNewTeamPage {
     }
 
     public void select_TeamManagerDropDown_Btn(String input) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(selectTeamManager_Dropdown);
-        ActionHelper.sendKeys(selectTeamManager_Dropdown, Keys.chord(input, Keys.ENTER));
+        Utility.select_FromDropDown_List(selectTeamManager_Dropdown.getBy(),dropdown_List.getBy(),input);
     }
 
     public void select_RiderDropDown_Btn(String input) {
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(selectRider_Dropdown);
-        ActionHelper.sendKeys(selectRider_Dropdown, Keys.chord(input, Keys.ENTER));
+        Utility.select_FromDropDown_List(selectRider_Dropdown.getBy(),dropdown_List.getBy(),input);
     }
 }

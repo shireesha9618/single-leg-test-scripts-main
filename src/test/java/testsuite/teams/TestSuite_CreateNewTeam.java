@@ -247,4 +247,27 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         softAssert.assertAll();
     }
 
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_012, Verify The Functionality Of Create Team With Duplicate Team Name")
+    public void TC_Teams_012_Verify_The_Functionality_Of_Team_Manager_DropDown_Create_Teams_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillTeams();
+        teamsPage.click_NewTeam_Btn();
+        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(),"Create Teams Header Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManager_DropDown(),"Team Manager DropDown Is Present As Expected");
+        createNewTeamPage.select_TeamManagerDropDown_Btn(Constants.TEAM_MANAGER);
+        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManagersDropDownList_Txt(),"Team Manager Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_012, Verify The Functionality Of Create Team With Duplicate Team Name")
+    public void TC_Teams_013_Verify_The_Functionality_Of_Rider_DropDown_Create_Teams_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillTeams();
+        teamsPage.click_NewTeam_Btn();
+        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(),"Create Teams Header Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_Rider_DropDown(),"Rider DropDown Is Present As Expected");
+        createNewTeamPage.select_RiderDropDown_Btn(Constants.RIDER);
+        softAssert.assertTrue(createNewTeamPage.isPresent_RidersDropDownList_Txt(),"Rider Name Is Present As Expected");
+        softAssert.assertAll();
+    }
 }

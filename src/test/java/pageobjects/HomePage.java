@@ -367,4 +367,24 @@ public class HomePage extends BaseTestClass {
     public void click_WorkFlowTeams_Btn() {
         ActionHelper.click(workFlowTeams_Btn);
     }
+
+    public boolean isPresent_CreateOrderMenu_Btn() {
+        return ActionHelper.isPresent(createOrdersMenu_Btn);
+    }
+
+    public boolean isPresent_ViewOrdersMenu_Btn() {
+        return ActionHelper.isPresent(viewOrdersMenu_Btn);
+    }
+
+    public void click_OpenMenuCreateOrders_Btn() {
+        ActionHelper.click(createOrderMenuItem_Btn);
+    }
+
+    public void click_OpenMenuViewOrders_Btn() {
+        ActionHelper.click(viewOrdersOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowOrders_Btn() {
+        ActionHelper.click(workFlowOrders_Btn);
+    }
 }

@@ -18,4 +18,5 @@ public class TestGroup {
     public static final String CREATE_NEW_TEAM = "createNewTeam";
     public static final String VIEW_ORDERS = "viewOrders";
     public static final String TEAM_DETAILS = "teamDetails";
+    public static final String HOME_ORDERS = "homeOrders";
 }
