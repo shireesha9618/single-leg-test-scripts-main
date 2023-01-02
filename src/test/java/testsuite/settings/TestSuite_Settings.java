@@ -19,7 +19,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_001, Verify The UI Of Settings Page")
-    public void TC_Facility_001_Verify_The_UI_Of_Settings_Page() {
+    public void TC_Setting_001_Verify_The_UI_Of_Settings_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         softAssert.assertTrue(settingsPage.isPresent_SettingPageHeader_Lbl(), "Setting Page Header LabelIs Present As Expected");
@@ -33,7 +33,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_002, Verify The Functionality Of Breadcrumb Menu For Settings Page")
-    public void TC_Facility_002_Verify_The_Functionality_Of_Breadcrumb_Menu_For_Settings_Page() {
+    public void TC_Setting_002_Verify_The_Functionality_Of_Breadcrumb_Menu_For_Settings_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         String expectedSettingHeader = settingsPage.getText_SettingPageHeader_Lbl();
@@ -47,7 +47,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_003, Verify The Functionality Of General Sub Menu Setting Option")
-    public void TC_Facility_003_Verify_The_Functionality_Of_General_Sub_Menu_Setting_Option() {
+    public void TC_Setting_003_Verify_The_Functionality_Of_General_Sub_Menu_Setting_Option() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "generalSettings/systemPreferences/";
@@ -60,7 +60,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_005, Verify The Functionality Of Workflow Sub Menu Setting Option")
-    public void TC_Facility_005_Verify_The_Functionality_Of_Workflow_Sub_Menu_Setting_Option() {
+    public void TC_Setting_005_Verify_The_Functionality_Of_Workflow_Sub_Menu_Setting_Option() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "workflow/";
@@ -73,7 +73,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_006, Verify The Functionality Of Users Sub Menu Setting Option")
-    public void TC_Facility_006_Verify_The_Functionality_Of_Users_Sub_Menu_Setting_Option() {
+    public void TC_Setting_006_Verify_The_Functionality_Of_Users_Sub_Menu_Setting_Option() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         String expectedGeneralPageURL = settingPageUrl + "users/list/?ptpType=workflow";
@@ -86,7 +86,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_007, Verify The Functionality Dock And Undock Of Left Panel")
-    public void TC_Facility_007_Verify_The_Functionality_Dock_And_Undock_Of_Left_Panel() {
+    public void TC_Setting_007_Verify_The_Functionality_Dock_And_Undock_Of_Left_Panel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
 
@@ -108,7 +108,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_008, Verify The Functionality Of Open Menu")
-    public void TC_Facility_008_Verify_The_Functionality_Of_Open_Menu() {
+    public void TC_Setting_008_Verify_The_Functionality_Of_Open_Menu() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
 
@@ -131,7 +131,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_009, Verify The Functionality Of Cross Button(X) Of Open Menu")
-    public void TC_Facility_009_Verify_The_Functionality_Of_Cross_Button_Of_Open_Menu() {
+    public void TC_Setting_009_Verify_The_Functionality_Of_Cross_Button_Of_Open_Menu() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
 
@@ -148,7 +148,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_010, Verify The Functionality Of Workflow Button")
-    public void TC_Facility_010_Verify_The_Functionality_Of_Workflow_Button() {
+    public void TC_Setting_010_Verify_The_Functionality_Of_Workflow_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
 
@@ -167,7 +167,7 @@ public class TestSuite_Settings extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_011, Verify The Functionality Of Settings Button Of Workflow")
-    public void TC_Facility_011_Verify_The_Functionality_Of_Settings_Button_Of_Workflow() {
+    public void TC_Setting_011_Verify_The_Functionality_Of_Settings_Button_Of_Workflow() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillSettings();
         String expectedSettingsPageHeader = settingsPage.getText_SettingPageHeader_Lbl();

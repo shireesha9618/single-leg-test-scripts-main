@@ -426,4 +426,11 @@ public class Utility {
         return element.isSelected();
     }
 
+    public static void scrollRightUsingKeyboardKey(int keyPressCount) {
+        Actions actions = new Actions(DriverManager.getDriver());
+        for (int i = 0; i < keyPressCount; i++)
+            actions.sendKeys(Keys.RIGHT);
+        actions.build().perform();
+    }
+
 }

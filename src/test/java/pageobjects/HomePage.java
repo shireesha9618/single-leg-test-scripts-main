@@ -356,8 +356,8 @@ public class HomePage extends BaseTestClass {
     }
 
     public void click_SettingsMenu_Btn() {
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(settingsMenu_Btn);
+        click_OpenMenu_Btn();
+        click_OpenMenuSettings_Btn();
     }
 
     public void click_OpenMenuSettings_Btn() {

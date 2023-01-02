@@ -3,15 +3,17 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import pageobjects.CommonActions;
+import utility.Utility;
 
 public class JobWorkflowPage {
     private static JobWorkflowPage _instance;
     private final Locator jobWorkflowsHeader_Lbl = Locator.builder().withWeb(By.xpath("//div/p[text()='Job Workflows']"));
-    private final Locator jobWorkflowsBreadCrumb_Link = Locator.builder().withWeb(By.id("/application/settings/workflow/job-workflow/list/"));
+    private final Locator jobWorkflowsBreadCrumb_Link = Locator.builder().withWeb(By.id("/settings/workflow/job-workflow/list"));
     private final Locator active_Btn = Locator.builder().withWeb(By.xpath("//button/p[contains(text(),'Active')]"));
     private final Locator draft_Btn = Locator.builder().withWeb(By.xpath("//button/p[contains(text(),'Draft')]"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Create']/.."));
-    private final Locator search_Text = Locator.builder().withWeb(By.id("//p[text()='Create']/.."));
+    private final Locator search_Text = Locator.builder().withWeb(By.id("search"));
 
     private final Locator tableColumnName_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Name']"));
     private final Locator tableColumnDescription_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Description']"));
@@ -22,6 +24,7 @@ public class JobWorkflowPage {
     private final Locator tableColumnCreatedBy_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Created By']"));
     private final Locator tableColumnUpdatedOn_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Updated On']"));
     private final Locator tableColumnUpdatedBy_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Updated By']"));
+    private final Locator dataTable_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='ant-table-body']"));
 
     public static JobWorkflowPage getInstance() {
         if(_instance == null)
@@ -38,7 +41,7 @@ public class JobWorkflowPage {
     }
 
     public boolean isPresent_JobWorkflowsBreadCrumb_Link() {
-        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link);
+        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link, 2000);
     }
 
     public void click_JobWorkflowsBreadCrumb_Link() {
@@ -59,6 +62,7 @@ public class JobWorkflowPage {
 
     public void click_Draft_Btn() {
         ActionHelper.click(draft_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Create_Btn() {
@@ -113,7 +117,13 @@ public class JobWorkflowPage {
         return ActionHelper.isPresent(tableColumnUpdatedOn_Lbl);
     }
 
+    public void click_DataTable_Lbl() {
+        ActionHelper.click(dataTable_Lbl);
+    }
+
     public boolean isPresent_TableColumnUpdatedBy_Lbl() {
-        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl);
+        click_DataTable_Lbl();
+        Utility.scrollRightUsingKeyboardKey(5);
+        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, 2000);
     }
 }

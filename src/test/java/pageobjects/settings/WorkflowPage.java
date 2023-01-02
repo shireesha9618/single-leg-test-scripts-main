@@ -3,6 +3,7 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import pageobjects.CommonActions;
 
 public class WorkflowPage {
     private static WorkflowPage _instance;
@@ -52,5 +53,6 @@ public class WorkflowPage {
 
     public void click_JobWorkflow_Link() {
         ActionHelper.click(jobWorkflow_Link);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 }
