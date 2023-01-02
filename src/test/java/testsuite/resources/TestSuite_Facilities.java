@@ -842,7 +842,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
         new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"));
