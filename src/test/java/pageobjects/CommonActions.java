@@ -249,24 +249,28 @@ public class CommonActions {
                 break;
             }
         }
-        return index + 1;
+        return index;
     }
 
-    public String getText_TableData_Lbl(String tableColumnName) {
-        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
-        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+    public String getText_TableData_Lbl(String tableColumnName, Boolean checkBox) {
+        int index = 0;
+        if(checkBox == true)
+            index = indexOfTableColumnName(tableColumnName) + 1;
+        else
+            indexOfTableColumnName(tableColumnName);
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", String.valueOf(index))));
         return ActionHelper.getText(data);
     }
 
     public List<String> getList_TableDataList_Lbl(String tableColumnName) {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
-        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
+        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", String.valueOf(index))));
         return Utility.getText_ListOfWebElements(ActionHelper.findElements(data));
     }
 
     public boolean isPresent_TableData_Lbl(String tableColumnName) {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
-        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", String.valueOf(index))));
         return ActionHelper.isPresent(data);
     }
 

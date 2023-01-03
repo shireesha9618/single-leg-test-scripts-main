@@ -83,6 +83,7 @@ public class JobWorkflowPage {
 
     public void fill_Search_Text(String workflowName) {
         ActionHelper.sendKeysWithClear(search_Text.getBy(), workflowName);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableColumnName_Lbl() {

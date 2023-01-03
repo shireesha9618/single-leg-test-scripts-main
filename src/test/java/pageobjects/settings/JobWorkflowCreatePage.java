@@ -149,6 +149,10 @@ public class JobWorkflowCreatePage {
         return ActionHelper.getText(productTypeValidationMsg_Lbl);
     }
 
+    public void select_ProductType_Txt(String productType) {
+        Utility.select_FromDropDown_List(productType_Txt.getBy(), productType_List.getBy(), productType);
+    }
+
     public boolean isPresent_ShipmentFlow_Lbl() {
         return ActionHelper.isPresent(shipmentFlow_Lbl);
     }
