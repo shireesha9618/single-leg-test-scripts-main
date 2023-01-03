@@ -76,8 +76,7 @@ public class HomePage extends BaseTestClass {
 
     public void selectTeam(String input) {
         CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(teamSelector_Dropdown);
-        ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
+        Utility.select_FromDropDown_List(teamSelector_Dropdown.getBy(), teamSelect_List.getBy(), input);
     }
 
     public void openCreateOrderPage() {
