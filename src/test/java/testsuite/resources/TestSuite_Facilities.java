@@ -845,11 +845,11 @@ public class TestSuite_Facilities extends BaseTestClass {
     @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Export As CSV For More Actions Button")
     public void TC_Facility_004_Verify_The_Functionality_Of_Export_As_CSV_For_More_Actions_Button() throws IOException {
-        new File(System.getProperty("user.dir") + "\\temp\\");
+        new File(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"));
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_MoreActions_DropDown();
         facilitiesPage.click_MoreActionsDropDownExportAsCSV_Link();
-        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + "\\temp\\", "facilities_list.csv", 10));
+        JarvisAssert.assertTrue(Utility.validateFileDownloadedSuccessfully(System.getProperty("user.dir") + System.getProperty("file.separator") + "temp" + System.getProperty("file.separator"), "facilities_list.csv", 10));
     }
 
     @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.FACILITY, TestGroup.BVT},
@@ -1087,7 +1087,7 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_060_Verify_The_Validation_Functionality_For_AddressLine2_In_Add_New_Facility_Page_For_Empty_Field() {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
-        String facilityName = "Facility " + sampleData.name().lastName().replaceAll("[^a-zA-Z0-9]","");
+        String facilityName = "Facility " + sampleData.name().lastName().replaceAll("[^a-zA-Z0-9]", "");
         String facilityId = addNewFacilityPage.getText_FacilityId_Txt();
         addNewFacilityPage.fill_FacilityName_Txt(facilityName);
         addNewFacilityPage.fill_PostalCode_Txt(Utility.get_PostalCode_Txt());
