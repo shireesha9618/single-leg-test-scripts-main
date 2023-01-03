@@ -242,35 +242,31 @@ public class CommonActions {
 
     public int indexOfTableColumnName(String input) {
         int index = 0;
-        List<WebElement> columName = ActionHelper.findElements(By.xpath("//tr[1]/th"));
+        List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
         for (WebElement element : columName) {
             if (element.getText().equals(input)) {
                 index = columName.indexOf(element);
                 break;
             }
         }
-        return index;
+        return index + 1;
     }
 
-    public String getText_TableData_Lbl(String tableColumnName, Boolean checkBox) {
-        int index = 0;
-        if(checkBox == true)
-            index = indexOfTableColumnName(tableColumnName) + 1;
-        else
-            indexOfTableColumnName(tableColumnName);
-        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", String.valueOf(index))));
+    public String getText_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
         return ActionHelper.getText(data);
     }
 
     public List<String> getList_TableDataList_Lbl(String tableColumnName) {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
-        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", String.valueOf(index))));
+        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
         return Utility.getText_ListOfWebElements(ActionHelper.findElements(data));
     }
 
     public boolean isPresent_TableData_Lbl(String tableColumnName) {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
-        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", String.valueOf(index))));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
         return ActionHelper.isPresent(data);
     }
 

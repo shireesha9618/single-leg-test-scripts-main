@@ -512,12 +512,12 @@ public class FacilitiesPage {
 
     public HashMap<String, String> getData_TableFirstData_List() {
         HashMap<String, String> tableData = new HashMap<>();
-        String facilityId = commonActions.getText_TableData_Lbl("FACILITY ID", true);
-        String facilityName = commonActions.getText_TableData_Lbl("FACILITY NAME", true);
-        String postalCode = commonActions.getText_TableData_Lbl("POSTAL CODE", true);
-        String address = commonActions.getText_TableData_Lbl("ADDRESS", true);
-        String city = commonActions.getText_TableData_Lbl("CITY", true);
-        String state = commonActions.getText_TableData_Lbl("STATE", true);
+        String facilityId = commonActions.getText_TableData_Lbl("FACILITY ID");
+        String facilityName = commonActions.getText_TableData_Lbl("FACILITY NAME");
+        String postalCode = commonActions.getText_TableData_Lbl("POSTAL CODE");
+        String address = commonActions.getText_TableData_Lbl("ADDRESS");
+        String city = commonActions.getText_TableData_Lbl("CITY");
+        String state = commonActions.getText_TableData_Lbl("STATE");
 
         tableData.put("facilityId", facilityId);
         tableData.put("facilityName", facilityName);

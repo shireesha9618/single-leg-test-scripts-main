@@ -285,7 +285,6 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
-        System.out.println("lksdfksldf " + commonActions.getText_TableData_Lbl("NAME", false));
-        System.out.println("sksldjkls " + jobWorkflowPage.getText_abc());
+        System.out.println("lksdfksldf " + commonActions.getText_TableData_Lbl("NAME"));
     }
 }
