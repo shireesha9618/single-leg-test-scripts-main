@@ -37,7 +37,11 @@ public class CommonActions {
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
     private final Locator pageSize_Txt = Locator.builder().withWeb(By.xpath("//div[@aria-label='Page Size']"));
     private final Locator paginationBlockList_Txt = Locator.builder().withWeb(By.xpath("//li[contains(@class, 'pagination-item')]"));
+    private final Locator moreActionsDropDownModifyColumnsLinkSelectAll_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class, 'px')]/button[1]/p"));
+    private final Locator moreActionsDropDownModifyColumnsLinkSave_Btn = Locator.builder().withWeb(By.xpath("//button//p[text()='Save']"));
     private final Locator emptyTableMsg_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//h3"));
+    private final Locator dataTable_Lbl = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
+
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
     String elementInFirstRow = "//tr[2]/td[index]";
     String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
@@ -225,6 +229,19 @@ public class CommonActions {
         return false;
     }
 
+    public void coverJourneyTillTeams() {
+        performCommonAction();
+        click_SkipIfPresent_Btn();
+        HomePage.getInstance().openTeamsPage();
+    }
+
+    public void resetColumns() {
+        TeamsPage.getInstance().clickAndChoose_MoreActionsDropDownMenuOptions_Btn("Modify Columns");
+        ActionHelper.click(moreActionsDropDownModifyColumnsLinkSelectAll_Btn);
+        new Actions(DriverManager.getDriver()).sendKeys(Keys.PAGE_DOWN).sendKeys(Keys.PAGE_DOWN).build().perform();
+        ActionHelper.click(moreActionsDropDownModifyColumnsLinkSave_Btn);
+    }
+
     public int indexOfTableColumnName(String input) {
         int index = 0;
         List<WebElement> columName = ActionHelper.findElements(By.xpath("//tr[1]/th"));
@@ -261,6 +278,10 @@ public class CommonActions {
 
     public String getText_EmptyTableMsg_Lbl() {
         return ActionHelper.getText(emptyTableMsg_Lbl);
+    }
+
+    public int get_TableData_Count() {
+        return ActionHelper.findElements(dataTable_Lbl).size();
     }
 
     public boolean isPresent_PaginationResults_Lbl() {
@@ -439,5 +460,4 @@ public class CommonActions {
         ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
-
 }

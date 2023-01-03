@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageobjects.CommonActions;
 
 import java.io.File;
 import java.time.Duration;
@@ -75,6 +76,7 @@ public class Utility {
     }
 
     public static List<String> getText_ListOfWebElements(By by) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(by));
     }
 

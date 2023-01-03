@@ -669,6 +669,27 @@ public class DispatchPage {
         return ActionHelper.getText(firstElementRemainingOrdersCountStatus_Lbl);
     }
 
+    public String get_AssignedCount_Lbl() {
+        return ActionHelper.getText(assignedCount_Lbl);
+    }
+
+    public String get_StartedCount_Lbl() {
+        return ActionHelper.getText(startedCount_Lbl);
+    }
+
+    public String get_OngoingCount_Lbl() {
+        return ActionHelper.getText(ongoingCount_Lbl);
+    }
+
+    public String get_ClosedCount_Lbl() {
+        return ActionHelper.getText(closedCount_Lbl);
+    }
+
+    public String get_DispatchCount_Lbl() {
+        ActionHelper.waitUntilElementVisible(dispatchesCount_Lbl.getBy());
+        return ActionHelper.getText(dispatchesCount_Lbl);
+    }
+
     public HashMap<String, String> getDispatchSummary() {
         HashMap<String, String> orderSummary = new HashMap<>();
         orderSummary.put("DispatchCount", getText_DispatchesCount_Lbl());
