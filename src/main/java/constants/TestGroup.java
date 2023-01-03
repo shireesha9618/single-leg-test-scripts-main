@@ -15,4 +15,5 @@ public class TestGroup {
     public static final String ADD_NEW_RIDER_PAGE = "addNewRiderPage";
     public static final String RIDERS = "riders";
     public static final String VIEW_ORDERS = "viewOrders";
+    public static final String DISPATCH = "dispatch";
 }

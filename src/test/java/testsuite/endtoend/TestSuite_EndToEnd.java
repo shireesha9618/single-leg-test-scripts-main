@@ -138,7 +138,7 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         softAssert.assertEquals(dispatchPage.get_FirstElementRemainingOrdersCountStatus_Lbl(), "1", "Status is matched as expected");
 
         DispatchPage.getInstance().select_FirstElement_Lbl();
-        softAssert.assertEquals(dispatchDetailPage.get_DispatchStatus_Lbl(), "Assigned", "Status is matched as expected");
+        softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), "Assigned", "Status is matched as expected");
         softAssert.assertEquals(dispatchDetailPage.get_TotalShipmentCount_Lbl(), "1", "Count is matched as expected");
         softAssert.assertEquals(dispatchDetailPage.get_ExpectedCashInHand_Lbl(), orderAmount + ".00 INR", "Expected Cash In Hand is matched as expected");
 
@@ -146,7 +146,7 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         softAssert.assertEquals(dispatchDetailPage.get_FirstElementStatus_Lbl(), "Assigned", "Status is matched as expected");
         dispatchDetailPage.click_PublishDispatch_Btn();
         dispatchDetailPage.click_ConfirmPublishDispatch_Btn();
-        softAssert.assertEquals(dispatchDetailPage.get_DispatchStatus_Lbl(), "Started", "Status is matched as expected");
+        softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), "Started", "Status is matched as expected");
         softAssert.assertEquals(dispatchDetailPage.get_InventoryInHand_Lbl(), "0", "Inventory is matched as expected");
         softAssert.assertEquals(dispatchDetailPage.get_ExpectedCashInHand_Lbl(), orderAmount + ".00 INR", "Expected Cash In Hand is matched as expected");
         softAssert.assertEquals(dispatchDetailPage.get_CashInHand_Lbl(), "0", "Cash In Hand is matched as expected");

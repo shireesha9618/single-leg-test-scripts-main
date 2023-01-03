@@ -97,7 +97,10 @@ public class CommonActions {
     public void coverJourneyTillDispatches() {
         performCommonAction();
         click_SkipIfPresent_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().openDispatchListPage();
+        JarvisAssert.assertTrue(DispatchPage.getInstance().isPresent_Header_Lbl());
+        JarvisAssert.assertEquals(DispatchPage.getInstance().getText_Header_Lbl(), "Dispatches");
     }
 
     public void coverJourneyTillCreateOrder() {
