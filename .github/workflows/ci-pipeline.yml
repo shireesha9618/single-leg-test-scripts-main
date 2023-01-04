@@ -88,5 +88,5 @@ jobs:
         to: ${{github.event.inputs.email_ids}}
         from: Platform Solutions QA <platform-solutions-qa@delhivery.com>
         secure: true
-        html_body: file://mailer_file.html
+        #html_body: file://mailer_file.html
         attachments: ${{github.workspace}}/extentreport/screenshots/reportscreenshot.png
