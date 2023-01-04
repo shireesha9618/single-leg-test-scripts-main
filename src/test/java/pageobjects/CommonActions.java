@@ -55,6 +55,7 @@ public class CommonActions {
     private final Locator calendarMonth_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-month-btn']"));
     private final Locator calendarYear_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-year-btn']"));
     private final Locator calendarChooseDateMonthYear_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[@title='PLACEHOLDER']"));
+    String linkInFirstRow = "//tr[2]/td[index]/a/a";
 
     public static CommonActions getInstance() {
         if (_instance == null) _instance = new CommonActions();
@@ -454,5 +455,11 @@ public class CommonActions {
             click_CalendarNextYear_Btn();
         ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
         CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(linkInFirstRow.replace("index", index)));
+        ActionHelper.click(data);
     }
 }

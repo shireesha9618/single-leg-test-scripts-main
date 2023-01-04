@@ -61,6 +61,6 @@ public class TeamEditPage {
     }
 
     public void fillWithClear_teamName_TextBox(String input) {
-        Utility.selectAllAndClear(teamName_TextBox.getBy());
-        ActionHelper.fillWithClear(teamName_TextBox.getBy(), input);    }
+        ActionHelper.sendKeysWithClear(teamName_TextBox.getBy(), input);
+    }
 }

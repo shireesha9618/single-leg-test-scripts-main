@@ -60,7 +60,7 @@ public class TestSuite_HomeOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.HOME_ORDERS}, description = "TC_06, Verify The Functionality of View Orders Button Of Open Menu Button")
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.HOME_ORDERS}, description = "TC_07, Verify The Functionality of View Orders Button Of Open Menu Button")
     public void TC_Orders_07_Verify_The_Functionality_Of_View_Orders_Button_Of_Open_Menu_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillCreateOrder();

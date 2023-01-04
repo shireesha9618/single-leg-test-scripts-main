@@ -23,6 +23,7 @@ public class TeamDetailsPage extends BaseTestClass {
     }
 
     public boolean isPresent_Header_Lbl() {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return ActionHelper.isPresent(headerTeamName_Lbl);
     }
 
@@ -34,15 +35,15 @@ public class TeamDetailsPage extends BaseTestClass {
         return ActionHelper.isPresent(edit_Btn);
     }
 
-    public void click_Edit_Btn(){
+    public void click_Edit_Btn() {
         ActionHelper.click(edit_Btn);
     }
 
-    public boolean isPresent_TeamDetailsBreadCrumb_Link(){
+    public boolean isPresent_TeamDetailsBreadCrumb_Link() {
         return ActionHelper.isPresent(teamDetailsBreadCrumb_Link);
     }
 
-    public void click_TeamsBreadCrumb_Link(){
+    public void click_TeamsBreadCrumb_Link() {
         ActionHelper.click(teams_BreadCrumb_Link);
     }
 }

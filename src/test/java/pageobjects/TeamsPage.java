@@ -55,7 +55,6 @@ public class TeamsPage extends BaseTestClass {
     private final Locator moreActionsDropDownModifyColumnsLinkSelectedOptionsList_Label = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div/p"));
     private final Locator moreActionsDropDownModifyColumnsLinkStatus_Checkbox = Locator.builder().withWeb(By.xpath("//input[@id='Status']"));
     private final Locator moreActionsDropDownModifyColumnsStatusCross_Icon = Locator.builder().withWeb(By.xpath("//div[@data-rbd-drag-handle-draggable-id='Status']/button"));
-    private final Locator teamsTableTeamIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
     private final Locator teamsTableTeamNameColumnList_Link = Locator.builder().withWeb(By.xpath("//td[@class='ant-table-cell'][2]"));
     private final Locator paginationSelectedItem_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'pagination')]//span[@title]"));
     private final Locator paginationPerPageOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),' / page')]"));
@@ -70,8 +69,7 @@ public class TeamsPage extends BaseTestClass {
     private final Locator deactivateTeamHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Deactivate Team']"));
     private final Locator deactivateTeamCancel_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(), 'Are you')]/../parent::div/following-sibling::div/button/p[text()='Cancel']"));
     private final Locator deactivateTeamDeactivate_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(), 'Are you')]/../parent::div/following-sibling::div/button/p[text()='Deactivate']"));
-    private final Locator teamsTableIDList_Link = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td/a"));
-    private final Locator search_Bar = Locator.builder().withWeb(By.xpath("//input[@id='search_ptp']"));
+    private final Locator search_Bar = Locator.builder().withWeb(By.id("search_ptp"));
     private final Locator tableDataTeamName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
     private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
     private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
@@ -398,16 +396,6 @@ public class TeamsPage extends BaseTestClass {
         ActionHelper.click(moreActionsDropDownModifyColumnsLinkCancel_Btn);
     }
 
-    public List<String> getText_TableDataTeamID_List() {
-        ActionHelper.waitUntilElementVisible(teamsTableTeamIDColumnList_Link.getBy());
-        return Utility.getText_ListOfWebElements(teamsTableTeamIDColumnList_Link.getBy());
-    }
-
-    public List<String> getText_TableDataTeamName_List() {
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        return Utility.getText_ListOfWebElements(teamsTableTeamNameColumnList_Link.getBy());
-    }
-
     public List<WebElement> getElements_TeamsTableTeamIdColumnList_Link() {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.findElements(teamsTableTeamIdColumnList_Link.getBy());
@@ -429,7 +417,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isPresent_Deactivate_Btn() {
-        return ActionHelper.isPresent(deactivate_Btn,5000);
+        return ActionHelper.isPresent(deactivate_Btn, 5000);
     }
 
     public boolean isPresent_SelectAll_CheckBox() {
@@ -473,13 +461,8 @@ public class TeamsPage extends BaseTestClass {
         ActionHelper.click(deactivateTeamCancel_Btn);
     }
 
-    public void click_TeamsTableIDList_Link(int index) {
-        ActionHelper.click(ActionHelper.findElements(teamsTableIDList_Link).get(index));
-        CommonActions.getInstance().waitTillLoaderDisappears();
-    }
-
     public void fillWithClear_Search_Txt(String teamName) {
-        ActionHelper.fillWithClear(search_Bar.getBy(), teamName);
+        ActionHelper.sendKeysWithClear(search_Bar.getBy(), teamName);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 

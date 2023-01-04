@@ -48,8 +48,8 @@ public class TestSuite_Teams extends BaseTestClass {
                 "CREATED BY", "UPDATED BY"));
         Collections.sort(actualTabHeadersLabels);
         Collections.sort(expectedTabHeaders);
-        for (int size = 0; size < actualTabHeadersLabels.size(); size++) {
-            softAssert.assertEquals(actualTabHeadersLabels.get(size), expectedTabHeaders.get(size), "Table Header label is matched as expected " + expectedTabHeaders.get(size));
+        for (int record = 0; record < actualTabHeadersLabels.size(); record++) {
+            softAssert.assertEquals(actualTabHeadersLabels.get(record), expectedTabHeaders.get(record), "Table Header label is matched as expected " + expectedTabHeaders.get(record));
         }
         softAssert.assertAll();
     }
@@ -137,7 +137,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_013_Verify_The_Functionality_Of_Edit_Button_In_Teams_Page() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamDetails.get("teamName"));
         teamsPage.click_Edit_Btn(0);
         softAssert.assertTrue(TeamEditPage.getInstance().isPresent_Header_lbl(), "Edit team Header is present as expected");
@@ -150,7 +150,7 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_014_Verify_The_UI_Of_Edit_Teams() {
         HashMap<String, String> teamDetails = teamsPage.createNewTeam();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
+        softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
         teamsPage.set_SearchTeam_TextBox(teamDetails.get("teamName"));
         teamsPage.click_Edit_Btn(0);
         softAssert.assertTrue(TeamEditPage.getInstance().isPresent_Header_lbl(), "Edit team Header is present as expected");
@@ -316,11 +316,11 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_024_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        List<String> currentPageElements = teamsPage.getText_TableDataTeamID_List();
+        List<String> currentPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = teamsPage.getText_TableDataTeamID_List();
+        List<String> nextPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
         softAssert.assertTrue(!currentPageElements.equals(nextPageElements), "Current Page Elements And Next Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
     }
@@ -332,9 +332,9 @@ public class TestSuite_Teams extends BaseTestClass {
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = teamsPage.getText_TableDataTeamID_List();
+        List<String> nextPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
         commonActions.click_PaginationPrevious_Btn();
-        List<String> prevPageElements = teamsPage.getText_TableDataTeamID_List();
+        List<String> prevPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         softAssert.assertTrue(!nextPageElements.equals(prevPageElements), "Next Page Elements And Previous Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
@@ -468,7 +468,7 @@ public class TestSuite_Teams extends BaseTestClass {
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(teamsPage.getText_TeamsTableTeamNameColumnList_Link().equals(teamName), "Team Name in Teams table is matched as expected");
 
-        teamsPage.click_TeamsTableIDList_Link(0);
+        commonActions.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         softAssert.assertTrue(teamName.equals(teamDetailsPage.getText_Header_Lbl()), "Team Name In Team name Label is matched as expected");
         softAssert.assertTrue(teamDetailsPage.isPresent_Edit_Btn(), "Edit Button Is Present As Expected");
