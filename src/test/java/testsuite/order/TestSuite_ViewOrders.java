@@ -1092,7 +1092,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT, TestGroup.FLAKY_TESTS},
             description = "TC_060, Verify The Functionality Of masking of Pickup address")
     public void TC_CreateNewOrder_060_Verify_The_Functionality_Of_masking_of_Pickup_address() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -1114,7 +1114,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT, TestGroup.FLAKY_TESTS},
             description = "TC_061, Verify The Functionality Of masking of Drop address")
     public void TC_CreateNewOrder_061_Verify_The_Functionality_Of_masking_of_Drop_address() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();

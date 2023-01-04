@@ -19,4 +19,5 @@ public class TestGroup {
     public static final String VIEW_ORDERS = "viewOrders";
     public static final String TEAM_DETAILS = "teamDetails";
     public static final String HOME_ORDERS = "homeOrders";
+    public static final String FLAKY_TESTS = "flakytests";
 }
