@@ -72,10 +72,14 @@ jobs:
       run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
    
     - name: Create html report file
-      uses: "finnp/create-file-action@master"
-      env:
-        FILE_NAME: ${{ github.workspace }}/extentreport/mailer_file.html
-        FILE_DATA: |
+      uses: 1arp/create-a-file-action@0.2
+      with:
+        # Path from cwd where file is to be created
+        #path: ${{ github.workspace }}/extentreport
+        # The name of the file to be created with extention
+        file: mailer_file.html
+        # The content of the file
+        content: |
           <html>
           <head></head>
           <body>
