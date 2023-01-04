@@ -102,7 +102,7 @@ jobs:
           </html> 
     
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.0.0
+      uses: actions/upload-artifact@v3.1.1
       with:
         name: Report
         path: ${{ github.workspace }}/extentreport/
