@@ -468,7 +468,7 @@ public class TestSuite_Teams extends BaseTestClass {
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(teamsPage.getText_TeamsTableTeamNameColumnList_Link().equals(teamName), "Team Name in Teams table is matched as expected");
 
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         softAssert.assertTrue(teamName.equals(teamDetailsPage.getText_Header_Lbl()), "Team Name In Team name Label is matched as expected");
         softAssert.assertTrue(teamDetailsPage.isPresent_Edit_Btn(), "Edit Button Is Present As Expected");

@@ -73,6 +73,7 @@ public class TeamsPage extends BaseTestClass {
     private final Locator tableDataTeamName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
     private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
     private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
+    String linkInFirstRow = "//tr[2]/td[index]/a/a";
     CommonActions commonActions = CommonActions.getInstance();
 
     public static TeamsPage getInstance() {
@@ -488,5 +489,11 @@ public class TeamsPage extends BaseTestClass {
         tableData.put("teamName", teamName);
 
         return tableData;
+    }
+
+    public void click_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(linkInFirstRow.replace("index", index)));
+        ActionHelper.click(data);
     }
 }

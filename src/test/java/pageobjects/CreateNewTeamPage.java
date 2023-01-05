@@ -11,7 +11,7 @@ public class CreateNewTeamPage {
     private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//h2[text()='Create Teams']"));
     private final Locator teamName_TextBox = Locator.builder().withWeb(By.xpath("//input[@name='teamDetails.name']"));
     private final Locator teamID_TextBox = Locator.builder().withWeb(By.xpath("//input[@name='teamDetails.ID']"));
-    private final Locator selectTeamManager_Dropdown = Locator.builder().withWeb(By.xpath("//h4[text()='Team Manager']/../following-sibling::div//div[@class='ant-select-selector']"));
+    private final Locator selectTeamManager_Dropdown = Locator.builder().withWeb(By.xpath("//span[text()='Select Team Manager']"));
     private final Locator selectRider_Dropdown = Locator.builder().withWeb(By.xpath("//h4[text()='Rider']/../following-sibling::div//div[@class='ant-select-selector']"));
     private final Locator create_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']"));
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
@@ -128,7 +128,7 @@ public class CreateNewTeamPage {
     }
 
     public void fillWithClear_Rider_TxtBox(String input) {
-        ActionHelper.fillWithClear(selectRider_Dropdown.getBy(), input);
+        ActionHelper.sendKeysWithClear(selectRider_Dropdown.getBy(),input);
     }
 
     public void click_teamsBreadCrumb_Link() {

@@ -31,7 +31,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(teamsPage.getText_TeamsTableTeamNameColumnList_Link().equals(teamName), "Team Name in Teams table is matched as expected");
 
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         softAssert.assertTrue(teamName.equals(teamDetailsPage.getText_Header_Lbl()), "Team Name In Team name Label is matched as expected");
         softAssert.assertTrue(teamDetailsPage.isPresent_Edit_Btn(), "Edit Button Is Present As Expected");
@@ -48,7 +48,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(teamsPage.getText_TeamsTableTeamNameColumnList_Link().equals(teamName), "Team Name in Teams table is matched as expected");
 
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Header Is Present As Expected");
         softAssert.assertTrue(teamDetailsPage.isPresent_Edit_Btn(), "Edit Button Is Present As Expected");
         softAssert.assertTrue(teamDetailsPage.isPresent_TeamDetailsBreadCrumb_Link(), "Team Details Breadcrumb Link Is Present As Expected");
@@ -65,7 +65,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
 
         teamsPage.fillWithClear_Search_Txt(teamDetails.get("teamName"));
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Team Details Header is present as expected");
 
         teamDetailsPage.click_Edit_Btn();
@@ -87,7 +87,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
 
         teamsPage.fillWithClear_Search_Txt(teamDetails.get("teamName"));
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Team Details Header is present as Expected");
 
         teamDetailsPage.click_Edit_Btn();
@@ -113,7 +113,7 @@ public class TestSuite_TeamDetails extends BaseTestClass {
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Check Visibility Of Heading");
 
         teamsPage.fillWithClear_Search_Txt(teamDetails.get("teamName"));
-        commonActions.click_TableData_Lbl("TEAM ID");
+        teamsPage.click_TableData_Lbl("TEAM ID");
         softAssert.assertTrue(teamDetailsPage.isPresent_Header_Lbl(), "Team Details Header is present as Expected");
 
         teamDetailsPage.click_Edit_Btn();
