@@ -102,7 +102,7 @@ jobs:
           </html>
     
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.0.0
+      uses: actions/upload-artifact@v3.1.1
       with:
         name: Report
         path: ${{ github.workspace }}/extentreport/
@@ -118,5 +118,5 @@ jobs:
         to: ${{github.event.inputs.email_ids}}
         from: Platform Solutions QA <platform-solutions-qa@delhivery.com>
         secure: true
-        html_body: file://mailer_file.html
+        html_body: file://${{ github.workspace }}/mailer_file.html
         attachments: ${{github.workspace}}/extentreport/screenshots/reportscreenshot.png
