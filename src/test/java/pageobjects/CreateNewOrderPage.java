@@ -168,6 +168,7 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_Header_Lbl() {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return ActionHelper.isPresent(header_Lbl);
     }
 
