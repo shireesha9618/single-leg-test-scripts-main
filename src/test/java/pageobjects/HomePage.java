@@ -5,7 +5,6 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import utility.Utility;
 
 public class HomePage extends BaseTestClass {
@@ -24,7 +23,7 @@ public class HomePage extends BaseTestClass {
     private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='View Orders']"));
     private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'dispatch')]"));
     private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Resources']"));
-    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Riders']"));
+    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'riders')]"));
     private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Facilities']"));
     private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-3']//p[text()='Teams']"));
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='secondarySidebar-0']//p"));

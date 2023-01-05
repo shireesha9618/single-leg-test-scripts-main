@@ -3,11 +3,8 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pageobjects.CommonActions;
 import utility.Utility;
-
-import java.util.List;
 
 public class JobWorkflowCreatePage {
     private static JobWorkflowCreatePage _instance;
@@ -21,7 +18,7 @@ public class JobWorkflowCreatePage {
     private final Locator workflowDescription_Txt = Locator.builder().withWeb(By.name("workflowDescription"));
     private final Locator workflowDescriptionValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Workflow Description']/../following-sibling::div//p"));
     private final Locator jobWorkType_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Job Type*']"));
-    private final Locator jobWorkType_Txt = Locator.builder().withWeb(By.xpath("//span[@class='ant-select-selection-search']/input[@disabled]"));
+    private final Locator jobWorkType_Txt = Locator.builder().withWeb(By.xpath("//input[@disabled]"));
 
     private final Locator otherAttributesSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Order Attributes*']"));
     private final Locator productType_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Product Type']"));

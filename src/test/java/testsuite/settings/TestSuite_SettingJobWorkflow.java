@@ -232,25 +232,6 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
-            description = "TC_011, Verify The Validation Functionality Of Create Button In New Job Workflow Page For Duplicate Record")
-    public void TC_JobWorkflowSettings_011_Verify_The_Validation_Functionality_Of_Create_Button_In_New_Job_Workflow_Page_For_Duplicate_Record() {
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        coverJourneyTillJobWorkflow();
-        jobWorkflowPage.click_Create_Btn();
-        String duplicateJobName = jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl();
-        jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
-
-        jobWorkflowCreatePage.fill_WorkflowName_Txt(duplicateJobName);
-        jobWorkflowCreatePage.fill_WorkflowDescription_Txt(sampleData.lorem().sentence(10));
-        jobWorkflowCreatePage.select_ProductType_Txt("Parceld");
-        jobWorkflowCreatePage.select_ShipmentFlow_Txt("None");
-        jobWorkflowCreatePage.check_KYCVerification_Btn();
-        jobWorkflowCreatePage.click_PaymentOption_Txt("Cash");
-        jobWorkflowCreatePage.click_PaymentType_Txt("Prepaid");
-        jobWorkflowCreatePage.click_Create_Btn();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
             description = "TC_014, Verify The UI Of Table Present In Job Workflows Page")
     public void TC_JobWorkflowSettings_014_Verify_The_UI_Of_Table_Present_In_Job_Workflows_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -277,14 +258,5 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         softAssert.assertTrue(commonActions.isPresent_EmptyTableMsg_Lbl(), "Empty Table Message Appeared As Expected");
         softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Validation Message Is Matched As Expected");
         softAssert.assertAll();
-    }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
-            description = "TC_016, Verify The Functionality Of Search Bar In Job Workflows Page With Invalid WorkFlow Name")
-    public void TC_JobWorkflowSettings_016_Verify_The_Functionality_Of_Search_Bar_In_Job_Workflows_Page_With_Invalid_WorkFlow_Name() {
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        coverJourneyTillJobWorkflow();
-        jobWorkflowPage.click_Draft_Btn();
-        System.out.println("lksdfksldf " + commonActions.getText_TableData_Lbl("NAME"));
     }
 }

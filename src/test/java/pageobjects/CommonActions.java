@@ -140,7 +140,6 @@ public class CommonActions {
         click_SkipIfPresent_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().click_FacilitiesMenuItem_Btn();
-        //HomePage.getInstance().openFacilitesPage();
         waitTillLoaderDisappears();
     }
 
