@@ -16,12 +16,16 @@ public class JobWorkflowActivePage {
     private final Locator descriptionSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h6[text()='Description']"));
     private final Locator objectives_Lbl = Locator.builder().withWeb(By.xpath("//h6[contains(text(),'Objectives ')]"));
     private final Locator search_Txt = Locator.builder().withWeb(By.name("search-bar"));
-    private final Locator tags_DropDown = Locator.builder().withWeb(By.className(" css-1d8n9bt"));
+    private final Locator tags_DropDown = Locator.builder().withWeb(By.className("css-1d8n9bt"));
 
     private final Locator diagram_Lbl = Locator.builder().withWeb(By.id("canvas"));
     private final Locator zoomIn_Btn = Locator.builder().withWeb(By.xpath("//button[text()='+']"));
     private final Locator zoomOut_Btn = Locator.builder().withWeb(By.xpath("//button[text()='-']"));
     private final Locator reset_Btn = Locator.builder().withWeb(By.xpath("//button[text()='RESET']"));
+
+    private final Locator popUpWindowWorkflowAlreadyExistHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Workflow already exists']"));
+    private final Locator popUpWindowBack_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
+    private final Locator popUpWindowDeactivate_Btn = Locator.builder().withWeb(By.xpath("//p[text()='De-activate Existing Workflow']/.."));
 
     public static JobWorkflowActivePage getInstance() {
         if(_instance == null)
@@ -115,5 +119,29 @@ public class JobWorkflowActivePage {
 
     public void click_Reset_Btn() {
         ActionHelper.click(reset_Btn);
+    }
+
+    public boolean isPresent_PopUpWindowWorkflowAlreadyExistHeader_Lbl() {
+        return ActionHelper.isPresent(popUpWindowWorkflowAlreadyExistHeader_Lbl);
+    }
+
+    public String getText_PopUpWindowWorkflowAlreadyExistHeader_Lbl() {
+        return ActionHelper.getText(popUpWindowWorkflowAlreadyExistHeader_Lbl);
+    }
+
+    public boolean isPresent_PopUpWindowBack_Btn() {
+        return ActionHelper.isPresent(popUpWindowBack_Btn);
+    }
+
+    public void click_PopUpWindowBack_Btn() {
+        ActionHelper.click(popUpWindowBack_Btn);
+    }
+
+    public boolean isPresent_PopUpWindowDeactivate_Btn() {
+        return ActionHelper.isPresent(popUpWindowDeactivate_Btn);
+    }
+
+    public void click_PopUpWindowDeactivate_Btn() {
+        ActionHelper.click(popUpWindowDeactivate_Btn);
     }
 }
