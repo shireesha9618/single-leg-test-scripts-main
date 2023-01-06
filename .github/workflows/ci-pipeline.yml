@@ -11,6 +11,13 @@ on:
           - group
           - role
         required: true
+      environment_type:
+        type: choice
+        description: 'Select a Environment'
+        options:
+          - alpha
+          - beta
+        required: true
       role_name:
         description: 'A role name is passed like noorg, notenant, oneteam, fullyonboarded, login  etc. Default is login'
         default: 'login'
@@ -61,15 +68,15 @@ jobs:
 
       - name: Run All Test Scripts
         if: ${{github.event.inputs.suite_type == 'system'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denv=${{github.event.inputs.environment_type}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
 
       - name: Run Specific Fpa Scripts
         if: ${{github.event.inputs.suite_type == 'role'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denv=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
 
       - name: Run Specifies Group of Test Scripts
         if: ${{github.event.inputs.suite_type == 'group'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denv=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
       
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
