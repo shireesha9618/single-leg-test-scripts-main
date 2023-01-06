@@ -38,15 +38,15 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         softAssert.assertTrue(jobWorkflowPage.isPresent_Active_Btn(), "Active Button Is Present As Expected");
         softAssert.assertTrue(jobWorkflowPage.isPresent_Draft_Btn(), "Draft Button Is Present As Expected");
 
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnName_Lbl(), "Table Column Name Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnDescription_Lbl(), "Table Column Description Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnStatus_Lbl(), "Table Column Status Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnProductType_Lbl(), "Table Column Product Type Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnShipmentflow_Lbl(), "Table Column Shipment Flow Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnPlanningMode_Lbl(), "Table Column Planning Mode Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnCreatedBy_Lbl(), "Table Column Created By Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnUpdatedOn_Lbl(), "Table Column Updated On Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnUpdatedBy_Lbl(), "Table Column Updated By Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("NAME"), "Table Column Name Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("DESCRIPTION"), "Table Column Description Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("STATUS"), "Table Column Status Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("PRODUCT TYPE"), "Table Column Product Type Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("SHIPMENT FLOW"), "Table Column Shipment Flow Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("PLANNING MODE"), "Table Column Planning Mode Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("CREATED BY"), "Table Column Created By Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("UPDATED ON"), "Table Column Updated On Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("UPDATED BY"), "Table Column Updated By Is Present As Expected");
 
         softAssert.assertTrue(commonActions.isPresent_PageSize_Txt(), "Page Size Text Is Present As Expected");
         softAssert.assertTrue(commonActions.isPresent_PaginationNext_Btn(), "Pagination Next Button Is Present As Expected");
@@ -93,7 +93,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.click_Create_Btn();
         jobWorkflowCreatePreviewPage.click_StatusActive_RadioBtn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
-        for(String status : statusList) {
+        for (String status : statusList) {
             softAssert.assertEquals(status, "Active", "Active Status Is Appeared As Expected");
         }
         softAssert.assertAll();
@@ -107,7 +107,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.click_Create_Btn();
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
-        for(String status : statusList) {
+        for (String status : statusList) {
             softAssert.assertEquals(status, "Draft", "Active Status Is Appeared As Expected");
         }
         softAssert.assertAll();
@@ -123,8 +123,8 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         List<String> draftStatusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         jobWorkflowCreatePreviewPage.click_StatusClearSelection_Btn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
-        for(int i = 0; i < statusList.size(); i++) {
-            if(!draftStatusList.get(i).equals(statusList.get(i))) {
+        for (int i = 0; i < statusList.size(); i++) {
+            if (!draftStatusList.get(i).equals(statusList.get(i))) {
                 softAssert.assertTrue(!draftStatusList.get(i).equals(statusList.get(i)), "Status Is Different On Clear Selection As Expected");
             }
         }
@@ -179,8 +179,12 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
 
         jobWorkflowCreatePage.fill_ShipmentFlow_Txt(sampleData.name().lastName());
         jobWorkflowCreatePage.fill_ProductType_Txt(sampleData.name().firstName());
+        String shipmentFlow = jobWorkflowCreatePage.getText_ShipmentFlow_Txt();
+        String productType = jobWorkflowCreatePage.getText_ProductType_Txt();
         jobWorkflowCreatePage.click_Create_Btn();
 
+        softAssert.assertEquals(shipmentFlow.length(), 0, "Invalid Data Is Not Accepted In Shipment Flow As Expected");
+        softAssert.assertEquals(productType.length(), 0, "Invalid Data Is Not Accepted In Product Type As Expected");
         softAssert.assertEquals(jobWorkflowCreatePage.getText_ProductTypeValidationMsg_Lbl(), "Required", "Product Type Required Validation Message Appeared As Expected");
         softAssert.assertEquals(jobWorkflowCreatePage.getText_ShipmentFlowValidationMsg_Lbl(), "Required", "Shipment Flow Required Validation Message Appeared As Expected");
         softAssert.assertAll();
@@ -195,7 +199,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
 
         String[] sampleData = {"@@#@@@", "^&&8976", "!$4"};
-        for(String sample : sampleData) {
+        for (String sample : sampleData) {
             jobWorkflowCreatePage.fill_WorkflowName_Txt(sample);
             jobWorkflowCreatePage.click_Create_Btn();
             softAssert.assertTrue(jobWorkflowCreatePage.isPresent_WorkflowNameValidationMsg_Lbl(), "Work Flow Name Incorrect Format Validation Message Appeared As Expected");
@@ -222,7 +226,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
 
         String[] sampleData = {"a", "abc", "bclt"};
-        for(String sample : sampleData) {
+        for (String sample : sampleData) {
             jobWorkflowCreatePage.fill_WorkflowName_Txt(sample);
             jobWorkflowCreatePage.click_Create_Btn();
             softAssert.assertTrue(jobWorkflowCreatePage.isPresent_WorkflowNameValidationMsg_Lbl(), "Work Flow Name Minimum Length Validation Message Appeared As Expected");
@@ -236,15 +240,15 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
     public void TC_JobWorkflowSettings_014_Verify_The_UI_Of_Table_Present_In_Job_Workflows_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobWorkflow();
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnName_Lbl(), "Table Column Name Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnDescription_Lbl(), "Table Column Description Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnStatus_Lbl(), "Table Column Status Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnProductType_Lbl(), "Table Column Product Type Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnShipmentflow_Lbl(), "Table Column Shipment Flow Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnPlanningMode_Lbl(), "Table Column Planning Mode Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnCreatedBy_Lbl(), "Table Column Created By Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnUpdatedOn_Lbl(), "Table Column Updated On Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowPage.isPresent_TableColumnUpdatedBy_Lbl(), "Table Column Updated By Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("NAME"), "Table Column Name Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("DESCRIPTION"), "Table Column Description Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("STATUS"), "Table Column Status Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("PRODUCT TYPE"), "Table Column Product Type Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("SHIPMENT FLOW"), "Table Column Shipment Flow Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("PLANNING MODE"), "Table Column Planning Mode Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("CREATED BY"), "Table Column Created By Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("UPDATED ON"), "Table Column Updated On Is Present As Expected");
+        softAssert.assertTrue(commonActions.isPresent_TableColumnName_Lbl("UPDATED BY"), "Table Column Updated By Is Present As Expected");
         softAssert.assertAll();
     }
 

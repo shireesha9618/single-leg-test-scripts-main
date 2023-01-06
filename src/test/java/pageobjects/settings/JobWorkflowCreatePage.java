@@ -48,7 +48,7 @@ public class JobWorkflowCreatePage {
     String productTypeDropDownList = "(//div[@class='rc-virtual-list-holder-inner'])[1]";
 
     public static JobWorkflowCreatePage getInstance() {
-        if(_instance == null)
+        if (_instance == null)
             _instance = new JobWorkflowCreatePage();
         return _instance;
     }
@@ -198,12 +198,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_KYCVerification_Btn() {
-        if(!isChecked_Btn(kycVerification_Btn))
+        if (!isChecked_Btn(kycVerification_Btn))
             ActionHelper.click(kycVerification_Btn);
     }
 
     public void unCheck_KYCVerification_Btn() {
-        if(isChecked_Btn(kycVerification_Btn))
+        if (isChecked_Btn(kycVerification_Btn))
             ActionHelper.click(kycVerification_Btn);
     }
 
@@ -216,12 +216,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_OTPVerification_Btn() {
-        if(!isChecked_Btn(otpVerification_Btn))
+        if (!isChecked_Btn(otpVerification_Btn))
             ActionHelper.click(otpVerification_Btn);
     }
 
     public void unCheck_OTPVerification_Btn() {
-        if(isChecked_Btn(otpVerification_Btn))
+        if (isChecked_Btn(otpVerification_Btn))
             ActionHelper.click(otpVerification_Btn);
     }
 
@@ -234,12 +234,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_QCVerification_Btn() {
-        if(!isChecked_Btn(qcVerification_Btn))
+        if (!isChecked_Btn(qcVerification_Btn))
             ActionHelper.click(qcVerification_Btn);
     }
 
     public void unCheck_QCVerification_Btn() {
-        if(isChecked_Btn(qcVerification_Btn))
+        if (isChecked_Btn(qcVerification_Btn))
             ActionHelper.click(qcVerification_Btn);
     }
 
@@ -252,12 +252,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_SignatureCollection_Btn() {
-        if(!isChecked_Btn(signatureCollection_Btn))
+        if (!isChecked_Btn(signatureCollection_Btn))
             ActionHelper.click(signatureCollection_Btn);
     }
 
     public void unCheck_SignatureCollection_Btn() {
-        if(isChecked_Btn(signatureCollection_Btn))
+        if (isChecked_Btn(signatureCollection_Btn))
             ActionHelper.click(signatureCollection_Btn);
     }
 
@@ -269,7 +269,7 @@ public class JobWorkflowCreatePage {
         return ActionHelper.isPresent(paymentOption_Txt);
     }
 
-    public void click_PaymentOption_Txt(String paymentOption){
+    public void click_PaymentOption_Txt(String paymentOption) {
         Locator paymentMethod = Locator.builder().withWeb(By.xpath(dropDownList.replace("abc", paymentOption)));
         ActionHelper.click(paymentOption_Txt);
         ActionHelper.click(paymentMethod);
@@ -307,5 +307,13 @@ public class JobWorkflowCreatePage {
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
         CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_ProductType_Txt() {
+        return ActionHelper.getText(productType_Txt);
+    }
+
+    public String getText_ShipmentFlow_Txt() {
+        return ActionHelper.getText(shipmentFlow_Txt);
     }
 }

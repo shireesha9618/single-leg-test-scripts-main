@@ -469,4 +469,13 @@ public class CommonActions {
         ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
+
+    public boolean isPresent_TableColumnName_Lbl(String tableColumnName) {
+        List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
+        for (WebElement element : columName) {
+            if (element.getText().equals(tableColumnName))
+                break;
+        }
+        return true;
+    }
 }
