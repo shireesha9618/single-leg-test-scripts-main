@@ -70,7 +70,35 @@ jobs:
       - name: Run Specifies Group of Test Scripts
         if: ${{github.event.inputs.suite_type == 'group'}}
         run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
-
+      
+      - name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
+        with:
+          path: ${{ github.workspace }}/mailer_file.html
+          write-mode: overwrite
+          contents: |
+              <html>
+              <head></head>
+              <body>
+              <table>
+                  <tr>
+                      <td>Hi Team,</td>
+                  </tr> <tr>
+                  <td>Please find below the execution summary</td>
+              </tr> <tr>
+                  <td>
+                      <a href="${{github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"> Click here to open Complete Report </a>
+                  </td>
+              </tr><tr>
+                  <td>&nbsp;</td>
+              </tr><tr>
+                  <td><img src="cid:reportscreenshot.png" width="1100"></td>
+              </tr>
+              </table>
+              </body>
+              </html>
+      
+      
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.1
         with:
