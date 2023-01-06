@@ -367,7 +367,6 @@ public class HomePage extends BaseTestClass {
         ActionHelper.click(workFlowSettings_Btn);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
-}
 
     public void click_OpenMenuTeams_Btn() {
         ActionHelper.click(teamsOpenMenu_Btn);
