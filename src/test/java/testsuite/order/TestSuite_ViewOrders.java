@@ -1114,7 +1114,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT, TestGroup.FLAKY_TESTS},
             description = "TC_061, Verify The Functionality Of masking of Drop address")
     public void TC_ViewOrder_061_Verify_The_Functionality_Of_masking_of_Drop_address() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();

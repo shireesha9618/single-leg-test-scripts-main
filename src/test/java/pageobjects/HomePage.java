@@ -83,8 +83,7 @@ public class HomePage extends BaseTestClass {
 
     public void selectTeam(String input) {
         CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(teamSelector_Dropdown);
-        ActionHelper.sendKeys(selectTeam_DropDown, Keys.chord(input, Keys.ENTER));
+        Utility.select_FromDropDown_List(teamSelector_Dropdown.getBy(), teamSelect_List.getBy(), input);
     }
 
     public void openCreateOrderPage() {
@@ -408,5 +407,33 @@ public class HomePage extends BaseTestClass {
 
     public void click_CloseSideBar_Icon() {
         ActionHelper.click(closeSideBar_Icon);
+    }
+
+    public void click_OpenMenuTeams_Btn() {
+        ActionHelper.click(teamsOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowTeams_Btn() {
+        ActionHelper.click(workFlowTeams_Btn);
+    }
+
+    public boolean isPresent_CreateOrderMenu_Btn() {
+        return ActionHelper.isPresent(createOrdersMenu_Btn);
+    }
+
+    public boolean isPresent_ViewOrdersMenu_Btn() {
+        return ActionHelper.isPresent(viewOrdersMenu_Btn);
+    }
+
+    public void click_OpenMenuCreateOrders_Btn() {
+        ActionHelper.click(createOrderMenuItem_Btn);
+    }
+
+    public void click_OpenMenuViewOrders_Btn() {
+        ActionHelper.click(viewOrdersOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowOrders_Btn() {
+        ActionHelper.click(workFlowOrders_Btn);
     }
 }
