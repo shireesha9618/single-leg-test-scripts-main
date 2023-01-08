@@ -6,12 +6,14 @@ import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
+import framework.utils.GmailHelper;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 import utility.Utility;
 
 import java.util.List;
@@ -460,4 +462,5 @@ public class CommonActions {
         ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
+
 }

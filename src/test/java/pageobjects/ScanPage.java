@@ -13,7 +13,6 @@ public class ScanPage {
     private final Locator addToDispatch_Btn = Locator.builder().withWeb(By.xpath("//button[p[text()='Add to dispatch']]"));
     private final Locator confirmAddToDispatch_Btn = Locator.builder().withWeb(By.xpath("(//button[@type='button'])[3]"));
     private final Locator shipmentCount_Lbl = Locator.builder().withWeb(By.xpath("(//div[@class='flex'])[4]//p"));
-    private final Locator deleteShipment_Btn = Locator.builder().withWeb(By.cssSelector("[class*='h-4 w-4 text-red-500 cursor-pointer']"));
     private final Locator deleteIconForAddedPackage_Btn = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']//*[local-name()='svg']"));
     private final Locator proceed_Lbl = Locator.builder().withWeb(By.xpath("(//p[text()='Proceed'])[1]"));
     private final Locator changeSummaryDialog_Lbl = Locator.builder().withWeb(By.xpath("//h1[text()='Change Summary']"));
@@ -51,7 +50,8 @@ public class ScanPage {
     }
 
     public boolean isPresent_EnterShipmentId_Txt() {
-        return ActionHelper.isPresent(enterShipmentId_Txt, 30000);
+        int TIMEOUT = 30000;
+        return ActionHelper.isPresent(enterShipmentId_Txt, TIMEOUT);
     }
 
     public void fill_EnterShipmentId_Txt(String shipment) {
@@ -64,12 +64,9 @@ public class ScanPage {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
     }
 
-    public void click_DeleteShipment_Btn() {
-        ActionHelper.click(deleteShipment_Btn);
-    }
-
     public boolean isPresent_AddToDispatch_Btn() {
-        return ActionHelper.isPresent(addToDispatch_Btn, 30000);
+        int TIMEOUT = 30000;
+        return ActionHelper.isPresent(addToDispatch_Btn, TIMEOUT);
     }
 
     public void click_AddToDispatch_Btn() {
@@ -85,7 +82,8 @@ public class ScanPage {
     }
 
     public boolean isPresent_DeleteIconForAddedPackage_Btn() {
-        return ActionHelper.isPresent(deleteIconForAddedPackage_Btn, 30000);
+        int TIMEOUT = 30000;
+        return ActionHelper.isPresent(deleteIconForAddedPackage_Btn, TIMEOUT);
     }
 
     public void click_DeleteIconForAddedPackage_Btn() {

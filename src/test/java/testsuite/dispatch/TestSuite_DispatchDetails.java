@@ -261,6 +261,4 @@ public class TestSuite_DispatchDetails {
         softAssert.assertTrue(dispatchDetailPage.getList_ShipmentDetailsTableColumnOrderId_ListLbl().size() <= 100, "Validate records present are not more than 100");
         softAssert.assertAll();
     }
-
-
 }

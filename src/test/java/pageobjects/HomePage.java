@@ -132,7 +132,7 @@ public class HomePage extends BaseTestClass {
 
     public void openRidersPage() {
         ActionHelper.waitForLoaderToHide();
-       // commenting for now as resources dropdown is not present click_Resources_Btn();
+        // commenting for now as resources dropdown is not present click_Resources_Btn();
         click_RidersMenu_Btn();
     }
 
@@ -231,7 +231,8 @@ public class HomePage extends BaseTestClass {
     }
 
     public void click_OpenMenuCross_Btn() {
-        if (ActionHelper.isPresent(openMenuCross_Btn))
+        int TIMEOUT = 5000;
+        if (ActionHelper.isPresent(openMenuCross_Btn, TIMEOUT))
             ActionHelper.click(openMenuCross_Btn);
     }
 

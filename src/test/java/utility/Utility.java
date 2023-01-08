@@ -127,7 +127,7 @@ public class Utility {
     }
 
     public static void uncheckCheckbox(By by) {
-        WebElement element = DriverManager.getDriver().findElement(by);
+        WebElement element = ActionHelper.findElement(by);
         uncheckCheckbox(element);
     }
 

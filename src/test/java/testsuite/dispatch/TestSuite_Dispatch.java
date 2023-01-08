@@ -2,7 +2,6 @@ package testsuite.dispatch;
 
 import base.BaseTestClass;
 import constants.TestGroup;
-import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
@@ -13,7 +12,6 @@ import pageobjects.DispatchPage;
 import pageobjects.HomePage;
 import utility.Utility;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,9 +58,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         List<String> actualTabHeadersLabels = dispatchPage.getText_ShipmentDetailsTableHeaderList_Lbl();
         List<String> expectedTabHeaders = new ArrayList<>(List.of("RIDER", "VEHICLE", "STRUCTURE", "STATUS", "ORDER STATUS", "ACTIONS"));
         Collections.sort(expectedTabHeaders);
-        for (int i = 0; i < expectedTabHeaders.size(); i++) {
-            softAssert.assertEquals(actualTabHeadersLabels.get(i), expectedTabHeaders.get(i), "Validate table header label");
-        }
+        softAssert.assertTrue(actualTabHeadersLabels.equals(expectedTabHeaders), "Validate table header label");
         softAssert.assertAll();
     }
 
@@ -79,7 +75,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},
             description = "TC_004, Verify The Functionality Of Search Bar with valid data")
-        public void TC_Dispatch_004_Verify_The_Functionality_Of_Search_Bar_with_valid_data() {
+    public void TC_Dispatch_004_Verify_The_Functionality_Of_Search_Bar_with_valid_data() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
