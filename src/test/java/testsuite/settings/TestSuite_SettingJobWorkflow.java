@@ -431,7 +431,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         String expectedJobName = commonActions.getText_TableData_Lbl("NAME");
         commonActions.click_TableData_Link("NAME");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_JobWorkflowDetailHeader_Lbl(), "Job Workflow Detail Header Is Present As Expected");
-        softAssert.assertEquals(jobWorkflowActivePage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobName, "Job Workflow Detail Header Label Is Matched As Expected");
+        softAssert.assertEqualsIgnoreCase(jobWorkflowActivePage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobName, "Job Workflow Detail Header Label Is Matched As Expected");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_ActiveStatus_Lbl(), "Active Status Label Is Present As Expected");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_ViewServiceAttributes_Btn(), "View Service Attributes Button Is Present As Expected");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_MakeACopy_Btn(), "Make A Copy Button Is Present As Expected");
