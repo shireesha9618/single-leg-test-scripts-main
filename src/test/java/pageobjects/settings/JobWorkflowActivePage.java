@@ -144,4 +144,12 @@ public class JobWorkflowActivePage {
     public void click_PopUpWindowDeactivate_Btn() {
         ActionHelper.click(popUpWindowDeactivate_Btn);
     }
+
+    public boolean isPresent_ObjectiveName_Lbl() {
+        return ActionHelper.isPresent(objectiveName_Lbl);
+    }
+
+    public String getText_ObjectiveName_Lbl() {
+        return ActionHelper.getText(objectiveName_Lbl);
+    }
 }

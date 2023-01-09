@@ -381,7 +381,6 @@ public class HomePage extends BaseTestClass {
     public void click_WorkFlowOrders_Btn() {
         ActionHelper.click(workFlowOrders_Btn);
     }
-}
 
     public void click_SettingsMenu_Btn() {
         click_OpenMenu_Btn();

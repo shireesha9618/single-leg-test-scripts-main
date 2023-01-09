@@ -9,6 +9,7 @@ import framework.frontend.actions.ActionHelper;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
+import pageobjects.HomePage;
 import pageobjects.settings.*;
 import utility.Utility;
 
@@ -459,6 +460,23 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.fill_Search_Text(expectedTableData);
         String actualTableData = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(actualTableData, expectedTableData, "Actual Job Workflow Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_034, Verify The Functionality Of Objective Present Below Search Bar Of Table Record Present In Active Tab Should Matched To Objective Workflows")
+    public void TC_JobWorkflowSettings_034_Verify_The_Functionality_Of_Objective_Present_Below_Search_Bar_Of_Table_Record_Present_In_Active_Tab_Should_Matched_To_Objective_Workflows() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        String expectedObjectiveName = jobWorkflowActivePage.getText_ObjectiveName_Lbl();
+        HomePage.getInstance().click_SettingsMenu_Btn();
+        SettingsPage.getInstance().click_Workflow_Link();
+        WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
+        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
         softAssert.assertAll();
     }
 }
