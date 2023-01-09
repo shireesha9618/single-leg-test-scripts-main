@@ -34,9 +34,19 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
 
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsHeader_Lbl(), "Check Visibility of Order Details header");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderId_Txt(), "Check Visibility of Order Id text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsScannableBarcodeNumber_Txt(), "Check Visibility of Scannable/Barcode Number text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescription_Txt(), "Check Visibility of Order Description text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsTeam_Dropdown(), "Check Visibility of Team dropdown");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsTotalWeight_Txt(), "Check Visibility of Total Weight");
+        softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsTotalVolume_Txt(), "Check Visibility of Total Volume");
+
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsHeader_Lbl(), "Check Visibility of Shipment Header");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsShipmentID_Txt(), "Check Visibility of Shipment ID");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDescription_Txt(), "Check Visibility of Shipment Details Description");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsWeight_Txt(), "Check Visibility of Shipment weight");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsVolume_Txt(), "Check Visibility of Shipment Volume");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsBreadth_Txt(), "Check Visibility of Shipment Dimensions Breadth");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsLength_Txt(), "Check Visibility of Shipment Dimensions Length");
+        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsDimensionsHeight_Txt(), "Check Visibility of Shipment Dimensions Height");
 
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsHeader_Lbl(), "Check Visibility of Pickup Details header");
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactName_Txt(), "Check Visibility of Contact Name text box");
@@ -48,7 +58,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsAddressLine2_Txt(), "Check Visibility of Address Line 2 text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsState_Txt(), "Check Visibility of State text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsCity_Txt(), "Check Visibility of City text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsClearAll_Btn(), "Check Visibility of Clear All button");
 
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsHeader_Lbl(), "Check Visibility of Drop Details header");
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsContactName_Txt(), "Check Visibility of Contact Name text box");
@@ -60,7 +69,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsAddressLine2_Txt(), "Check Visibility of Address Line 2 text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsState_Txt(), "Check Visibility of State text box");
         softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsCity_Txt(), "Check Visibility of City text box");
-        softAssert.assertTrue(createNewOrderPage.isPresent_DropDetailsClearAll_Btn(), "Check Visibility of Clear All button");
 
         softAssert.assertTrue(createNewOrderPage.isPresent_PaymentDetailsHeader_Lbl(), "Check Visibility of Payment Details header");
         softAssert.assertTrue(createNewOrderPage.isPresent_PaymentDetailsPaymentType_Select(), "Check Visibility of Payment Type dropdown");
