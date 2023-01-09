@@ -6,14 +6,12 @@ import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
-import framework.utils.GmailHelper;
 import org.joda.time.DateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.Test;
 import utility.Utility;
 
 import java.util.List;
@@ -57,6 +55,7 @@ public class CommonActions {
     private final Locator calendarMonth_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-month-btn']"));
     private final Locator calendarYear_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-year-btn']"));
     private final Locator calendarChooseDateMonthYear_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[@title='PLACEHOLDER']"));
+
     public static CommonActions getInstance() {
         if (_instance == null) _instance = new CommonActions();
         return _instance;
@@ -259,10 +258,22 @@ public class CommonActions {
         return ActionHelper.getText(data);
     }
 
-    public List<String> getList_TableDataList_Lbl(String tableColumnName) {
+    public List<String> getTextList_TableDataList_Lbl(String tableColumnName) {
         String index = String.valueOf(indexOfTableColumnName(tableColumnName));
         Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
         return Utility.getText_ListOfWebElements(ActionHelper.findElements(data));
+    }
+
+    public WebElement getWebElement_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+        return ActionHelper.findElement(data);
+    }
+
+    public List<WebElement> getWebElementList_TableDataList_Lbl(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
+        return ActionHelper.findElements(data);
     }
 
     public boolean isPresent_TableData_Lbl(String tableColumnName) {

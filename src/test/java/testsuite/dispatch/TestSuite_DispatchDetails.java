@@ -37,7 +37,7 @@ public class TestSuite_DispatchDetails {
         softAssert.assertTrue(dispatchDetailPage.isPresent_ScanToAddOrders_Btn(), "Validate presence of Scan To Add Orders button");
         softAssert.assertTrue(dispatchDetailPage.isPresent_DownloadRunSheet_Btn(), "Validate presence of Download Run Sheet button");
         softAssert.assertTrue(dispatchDetailPage.isPresent_Refresh_Btn(), "Validate presence of Refresh button");
-        for (String text : dispatchDetailPage.getText_ShipmentDetailsTableColumnStatus_ListLbl())
+        for (String text : commonActions.getTextList_TableDataList_Lbl("STATUS"))
             softAssert.assertEquals(text, "Assigned", "Validate status of Orders");
         softAssert.assertAll();
     }
@@ -62,7 +62,7 @@ public class TestSuite_DispatchDetails {
         softAssert.assertTrue(dispatchDetailPage.isPresent_ScanToAddOrders_Btn(), "Validate presence of Scan To Add Orders button");
         softAssert.assertTrue(dispatchDetailPage.isPresent_DownloadRunSheet_Btn(), "Validate presence of Download Run Sheet button");
         softAssert.assertTrue(dispatchDetailPage.isPresent_Refresh_Btn(), "Validate presence of Refresh button");
-        for (String text : dispatchDetailPage.getText_ShipmentDetailsTableColumnStatus_ListLbl())
+        for (String text : commonActions.getTextList_TableDataList_Lbl("STATUS"))
             softAssert.assertEquals(text, "Assigned", "Validate status of Orders");
         softAssert.assertAll();
     }
@@ -252,13 +252,13 @@ public class TestSuite_DispatchDetails {
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
 
         dispatchDetailPage.clickAndChoose_PaginationDropDownOptions_Btn(10);
-        softAssert.assertTrue(dispatchDetailPage.getList_ShipmentDetailsTableColumnOrderId_ListLbl().size() <= 10, "Validate records present are not more than 10");
+        softAssert.assertTrue(commonActions.getWebElementList_TableDataList_Lbl("ORDER ID").size() <= 10, "Validate records present are not more than 10");
         dispatchDetailPage.clickAndChoose_PaginationDropDownOptions_Btn(20);
-        softAssert.assertTrue(dispatchDetailPage.getList_ShipmentDetailsTableColumnOrderId_ListLbl().size() <= 20, "Validate records present are not more than 20");
+        softAssert.assertTrue(commonActions.getWebElementList_TableDataList_Lbl("ORDER ID").size() <= 20, "Validate records present are not more than 20");
         dispatchDetailPage.clickAndChoose_PaginationDropDownOptions_Btn(50);
-        softAssert.assertTrue(dispatchDetailPage.getList_ShipmentDetailsTableColumnOrderId_ListLbl().size() <= 50, "Validate records present are not more than 50");
+        softAssert.assertTrue(commonActions.getWebElementList_TableDataList_Lbl("ORDER ID").size() <= 50, "Validate records present are not more than 50");
         dispatchDetailPage.clickAndChoose_PaginationDropDownOptions_Btn(100);
-        softAssert.assertTrue(dispatchDetailPage.getList_ShipmentDetailsTableColumnOrderId_ListLbl().size() <= 100, "Validate records present are not more than 100");
+        softAssert.assertTrue(commonActions.getWebElementList_TableDataList_Lbl("ORDER ID").size() <= 100, "Validate records present are not more than 100");
         softAssert.assertAll();
     }
 }

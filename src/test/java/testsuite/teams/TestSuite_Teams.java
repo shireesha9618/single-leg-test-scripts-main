@@ -316,11 +316,11 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_024_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        List<String> currentPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
+        List<String> currentPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
+        List<String> nextPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
         softAssert.assertTrue(!currentPageElements.equals(nextPageElements), "Current Page Elements And Next Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
     }
@@ -332,9 +332,9 @@ public class TestSuite_Teams extends BaseTestClass {
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
+        List<String> nextPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
         commonActions.click_PaginationPrevious_Btn();
-        List<String> prevPageElements = commonActions.getList_TableDataList_Lbl("TEAM ID");
+        List<String> prevPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
         softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
         softAssert.assertTrue(!nextPageElements.equals(prevPageElements), "Next Page Elements And Previous Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
