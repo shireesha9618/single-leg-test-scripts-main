@@ -448,4 +448,17 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
 
         softAssert.assertAll();
     }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_033, Verify The Functionality Of Search Bar Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_033_Verify_The_Functionality_Of_Search_Bar_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        String expectedTableData = commonActions.getText_TableData_Lbl("NAME");
+        jobWorkflowPage.fill_Search_Text(expectedTableData);
+        String actualTableData = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertEquals(actualTableData, expectedTableData, "Actual Job Workflow Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
 }
