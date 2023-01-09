@@ -108,7 +108,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (String status : statusList) {
-            softAssert.assertEquals(status, "Draft", "Active Status Is Appeared As Expected");
+            softAssert.assertEquals(status, "Draft", "Draft Status Appeared As Expected");
         }
         softAssert.assertAll();
     }
@@ -121,6 +121,10 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.click_Create_Btn();
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> draftStatusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
+        for (int i = 0; i < draftStatusList.size(); i++) {
+                softAssert.assertTrue(draftStatusList.get(i).equals("Draft"), "Draft Status Appeared As Expected");
+        }
+
         jobWorkflowCreatePreviewPage.click_StatusClearSelection_Btn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (int i = 0; i < statusList.size(); i++) {
