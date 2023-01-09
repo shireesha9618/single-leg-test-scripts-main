@@ -27,6 +27,9 @@ public class JobWorkflowActivePage {
     private final Locator popUpWindowBack_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
     private final Locator popUpWindowDeactivate_Btn = Locator.builder().withWeb(By.xpath("//p[text()='De-activate Existing Workflow']/.."));
 
+    private final Locator objectiveName_Lbl = Locator.builder().withWeb(By.xpath("(//section//div[@class='flex justify-between'])[1]"));
+
+
     public static JobWorkflowActivePage getInstance() {
         if(_instance == null)
             _instance = new JobWorkflowActivePage();
