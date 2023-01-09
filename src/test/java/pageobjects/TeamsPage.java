@@ -19,7 +19,7 @@ public class TeamsPage extends BaseTestClass {
     private static TeamsPage _instance;
 
     private final Locator searchTeam_TextBox = Locator.builder().withWeb(By.xpath("//input[@id='search_ptp']"));
-    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Teams']"));
+    private final Locator header_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//p[text()='Teams']"));
     private final Locator newTeam_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'New')]/.."));
     private final Locator teamBreadcrumb_Lbl = Locator.builder().withWeb(By.xpath("//li[@id='/teams']"));
     private final Locator moreActions_Dropdown = Locator.builder().withWeb(By.xpath("//p[text()='More Actions']/.."));
@@ -55,8 +55,25 @@ public class TeamsPage extends BaseTestClass {
     private final Locator moreActionsDropDownModifyColumnsLinkSelectedOptionsList_Label = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div/p"));
     private final Locator moreActionsDropDownModifyColumnsLinkStatus_Checkbox = Locator.builder().withWeb(By.xpath("//input[@id='Status']"));
     private final Locator moreActionsDropDownModifyColumnsStatusCross_Icon = Locator.builder().withWeb(By.xpath("//div[@data-rbd-drag-handle-draggable-id='Status']/button"));
+    private final Locator teamsTableTeamNameColumnList_Link = Locator.builder().withWeb(By.xpath("//td[@class='ant-table-cell'][2]"));
+    private final Locator paginationSelectedItem_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'pagination')]//span[@title]"));
+    private final Locator paginationPerPageOptionsList_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(text(),' / page')]"));
+    private final Locator teamsTableTeamIdColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]"));
+    private final Locator paginationBlockList_Lbl = Locator.builder().withWeb(By.xpath("//li[contains(@class,'pagination-item')]"));
+    private final Locator next_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Next']"));
+    private final Locator previous_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Prev']"));
+    private final Locator tableData_CheckBox = Locator.builder().withWeb(By.xpath("//td//label[@class='ant-checkbox-wrapper']"));
+    private final Locator deactivate_Btn = Locator.builder().withWeb(By.xpath("(//p[text()='Deactivate']//parent::button)[1]"));
+    private final Locator selectAll_CheckBox = Locator.builder().withWeb(By.xpath("//span[@class='select-all']"));
+    private final Locator tableDataCheckBox_Checked = Locator.builder().withWeb(By.xpath("//span[@class='ant-checkbox ant-checkbox-checked']"));
+    private final Locator deactivateTeamHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Deactivate Team']"));
+    private final Locator deactivateTeamCancel_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(), 'Are you')]/../parent::div/following-sibling::div/button/p[text()='Cancel']"));
+    private final Locator deactivateTeamDeactivate_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(), 'Are you')]/../parent::div/following-sibling::div/button/p[text()='Deactivate']"));
+    private final Locator search_Bar = Locator.builder().withWeb(By.id("search_ptp"));
+    private final Locator tableDataTeamName_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]//td[3]"));
     private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
     private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
+    String linkInFirstRow = "//tr[2]/td[index]/a/a";
     CommonActions commonActions = CommonActions.getInstance();
 
     public static TeamsPage getInstance() {
@@ -66,11 +83,13 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public Boolean isPresent_Header_Lbl() {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return ActionHelper.isPresent(header_Lbl);
     }
 
     public void click_NewTeam_Btn() {
         ActionHelper.click(newTeam_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public Boolean isPresent_NewTeam_Btn() {
@@ -378,8 +397,103 @@ public class TeamsPage extends BaseTestClass {
         ActionHelper.click(moreActionsDropDownModifyColumnsLinkCancel_Btn);
     }
 
-    public List<String> getText_TableDataTeamID_List() {
-        ActionHelper.waitUntilElementVisible(teamsTableRiderIDColumnList_Link.getBy());
-        return Utility.getText_ListOfWebElements(teamsTableRiderIDColumnList_Link.getBy());
+    public List<WebElement> getElements_TeamsTableTeamIdColumnList_Link() {
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        return ActionHelper.findElements(teamsTableTeamIdColumnList_Link.getBy());
+    }
+
+    public boolean validateTeamsTableRecordEqualsToPerPaginationOptions() {
+        ActionHelper.waitUntilAllElementsVisible(teamsTableTeamIdColumnList_Link.getBy());
+        String getTextPaginationSelectedItem_Lbl[] = ActionHelper.findElement(paginationSelectedItem_Lbl).getText().split(" ");
+        return (getElements_TeamsTableTeamIdColumnList_Link().size() <= Integer.parseInt(getTextPaginationSelectedItem_Lbl[0]));
+    }
+
+    public String getText_TeamsHeader_Lbl() {
+        return ActionHelper.getText(header_Lbl);
+    }
+
+    public void check_TableData_CheckBox(int index) {
+        ActionHelper.waitUntilElementVisible(tableData_CheckBox.getBy());
+        Utility.checkCheckbox(ActionHelper.findElements(tableData_CheckBox.getBy()).get(index));
+    }
+
+    public boolean isPresent_Deactivate_Btn() {
+        return ActionHelper.isPresent(deactivate_Btn, 5000);
+    }
+
+    public boolean isPresent_SelectAll_CheckBox() {
+        return ActionHelper.isPresent(selectAll_CheckBox);
+    }
+
+    public void click_SelectAll_CheckBox() {
+        ActionHelper.click(selectAll_CheckBox);
+    }
+
+    public void uncheck_TableData_CheckBox(int index) {
+        ActionHelper.waitUntilElementVisible(tableDataCheckBox_Checked.getBy());
+        Utility.checkCheckbox(ActionHelper.findElements(tableDataCheckBox_Checked.getBy()).get(index));
+    }
+
+    public void click_Deactivate_Btn() {
+        ActionHelper.click(deactivate_Btn);
+    }
+
+    public boolean isPresent_DeactivateTeamHeader_Lbl() {
+        return ActionHelper.isPresent(deactivateTeamHeader_Lbl);
+    }
+
+    public String getText_DeactivateTeamHeader_Lbl() {
+        return ActionHelper.getText(deactivateTeamHeader_Lbl);
+    }
+
+    public boolean isPresent_DeactivateTeamCancel_Btn() {
+        return ActionHelper.isPresent(deactivateTeamCancel_Btn);
+    }
+
+    public boolean isPresent_DeactivateTeamDeactivate_Btn() {
+        return ActionHelper.isPresent(deactivateTeamDeactivate_Btn);
+    }
+
+    public void click_DeactivateTeamDeactivate_Btn() {
+        ActionHelper.click(deactivateTeamDeactivate_Btn);
+    }
+
+    public void click_DeactivateTeamCancel_Btn() {
+        ActionHelper.click(deactivateTeamCancel_Btn);
+    }
+
+    public void fillWithClear_Search_Txt(String teamName) {
+        ActionHelper.sendKeysWithClear(search_Bar.getBy(), teamName);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_TeamsTableTeamNameColumnList_Link() {
+        return ActionHelper.getText(teamsTableTeamNameColumnList_Link);
+    }
+
+    public boolean isPresent_TableDataTeamName_Lbl() {
+        return ActionHelper.isPresent(tableDataTeamName_Lbl);
+    }
+
+    public int getSize_TeamsTableTeamName() {
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
+        return ActionHelper.findElements(tableDataTeamName_Lbl).size();
+    }
+
+    public HashMap<String, String> getData_TableFirstData_List() {
+        HashMap<String, String> tableData = new HashMap<>();
+        String teamId = commonActions.getText_TableData_Lbl("TEAM ID");
+        String teamName = commonActions.getText_TableData_Lbl("TEAM NAME");
+
+        tableData.put("teamId", teamId);
+        tableData.put("teamName", teamName);
+
+        return tableData;
+    }
+
+    public void click_TableData_Lbl(String tableColumnName) {
+        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(linkInFirstRow.replace("index", index)));
+        ActionHelper.click(data);
     }
 }

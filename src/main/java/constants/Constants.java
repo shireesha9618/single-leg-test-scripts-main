@@ -51,6 +51,8 @@ public class Constants {
     public static String TEAM = "QATeam";
     public static String PICKUP_PINCODE="208014";
     public static String DROP_PINCODE="281001";
+    public static String RIDER = "Arpit kishoruser";
+    public static String TEAM_MANAGER ="feAutomation user";
 
     private Constants() {
 

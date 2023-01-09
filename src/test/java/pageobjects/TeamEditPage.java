@@ -3,6 +3,7 @@ package pageobjects;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import utility.Utility;
 
 public class TeamEditPage {
 
@@ -23,6 +24,7 @@ public class TeamEditPage {
     }
 
     public Boolean isPresent_Header_lbl() {
+        CommonActions.getInstance().waitTillLoaderTxtDisappears();
         return ActionHelper.isPresent(header_Lbl, 5000);
     }
 
@@ -48,5 +50,17 @@ public class TeamEditPage {
 
     public void click_Cancel_Btn() {
         ActionHelper.click(cancel_Btn);
+    }
+
+    public boolean isPresent_Cancel_Btn() {
+        return ActionHelper.isPresent(cancel_Btn);
+    }
+
+    public boolean isPresent_Save_Btn() {
+        return ActionHelper.isPresent(create_Btn);
+    }
+
+    public void fillWithClear_teamName_TextBox(String input) {
+        ActionHelper.sendKeysWithClear(teamName_TextBox.getBy(), input);
     }
 }

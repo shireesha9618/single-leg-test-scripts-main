@@ -5,6 +5,7 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import utility.Utility;
 
 public class HomePage extends BaseTestClass {
@@ -23,10 +24,10 @@ public class HomePage extends BaseTestClass {
     private final Locator viewOrdersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-0']//p[text()='View Orders']"));
     private final Locator dispatchMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'dispatch')]"));
     private final Locator resourcesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Resources']"));
-    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Riders']"));
-    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-2']//p[text()='Facilities']"));
-    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-3']//p[text()='Teams']"));
-    private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//div[@id='secondarySidebar-0']//p"));
+    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'riders')]"));
+    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'facilities')]"));
+    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'teams')]"));
+    private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'settings')]"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));
     private final Locator delhiveryLogo_Img = Locator.builder().withWeb(By.xpath("//img[@alt='Workflow']"));
@@ -352,6 +353,35 @@ public class HomePage extends BaseTestClass {
         ActionHelper.click(workFlowOs1_Link);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
+
+    public void click_OpenMenuTeams_Btn() {
+        ActionHelper.click(teamsOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowTeams_Btn() {
+        ActionHelper.click(workFlowTeams_Btn);
+    }
+
+    public boolean isPresent_CreateOrderMenu_Btn() {
+        return ActionHelper.isPresent(createOrdersMenu_Btn);
+    }
+
+    public boolean isPresent_ViewOrdersMenu_Btn() {
+        return ActionHelper.isPresent(viewOrdersMenu_Btn);
+    }
+
+    public void click_OpenMenuCreateOrders_Btn() {
+        ActionHelper.click(createOrderMenuItem_Btn);
+    }
+
+    public void click_OpenMenuViewOrders_Btn() {
+        ActionHelper.click(viewOrdersOpenMenu_Btn);
+    }
+
+    public void click_WorkFlowOrders_Btn() {
+        ActionHelper.click(workFlowOrders_Btn);
+    }
+}
 
     public void click_SettingsMenu_Btn() {
         click_OpenMenu_Btn();
