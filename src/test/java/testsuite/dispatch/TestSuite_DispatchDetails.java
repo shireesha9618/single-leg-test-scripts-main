@@ -1,6 +1,8 @@
 package testsuite.dispatch;
 
+import api.ApiClient;
 import constants.TestGroup;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisSoftAssert;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
@@ -8,6 +10,14 @@ import pageobjects.DispatchDetailPage;
 import pageobjects.DispatchPage;
 import pageobjects.HomePage;
 import pageobjects.ScanPage;
+import utility.Utility;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static api.ApiClient.createOrder;
 
 public class TestSuite_DispatchDetails {
 

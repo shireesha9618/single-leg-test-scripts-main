@@ -68,7 +68,7 @@ public class DispatchPage {
     private final Locator shipmentDetailsTableColumnOrderStatusRemaining_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]/div/div[3]/div/p"));
     private final Locator shipmentDetailsTableColumnActions_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[8]//button"));
     private final Locator shipmentDetailsTableColumnActionsAddOrder_Radio = Locator.builder().withWeb(By.xpath("//input[@value='addOrders']"));
-    private final Locator shipmentDetailsTableColumnActionsViewOrder_Radio = Locator.builder().withWeb(By.xpath("//input[@value='viewOrders']"));
+    private final Locator shipmentDetailsTableColumnActionsViewOrder_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='View Orders']"));
     private final Locator itsEmptyHere_Lbl = Locator.builder().withWeb(By.xpath("//h3[text()='It\'s Empty here']"));
 
     private final Locator mapsZoomIn_Btn = Locator.builder().withWeb(By.xpath("//a[@title='Zoom in']"));

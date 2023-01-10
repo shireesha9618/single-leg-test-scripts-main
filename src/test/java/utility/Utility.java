@@ -1,6 +1,8 @@
 package utility;
 
+import api.ApiClient;
 import com.github.javafaker.Faker;
+import framework.backend.APIResponseException;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
@@ -23,15 +25,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.CommonActions;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utility {
@@ -441,4 +439,16 @@ public class Utility {
         return element.isSelected();
     }
 
+    public static String createAnOrderAndDispatch_Then_Get_Id() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder("cod");
+        String jobID = ApiClient.getJobID(order.get("orderId"));
+        List<String> jobIDList = new ArrayList<>();
+        jobIDList.add(jobID);
+        HashMap<String, String> dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        return jobID;
+    }
+
+    public static void createAnOrder() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder("cod");
+    }
 }

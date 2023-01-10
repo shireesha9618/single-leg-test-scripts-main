@@ -8,10 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import utility.Utility;
 
+import static constants.Constants.WAIT_FOR_ONE_SECOND;
+
 public class HomePage extends BaseTestClass {
     private static HomePage _instance;
     private final Locator loginButton_Btn = Locator.builder().withWeb(By.id("loginButton"));
-    private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch']"));
+    private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//a[normalize-space()='Dispatch']"));
     private final Locator selectTeam_DropDown = Locator.builder().withWeb(By.id("selectTeam"));
     private final Locator selectTeam_Txt = Locator.builder().withWeb(By.xpath("//input[@id='selectTeam']/..//following-sibling::span"));
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
@@ -65,6 +67,8 @@ public class HomePage extends BaseTestClass {
     private final Locator leftPanel_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-base')]"));
     private final Locator closeSideBar_Icon = Locator.builder().withWeb(By.id("closeSideBar"));
     private final Locator openSideBar_Icon = Locator.builder().withWeb(By.id("openSideBar"));
+    private final Locator menu_Icon = Locator.builder().withWeb(By.cssSelector("img[alt='open menu']"));
+    private final Locator close_Menu_Btn = Locator.builder().withWeb(By.xpath("(//*[name()='svg'][@data-icon='circle-xmark'])[1]"));
 
     public static HomePage getInstance() {
         if (_instance == null)
@@ -435,5 +439,17 @@ public class HomePage extends BaseTestClass {
 
     public void click_WorkFlowOrders_Btn() {
         ActionHelper.click(workFlowOrders_Btn);
+    }
+
+    public void open_Menu_Btn(){
+        if(ActionHelper.isPresent(menu_Icon,WAIT_FOR_ONE_SECOND)){
+            ActionHelper.click(menu_Icon);
+        }
+    }
+
+    public void close_Menu_Btn(){
+        if(ActionHelper.isPresent(close_Menu_Btn,WAIT_FOR_ONE_SECOND)){
+            ActionHelper.click(close_Menu_Btn);
+        }
     }
 }

@@ -2,6 +2,7 @@ package testsuite.dispatch;
 
 import base.BaseTestClass;
 import constants.TestGroup;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
@@ -12,6 +13,7 @@ import pageobjects.DispatchPage;
 import pageobjects.HomePage;
 import utility.Utility;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -596,5 +598,15 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertAll();
     }
 
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},
+            description = "TC_021, Verify The Functionality of Add Order Button in Actions")
+    public void TC_Dispatch_021_Verify_The_Functionality_of_Add_Order_Button_In_Actions() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        Utility.createAnOrder();
+        commonActions.coverJourneyTillDispatches();
+
+
+        softAssert.assertAll();
+    }
 
 }
