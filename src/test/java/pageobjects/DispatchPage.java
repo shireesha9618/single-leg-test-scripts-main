@@ -12,6 +12,9 @@ import utility.Utility;
 import java.util.HashMap;
 import java.util.List;
 
+import static constants.Constants.WAIT_FOR_ONE_SECOND;
+import static constants.Constants.WAIT_FOR_TWO_SECOND;
+
 public class DispatchPage {
     private static DispatchPage _instance;
 
@@ -80,6 +83,11 @@ public class DispatchPage {
     private final Locator firstElementDeliveredCountStatus_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[4]/div/div[@class='cursor-pointer '][1]//p"));
     private final Locator firstElementFailedOrdersCountStatus_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[4]/div/div[@class='cursor-pointer '][2]//p"));
     private final Locator firstElementRemainingOrdersCountStatus_Lbl = Locator.builder().withWeb(By.xpath("//tr[2]/td[4]/div/div[@class='cursor-pointer '][3]//p"));
+    private final Locator dispatches_Table_Header = Locator.builder().withWeb(By.className("ant-table-header"));
+    private final Locator actions_Header = Locator.builder().withWeb(By.xpath("//th[normalize-space()='Actions']"));
+    private final Locator actions_Btn = Locator.builder().withWeb(By.xpath("//tr/td[8]//button"));
+    private final Locator add_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("//input[@value='addOrders']"));
+    private final Locator view_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("//input[@value='viewOrders']"));
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -714,6 +722,33 @@ public class DispatchPage {
 
     public void click_MapsZoomOut_Btn() {
         ActionHelper.click(mapsZoomOut_Btn);
+    }
+
+    public void clickOn_Dispatches_Table_Header(){
+        ActionHelper.click(dispatches_Table_Header);
+    }
+
+    public void scrollTo_Actions_column() {
+        clickOn_Dispatches_Table_Header();
+        for (int i=1; i<6; i++){
+            if(ActionHelper.isPresent(actions_Header, WAIT_FOR_ONE_SECOND)){
+                break;
+            }
+            else
+                Utility.scrollRightUsingKeyboardKey(i);
+        }
+    }
+
+    private void clickOn_Actions_Btn_Of(int order_Number){
+        ActionHelper.findElements(actions_Btn).get(order_Number).click();
+    }
+
+    public void clickOn_FirstOrder_Actions_Btn(){
+        clickOn_Actions_Btn_Of(0);
+    }
+
+    public void clickOn_Add_Orders_Radio_Btn(){
+        ActionHelper.click(add_Orders_Radio_Btn);
     }
 
 }

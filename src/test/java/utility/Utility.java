@@ -448,7 +448,15 @@ public class Utility {
         return jobID;
     }
 
-    public static void createAnOrder() throws IOException, APIResponseException {
+    public static String createAnOrder_Get_Order_ID() throws IOException, APIResponseException {
         HashMap<String, String> order = ApiClient.createOrder("cod");
+        return order.get("clientContainerId");
+    }
+
+    public static void scrollRightUsingKeyboardKey(int keyPressCount) {
+        Actions actions = new Actions(DriverManager.getDriver());
+        for (int i = 0; i < keyPressCount; i++)
+            actions.sendKeys(Keys.RIGHT);
+        actions.build().perform();
     }
 }

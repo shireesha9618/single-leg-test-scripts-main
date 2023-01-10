@@ -602,9 +602,12 @@ public class TestSuite_Dispatch extends BaseTestClass {
             description = "TC_021, Verify The Functionality of Add Order Button in Actions")
     public void TC_Dispatch_021_Verify_The_Functionality_of_Add_Order_Button_In_Actions() throws IOException, APIResponseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        Utility.createAnOrder();
-        commonActions.coverJourneyTillDispatches();
-
+        System.out.println("id: " +Utility.createAnOrder_Get_Order_ID());
+//        commonActions.coverJourneyTillDispatches();
+//        dispatchPage.scrollTo_Actions_column();
+//        dispatchPage.clickOn_FirstOrder_Actions_Btn();
+//        dispatchPage.clickOn_Add_Orders_Radio_Btn();
+//
 
         softAssert.assertAll();
     }

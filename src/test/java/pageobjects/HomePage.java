@@ -5,7 +5,6 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import utility.Utility;
 
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
@@ -81,6 +80,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void openDispatchListPage() {
+        HomePage.getInstance().click_OpenMenu_Btn();
         ActionHelper.click(dispatchMenuItem_Btn);
         ActionHelper.waitForLoaderToHide();
     }
@@ -344,12 +344,7 @@ public class HomePage extends BaseTestClass {
 
     public void click_FacilitiesMenuItem_Btn() {
         click_OpenMenu_Btn();
-        if (isPresent_FacilitiesMenuItem_Btn())
-            ActionHelper.click(facilitiesMenu_Btn);
-        else {
-            click_Resources_Btn();
-            ActionHelper.click(facilitiesMenu_Btn);
-        }
+        ActionHelper.click(facilitiesOpenMenu_Btn);
     }
 
     public void openTeamsPage() {
@@ -405,12 +400,28 @@ public class HomePage extends BaseTestClass {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
+
     public void click_OpenSideBar_Icon() {
         ActionHelper.click(openSideBar_Icon);
     }
 
     public void click_CloseSideBar_Icon() {
         ActionHelper.click(closeSideBar_Icon);
+    }
+
+    public void click_SettingsMenu_Btn() {
+        click_OpenMenu_Btn();
+        click_OpenMenuSettings_Btn();
+    }
+
+    public void click_OpenMenuSettings_Btn() {
+        ActionHelper.click(settingsOpenMenu_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_WorkFlowSettings_Btn() {
+        ActionHelper.click(workFlowSettings_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void click_OpenMenuTeams_Btn() {
@@ -439,17 +450,5 @@ public class HomePage extends BaseTestClass {
 
     public void click_WorkFlowOrders_Btn() {
         ActionHelper.click(workFlowOrders_Btn);
-    }
-
-    public void open_Menu_Btn(){
-        if(ActionHelper.isPresent(menu_Icon,WAIT_FOR_ONE_SECOND)){
-            ActionHelper.click(menu_Icon);
-        }
-    }
-
-    public void close_Menu_Btn(){
-        if(ActionHelper.isPresent(close_Menu_Btn,WAIT_FOR_ONE_SECOND)){
-            ActionHelper.click(close_Menu_Btn);
-        }
     }
 }

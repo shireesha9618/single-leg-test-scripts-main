@@ -54,6 +54,7 @@ public class Constants {
     public static String RIDER = "Arpit kishoruser";
     public static String TEAM_MANAGER ="feAutomation user";
     public static int WAIT_FOR_ONE_SECOND = 1000;
+    public static int WAIT_FOR_TWO_SECOND = 2000;
 
     private Constants() {
 
