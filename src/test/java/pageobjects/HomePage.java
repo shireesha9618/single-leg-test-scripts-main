@@ -5,7 +5,6 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import utility.Utility;
 
 public class HomePage extends BaseTestClass {
@@ -298,12 +297,7 @@ public class HomePage extends BaseTestClass {
 
     public void click_FacilitiesMenuItem_Btn() {
         click_OpenMenu_Btn();
-        if (isPresent_FacilitiesMenuItem_Btn())
-            ActionHelper.click(facilitiesMenu_Btn);
-        else {
-            click_Resources_Btn();
-            ActionHelper.click(facilitiesMenu_Btn);
-        }
+        ActionHelper.click(facilitiesOpenMenu_Btn);
     }
 
     public void openTeamsPage() {
@@ -356,6 +350,21 @@ public class HomePage extends BaseTestClass {
 
     public void click_WorkFlowOs1_Link() {
         ActionHelper.click(workFlowOs1_Link);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_SettingsMenu_Btn() {
+        click_OpenMenu_Btn();
+        click_OpenMenuSettings_Btn();
+    }
+
+    public void click_OpenMenuSettings_Btn() {
+        ActionHelper.click(settingsOpenMenu_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_WorkFlowSettings_Btn() {
+        ActionHelper.click(workFlowSettings_Btn);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
