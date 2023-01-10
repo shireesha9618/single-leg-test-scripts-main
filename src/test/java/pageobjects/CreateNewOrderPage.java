@@ -1,6 +1,7 @@
 package pageobjects;
 
 import com.github.javafaker.Faker;
+import constants.Constants;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
@@ -60,6 +61,7 @@ public class CreateNewOrderPage {
     private final Locator pickupDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='contactName']"));
     private final Locator pickupDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='primaryMobile']"));
     private final Locator pickupDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::div//input[@type='search']"));
+    private final Locator pickupDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']//following-sibling::div//span[@class='ant-select-selection-item']"));
     private final Locator pickupDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='postalCode']"));
     private final Locator pickupDetailsCountry_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter Country']"));
     private final Locator pickupDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressLine1']"));
@@ -77,6 +79,7 @@ public class CreateNewOrderPage {
     private final Locator dropDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropContactName']"));
     private final Locator dropDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPrimaryMobile']"));
     private final Locator dropDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//input[@type='search'])[2]"));
+    private final Locator dropDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']//following-sibling::div//span[@class='ant-select-selection-item'])[2]"));
     private final Locator dropDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPostalCode']"));
     private final Locator dropDetailsCountry_Select = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter Country'])[2]"));
     private final Locator dropDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropAddressLine1']"));
@@ -360,7 +363,7 @@ public class CreateNewOrderPage {
     }
 
     public String getValue_PickupDetailsSelectAFacility_Dropdown() {
-        return ActionHelper.getAttribute(pickupDetailsSelectAFacility_Dropdown, "value");
+        return ActionHelper.getAttribute(pickupDetailsSelectAFacility_Txt, "title");
     }
 
     public boolean isPresent_PickupDetailsPostalCode_Txt() {
@@ -381,7 +384,7 @@ public class CreateNewOrderPage {
     }
 
     public String getValue_PickupDetailsPostalCode_Txt() {
-        return ActionHelper.getAttribute(pickupDetailsPostalCode_Txt, "value");
+        return ActionHelper.getAttribute(pickupDetailsPostalCode_Txt,"title");
     }
 
     public boolean isPresent_PickupDetailsCountry_Select() {
@@ -1305,24 +1308,24 @@ public class CreateNewOrderPage {
 
     public void set_PickUpFacility_TextBox() {
         ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void set_DropFacility_TextBox() {
         ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void set_PickUpFacility_TextBox(String value) {
         ActionHelper.click(pickupDetailsSelectAFacility_Dropdown);
         Utility.clickWebElementMatchingText(ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()), value);
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void set_DropFacility_TextBox(String value) {
         ActionHelper.click(dropDetailsSelectAFacility_Dropdown);
         Utility.clickWebElementMatchingText(ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()), value);
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public String setPickUpFacilityByIndex(int index) {
@@ -1330,7 +1333,7 @@ public class CreateNewOrderPage {
         WebElement element = ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()).get(index);
         String text = ActionHelper.getText(element);
         ActionHelper.click(element);
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return text;
     }
 
@@ -1339,7 +1342,7 @@ public class CreateNewOrderPage {
         WebElement element = ActionHelper.findElementsWithoutWait(selectAFacilityDropdownOptions_ListBtn.getBy()).get(index);
         String text = ActionHelper.getText(element);
         ActionHelper.click(element);
-        ActionHelper.waitForLoaderToHide();
+        CommonActions.getInstance().waitTillLoaderDisappears();
         return text;
     }
 
@@ -1415,21 +1418,19 @@ public class CreateNewOrderPage {
     }
 
     public void fillPickupDetailsWithCustomData() {
-        fillWithClear_PickupDetailsPostalCode_Txt(sampleData.address().zipCode());
-        selectByVisibleText_PickupDetailsCountry_Select(sampleData.country().name());
+        click_PickupDetailsCustomAddress_Radio();
+        fillWithClear_PickupDetailsPostalCode_Txt(Constants.PICKUP_PINCODE);
         fillWithClear_PickupDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
         fillWithClear_PickupDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
-        fillWithClear_PickupDetailsState_Txt(sampleData.address().state());
-        fillWithClear_PickupDetailsCity_Txt(sampleData.address().city());
+        fillWithClear_PickupDetailsPickupDate_Txt(Utility.getCustomCurrentDateFormatter("dd/MM/yyyy"));
     }
 
     public void fillDropDetailsWithCustomData() {
-        fillWithClear_DropDetailsPostalCode_Txt(sampleData.address().zipCode());
-        selectByVisibleText_DropDetailsCountry_Select(sampleData.country().name());
+        click_DropDetailsCustomAddress_Radio();
+        fillWithClear_DropDetailsPostalCode_Txt(Constants.DROP_PINCODE);
         fillWithClear_DropDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
         fillWithClear_DropDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
-        fillWithClear_DropDetailsState_Txt(sampleData.address().state());
-        fillWithClear_DropDetailsCity_Txt(sampleData.address().city());
+        fillWithClear_DropDetailsDropDate_Txt(Utility.getCustomCurrentDateFormatter("dd/MM/yyyy"));
     }
 
     public boolean isPresent_OrderDetailsTotalWeight_Txt() {
@@ -2098,5 +2099,16 @@ public class CreateNewOrderPage {
             fillWithClear_PaymentDetailsOrderAmount_Txt(amount);
         }
         return amount;
+    }
+
+    public void fillShipmentDetails() {
+        fillWithClear_ShipmentDetailsShipmentID_Txt(sampleData.idNumber().valid().replace("-",""));
+        fillWithClear_ShipmentDetailsDescription_Txt(sampleData.backToTheFuture().quote());
+        fillWithClear_ShipmentDetailsVolume_Txt("10");
+        fillWithClear_ShipmentDetailsWeight_Txt("10");
+        fillWithClear_ShipmentDetailsDimensionsBreadth_Txt("10");
+        fillWithClear_ShipmentDetailsDimensionsHeight_Txt("10");
+        fillWithClear_ShipmentDetailsDimensionsLength_Txt("10");
+        click_ShipmentDetailsAddShipment_Btn();
     }
 }
