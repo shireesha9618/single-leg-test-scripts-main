@@ -119,9 +119,24 @@ public class Utility {
     }
 
     public static void checkCheckbox(WebElement element) {
-        ActionHelper.waitUntilElementClickable(element);
-        ActionHelper.click(element);
-        ExtentLogger.logPass("Checking Checkbox ");
+        if (!isChecked_Input_CheckBox(element)) {
+            ActionHelper.waitUntilElementClickable(element);
+            ActionHelper.click(element);
+            ExtentLogger.logPass("Checking Checkbox ");
+        }
+    }
+
+    public static void uncheckCheckbox(By by) {
+        WebElement element = ActionHelper.findElement(by);
+        uncheckCheckbox(element);
+    }
+
+    public static void uncheckCheckbox(WebElement element) {
+        if (isChecked_Input_CheckBox(element)) {
+            ActionHelper.waitUntilElementClickable(element);
+            ActionHelper.click(element);
+            ExtentLogger.logPass("Unchecking Checkbox");
+        }
     }
 
     public static void clickRadio(By by) {

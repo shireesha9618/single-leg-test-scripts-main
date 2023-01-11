@@ -3,11 +3,8 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pageobjects.CommonActions;
 import utility.Utility;
-
-import java.util.List;
 
 public class JobWorkflowCreatePage {
     private static JobWorkflowCreatePage _instance;
@@ -21,7 +18,7 @@ public class JobWorkflowCreatePage {
     private final Locator workflowDescription_Txt = Locator.builder().withWeb(By.name("workflowDescription"));
     private final Locator workflowDescriptionValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Workflow Description']/../following-sibling::div//p"));
     private final Locator jobWorkType_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Job Type*']"));
-    private final Locator jobWorkType_Txt = Locator.builder().withWeb(By.xpath("//span[@class='ant-select-selection-search']/input[@disabled]"));
+    private final Locator jobWorkType_Txt = Locator.builder().withWeb(By.xpath("//input[@disabled]"));
 
     private final Locator otherAttributesSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Order Attributes*']"));
     private final Locator productType_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Product Type']"));
@@ -51,7 +48,7 @@ public class JobWorkflowCreatePage {
     String productTypeDropDownList = "(//div[@class='rc-virtual-list-holder-inner'])[1]";
 
     public static JobWorkflowCreatePage getInstance() {
-        if(_instance == null)
+        if (_instance == null)
             _instance = new JobWorkflowCreatePage();
         return _instance;
     }
@@ -201,12 +198,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_KYCVerification_Btn() {
-        if(!isChecked_Btn(kycVerification_Btn))
+        if (!isChecked_Btn(kycVerification_Btn))
             ActionHelper.click(kycVerification_Btn);
     }
 
     public void unCheck_KYCVerification_Btn() {
-        if(isChecked_Btn(kycVerification_Btn))
+        if (isChecked_Btn(kycVerification_Btn))
             ActionHelper.click(kycVerification_Btn);
     }
 
@@ -219,12 +216,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_OTPVerification_Btn() {
-        if(!isChecked_Btn(otpVerification_Btn))
+        if (!isChecked_Btn(otpVerification_Btn))
             ActionHelper.click(otpVerification_Btn);
     }
 
     public void unCheck_OTPVerification_Btn() {
-        if(isChecked_Btn(otpVerification_Btn))
+        if (isChecked_Btn(otpVerification_Btn))
             ActionHelper.click(otpVerification_Btn);
     }
 
@@ -237,12 +234,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_QCVerification_Btn() {
-        if(!isChecked_Btn(qcVerification_Btn))
+        if (!isChecked_Btn(qcVerification_Btn))
             ActionHelper.click(qcVerification_Btn);
     }
 
     public void unCheck_QCVerification_Btn() {
-        if(isChecked_Btn(qcVerification_Btn))
+        if (isChecked_Btn(qcVerification_Btn))
             ActionHelper.click(qcVerification_Btn);
     }
 
@@ -255,12 +252,12 @@ public class JobWorkflowCreatePage {
     }
 
     public void check_SignatureCollection_Btn() {
-        if(!isChecked_Btn(signatureCollection_Btn))
+        if (!isChecked_Btn(signatureCollection_Btn))
             ActionHelper.click(signatureCollection_Btn);
     }
 
     public void unCheck_SignatureCollection_Btn() {
-        if(isChecked_Btn(signatureCollection_Btn))
+        if (isChecked_Btn(signatureCollection_Btn))
             ActionHelper.click(signatureCollection_Btn);
     }
 
@@ -272,7 +269,7 @@ public class JobWorkflowCreatePage {
         return ActionHelper.isPresent(paymentOption_Txt);
     }
 
-    public void click_PaymentOption_Txt(String paymentOption){
+    public void click_PaymentOption_Txt(String paymentOption) {
         Locator paymentMethod = Locator.builder().withWeb(By.xpath(dropDownList.replace("abc", paymentOption)));
         ActionHelper.click(paymentOption_Txt);
         ActionHelper.click(paymentMethod);
@@ -310,5 +307,13 @@ public class JobWorkflowCreatePage {
     public void click_Create_Btn() {
         ActionHelper.click(create_Btn);
         CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public String getText_ProductType_Txt() {
+        return ActionHelper.getText(productType_Txt);
+    }
+
+    public String getText_ShipmentFlow_Txt() {
+        return ActionHelper.getText(shipmentFlow_Txt);
     }
 }

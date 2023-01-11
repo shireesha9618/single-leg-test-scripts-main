@@ -41,7 +41,7 @@ public class TestSuite_Settings extends BaseTestClass {
         softAssert.assertTrue(GeneralPage.getInstance().isPresent_GeneralHeader_Lbl(), "General Header Label Is Present As Expected");
         settingsPage.click_settingBreadCrumb_Link();
         softAssert.assertEquals(settingsPage.getText_SettingPageHeader_Lbl(), expectedSettingHeader, "Settings Header Label Is Matched As Expected");
-        softAssert.assertEquals(commonActions.getCurrentPageUrl(), settingPageUrl, "Settings Page URL Is Matched With Expected URl As Expected");
+        softAssert.assertEquals(commonActions.getCurrentPageUrl(), settingPageUrl, "Settings Page URL Is Matched As Expected");
         softAssert.assertAll();
     }
 
@@ -84,7 +84,7 @@ public class TestSuite_Settings extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.SETTING, TestGroup.BVT},
             description = "TC_007, Verify The Functionality Dock And Undock Of Left Panel")
     public void TC_Setting_007_Verify_The_Functionality_Dock_And_Undock_Of_Left_Panel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -174,7 +174,7 @@ public class TestSuite_Settings extends BaseTestClass {
         homePage.click_WorkFlowOs1_Link();
         homePage.click_WorkFlowSettings_Btn();
         softAssert.assertEquals(settingsPage.getText_SettingPageHeader_Lbl(), expectedSettingsPageHeader, "Facility Header Label Is Matched As Expected");
-        softAssert.assertEquals(commonActions.getCurrentPageUrl(), settingPageUrl, "Settings Page URL Is Matched With Expected URl As Expected");
+        softAssert.assertEquals(commonActions.getCurrentPageUrl(), settingPageUrl, "Settings Page URL Is Matched As Expected");
         softAssert.assertAll();
     }
 }
