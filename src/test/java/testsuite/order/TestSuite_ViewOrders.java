@@ -31,7 +31,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_001, Verify The UI Of Orders Page")
-    public void TC_CreateNewOrder_001_Verify_UI_Of_Orders_Page() {
+    public void TC_ViewOrder_001_Verify_UI_Of_Orders_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -54,7 +54,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_002, Verify The UI Of Table Present In Order Page")
-    public void TC_CreateNewOrder_002_Verify_The_UI_Of_Table_Present_In_Order_Page() {
+    public void TC_ViewOrder_002_Verify_The_UI_Of_Table_Present_In_Order_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -73,7 +73,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_003, Verify The Functionality Of Search Bar")
-    public void TC_CreateNewOrder_003_Verify_The_Functionality_Of_Search_Bar() {
+    public void TC_ViewOrder_003_Verify_The_Functionality_Of_Search_Bar() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -88,7 +88,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_004, Verify The UI Of Status Button")
-    public void TC_CreateNewOrder_004_Verify_The_UI_Of_Status_Button() {
+    public void TC_ViewOrder_004_Verify_The_UI_Of_Status_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -107,7 +107,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_005, Verify The Functionality Of Filter The Orders With Created Status ")
-    public void TC_CreateNewOrder_005_Verify_The_Functionality_Of_Filter_The_Orders_With_Created_Status() {
+    public void TC_ViewOrder_005_Verify_The_Functionality_Of_Filter_The_Orders_With_Created_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -121,7 +121,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_006, Verify The Functionality Of Filter The Orders With Assigned Status ")
-    public void TC_CreateNewOrder_006_Verify_The_Functionality_Of_Filter_The_Orders_With_Assigned_Status() {
+    public void TC_ViewOrder_006_Verify_The_Functionality_Of_Filter_The_Orders_With_Assigned_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -135,7 +135,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_007, Verify The Functionality Of Filter The Orders With In progress Status ")
-    public void TC_CreateNewOrder_007_Verify_The_Functionality_Of_Filter_The_Orders_With_In_progress_Status() {
+    public void TC_ViewOrder_007_Verify_The_Functionality_Of_Filter_The_Orders_With_In_progress_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -149,7 +149,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_008, Verify The Functionality Of Filter The Orders With Completed Status ")
-    public void TC_CreateNewOrder_008_Verify_The_Functionality_Of_Filter_The_Orders_With_Completed_Status() {
+    public void TC_ViewOrder_008_Verify_The_Functionality_Of_Filter_The_Orders_With_Completed_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -163,7 +163,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_009, Verify The Functionality Of Filter The Orders With Creation Failed Status ")
-    public void TC_CreateNewOrder_009_Verify_The_Functionality_Of_Filter_The_Orders_With_Creation_Failed_Status() {
+    public void TC_ViewOrder_009_Verify_The_Functionality_Of_Filter_The_Orders_With_Creation_Failed_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -177,7 +177,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_010, Verify The Functionality Of Filter The Orders With Failed Status ")
-    public void TC_CreateNewOrder_010_Verify_The_Functionality_Of_Filter_The_Orders_With_Failed_Status() {
+    public void TC_ViewOrder_010_Verify_The_Functionality_Of_Filter_The_Orders_With_Failed_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -191,7 +191,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_011, Verify The Functionality Of Filter The Orders With Cancelled Status ")
-    public void TC_CreateNewOrder_011_Verify_The_Functionality_Of_Filter_The_Orders_With_Cancelled_Status() {
+    public void TC_ViewOrder_011_Verify_The_Functionality_Of_Filter_The_Orders_With_Cancelled_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -205,7 +205,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_012, Verify The Functionality Of Clear Selection Button In Status")
-    public void TC_CreateNewOrder_012_Verify_The_Functionality_Of_Clear_Selection_Button_In_Status() {
+    public void TC_ViewOrder_012_Verify_The_Functionality_Of_Clear_Selection_Button_In_Status() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -225,7 +225,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_013, Verify The Functionality Of Refresh Button In Orders page")
-    public void TC_CreateNewOrder_013_Verify_The_Functionality_Of_Refresh_Button_In_Orders_page() {
+    public void TC_ViewOrder_013_Verify_The_Functionality_Of_Refresh_Button_In_Orders_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -242,7 +242,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_014, Verify The Functionality Of  in view orders count as per the display records")
-    public void TC_CreateNewOrder_014_Verify_The_Functionality_Of_in_view_orders_count_as_per_the_display_records() {
+    public void TC_ViewOrder_014_Verify_The_Functionality_Of_in_view_orders_count_as_per_the_display_records() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -257,7 +257,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_015, Verify The UI of Calender in Orders page")
-    public void TC_CreateNewOrder_015_Verify_The_UI_of_Calender_in_Orders_page() {
+    public void TC_ViewOrder_015_Verify_The_UI_of_Calender_in_Orders_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -270,7 +270,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_016, Verify Next And Previous Year Button On Calender")
-    public void TC_CreateNewOrder_016_Verify_Next_And_Previous_Year_Button_On_Calender() {
+    public void TC_ViewOrder_016_Verify_Next_And_Previous_Year_Button_On_Calender() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -292,7 +292,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_017, Verify The Default start date and end date in Calender")
-    public void TC_CreateNewOrder_017_Verify_The_Default_start_date_and_end_date_in_Calender() {
+    public void TC_ViewOrder_017_Verify_The_Default_start_date_and_end_date_in_Calender() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -304,7 +304,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_018, Verify Next And Previous Month Button On Calender")
-    public void TC_CreateNewOrder_018_Verify_Next_And_Previous_Month_Button_On_Calender() {
+    public void TC_ViewOrder_018_Verify_Next_And_Previous_Month_Button_On_Calender() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -326,7 +326,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_019, Verify Start Date Is Not Greater Than End Date")
-    public void TC_CreateNewOrder_019_Verify_Start_Date_Is_Not_Greater_Than_End_Date() {
+    public void TC_ViewOrder_019_Verify_Start_Date_Is_Not_Greater_Than_End_Date() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -341,7 +341,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_020, Verify Order Table Record With Created Date")
-    public void TC_CreateNewOrder_020_Verify_Order_Table_Record_With_Created_Date() {
+    public void TC_ViewOrder_020_Verify_Order_Table_Record_With_Created_Date() {
         String fromDate = "2022-09-20";
         String toDate = "2022-10-20";
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -369,7 +369,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_021, Verify Order Table Record With Closure Date")
-    public void TC_CreateNewOrder_021_Verify_Order_Table_Record_With_Closure_Date() {
+    public void TC_ViewOrder_021_Verify_Order_Table_Record_With_Closure_Date() {
         String fromDate = Utility.getPreviousYear(String.valueOf(ActionHelper.getCurrentYear())) + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentDay();
         String toDate = ActionHelper.getCurrentYear() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentDay();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -396,7 +396,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_022, Verify Functionality Of Next Page Pagination Button")
-    public void TC_CreateNewOrder_022_Verify_Functionality_Of_Next_Page_Pagination_Button() {
+    public void TC_ViewOrder_022_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -408,7 +408,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_023, Verify Functionality Of Previous Page Pagination Button")
-    public void TC_CreateNewOrder_023_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
+    public void TC_ViewOrder_023_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -423,7 +423,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_024, Verify Displaying Of Facilities Table Records As Per Pagination Value")
-    public void TC_CreateNewOrder_024_Verify_Displaying_Of_Facilities_Table_Records_As_Per_Pagination_Value() {
+    public void TC_ViewOrder_024_Verify_Displaying_Of_Facilities_Table_Records_As_Per_Pagination_Value() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -441,7 +441,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_025, Verify Functionality Of Pagination Paging Block")
-    public void TC_CreateNewOrder_025_Verify_Functionality_Of_Pagination_Paging_Block() {
+    public void TC_ViewOrder_025_Verify_Functionality_Of_Pagination_Paging_Block() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -457,7 +457,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_026, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
-    public void TC_CreateNewOrder_026_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
+    public void TC_ViewOrder_026_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -489,7 +489,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_027, Verify Functionality Of Pagination Paging Block With Next 5 pages And Previous 5 pages Button")
-    public void TC_CreateNewOrder_027_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_5_pages_And_Previous_5_pages_Button() {
+    public void TC_ViewOrder_027_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_5_pages_And_Previous_5_pages_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -511,7 +511,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_028, Verify Functionality Of Pagination Per Page With Paging Block And Next Button")
-    public void TC_CreateNewOrder_028_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
+    public void TC_ViewOrder_028_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -537,7 +537,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_029, Verify Functionality Of Vertically Scroll Of Facilities Table Using Mouse Scroll Wheel")
-    public void TC_CreateNewOrder_029_Verify_Functionality_Of_Vertically_Scroll_Of_Facilities_Table_Using_Mouse_Scroll_Wheel() {
+    public void TC_ViewOrder_029_Verify_Functionality_Of_Vertically_Scroll_Of_Facilities_Table_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -551,7 +551,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_030, Verify Vertically Scroll In Facilities Table Using KeyBoard")
-    public void TC_CreateNewOrder_030_Verify_Vertically_Scroll_In_Facilities_Table_Using_KeyBoard() {
+    public void TC_ViewOrder_030_Verify_Vertically_Scroll_In_Facilities_Table_Using_KeyBoard() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -565,7 +565,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_031, Verify The Functionality Of CheckBox Present In Orders Table Heading")
-    public void TC_CreateNewOrder_031_Verify_The_Functionality_Of_CheckBox_Present_In_Orders_Table_Heading() {
+    public void TC_ViewOrder_031_Verify_The_Functionality_Of_CheckBox_Present_In_Orders_Table_Heading() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -579,7 +579,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_032, Verify The Functionality Of CheckBox Present In Orders Table for any record")
-    public void TC_CreateNewOrder_032_Verify_The_Functionality_Of_CheckBox_Present_In_Orders_Table_for_any_record() {
+    public void TC_ViewOrder_032_Verify_The_Functionality_Of_CheckBox_Present_In_Orders_Table_for_any_record() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -593,7 +593,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_033, Verify The Functionality Of Unchecking the CheckBox ")
-    public void TC_CreateNewOrder_033_Verify_The_Functionality_Of_Unchecking_the_CheckBox() {
+    public void TC_ViewOrder_033_Verify_The_Functionality_Of_Unchecking_the_CheckBox() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -611,7 +611,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_034, Verify UI Of Assign Rider Button")
-    public void TC_CreateNewOrder_034_Verify_UI_Of_Assign_Rider_Button() {
+    public void TC_ViewOrder_034_Verify_UI_Of_Assign_Rider_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -625,7 +625,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_035, Verify The Functionality Of Manual button in Assign Rider Button ")
-    public void TC_CreateNewOrder_035_Verify_The_Functionality_Of_Manual_button_in_Assign_Rider_Button() {
+    public void TC_ViewOrder_035_Verify_The_Functionality_Of_Manual_button_in_Assign_Rider_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -642,7 +642,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_036, Verify The Functionality Of Assign button in manual Assign")
-    public void TC_CreateNewOrder_036_Verify_The_Functionality_Of_Assign_button_in_manual_Assign() {
+    public void TC_ViewOrder_036_Verify_The_Functionality_Of_Assign_button_in_manual_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -660,7 +660,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_037, Verify The Functionality Of Assign And Start button in manual Assign ")
-    public void TC_CreateNewOrder_037_Verify_The_Functionality_Of_Assign_And_Start_button_in_manual_Assign() {
+    public void TC_ViewOrder_037_Verify_The_Functionality_Of_Assign_And_Start_button_in_manual_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -678,7 +678,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_038, Verify The Functionality Of Automatic button in Assign Rider Button ")
-    public void TC_CreateNewOrder_038_Verify_The_Functionality_Of_Automatic_button_in_Assign_Rider_Button() {
+    public void TC_ViewOrder_038_Verify_The_Functionality_Of_Automatic_button_in_Assign_Rider_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -696,7 +696,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_039, Verify The Functionality Of Search Bar of Automatic in Assign Rider Button ")
-    public void TC_CreateNewOrder_039_Verify_The_Functionality_Of_Search_Bar_of_Automatic_in_Assign_Rider_Button() {
+    public void TC_ViewOrder_039_Verify_The_Functionality_Of_Search_Bar_of_Automatic_in_Assign_Rider_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -715,7 +715,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_040, Verify The Functionality Of Search Bar in Automatic Assign")
-    public void TC_CreateNewOrder_040_Verify_The_Functionality_Of_Search_Bar_in_Automatic_Assign() {
+    public void TC_ViewOrder_040_Verify_The_Functionality_Of_Search_Bar_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -731,7 +731,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_041, Verify The Functionality Of Cancel button in Automatic Assign")
-    public void TC_CreateNewOrder_041_Verify_The_Functionality_Of_Cancel_button_in_Automatic_Assign() {
+    public void TC_ViewOrder_041_Verify_The_Functionality_Of_Cancel_button_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -747,7 +747,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_042, Verify The UI Of Table Present in Automatic Assign ")
-    public void TC_CreateNewOrder_042_Verify_The_UI_Of_Table_Present_in_Automatic_Assign() {
+    public void TC_ViewOrder_042_Verify_The_UI_Of_Table_Present_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -769,7 +769,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_043, Verify The Functional Of Checkbox Present in Automatic Assign")
-    public void TC_CreateNewOrder_043_Verify_The_Functional_Of_Checkbox_Present_in_Automatic_Assign() {
+    public void TC_ViewOrder_043_Verify_The_Functional_Of_Checkbox_Present_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -785,7 +785,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_044, Verify The Functionality Of Start Time in Automatic Assign")
-    public void TC_CreateNewOrder_044_Verify_The_Functionality_Of_Start_Time_in_Automatic_Assign() {
+    public void TC_ViewOrder_044_Verify_The_Functionality_Of_Start_Time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -804,7 +804,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_045, Verify The Functionality Of Ok button of Start time in Automatic Assign")
-    public void TC_CreateNewOrder_045_Verify_The_Functionality_Of_Ok_button_of_Start_time_in_Automatic_Assign() {
+    public void TC_ViewOrder_045_Verify_The_Functionality_Of_Ok_button_of_Start_time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -823,7 +823,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_046, Verify The Functionality Of Now button of Start time in Automatic Assign")
-    public void TC_CreateNewOrder_046_Verify_The_Functionality_Of_Now_button_of_Start_time_in_Automatic_Assign() {
+    public void TC_ViewOrder_046_Verify_The_Functionality_Of_Now_button_of_Start_time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -840,7 +840,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_047, Verify The Functionality Of Vertically Scroll Of Start TimeTable Using Mouse Scroll Wheel")
-    public void TC_CreateNewOrder_047_Verify_The_Functionality_Of_Vertically_Scroll_Of_Start_TimeTable_Using_Mouse_Scroll_Wheel() {
+    public void TC_ViewOrder_047_Verify_The_Functionality_Of_Vertically_Scroll_Of_Start_TimeTable_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -858,7 +858,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_048, Verify The Functionality Of Vertically Scroll Of Start TimeTable Using Mouse Scroll Wheel")
-    public void TC_CreateNewOrder_048_Verify_The_Functionality_Of_Vertically_Scroll_Of_Start_TimeTable_Using_Mouse_Scroll_Wheel() {
+    public void TC_ViewOrder_048_Verify_The_Functionality_Of_Vertically_Scroll_Of_Start_TimeTable_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -876,7 +876,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_049, Verify The Functionality Of Drop Time in Automatic Assign")
-    public void TC_CreateNewOrder_049_Verify_The_Functionality_Of_Drop_Time_in_Automatic_Assign() {
+    public void TC_ViewOrder_049_Verify_The_Functionality_Of_Drop_Time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -895,7 +895,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_050, Verify The Functionality Of Ok button of Drop time in Automatic Assign")
-    public void TC_CreateNewOrder_050_Verify_The_Functionality_Of_Ok_button_of_Drop_time_in_Automatic_Assign() {
+    public void TC_ViewOrder_050_Verify_The_Functionality_Of_Ok_button_of_Drop_time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -914,7 +914,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_051, Verify The Functionality Of Now button of Drop time in Automatic Assign")
-    public void TC_CreateNewOrder_051_Verify_The_Functionality_Of_Now_button_of_Drop_time_in_Automatic_Assign() {
+    public void TC_ViewOrder_051_Verify_The_Functionality_Of_Now_button_of_Drop_time_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -931,7 +931,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_052, Verify The Functionality Of Vertically Scroll Of Drop Time Table Using Mouse Scroll Wheel")
-    public void TC_CreateNewOrder_052_Verify_The_Functionality_Of_Vertically_Scroll_Of_Drop_Time_Table_Using_Mouse_Scroll_Wheel() {
+    public void TC_ViewOrder_052_Verify_The_Functionality_Of_Vertically_Scroll_Of_Drop_Time_Table_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -949,7 +949,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_053, Verify The Functionality Of Vertically Scroll Of Drop Time Table Using Mouse Scroll Wheel")
-    public void TC_CreateNewOrder_053_Verify_The_Functionality_Of_Vertically_Scroll_Of_Drop_Time_Table_Using_Mouse_Scroll_Wheel() {
+    public void TC_ViewOrder_053_Verify_The_Functionality_Of_Vertically_Scroll_Of_Drop_Time_Table_Using_Mouse_Scroll_Wheel() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -967,7 +967,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_054, Verify The Functionality of Maximum Shipments in Automatic Assign")
-    public void TC_CreateNewOrder_054_Verify_The_Functionality_of_Maximum_Shipments_in_Automatic_Assign() {
+    public void TC_ViewOrder_054_Verify_The_Functionality_of_Maximum_Shipments_in_Automatic_Assign() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -983,7 +983,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_055, Verify The Functionality of Order Details page")
-    public void TC_CreateNewOrder_055_Verify_The_Functionality_of_Order_Details_page() {
+    public void TC_ViewOrder_055_Verify_The_Functionality_of_Order_Details_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1020,7 +1020,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_056, Verify The Functionality Of Cancel Button In Orders Details page  ")
-    public void TC_CreateNewOrder_056_Verify_The_Functionality_Of_Cancel_Button_In_Orders_Details_page() {
+    public void TC_ViewOrder_056_Verify_The_Functionality_Of_Cancel_Button_In_Orders_Details_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1040,7 +1040,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_057, Verify The Functionality Of Back Button In Cancel Order page  ")
-    public void TC_CreateNewOrder_057_Verify_The_Functionality_Of_Back_Button_In_Cancel_Order_page() {
+    public void TC_ViewOrder_057_Verify_The_Functionality_Of_Back_Button_In_Cancel_Order_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1059,7 +1059,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_058, Verify The Functionality Of Cancel Button In Cancel Order page  ")
-    public void TC_CreateNewOrder_058_Verify_The_Functionality_Of_Cancel_Button_In_Cancel_Order_page() {
+    public void TC_ViewOrder_058_Verify_The_Functionality_Of_Cancel_Button_In_Cancel_Order_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1081,7 +1081,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_059, Verify The Functionality of New Order Button")
-    public void TC_CreateNewOrder_059_Verify_The_Functionality_of_New_Order_Button() {
+    public void TC_ViewOrder_059_Verify_The_Functionality_of_New_Order_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1094,7 +1094,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT},
             description = "TC_060, Verify The Functionality Of masking of Pickup address")
-    public void TC_CreateNewOrder_060_Verify_The_Functionality_Of_masking_of_Pickup_address() {
+    public void TC_ViewOrder_060_Verify_The_Functionality_Of_masking_of_Pickup_address() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
@@ -1116,7 +1116,7 @@ public class TestSuite_ViewOrders extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.VIEW_ORDERS, TestGroup.BVT, TestGroup.FLAKY_TESTS},
             description = "TC_061, Verify The Functionality Of masking of Drop address")
-    public void TC_CreateNewOrder_061_Verify_The_Functionality_Of_masking_of_Drop_address() {
+    public void TC_ViewOrder_061_Verify_The_Functionality_Of_masking_of_Drop_address() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillViewOrder();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
