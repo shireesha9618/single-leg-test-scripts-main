@@ -163,7 +163,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
             softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
-            List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+            List<String> facilityTableStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
                 softAssert.assertEquals(status, "Active", "Active Status Is Present As Expected");
         }
@@ -180,7 +180,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
             softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
-            List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+            List<String> facilityTableStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
                 softAssert.assertEquals(status, "Pause", "Pause Status Is Present As Expected");
         }
@@ -197,7 +197,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
             softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
-            List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+            List<String> facilityTableStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
                 softAssert.assertEquals(status, "Onboarding", "Onboarding Status Is Present As Expected");
         }
@@ -214,7 +214,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
             softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
-            List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+            List<String> facilityTableStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
                 softAssert.assertEquals(status, "Deboard", "Deboard Status Is Present As Expected");
         }
@@ -231,7 +231,7 @@ public class TestSuite_Facilities extends BaseTestClass {
             softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Validation Message For Empty Table Is Matched As Expected");
             softAssert.assertTrue(facilitiesPage.isPresent_AddFacility_Btn(), "Add Facility Button Is Present As Expected");
         } else {
-            List<String> facilityTableStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+            List<String> facilityTableStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
             for (String status : facilityTableStatusList)
                 softAssert.assertEquals(status, "Inactive", "Inactive Status Is Present As Expected");
         }
@@ -244,15 +244,15 @@ public class TestSuite_Facilities extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillFacility();
 
-        List<String> initialStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+        List<String> initialStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
         facilitiesPage.click_Status_RadioBtn("Active");
-        List<String> tableDataActiveStatus = commonActions.getList_TableDataList_Lbl("STATUS");
+        List<String> tableDataActiveStatus = commonActions.getTextList_TableDataList_Lbl("STATUS");
         for (String status : tableDataActiveStatus)
             softAssert.assertEquals(status, "Active", "Active Status Is Present As Expected");
 
         facilitiesPage.click_Status_DropDown();
         facilitiesPage.click_StatusDropDownClearSelection_Btn();
-        List<String> currentStatusList = commonActions.getList_TableDataList_Lbl("STATUS");
+        List<String> currentStatusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
         for (int i = 0; i < initialStatusList.size(); i++)
             softAssert.assertEquals(currentStatusList.get(i), initialStatusList.get(i), "Status Value Is Same As Initial Status Value As Expected");
         softAssert.assertAll();
@@ -344,9 +344,9 @@ public class TestSuite_Facilities extends BaseTestClass {
     public void TC_Facility_018_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
         commonActions.coverJourneyTillFacility();
         commonActions.chooseNoOfRecordToBeDisplayed(5);
-        String firstRecord = commonActions.getList_TableDataList_Lbl("FACILITY NAME").get(0);
+        String firstRecord = commonActions.getTextList_TableDataList_Lbl("FACILITY NAME").get(0);
         commonActions.click_PaginationNext_Btn();
-        String sixthRecord = commonActions.getList_TableDataList_Lbl("FACILITY NAME").get(0);
+        String sixthRecord = commonActions.getTextList_TableDataList_Lbl("FACILITY NAME").get(0);
         JarvisAssert.assertNotEquals(firstRecord, sixthRecord, "The Two Record Names Didn't Matched As Expected");
     }
 
@@ -536,21 +536,21 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
 
         commonActions.chooseNoOfRecordToBeDisplayed(10);
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("FACILITY ID").size(), 10, "Total Data Counts 10 As Expected");
-        String sixthElement = commonActions.getList_TableDataList_Lbl("FACILITY ID").get(5);
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("FACILITY ID").size(), 10, "Total Data Counts 10 As Expected");
+        String sixthElement = commonActions.getTextList_TableDataList_Lbl("FACILITY ID").get(5);
 
         commonActions.chooseNoOfRecordToBeDisplayed(5);
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("FACILITY ID").size(), 5, "Total Data Counts 5 As Expected");
-        String firstElement = commonActions.getList_TableDataList_Lbl("FACILITY ID").get(0);
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("FACILITY ID").size(), 5, "Total Data Counts 5 As Expected");
+        String firstElement = commonActions.getTextList_TableDataList_Lbl("FACILITY ID").get(0);
 
         commonActions.click_PaginationNext_Btn();
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("FACILITY ID").get(0), sixthElement, "Sixth Record Of First Page And First Record of Second Page Is Matched As Expected");
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("FACILITY ID").get(0), sixthElement, "Sixth Record Of First Page And First Record of Second Page Is Matched As Expected");
 
         commonActions.click_PaginationPrevious_Btn();
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("FACILITY ID").get(0), firstElement, "Validate Record Matched As Expected");
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("FACILITY ID").get(0), firstElement, "Validate Record Matched As Expected");
 
         commonActions.select_PaginationBlock_Txt(2);
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("FACILITY ID").get(0), sixthElement, "Records Matched On Clicking Pagination Block 2 As Expected");
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("FACILITY ID").get(0), sixthElement, "Records Matched On Clicking Pagination Block 2 As Expected");
 
         softAssert.assertAll();
     }
@@ -592,19 +592,19 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
 
         commonActions.chooseNoOfRecordToBeDisplayed(10);
-        List<String> elements = commonActions.getList_TableDataList_Lbl("FACILITY ID");
+        List<String> elements = commonActions.getTextList_TableDataList_Lbl("FACILITY ID");
         softAssert.assertEquals(elements.size(), Integer.parseInt(commonActions.getText_PageSize_Txt()), "Number Of Data Displayed 10 As Expected");
 
         commonActions.chooseNoOfRecordToBeDisplayed(20);
-        elements = commonActions.getList_TableDataList_Lbl("FACILITY ID");
+        elements = commonActions.getTextList_TableDataList_Lbl("FACILITY ID");
         softAssert.assertEquals(elements.size(), Integer.parseInt(commonActions.getText_PageSize_Txt()), "Number Of Data Displayed 20 As Expected");
 
         commonActions.chooseNoOfRecordToBeDisplayed(50);
-        elements = commonActions.getList_TableDataList_Lbl("FACILITY ID");
+        elements = commonActions.getTextList_TableDataList_Lbl("FACILITY ID");
         softAssert.assertEquals(elements.size(), Integer.parseInt(commonActions.getText_PageSize_Txt()), "Number Of Data Displayed 50 As Expected");
 
         commonActions.chooseNoOfRecordToBeDisplayed(5);
-        elements = commonActions.getList_TableDataList_Lbl("FACILITY ID");
+        elements = commonActions.getTextList_TableDataList_Lbl("FACILITY ID");
         softAssert.assertEquals(elements.size(), Integer.parseInt(commonActions.getText_PageSize_Txt()), "Number Of Data Displayed 5 As Expected");
         softAssert.assertAll();
     }
@@ -661,7 +661,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String sixthRecord = commonActions.getText_TableData_Lbl("FACILITY NAME");
         commonActions.click_PaginationPrevious_Btn();
         commonActions.chooseNoOfRecordToBeDisplayed(10);
-        List<String> facilityNameRecords = commonActions.getList_TableDataList_Lbl("FACILITY NAME");
+        List<String> facilityNameRecords = commonActions.getTextList_TableDataList_Lbl("FACILITY NAME");
         softAssert.assertEquals(facilityNameRecords.get(0), firstRecord, "Facility Name Of 1st Position Is Matched As Expected");
         softAssert.assertEquals(facilityNameRecords.get(5), sixthRecord, "Facility Name Of 6th Position Is Matched With Next Page First Record As Expected");
         softAssert.assertAll();

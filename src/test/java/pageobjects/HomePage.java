@@ -401,7 +401,6 @@ public class HomePage extends BaseTestClass {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
-
     public void click_OpenSideBar_Icon() {
         ActionHelper.click(openSideBar_Icon);
     }

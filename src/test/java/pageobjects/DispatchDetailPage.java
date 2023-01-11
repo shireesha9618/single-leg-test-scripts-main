@@ -70,21 +70,12 @@ public class DispatchDetailPage {
     private final Locator downloadRunSheet_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Download Run Sheet']"));
 
     private final Locator shipmentDetailsTableColumnCheckbox_ListCheckbox = Locator.builder().withWeb(By.xpath("//tbody/tr/td//input"));
-    private final Locator shipmentDetailsTableColumnOrderId_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[2]"));
-    private final Locator shipmentDetailsTableColumnStatus_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[3]/div/h6"));
-    private final Locator shipmentDetailsTableColumnNoOfShipments_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[4]"));
-    private final Locator shipmentDetailsTableColumnWeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[5]"));
-    private final Locator shipmentDetailsTableColumnVolume_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[6]"));
     private final Locator shipmentDetailsTableColumnPickupAddressShowHideName_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[1]/*"));
     private final Locator shipmentDetailsTableColumnPickupAddressName_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[2]/p[1]"));
     private final Locator shipmentDetailsTableColumnPickupAddressAddress_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[2]/p[2]"));
     private final Locator shipmentDetailsTableColumnDropAddressShowHideName_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[8]/div/div[1]/*"));
     private final Locator shipmentDetailsTableColumnDropAddressName_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[8]/div/div[2]/p[1]"));
     private final Locator shipmentDetailsTableColumnDropAddressAddress_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[8]/div/div[2]/p[2]"));
-    private final Locator shipmentDetailsTableColumnPickupPinCode_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[9]/div"));
-    private final Locator shipmentDetailsTableColumnDropPinCode_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[10]/div"));
-    private final Locator shipmentDetailsTableColumnPickupDate_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[11]/div"));
-    private final Locator shipmentDetailsTableColumnDropDate_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[12]/div"));
     private final Locator shipmentDetailsTableColumnPickupContactShowHideNumber_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[13]/div/div[1]/*"));
     private final Locator shipmentDetailsTableColumnPickupContactName_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[13]/p"));
     private final Locator shipmentDetailsTableColumnPickupContactNumber_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[13]/div/div[2]/p[1]"));
@@ -491,66 +482,6 @@ public class DispatchDetailPage {
         Utility.checkCheckbox(ActionHelper.findElements(shipmentDetailsTableColumnCheckbox_ListCheckbox.getBy()).get(index));
     }
 
-    public List<WebElement> getList_ShipmentDetailsTableColumnOrderId_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnOrderId_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnOrderId_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnOrderId_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnOrderId_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnOrderId_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnStatus_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnStatus_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnStatus_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnNoOfShipments_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnNoOfShipments_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnNoOfShipments_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnNoOfShipments_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnNoOfShipments_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnNoOfShipments_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnWeight_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnWeight_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnWeight_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnVolume_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnVolume_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnVolume_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()).get(index));
-    }
-
     public List<WebElement> getList_ShipmentDetailsTableColumnPickupAddressShowHideName_ListBtn() {
         return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupAddressShowHideName_ListBtn.getBy());
     }
@@ -629,54 +560,6 @@ public class DispatchDetailPage {
 
     public String getText_ShipmentDetailsTableColumnDropAddressAddress_ListLbl(int index) {
         return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropAddressAddress_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnPickupPinCode_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupPinCode_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnPickupPinCode_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupPinCode_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnPickupPinCode_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupPinCode_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnDropPinCode_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropPinCode_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnDropPinCode_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropPinCode_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnDropPinCode_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropPinCode_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnPickupDate_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupDate_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnPickupDate_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupDate_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnPickupDate_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnPickupDate_ListLbl.getBy()).get(index));
-    }
-
-    public List<WebElement> getList_ShipmentDetailsTableColumnDropDate_ListLbl() {
-        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropDate_ListLbl.getBy());
-    }
-
-    public List<String> getText_ShipmentDetailsTableColumnDropDate_ListLbl() {
-        return Utility.getText_ListOfWebElements(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropDate_ListLbl.getBy()));
-    }
-
-    public String getText_ShipmentDetailsTableColumnDropDate_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDropDate_ListLbl.getBy()).get(index));
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnPickupContactShowHideNumber_ListBtn() {
@@ -904,8 +787,7 @@ public class DispatchDetailPage {
     }
 
     public void waitTillAllOrdersAreLoaded() {
-        ActionHelper.waitUntilAllElementsVisible(shipmentDetailsTableColumnOrderId_ListLbl.getBy());
-        List<WebElement> orders = ActionHelper.findElements(shipmentDetailsTableColumnOrderId_ListLbl);
+        List<WebElement> orders = CommonActions.getInstance().getWebElementList_TableDataList_Lbl("ORDER ID");
         ActionHelper.waitUntilElementClickable(orders.get(orders.size() - 1));
     }
 }
