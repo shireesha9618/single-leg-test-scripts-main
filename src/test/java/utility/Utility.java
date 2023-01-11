@@ -449,7 +449,7 @@ public class Utility {
     }
 
     public static String createAnOrder_Get_Order_ID() throws IOException, APIResponseException {
-        HashMap<String, String> order = ApiClient.createOrder("cod");
+        HashMap<String, String> order = ApiClient.createOrder1("cod");
         return order.get("clientContainerId");
     }
 

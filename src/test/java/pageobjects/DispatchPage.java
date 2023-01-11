@@ -86,8 +86,8 @@ public class DispatchPage {
     private final Locator dispatches_Table_Header = Locator.builder().withWeb(By.className("ant-table-header"));
     private final Locator actions_Header = Locator.builder().withWeb(By.xpath("//th[normalize-space()='Actions']"));
     private final Locator actions_Btn = Locator.builder().withWeb(By.xpath("//tr/td[8]//button"));
-    private final Locator add_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("//input[@value='addOrders']"));
-    private final Locator view_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("//input[@value='viewOrders']"));
+    private final By add_Orders_Radio_Btn = By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]");
+    private final Locator view_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -748,6 +748,7 @@ public class DispatchPage {
     }
 
     public void clickOn_Add_Orders_Radio_Btn(){
+        ActionHelper.waitUntilElementVisible(add_Orders_Radio_Btn);
         ActionHelper.click(add_Orders_Radio_Btn);
     }
 

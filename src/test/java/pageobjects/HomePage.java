@@ -12,7 +12,7 @@ import static constants.Constants.WAIT_FOR_ONE_SECOND;
 public class HomePage extends BaseTestClass {
     private static HomePage _instance;
     private final Locator loginButton_Btn = Locator.builder().withWeb(By.id("loginButton"));
-    private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("//a[normalize-space()='Dispatch']"));
+    private final Locator dispatchMenuItem_Btn = Locator.builder().withWeb(By.xpath("(//a[normalize-space()='Dispatch'])[1]"));
     private final Locator selectTeam_DropDown = Locator.builder().withWeb(By.id("selectTeam"));
     private final Locator selectTeam_Txt = Locator.builder().withWeb(By.xpath("//input[@id='selectTeam']/..//following-sibling::span"));
     private final Locator teamSelector_Dropdown = Locator.builder().withWeb(By.xpath("(//span[@class='ant-select-selection-search']/following-sibling::span)[1]"));
@@ -81,7 +81,8 @@ public class HomePage extends BaseTestClass {
 
     public void openDispatchListPage() {
         HomePage.getInstance().click_OpenMenu_Btn();
-        ActionHelper.click(dispatchMenuItem_Btn);
+        ActionHelper.waitUntilElementClickable(dispatchOpenMenu_Btn);
+        ActionHelper.click(dispatchOpenMenu_Btn);
         ActionHelper.waitForLoaderToHide();
     }
 
