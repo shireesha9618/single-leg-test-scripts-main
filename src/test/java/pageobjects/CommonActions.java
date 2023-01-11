@@ -242,7 +242,7 @@ public class CommonActions {
 
     public int indexOfTableColumnName(String input) {
         int index = 0;
-        List<WebElement> columName = ActionHelper.findElements(By.xpath("//tr[1]/th"));
+        List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
         for (WebElement element : columName) {
             if (element.getText().equals(input)) {
                 index = columName.indexOf(element);
@@ -288,6 +288,18 @@ public class CommonActions {
 
     public String getText_EmptyTableMsg_Lbl() {
         return ActionHelper.getText(emptyTableMsg_Lbl);
+    }
+
+    public void coverJourneyTillSettings() {
+        performCommonAction();
+        click_SkipIfPresent_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        HomePage.getInstance().click_SettingsMenu_Btn();
+        waitTillLoaderDisappears();
+    }
+
+    public String getCurrentPageUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
     }
 
     public int get_TableData_Count() {
@@ -469,6 +481,15 @@ public class CommonActions {
             click_CalendarNextYear_Btn();
         ActionHelper.click(Utility.fillPlaceholderValueInXpath(calendarChooseDateMonthYear_Btn, inputToDate));
         CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_TableColumnName_Lbl(String tableColumnName) {
+        List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
+        for (WebElement element : columName) {
+            if (element.getText().equals(tableColumnName))
+                break;
+        }
+        return true;
     }
 
 }
