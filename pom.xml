@@ -102,13 +102,13 @@
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>frontend</artifactId>
-            <version>1.3.13</version>
+            <version>1.3.14</version>
         </dependency>
 
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>backend</artifactId>
-            <version>1.3.13</version>
+            <version>1.3.14</version>
         </dependency>
         <dependency>
             <groupId>com.delhivery</groupId>
@@ -118,7 +118,7 @@
         <dependency>
             <groupId>com.automation</groupId>
             <artifactId>fileutils</artifactId>
-            <version>1.3.13</version>
+            <version>1.3.14</version>
         </dependency>
     </dependencies>
 
