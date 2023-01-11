@@ -1,5 +1,6 @@
 package testsuite.dispatch;
 
+import base.BaseTestClass;
 import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
 import org.testng.annotations.Test;
@@ -9,7 +10,7 @@ import pageobjects.DispatchPage;
 import pageobjects.HomePage;
 import pageobjects.ScanPage;
 
-public class TestSuite_DispatchDetails {
+public class TestSuite_DispatchDetails extends BaseTestClass {
 
     CommonActions commonActions = CommonActions.getInstance();
     DispatchPage dispatchPage = DispatchPage.getInstance();
