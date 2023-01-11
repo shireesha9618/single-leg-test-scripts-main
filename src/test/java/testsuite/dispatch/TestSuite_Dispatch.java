@@ -605,17 +605,17 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.clickOn_FirstOrder_Actions_Btn();
         dispatchPage.clickOn_Add_Orders_Radio_Btn();
         softAssert.assertEquals(AddOrdersPage.getInstance().get_Header_txt(), "Add Orders", "Add Orders Page is opened as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_Inventory_In_Hand_Txt_Present(), "Inventory in hand text is present as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_ExpectedCash_To_Be_Collected_Txt_Present(), "Expected Cash To Be Collected text is present as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_Txt_Present(), "You Don't Have Any Scanned Shipments text is present as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().is_InventoryInHand_TxtPresent(), "Inventory in hand text is present as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().is_ExpectedCashToBeCollected_TxtPresent(), "Expected Cash To Be Collected text is present as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_TxtPresent(), "You Don't Have Any Scanned Shipments text is present as expected");
 
         int cash_Collected_Before_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
-        AddOrdersPage.getInstance().send_TxtOn_Search_By_Order_Id_Txt_Box(order_Id);
+        AddOrdersPage.getInstance().sendTxtOn_SearchByOrderId_TxtBox(order_Id);
         int cash_Collected_After_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
         softAssert.assertTrue(cash_Collected_After_Adding_New_Order > cash_Collected_Before_Adding_New_Order, "Expected Cash to be collected is greater than after adding a new order as expected");
-        softAssert.assertTrue(!AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_Txt_Present(), "You Don't Have Any Scanned Shipments text is present as expected");
+        softAssert.assertTrue(!AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_TxtPresent(), "You Don't Have Any Scanned Shipments text is present as expected");
 
-        AddOrdersPage.getInstance().clickOn_Remove_Order_Btn();
+        AddOrdersPage.getInstance().clickOn_RemoveOrder_Btn();
         cash_Collected_After_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
 
         softAssert.assertEquals(cash_Collected_After_Adding_New_Order, cash_Collected_Before_Adding_New_Order, "Expected Cash to be collected is equals as expected");

@@ -98,7 +98,6 @@ public class CommonActions {
 
     public void coverJourneyTillDispatches() {
         performCommonAction();
-        Utility.refreshPage();
         click_SkipIfPresent_Btn();
         HomePage.getInstance().selectTeam(Constants.TEAM);
         HomePage.getInstance().openDispatchListPage();
