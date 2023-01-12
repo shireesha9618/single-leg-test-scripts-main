@@ -338,7 +338,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
         List<WebElement> jobWorkflow = jobWorkflowPage.getList_DataTableColumnName_List();
-        Utility.validatePageScrollDown(jobWorkflow.get(jobWorkflow.size()-1));
+        Utility.validatePageScrollDown(jobWorkflow.get(jobWorkflow.size() - 1));
         JarvisAssert.assertTrue(ActionHelper.isPresent(jobWorkflow.get(jobWorkflow.size() - 1), 2000), "Validate Last Element Is Present As Expected");
     }
 
@@ -398,7 +398,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.click_Draft_Btn();
         String firstJobName = commonActions.getText_TableData_Lbl("NAME");
         commonActions.click_PaginationNext_Btn();
-        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2),  "Page 2 Is Selected As Expected");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected As Expected");
         commonActions.click_PaginationPrevious_Btn();
         softAssert.assertTrue(commonActions.isPaginationBlockSelected(1), "Page 1 Is Selected As Expected");
         softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), firstJobName, "First Page First Data Is Matched As Expected");
@@ -413,11 +413,11 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.click_Draft_Btn();
         commonActions.click_PaginationNext_Btn();
         String EleventhJobName = commonActions.getText_TableData_Lbl("NAME");
-        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2),  "Page 2 Is Selected On Clicking Next As Expected");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected On Clicking Next As Expected");
         commonActions.click_PaginationPrevious_Btn();
         softAssert.assertTrue(commonActions.isPaginationBlockSelected(1), "Page 1 Is Selected As Expected");
         commonActions.select_PaginationBlock_Txt(2);
-        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2),  "Page 2 Is Selected On Selecting 2 From Block As Expected");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected On Selecting 2 From Block As Expected");
         softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), EleventhJobName, "Second Page First Data Is Matched As Expected");
         softAssert.assertAll();
     }
@@ -477,6 +477,53 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
         String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_036, Verify The Functionality Of Cancel Button In Disable Workflow")
+    public void TC_JobWorkflowSettings_036_Verify_The_Functionality_Of_Cancel_Button_In_Disable_Workflow() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
+        String expectedStatus = jobWorkflowActivePage.getText_ActiveStatus_Lbl();
+
+        jobWorkflowActivePage.click_Deactivate_Btn();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowWorkflowAlreadyExistHeader_Lbl(), "Pop Up Window Header Is Present As Expected");
+        softAssert.assertEquals(jobWorkflowActivePage.getText_PopUpWindowWorkflowAlreadyExistHeader_Lbl(), "De-activate Workflow", "Deactivate Workflow Pop Up Window Header");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowDeactivate_Btn(), "Deactivate Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowCancel_Btn(), "Cancel Button Is Present As Expected");
+
+        jobWorkflowActivePage.click_PopUpWindowCancel_Btn();
+        softAssert.assertEquals(jobWorkflowActivePage.getText_ActiveStatus_Lbl(), expectedStatus, "Status Is Active As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_037, Verify The Functionality Of Objective Box In Job Workflow Diagram Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_037_Verify_The_Functionality_Of_Objective_Box_In_Job_Workflow_Diagram_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+
+        jobWorkflowActivePage.click_ObjectiveDiagram_Lbl();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ObjectiveConfiguration_Btn(), "Objective Configuration Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connectors_Btn(), "Connector Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ExecutionTaskWorkflowHeader_Lbl(), "Execution Tas Workflow Header Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ObjectiveConfigurationName_Lbl(), "Objective Configuration Name Label Is Present AS Expected");
+
+        jobWorkflowActivePage.click_Connectors_Btn();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1_Lbl(), "Connector 1 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Destination_Lbl(), "Connector 1 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Status_Lbl(), "Connector 1 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Reason_Lbl(), "Connector 1 Reason Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2_Lbl(), "Connector 2 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Destination_Lbl(), "Connector 2 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Status_Lbl(), "Connector 2 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Reason_Lbl(), "Connector 2 Reason Label Is Present As Expected");
         softAssert.assertAll();
     }
 }
