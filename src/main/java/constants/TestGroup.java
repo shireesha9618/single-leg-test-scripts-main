@@ -19,6 +19,8 @@ public class TestGroup {
     public static final String TEAMS = "teams";
     public static final String CREATE_NEW_TEAM = "createNewTeam";
     public static final String VIEW_ORDERS = "viewOrders";
+    public static final String DISPATCH = "dispatch";
+    public static final String JOB_WORKFLOW = "jobWorkflow";
     public static final String TEAM_DETAILS = "teamDetails";
     public static final String HOME_ORDERS = "homeOrders";
     public static final String FLAKY_TESTS = "flakytests";

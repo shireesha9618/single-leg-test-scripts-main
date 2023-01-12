@@ -9,7 +9,7 @@ public class WorkflowExecutionTaskPage {
     private final Locator executionTaskHeader_Lbl = Locator.builder().withWeb(By.xpath("//div/p[text()='Execution Tasks']"));
     private final Locator executionTaskBreadCrumb_Link = Locator.builder().withWeb(By.id("/settings/workflow/execution-task/list"));
     private final Locator search_Txt = Locator.builder().withWeb(By.id("search"));
-    private final Locator startMenuCard_Link = Locator.builder().withWeb(By.xpath("//a[contains(@href,'952f3754-12e8-5ff2-93a8-aca383d18e56')]"));
+    private final Locator startMenuCard_Link = Locator.builder().withWeb(By.xpath("//p[text()='Start']/ancestor::a"));
     private final Locator startMenuCardHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Start']"));
     private final Locator startMenuCardEditReason_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start']/../following-sibling::div/div"));
 
