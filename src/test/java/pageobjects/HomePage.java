@@ -81,7 +81,7 @@ public class HomePage extends BaseTestClass {
 
     public void openDispatchListPage() {
         HomePage.getInstance().click_OpenMenu_Btn();
-        //ActionHelper.waitUntilElementClickable(dispatchOpenMenu_Btn);
+        ActionHelper.waitUntilElementClickable(dispatchOpenMenu_Btn);
         ActionHelper.click(dispatchOpenMenu_Btn);
         ActionHelper.waitForLoaderToHide();
     }
