@@ -41,13 +41,13 @@ public class HomePage extends BaseTestClass {
     private final Locator skip_Btn = Locator.builder().withWeb(By.cssSelector(".productfruits--btn.productfruits--card-footer-skip-button"));
     private final Locator teamSelect_Btn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div/div"));
     private final Locator teamSelect_List = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item-option-content']"));
-    private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']/.."));
+    private final Locator openMenu_Btn = Locator.builder().withWeb(By.xpath("//img[@alt='open menu']"));
     private final Locator appsHeader_Lbl = Locator.builder().withWeb(By.xpath("//a[text()='Apps']"));
     private final Locator ordersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Orders']"));
     private final Locator createOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Create Orders']"));
     private final Locator viewOrdersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='View Orders']"));
     private final Locator routingOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Routing']"));
-    private final Locator dispatchOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Dispatch']"));
+    private final Locator dispatchOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(text(),'Dispatch')]"));
     private final Locator ridersOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Riders']"));
     private final Locator facilitiesOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Facilities']"));
     private final Locator teamsOpenMenu_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Teams']"));
@@ -81,7 +81,7 @@ public class HomePage extends BaseTestClass {
 
     public void openDispatchListPage() {
         HomePage.getInstance().click_OpenMenu_Btn();
-        ActionHelper.waitUntilElementClickable(dispatchOpenMenu_Btn);
+        //ActionHelper.waitUntilElementClickable(dispatchOpenMenu_Btn);
         ActionHelper.click(dispatchOpenMenu_Btn);
         ActionHelper.waitForLoaderToHide();
     }
@@ -231,7 +231,6 @@ public class HomePage extends BaseTestClass {
 
     public void click_OpenMenu_Btn() {
         ActionHelper.click(openMenu_Btn);
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void click_OpenMenuCross_Btn() {

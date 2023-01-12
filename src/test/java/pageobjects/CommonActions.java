@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static constants.Constants.WAIT_FOR_ONE_SECOND;
 import static utility.Utility.acceptAlertIfPresent;
 
 public class CommonActions {
@@ -134,7 +135,7 @@ public class CommonActions {
             String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
             JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
             WebElement element = (WebElement) js.executeScript(skipButton);
-            if (element.isDisplayed())
+            if (ActionHelper.isPresent(element, WAIT_FOR_ONE_SECOND))
                 element.click();
         } catch (Exception e) {
             ExtentLogger.logPass(e.toString());
@@ -497,16 +498,16 @@ public class CommonActions {
         return true;
     }
 
-    public String get_FutureDateForGivenDate_Of(String givenDate,int days) throws ParseException {
-            Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.DATE, days);
-            return dateFormat.format(cal.getTime());
+    public String get_FutureDateForGivenDate_Of(String givenDate, int days) throws ParseException {
+        Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days);
+        return dateFormat.format(cal.getTime());
     }
 
-    public String get_PreviousDateForGivenDate_Of(String givenDate,int days) throws ParseException {
+    public String get_PreviousDateForGivenDate_Of(String givenDate, int days) throws ParseException {
         Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
