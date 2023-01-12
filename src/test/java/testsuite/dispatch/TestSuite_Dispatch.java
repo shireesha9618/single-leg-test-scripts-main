@@ -629,23 +629,22 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_026_And_027_Verify_The_Dispatch_Table_Record_With_Created_Date() throws ParseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
+        String createdDate = dispatchPage.get_CreatedDispatchDate_Value();
+        String closureDate = dispatchPage.get_ClosureDispatchDate_Value();
+        String expected_CreatedDate_Value = commonActions.get_PreviousDateForGivenDate_Of(createdDate, 30);
+        String expected_ClosureDate_Value = commonActions.get_PreviousDateForGivenDate_Of(closureDate, 40);
+        List<String> ridersNames = dispatchPage.getRiderNameAsList();
+        dispatchPage.set_CreatedDispatchDate_As(expected_CreatedDate_Value);
+        List<String> expected_RidersNames =dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches created dates are matched as expected");
+        dispatchPage.set_ClosureDispatchDate_As(expected_ClosureDate_Value);
+        expected_RidersNames =dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches closure dates are matched as expected");
 
-//        String createdDate = dispatchPage.get_CreatedDispatchDate_Value();
-//        String closureDate = dispatchPage.get_ClosureDispatchDate_Value();
-//        String expected_CreatedDate_Value = commonActions.get_PreviousDateForGivenDate_Of(createdDate, 30);
-//        String expected_ClosureDate_Value = commonActions.get_PreviousDateForGivenDate_Of(closureDate, 40);
-//        List<String> ridersNames = dispatchPage.getRiderNameAsList();
-//        dispatchPage.set_CreatedDispatchDate_As(expected_CreatedDate_Value);
-//        List<String> expected_RidersNames =dispatchPage.getRiderNameAsList();
-//        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches created dates are matched as expected");
-//        dispatchPage.set_ClosureDispatchDate_As(expected_ClosureDate_Value);
-//        expected_RidersNames =dispatchPage.getRiderNameAsList();
-//        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches closure dates are matched as expected");
-//
-//        dispatchPage.set_CreatedDispatchDate_As(createdDate);
-//        dispatchPage.set_ClosureDispatchDate_As(closureDate);
-//
-//        softAssert.assertAll();
+        dispatchPage.set_CreatedDispatchDate_As(createdDate);
+        dispatchPage.set_ClosureDispatchDate_As(closureDate);
+
+        softAssert.assertAll();
     }
 
 
