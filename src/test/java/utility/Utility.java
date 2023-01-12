@@ -448,7 +448,7 @@ public class Utility {
         return jobID;
     }
 
-    public static String createAnOrder_Get_Order_ID() throws IOException, APIResponseException {
+    public static String createAnOrderGetOrderID() throws IOException, APIResponseException {
         HashMap<String, String> order = ApiClient.createOrder1("cod");
         return order.get("clientContainerId");
     }

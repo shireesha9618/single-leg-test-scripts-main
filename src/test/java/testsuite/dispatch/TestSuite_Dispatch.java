@@ -11,6 +11,7 @@ import pageobjects.*;
 import utility.Utility;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -599,28 +600,53 @@ public class TestSuite_Dispatch extends BaseTestClass {
             description = "TC_021, Verify The Functionality of Add Order Button in Actions")
     public void TC_Dispatch_021_Verify_The_Functionality_of_Add_Order_Button_In_Actions() throws IOException, APIResponseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        String order_Id = Utility.createAnOrder_Get_Order_ID();
+        String orderId = Utility.createAnOrderGetOrderID();
         commonActions.coverJourneyTillDispatches();
         dispatchPage.scrollTo_Actions_column();
-        dispatchPage.clickOn_FirstOrder_Actions_Btn();
-        dispatchPage.clickOn_Add_Orders_Radio_Btn();
-        softAssert.assertEquals(AddOrdersPage.getInstance().get_Header_txt(), "Add Orders", "Add Orders Page is opened as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_InventoryInHand_TxtPresent(), "Inventory in hand text is present as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_ExpectedCashToBeCollected_TxtPresent(), "Expected Cash To Be Collected text is present as expected");
-        softAssert.assertTrue(AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_TxtPresent(), "You Don't Have Any Scanned Shipments text is present as expected");
+        dispatchPage.clickOn_FirstOrderActions_Btn();
+        dispatchPage.clickOn_AddOrders_RadioBtn();
+        softAssert.assertEquals(AddOrdersPage.getInstance().getText_Header_Txt(), "Add Orders", "Add Orders Page is opened as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().isPresent_InventoryInHand_Txt(), "Inventory in hand text is present as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().isPresent_InventoryInHand_Txt(), "Expected Cash To Be Collected text is present as expected");
+        softAssert.assertTrue(AddOrdersPage.getInstance().isPresent_YouDontHaveAnyScannedShipments_Txt(), "You Don't Have Any Scanned Shipments text is present as expected");
 
-        int cash_Collected_Before_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
-        AddOrdersPage.getInstance().sendTxtOn_SearchByOrderId_TxtBox(order_Id);
-        int cash_Collected_After_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
-        softAssert.assertTrue(cash_Collected_After_Adding_New_Order > cash_Collected_Before_Adding_New_Order, "Expected Cash to be collected is greater than after adding a new order as expected");
-        softAssert.assertTrue(!AddOrdersPage.getInstance().is_YouDontHaveAnyScannedShipments_TxtPresent(), "You Don't Have Any Scanned Shipments text is present as expected");
+        int cashCollectedBeforeAddingNewOrder = AddOrdersPage.getInstance().get_ExpectedCash_Value();
+        AddOrdersPage.getInstance().fill_SearchByOrderId_TxtBox(orderId);
+        int cashCollectedAfterAddingNewOrder = AddOrdersPage.getInstance().get_ExpectedCash_Value();
+        softAssert.assertTrue(cashCollectedAfterAddingNewOrder > cashCollectedBeforeAddingNewOrder, "Expected Cash to be collected is greater than after adding a new order as expected");
+        softAssert.assertTrue(!AddOrdersPage.getInstance().isPresent_YouDontHaveAnyScannedShipments_Txt(), "You Don't Have Any Scanned Shipments text is present as expected");
 
         AddOrdersPage.getInstance().clickOn_RemoveOrder_Btn();
-        cash_Collected_After_Adding_New_Order = AddOrdersPage.getInstance().get_Expected_Cash();
+        cashCollectedAfterAddingNewOrder = AddOrdersPage.getInstance().get_ExpectedCash_Value();
 
-        softAssert.assertEquals(cash_Collected_After_Adding_New_Order, cash_Collected_Before_Adding_New_Order, "Expected Cash to be collected is equals as expected");
+        softAssert.assertEquals(cashCollectedAfterAddingNewOrder, cashCollectedBeforeAddingNewOrder, "Expected Cash to be collected is equals as expected");
 
         softAssert.assertAll();
     }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},
+            description = "TC_026 & TC_027, Verify the Dispatch Table Record With Created Date and Closure Date ")
+    public void TC_Dispatch_026_And_027_Verify_The_Dispatch_Table_Record_With_Created_Date() throws ParseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        commonActions.coverJourneyTillDispatches();
+
+        String createdDate = dispatchPage.get_CreatedDispatchDate_Value();
+        String closureDate = dispatchPage.get_ClosureDispatchDate_Value();
+        String expected_CreatedDate_Value = commonActions.get_PreviousDateForGivenDate_Of(createdDate, 30);
+        String expected_ClosureDate_Value = commonActions.get_PreviousDateForGivenDate_Of(closureDate, 40);
+        List<String> ridersNames = dispatchPage.getRiderNameAsList();
+        dispatchPage.set_CreatedDispatchDate_As(expected_CreatedDate_Value);
+        List<String> expected_RidersNames =dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches created dates are matched as expected");
+        dispatchPage.set_ClosureDispatchDate_As(expected_ClosureDate_Value);
+        expected_RidersNames =dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches closure dates are matched as expected");
+
+        dispatchPage.set_CreatedDispatchDate_As(createdDate);
+        dispatchPage.set_ClosureDispatchDate_As(closureDate);
+
+        softAssert.assertAll();
+    }
+
 
 }

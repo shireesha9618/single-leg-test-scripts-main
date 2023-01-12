@@ -14,6 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static utility.Utility.acceptAlertIfPresent;
@@ -103,6 +107,7 @@ public class CommonActions {
         HomePage.getInstance().openDispatchListPage();
         JarvisAssert.assertTrue(DispatchPage.getInstance().isPresent_Header_Lbl());
         JarvisAssert.assertEquals(DispatchPage.getInstance().getText_Header_Lbl(), "Dispatches");
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void coverJourneyTillCreateOrder() {
@@ -490,5 +495,23 @@ public class CommonActions {
                 break;
         }
         return true;
+    }
+
+    public String get_FutureDateForGivenDate_Of(String givenDate,int days) throws ParseException {
+            Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, days);
+            return dateFormat.format(cal.getTime());
+    }
+
+    public String get_PreviousDateForGivenDate_Of(String givenDate,int days) throws ParseException {
+        Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -days);
+        return dateFormat.format(cal.getTime());
     }
 }

@@ -151,7 +151,7 @@ public class AddNewRiderPage {
 
     public void select_TeamsDropDown_Btn(String teamName) {
         Utility.select_FromDropDown_List(teamsDropDown_TextBox.getBy(), teamDropDown_List.getBy(), teamName);
-        close_selectTeams_DropDown();
+        close_SelectTeams_DropDown();
     }
 
     public void click_RemoveTeamCross_Btn() {
@@ -192,7 +192,7 @@ public class AddNewRiderPage {
         return createNewRider;
     }
 
-    private void close_selectTeams_DropDown() {
+    private void close_SelectTeams_DropDown() {
         ActionHelper.click(teamsDropDown_TextBox);
     }
 

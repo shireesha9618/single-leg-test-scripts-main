@@ -9,11 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
-import static constants.Constants.WAIT_FOR_TWO_SECOND;
 
 public class DispatchPage {
     private static DispatchPage _instance;
@@ -88,6 +88,10 @@ public class DispatchPage {
     private final Locator actions_Btn = Locator.builder().withWeb(By.xpath("//tr/td[8]//button"));
     private final By add_Orders_Radio_Btn = By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]");
     private final Locator view_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
+    private final Locator calender_WindowBtn = Locator.builder().withWeb(By.xpath("//div[@class='ant-picker-panels']"));
+    private final Locator createdDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@id='rangePicker']"));
+    private final Locator closureDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@placeholder='End date']"));
+    private final Locator riderNme_Txt = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']//td[2]//p"));
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -724,32 +728,65 @@ public class DispatchPage {
         ActionHelper.click(mapsZoomOut_Btn);
     }
 
-    public void clickOn_Dispatches_Table_Header(){
+    public void clickOn_Dispatches_Table_Header() {
         ActionHelper.click(dispatches_Table_Header);
     }
 
     public void scrollTo_Actions_column() {
         clickOn_Dispatches_Table_Header();
-        for (int i=1; i<6; i++){
-            if(ActionHelper.isPresent(actions_Header, WAIT_FOR_ONE_SECOND)){
+        for (int i = 1; i < 6; i++) {
+            if (ActionHelper.isPresent(actions_Header, WAIT_FOR_ONE_SECOND)) {
                 break;
-            }
-            else
+            } else
                 Utility.scrollRightUsingKeyboardKey(i);
         }
     }
 
-    private void clickOn_Actions_Btn_Of(int order_Number){
+    private void clickOn_Actions_Btn_Of(int order_Number) {
         ActionHelper.findElements(actions_Btn).get(order_Number).click();
     }
 
-    public void clickOn_FirstOrder_Actions_Btn(){
+    public void clickOn_FirstOrderActions_Btn() {
         clickOn_Actions_Btn_Of(0);
     }
 
-    public void clickOn_Add_Orders_Radio_Btn(){
+    public void clickOn_AddOrders_RadioBtn() {
         ActionHelper.waitUntilElementVisible(add_Orders_Radio_Btn);
         ActionHelper.click(add_Orders_Radio_Btn);
     }
 
+    public String get_CreatedDispatchDate_Value() {
+        return ActionHelper.getAttribute(createdDate_TxtBox,"value");
+    }
+
+    public String get_ClosureDispatchDate_Value() {
+        return ActionHelper.getAttribute(closureDate_TxtBox,"value");
+    }
+
+    public void set_CreatedDispatchDate_As(String date) {
+        ActionHelper.findElements(createdDate_TxtBox).clear();
+        ActionHelper.sendKeys(createdDate_TxtBox, date);
+        click_Refresh_Btn();
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void set_ClosureDispatchDate_As(String date) {
+        ActionHelper.findElements(closureDate_TxtBox).clear();
+        ActionHelper.sendKeys(closureDate_TxtBox, date);
+        click_Refresh_Btn();
+    }
+
+    public List<String> getRiderNameAsList() {
+        List<String> rider_Names = new ArrayList<>();
+        try {
+            List<WebElement> riders = ActionHelper.findElements(riderNme_Txt);
+
+            for (int i = 0; i < riders.size(); i++) {
+                rider_Names.add(riders.get(1).getText());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rider_Names;
+    }
 }
