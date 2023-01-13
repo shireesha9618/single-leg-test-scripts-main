@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
 
-
 public class AddOrdersPage {
     private static AddOrdersPage _instance;
     private final Locator header_Txt = Locator.builder().withWeb(By.xpath("//h1//div[contains(text(),'Add Orders')]"));
@@ -58,7 +57,8 @@ public class AddOrdersPage {
     }
 
     public int getText_ExpectedCashValue_Txt(){
-        ActionHelper.gotoSleep(WAIT_FOR_ONE_SECOND);
+        ActionHelper.waitForLoaderToHide();
+        ActionHelper.waitUntilElementVisible(expectedCash_Value.getBy());
         return Integer.parseInt(ActionHelper.getText(expectedCash_Value).split("\\.")[0]);
     }
 }

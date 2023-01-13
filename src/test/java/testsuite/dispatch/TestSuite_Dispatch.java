@@ -123,8 +123,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
-        for (int i = 0; i < statusList.size(); i++) {
-            softAssert.assertEquals(statusList.get(i), "Assigned", "Validate status label");
+        for (String s : statusList) {
+            softAssert.assertEquals(s, "Assigned", "Validate status label");
         }
         softAssert.assertAll();
     }
@@ -138,8 +138,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownStarted_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
-        for (int i = 0; i < statusList.size(); i++) {
-            softAssert.assertEquals(statusList.get(i), "Started", "Validate status label");
+        for (String s : statusList) {
+            softAssert.assertEquals(s, "Started", "Validate status label");
         }
         softAssert.assertAll();
     }
@@ -153,8 +153,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownOngoing_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
-        for (int i = 0; i < statusList.size(); i++) {
-            softAssert.assertEquals(statusList.get(i), "Ongoing", "Validate status label");
+        for (String s : statusList) {
+            softAssert.assertEquals(s, "Ongoing", "Validate status label");
         }
         softAssert.assertAll();
     }
@@ -168,8 +168,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownClosed_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
-        for (int i = 0; i < statusList.size(); i++) {
-            softAssert.assertEquals(statusList.get(i), "Closed", "Validate status label");
+        for (String s : statusList) {
+            softAssert.assertEquals(s, "Closed", "Validate status label");
         }
         softAssert.assertAll();
     }
@@ -266,8 +266,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
         List<String> availableColumns = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
-        softAssert.assertTrue(availableColumns.contains("Rider") == false, "Validate absence of Rider as option");
-        softAssert.assertTrue(availableColumns.contains("Actions") == false, "Validate absence of Actions as option");
+        softAssert.assertTrue(!availableColumns.contains("Rider"), "Validate absence of Rider as option");
+        softAssert.assertTrue(!availableColumns.contains("Actions"), "Validate absence of Actions as option");
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
         availableColumns = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
@@ -288,20 +288,20 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_TableActions_Dropdown();
         dispatchPage.click_TableActionsDropdownModifyColumn_Link();
         dispatchPage.fillWithClear_TableActionsDropDownModifyColumnsLinkSearchBar_Txt("abcd");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox() == false, "Validate absence of Id Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox() == false, "Validate absence of Name Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox() == false, "Validate absence of Status Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox() == false, "Validate absence of Facility Type Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox() == false, "Validate absence of Operating Duration Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox() == false, "Validate absence of Area Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox(), "Validate absence of Id Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox(), "Validate absence of Name Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox(), "Validate absence of Status Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox(), "Validate absence of Facility Type Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of Operating Duration Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox(), "Validate absence of Area Checkbox");
 
         dispatchPage.fillWithClear_TableActionsDropDownModifyColumnsLinkSearchBar_Txt("Status");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox() == false, "Validate absence of Id Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox() == false, "Validate absence of Name Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox() == false, "Validate absence of Status Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox() == true, "Validate presence of Facility Type Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox() == false, "Validate absence of Operating Duration Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox() == false, "Validate absence of Area Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox(), "Validate absence of Id Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox(), "Validate absence of Name Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox(), "Validate absence of Status Checkbox");
+        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox(), "Validate presence of Facility Type Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of Operating Duration Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox(), "Validate absence of Area Checkbox");
         softAssert.assertAll();
     }
 
@@ -603,8 +603,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         String orderId = commonActions.createAnOrderGetOrderID();
         commonActions.coverJourneyTillDispatches();
         dispatchPage.scrollTo_Actions_column();
-        dispatchPage.clickOn_FirstOrderActions_Btn();
-        dispatchPage.clickOn_AddOrders_RadioBtn();
+        dispatchPage.click_FirstOrderActions_Btn();
+        dispatchPage.click_AddOrders_RadioBtn();
         softAssert.assertEquals(AddOrdersPage.getInstance().getText_Header_Txt(), "Add Orders", "Add Orders Page is opened as expected");
         softAssert.assertTrue(AddOrdersPage.getInstance().isPresent_InventoryInHand_Txt(), "Inventory in hand text is present as expected");
         softAssert.assertTrue(AddOrdersPage.getInstance().isPresent_InventoryInHand_Txt(), "Expected Cash To Be Collected text is present as expected");

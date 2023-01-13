@@ -86,8 +86,8 @@ public class DispatchPage {
     private final Locator dispatches_Table_Header = Locator.builder().withWeb(By.className("ant-table-header"));
     private final Locator actions_Header = Locator.builder().withWeb(By.xpath("//th[normalize-space()='Actions']"));
     private final Locator actions_Btn = Locator.builder().withWeb(By.xpath("//tr/td[8]//button"));
-    private final Locator add_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
-    private final Locator view_Orders_Radio_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
+    private final Locator addOrders_RadioBtn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
+    private final Locator viewOrders_RadioBtn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-space ant-space-vertical']//span)[1]"));
     private final Locator calender_WindowBtn = Locator.builder().withWeb(By.xpath("//div[@class='ant-picker-panels']"));
     private final Locator createdDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@id='rangePicker']"));
     private final Locator closureDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@placeholder='End date']"));
@@ -728,12 +728,12 @@ public class DispatchPage {
         ActionHelper.click(mapsZoomOut_Btn);
     }
 
-    public void clickOn_Dispatches_Table_Header() {
+    public void click_DispatchesTable_Header() {
         ActionHelper.click(dispatches_Table_Header);
     }
 
     public void scrollTo_Actions_column() {
-        clickOn_Dispatches_Table_Header();
+        click_DispatchesTable_Header();
         for (int i = 1; i < 6; i++) {
             if (ActionHelper.isPresent(actions_Header, WAIT_FOR_ONE_SECOND)) {
                 break;
@@ -742,17 +742,17 @@ public class DispatchPage {
         }
     }
 
-    private void clickOn_Actions_Btn_Of(int order_Number) {
+    private void click_Actions_BtnOf(int order_Number) {
         ActionHelper.findElements(actions_Btn).get(order_Number).click();
     }
 
-    public void clickOn_FirstOrderActions_Btn() {
-        clickOn_Actions_Btn_Of(0);
+    public void click_FirstOrderActions_Btn() {
+        click_Actions_BtnOf(0);
     }
 
-    public void clickOn_AddOrders_RadioBtn() {
-        ActionHelper.waitUntilElementVisible(add_Orders_Radio_Btn.getBy());
-        ActionHelper.click(add_Orders_Radio_Btn);
+    public void click_AddOrders_RadioBtn() {
+        ActionHelper.waitUntilElementVisible(addOrders_RadioBtn.getBy());
+        ActionHelper.click(addOrders_RadioBtn);
     }
 
     public String get_CreatedDispatchDate_Value() {
