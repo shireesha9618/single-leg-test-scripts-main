@@ -57,7 +57,7 @@ public class AddOrdersPage {
         return ActionHelper.isPresent(expectedCashToBeCollected_Lbl);
     }
 
-    public int get_ExpectedCash_Value(){
+    public int getText_ExpectedCashValue_Txt(){
         ActionHelper.gotoSleep(WAIT_FOR_ONE_SECOND);
         return Integer.parseInt(ActionHelper.getText(expectedCash_Value).split("\\.")[0]);
     }
