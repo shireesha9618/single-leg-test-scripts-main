@@ -24,5 +24,4 @@ public class TestGroup {
     public static final String TEAM_DETAILS = "teamDetails";
     public static final String HOME_ORDERS = "homeOrders";
     public static final String FLAKY_TESTS = "flakytests";
-    public static final String JOB_WORKFLOW = "jobWorkflow";
 }

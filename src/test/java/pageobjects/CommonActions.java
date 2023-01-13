@@ -42,7 +42,7 @@ public class CommonActions {
     private final Locator emptyTableMsg_Lbl = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-placeholder']//h3"));
     private final Locator dataTable_Lbl = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
     String chooseNoOfRecordToBeDisplayed = "//div[text()='ab / page']";
-    String elementInFirstRow = "//tr[2]/td[index]";
+    String elementInFirstRow = "//tr[2]/td[index]/a";
     String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
     private final Locator calendarFromMonth_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[1]"));
     private final Locator calendarFromYear_Btn = Locator.builder().withWeb(By.xpath("(//div[@class='ant-picker-header-view'])[1]/button[2]"));

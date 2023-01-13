@@ -31,11 +31,7 @@ public class HomePage extends BaseTestClass {
     private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'facilities')]"));
     private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'teams')]"));
     private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'settings')]"));
-    private final Locator ridersMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'riders')]"));
-    private final Locator facilitiesMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'facilities')]"));
-    private final Locator teamsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'teams')]"));
     private final Locator teamsMenu_Icon = Locator.builder().withWeb(By.xpath("//div[@id='sidebar-3']//p[text()='Teams']/preceding-sibling::*"));
-    private final Locator settingsMenu_Btn = Locator.builder().withWeb(By.xpath("//nav[@aria-label='Sidebar']//a[contains(@href,'settings')]"));
     private final Locator settingsMenu_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Settings']/preceding-sibling::*"));
     private final Locator userProfile_Img = Locator.builder().withWeb(By.xpath("//div[@class='flex items-center']/div/p"));
     private final Locator logout_Btn = Locator.builder().withWeb(By.xpath("//a[text()='Logout']"));

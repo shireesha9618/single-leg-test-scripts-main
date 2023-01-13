@@ -3,9 +3,13 @@ package testsuite.settings;
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
 import constants.TestGroup;
+import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
+import framework.frontend.actions.ActionHelper;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
+import pageobjects.HomePage;
 import pageobjects.settings.*;
 import utility.Utility;
 
@@ -17,6 +21,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
     JobWorkflowCreatePreviewPage jobWorkflowCreatePreviewPage = JobWorkflowCreatePreviewPage.getInstance();
     JobWorkflowCreatePage jobWorkflowCreatePage = JobWorkflowCreatePage.getInstance();
     JobWorkflowActivePage jobWorkflowActivePage = JobWorkflowActivePage.getInstance();
+    JobWorkflowDraftPage jobWorkflowDraftPage = JobWorkflowDraftPage.getInstance();
     Faker sampleData = new Faker();
 
     private void coverJourneyTillJobWorkflow() {
@@ -286,7 +291,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Active_Btn();
-        List<String> statusList = commonActions.getList_TableDataList_Lbl("STATUS");
+        List<String> statusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
         for (String status : statusList) {
             softAssert.assertEquals(status, "Active", "Status Is Active As Expected");
         }
@@ -299,7 +304,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
-        List<String> statusList = commonActions.getList_TableDataList_Lbl("STATUS");
+        List<String> statusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
         for (String status : statusList) {
             softAssert.assertEquals(status, "Draft", "Status Is Draft As Expected");
         }
@@ -362,6 +367,8 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Active_Btn();
         softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("10"), "Ten Data Elements Is Selected In Pagination Value As Expected");
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("5"), "Five Data Elements Is Selected In Pagination Value As Expected");
         softAssert.assertAll();
     }
 
@@ -372,7 +379,9 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
         softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("10"), "Ten Data Elements Is Selected In Pagination Value As Expected");
-        softAssert.assertEquals(commonActions.getList_TableDataList_Lbl("NAME").size(), 10, "Number Of Data Displayed Counts 10 As Expected");
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("NAME").size(), 10, "Number Of Data Displayed Counts 10 As Expected");
+        commonActions.chooseNoOfRecordToBeDisplayed(20);
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("20"), "Twenty Data Elements Is Selected In Pagination Value As Expected");
         softAssert.assertAll();
     }
 
