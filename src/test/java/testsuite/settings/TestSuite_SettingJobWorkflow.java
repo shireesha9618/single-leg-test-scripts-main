@@ -114,6 +114,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (String status : statusList) {
+            softAssert.assertEquals(status, "Draft", "Active Status Is Appeared As Expected");
             softAssert.assertEquals(status, "Draft", "Draft Status Appeared As Expected");
         }
         softAssert.assertAll();
