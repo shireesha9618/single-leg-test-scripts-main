@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static constants.Constants.WAIT_FOR_FIVE_SECOND;
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
 
 public class DispatchPage {
@@ -39,13 +40,13 @@ public class DispatchPage {
     private final Locator tableActionsDropdownModifyColumn_Link = Locator.builder().withWeb(By.xpath("//a[text()='Modify Columns']"));
     private final Locator tableActionsDropDownModifyColumnsLinkHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']"));
     private final Locator tableActionsDropDownModifyColumnsLinkSearchBar_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Search']"));
-    private final Locator tableActionsDropDownModifyColumnsLinkSelectAll_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']"));
+    private final Locator tableActionsDropDownModifyColumnsLinkSelectAll_Btn = Locator.builder().withWeb(By.xpath("//p[.='Select All']"));
     private final Locator tableActionsDropDownModifyColumnsLinkOptionsList_Label = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../..//label/p"));
     private final Locator tableActionsDropDownModifyColumnsLinkRider_Checkbox = Locator.builder().withWeb(By.id("Rider"));
     private final Locator tableActionsDropDownModifyColumnsLinkVehicle_Checkbox = Locator.builder().withWeb(By.id("Vehicle"));
     private final Locator tableActionsDropDownModifyColumnsLinkStructure_Checkbox = Locator.builder().withWeb(By.id("Structure"));
     private final Locator tableActionsDropDownModifyColumnsLinkStatus_Checkbox = Locator.builder().withWeb(By.id("Status"));
-    private final Locator tableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox = Locator.builder().withWeb(By.id("Order Status"));
+    private final Locator tableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox = Locator.builder().withWeb(By.id("Order status"));
     private final Locator tableActionsDropDownModifyColumnsLinkActions_Checkbox = Locator.builder().withWeb(By.id("Actions"));
     private final Locator tableActionsDropDownModifyColumnsLinkAmount_Checkbox = Locator.builder().withWeb(By.id("Amount"));
     private final Locator tableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div/p"));
@@ -53,7 +54,7 @@ public class DispatchPage {
     private final Locator tableActionsDropDownModifyColumnsLinkCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../../../../following-sibling::div/button/p[text()='Cancel']"));
     private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
 
-    private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[div[@id='wrapper']]/following-sibling::div//button/button/p"));
+    private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[@class='h-full flex border rounded-md']//p"));
     private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='createdAt']"));
     private final Locator dateFilterDropdownClosureDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='updatedAt']"));
     private final Locator fromDateField_Txt = Locator.builder().withWeb(By.id("rangePicker"));
@@ -72,7 +73,7 @@ public class DispatchPage {
     private final Locator shipmentDetailsTableColumnActions_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[8]//button"));
     private final Locator shipmentDetailsTableColumnActionsAddOrder_Radio = Locator.builder().withWeb(By.xpath("//input[@value='addOrders']"));
     private final Locator shipmentDetailsTableColumnActionsViewOrder_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='View Orders']"));
-    private final Locator itsEmptyHere_Lbl = Locator.builder().withWeb(By.xpath("//h3[text()='It\'s Empty here']"));
+    private final Locator itsEmptyHere_Lbl = Locator.builder().withWeb(By.xpath("//h3[contains(.,\"It's empty here\")]"));
 
     private final Locator mapsZoomIn_Btn = Locator.builder().withWeb(By.xpath("//a[@title='Zoom in']"));
     private final Locator mapsZoomOut_Btn = Locator.builder().withWeb(By.xpath("//a[@title='Zoom out']"));
@@ -92,6 +93,8 @@ public class DispatchPage {
     private final Locator createdDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@id='rangePicker']"));
     private final Locator closureDate_TxtBox = Locator.builder().withWeb(By.xpath("//input[@placeholder='End date']"));
     private final Locator riderNme_Txt = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']//td[2]//p"));
+    private final Locator closeEditColumns_PopUp = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Columns']/following-sibling::*[name()='svg']"));
+    private final Locator dispatchTableHeaders_Txt = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell']"));
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -184,6 +187,7 @@ public class DispatchPage {
 
     public void fillWithClear_SearchBar_Txt(String value) {
         ActionHelper.fillWithClear(searchBar_Txt.getBy(), value);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void clear_SearchBar_Txt() {
@@ -309,6 +313,7 @@ public class DispatchPage {
     }
 
     public void click_TableActionsDropdownModifyColumn_Link() {
+        ActionHelper.waitUntilElementClickable(tableActionsDropdownModifyColumn_Link);
         ActionHelper.click(tableActionsDropdownModifyColumn_Link);
     }
 
@@ -339,6 +344,7 @@ public class DispatchPage {
 
     public void click_TableActionsDropDownModifyColumnsLinkSelectAll_Btn() {
         ActionHelper.click(tableActionsDropDownModifyColumnsLinkSelectAll_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsLinkSave_Btn() {
@@ -365,7 +371,6 @@ public class DispatchPage {
 
     public void click_TableActionsDropDownModifyColumnsLinkCross_Icon() {
         ActionHelper.click(tableActionsDropDownModifyColumnsLinkCross_Icon);
-        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsLinkOptionsList_Label() {
@@ -394,7 +399,11 @@ public class DispatchPage {
         return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkRider_Checkbox);
     }
 
-    public void click_TableActionsDropDownModifyColumnsLinkRider_Checkbox() {
+    public void uncheck_TableActionsDropDownModifyColumnsLinkRider_Checkbox() {
+        Utility.uncheckCheckbox(tableActionsDropDownModifyColumnsLinkRider_Checkbox.getBy());
+    }
+
+    public void check_TableActionsDropDownModifyColumnsLinkRider_Checkbox() {
         Utility.checkCheckbox(tableActionsDropDownModifyColumnsLinkRider_Checkbox.getBy());
     }
 
@@ -410,8 +419,8 @@ public class DispatchPage {
         return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkStructure_Checkbox);
     }
 
-    public void click_TableActionsDropDownModifyColumnsLinkStructure_Checkbox() {
-        Utility.checkCheckbox(tableActionsDropDownModifyColumnsLinkStructure_Checkbox.getBy());
+    public void uncheck_TableActionsDropDownModifyColumnsLinkStructure_Checkbox() {
+        Utility.uncheckCheckbox(tableActionsDropDownModifyColumnsLinkStructure_Checkbox.getBy());
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox() {
@@ -426,15 +435,20 @@ public class DispatchPage {
         return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox);
     }
 
-    public void click_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox() {
-        Utility.checkCheckbox(tableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox.getBy());
+    public void uncheck_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox() {
+        Utility.uncheckCheckbox(tableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox.getBy());
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox() {
         return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkActions_Checkbox);
     }
 
-    public void click_TableActionsDropDownModifyColumnsLinkActions_Checkbox() {
+    public void uncheck_TableActionsDropDownModifyColumnsLinkActions_Checkbox() {
+        Utility.uncheckCheckbox(tableActionsDropDownModifyColumnsLinkActions_Checkbox.getBy());
+    }
+
+    public void check_TableActionsDropDownModifyColumnsLinkActions_Checkbox() {
         Utility.checkCheckbox(tableActionsDropDownModifyColumnsLinkActions_Checkbox.getBy());
     }
 
@@ -543,7 +557,7 @@ public class DispatchPage {
     }
 
     public String getText_ShipmentDetailsTableColumnRider_ListLink(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnRider_ListLink.getBy()).get(index));
+        return ActionHelper.getText(ActionHelper.findElements(shipmentDetailsTableColumnRider_ListLink.getBy()).get(index));
     }
 
     public void click_ShipmentDetailsTableColumnRider_ListLink(int index) {
@@ -657,7 +671,7 @@ public class DispatchPage {
     }
 
     public boolean isPresent_ItsEmptyHere_Lbl() {
-        return ActionHelper.isPresent(itsEmptyHere_Lbl, 5000);
+        return ActionHelper.isPresent(itsEmptyHere_Lbl, WAIT_FOR_FIVE_SECOND);
     }
 
     public void select_FirstElement_Lbl() {
@@ -787,5 +801,21 @@ public class DispatchPage {
             e.printStackTrace();
         }
         return rider_Names;
+    }
+
+    public void closeEditColumnsPopUp(){
+        ActionHelper.click(closeEditColumns_PopUp);
+    }
+
+    public List<String> getText_TableHeader_Labels() {
+        return Utility.getText_ListOfWebElements(dispatchTableHeaders_Txt.getBy());
+    }
+
+    public void click_FromDate_TxtBox() {
+        ActionHelper.click(createdDate_TxtBox);
+    }
+
+    public boolean isPresent_CalendarWindow_PopUp(){
+        return ActionHelper.isPresent(calender_WindowBtn);
     }
 }

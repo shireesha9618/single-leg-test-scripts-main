@@ -411,7 +411,7 @@ public class Utility {
     }
 
     public static boolean isChecked_Input_CheckBox(WebElement element) {
-        return element.getAttribute("class").contains("checked");
+        return element.isSelected();
     }
 
     public static void sendKeysWithClear(WebElement element, String input) {

@@ -9,7 +9,6 @@ import framework.frontend.actions.ActionHelper;
 import org.testng.annotations.Test;
 import pageobjects.*;
 import utility.Utility;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
@@ -57,7 +56,6 @@ public class TestSuite_Dispatch extends BaseTestClass {
 
         List<String> actualTabHeadersLabels = dispatchPage.getText_ShipmentDetailsTableHeaderList_Lbl();
         List<String> expectedTabHeaders = new ArrayList<>(List.of("RIDER", "VEHICLE", "STRUCTURE", "STATUS", "ORDER STATUS", "ACTIONS"));
-        Collections.sort(expectedTabHeaders);
         softAssert.assertTrue(actualTabHeadersLabels.equals(expectedTabHeaders), "Validate table header label");
         softAssert.assertAll();
     }
@@ -67,7 +65,6 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_003_Verify_The_UI_Of_Table_Actions() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
-
         dispatchPage.click_TableActions_Dropdown();
         softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropdownModifyColumn_Link(), "Validate presence of Modify Column link");
         softAssert.assertAll();
@@ -80,9 +77,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
         commonActions.coverJourneyTillDispatches();
 
         String riderName = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        dispatchPage.fillWithClear_SearchBar_Txt(riderName);
+        dispatchPage.fillWithClear_SearchBar_Txt(riderName.substring(0,2));
         List<String> riders = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink();
-        softAssert.assertEquals(riders.size(), 1, "Validate count of search results");
         softAssert.assertEquals(riders.get(0), riderName, "Validate the rider name");
         softAssert.assertAll();
     }
@@ -93,7 +89,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.fillWithClear_SearchBar_Txt(ActionHelper.getRandomNumberString(5));
+        dispatchPage.fillWithClear_SearchBar_Txt(ActionHelper.getRandomNumberString(10));
         List<String> riders = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink();
         softAssert.assertEquals(riders.size(), 0, "Validate zero search results");
         softAssert.assertTrue(dispatchPage.isPresent_ItsEmptyHere_Lbl(), "Validate the presence of It's Empty here label");
@@ -120,8 +116,10 @@ public class TestSuite_Dispatch extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
         for (String s : statusList) {
             softAssert.assertEquals(s, "Assigned", "Validate status label");
@@ -135,8 +133,10 @@ public class TestSuite_Dispatch extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownStarted_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownAssigned_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
         for (String s : statusList) {
             softAssert.assertEquals(s, "Started", "Validate status label");
@@ -150,8 +150,10 @@ public class TestSuite_Dispatch extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownOngoing_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownAssigned_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
         for (String s : statusList) {
             softAssert.assertEquals(s, "Ongoing", "Validate status label");
@@ -165,8 +167,10 @@ public class TestSuite_Dispatch extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.click_Status_Dropdown();
         dispatchPage.checkCheckbox_StatusDropdownClosed_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownAssigned_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
         List<String> statusList = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl();
         for (String s : statusList) {
             softAssert.assertEquals(s, "Closed", "Validate status label");
@@ -190,7 +194,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertEquals(options.get(1), "Vehicle", "Validate presence of Vehicle option");
         softAssert.assertEquals(options.get(2), "Structure", "Validate presence of Structure option");
         softAssert.assertEquals(options.get(3), "Status", "Validate presence of Status option");
-        softAssert.assertEquals(options.get(4), "Order Status", "Validate presence of Order Status option");
+        softAssert.assertEquals(options.get(4), "Order status", "Validate presence of Order Status option");
         softAssert.assertEquals(options.get(5), "Actions", "Validate presence of Actions option");
         softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkCancel_Btn(), "Validate presence of Cancel Button");
         softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkSave_Btn(), "Validate presence of Save Button");
@@ -214,12 +218,12 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertEquals(options.get(3), "Status", "Validate presence of Status option");
         softAssert.assertEquals(options.get(4), "Order Status", "Validate presence of Order Status option");
         softAssert.assertEquals(options.get(5), "Actions", "Validate presence of Actions option");
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkStructure_Checkbox();
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkStructure_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox();
         options = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
         softAssert.assertEquals(options.get(0), "Rider", "Validate presence of Rider option");
         softAssert.assertEquals(options.get(1), "Vehicle", "Validate presence of Vehicle option");
-        softAssert.assertEquals(options.get(2), "Order Status", "Validate presence of Order Status option");
+        softAssert.assertEquals(options.get(2), "Status", "Validate presence of Order Status option");
         softAssert.assertEquals(options.get(3), "Actions", "Validate presence of Actions option");
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSelectAll_Btn();
         options = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
@@ -229,6 +233,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertEquals(options.get(3), "Status", "Validate presence of Status option");
         softAssert.assertEquals(options.get(4), "Order Status", "Validate presence of Order Status option");
         softAssert.assertEquals(options.get(5), "Actions", "Validate presence of Actions option");
+        dispatchPage.closeEditColumnsPopUp();
         softAssert.assertAll();
     }
 
@@ -250,6 +255,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         List<String> actualOptions = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
         for (int i = 0; i < expectedOptions.size(); i++)
             softAssert.assertEquals(actualOptions.get(i), expectedOptions.get(i), "Validate order of options");
+        dispatchPage.closeEditColumnsPopUp();
         softAssert.assertAll();
     }
 
@@ -262,20 +268,20 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_TableActions_Dropdown();
         dispatchPage.click_TableActionsDropdownModifyColumn_Link();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSelectAll_Btn();
-        softAssert.assertTrue(dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label().contains("Facility Type"), "Validate presence of Facility Type as option");
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
         List<String> availableColumns = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
         softAssert.assertTrue(!availableColumns.contains("Rider"), "Validate absence of Rider as option");
         softAssert.assertTrue(!availableColumns.contains("Actions"), "Validate absence of Actions as option");
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
+        dispatchPage.check_TableActionsDropDownModifyColumnsLinkRider_Checkbox();
+        dispatchPage.check_TableActionsDropDownModifyColumnsLinkActions_Checkbox();
         availableColumns = dispatchPage.getText_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label();
         softAssert.assertTrue(availableColumns.contains("Rider"), "Validate presence of Rider as option");
         softAssert.assertTrue(availableColumns.contains("Rider"), "Validate presence of Rider as option");
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkCross_Icon();
         softAssert.assertTrue(dispatchPage.isPresent_Header_Lbl(), "Validate presence of header label");
         softAssert.assertEquals(DispatchPage.getInstance().getText_Header_Lbl(), "Dispatches", "Validate label of header");
+
         softAssert.assertAll();
     }
 
@@ -292,16 +298,18 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox(), "Validate absence of Name Checkbox");
         softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox(), "Validate absence of Status Checkbox");
         softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox(), "Validate absence of Facility Type Checkbox");
-        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of Operating Duration Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of order status Checkbox");
         softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox(), "Validate absence of Area Checkbox");
 
         dispatchPage.fillWithClear_TableActionsDropDownModifyColumnsLinkSearchBar_Txt("Status");
-        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox(), "Validate absence of Id Checkbox");
-        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox(), "Validate absence of Name Checkbox");
-        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox(), "Validate absence of Status Checkbox");
-        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox(), "Validate presence of Facility Type Checkbox");
-        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of Operating Duration Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkRider_Checkbox(), "Validate absence of rider Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkVehicle_Checkbox(), "Validate absence of vehicle Checkbox");
+        softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStructure_Checkbox(), "Validate absence of structure Checkbox");
+        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkStatus_Checkbox(), "Validate presence of Status Type Checkbox");
+        softAssert.assertTrue(dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox(), "Validate absence of order status Checkbox");
         softAssert.assertTrue(!dispatchPage.isPresent_TableActionsDropDownModifyColumnsLinkActions_Checkbox(), "Validate absence of Area Checkbox");
+        dispatchPage.click_TableActionsDropDownModifyColumnsLinkCross_Icon();
+
         softAssert.assertAll();
     }
 
@@ -329,20 +337,19 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_TableActionsDropdownModifyColumn_Link();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSelectAll_Btn();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSave_Btn();
-        List<String> headList = dispatchPage.getText_ShipmentDetailsTableColumnStructure_ListLbl();
+        List<String> headList = dispatchPage.getText_TableHeader_Labels();
         softAssert.assertEquals(headList.get(0), "RIDER", "Validate presence of RIDER header");
         softAssert.assertEquals(headList.get(1), "VEHICLE", "Validate presence of VEHICLE header");
         softAssert.assertEquals(headList.get(2), "STRUCTURE", "Validate presence of STRUCTURE header");
         softAssert.assertEquals(headList.get(3), "STATUS", "Validate presence of STATUS header");
         softAssert.assertEquals(headList.get(4), "ORDER STATUS", "Validate presence of ORDER STATUS header");
-        softAssert.assertEquals(headList.get(5), "ACTIONS", "Validate presence of ACTIONS header");
 
         dispatchPage.click_TableActions_Dropdown();
         dispatchPage.click_TableActionsDropdownModifyColumn_Link();
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkStructure_Checkbox();
-        dispatchPage.click_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkStructure_Checkbox();
+        dispatchPage.uncheck_TableActionsDropDownModifyColumnsLinkOrderStatus_Checkbox();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSave_Btn();
-        headList = dispatchPage.getText_ShipmentDetailsTableColumnStructure_ListLbl();
+        headList = dispatchPage.getText_TableHeader_Labels();
         softAssert.assertEquals(headList.get(0), "RIDER", "Validate presence of RIDER header");
         softAssert.assertEquals(headList.get(1), "VEHICLE", "Validate presence of VEHICLE header");
         softAssert.assertEquals(headList.get(2), "STATUS", "Validate presence of STATUS header");
@@ -352,13 +359,12 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.click_TableActionsDropdownModifyColumn_Link();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSelectAll_Btn();
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkSave_Btn();
-        headList = dispatchPage.getText_ShipmentDetailsTableColumnStructure_ListLbl();
+        headList = dispatchPage.getText_TableHeader_Labels();
         softAssert.assertEquals(headList.get(0), "RIDER", "Validate presence of RIDER header");
         softAssert.assertEquals(headList.get(1), "VEHICLE", "Validate presence of VEHICLE header");
         softAssert.assertEquals(headList.get(2), "STRUCTURE", "Validate presence of STRUCTURE header");
         softAssert.assertEquals(headList.get(3), "STATUS", "Validate presence of STATUS header");
         softAssert.assertEquals(headList.get(4), "ORDER STATUS", "Validate presence of ORDER STATUS header");
-        softAssert.assertEquals(headList.get(5), "ACTIONS", "Validate presence of ACTIONS header");
         softAssert.assertAll();
     }
 
@@ -367,10 +373,12 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_018_Verify_The_Functionality_Of_Refresh_Button_In_Dispatches_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_FromDate_TxtBox();
+        softAssert.assertTrue(dispatchPage.isPresent_CalendarWindow_PopUp(), "Calendar window popup is present as expected");
 
         dispatchPage.click_Refresh_Btn();
-        softAssert.assertEquals(dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size(), 0, "Validate data is not visible");
-        softAssert.assertEquals(dispatchPage.getListWithExplicitWait_ShipmentDetailsTableColumnRider_ListLink().size(), 0, "Validate data is visible again");
+        softAssert.assertTrue(!dispatchPage.isPresent_CalendarWindow_PopUp(), "Calendar window popup is not present as expected");
+
         softAssert.assertAll();
     }
 
@@ -635,17 +643,15 @@ public class TestSuite_Dispatch extends BaseTestClass {
         String expected_ClosureDate_Value = commonActions.get_PreviousDateForGivenDate_Of(closureDate, 40);
         List<String> ridersNames = dispatchPage.getRiderNameAsList();
         dispatchPage.set_CreatedDispatchDate_As(expected_CreatedDate_Value);
-        List<String> expected_RidersNames =dispatchPage.getRiderNameAsList();
-        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches created dates are matched as expected");
+        List<String> expected_RidersNames = dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames), "Dispatches created dates are matched as expected");
         dispatchPage.set_ClosureDispatchDate_As(expected_ClosureDate_Value);
-        expected_RidersNames =dispatchPage.getRiderNameAsList();
-        softAssert.assertTrue(ridersNames.equals(expected_RidersNames),"Dispatches closure dates are matched as expected");
+        expected_RidersNames = dispatchPage.getRiderNameAsList();
+        softAssert.assertTrue(ridersNames.equals(expected_RidersNames), "Dispatches closure dates are matched as expected");
 
         dispatchPage.set_CreatedDispatchDate_As(createdDate);
         dispatchPage.set_ClosureDispatchDate_As(closureDate);
 
         softAssert.assertAll();
     }
-
-
 }

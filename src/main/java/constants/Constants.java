@@ -55,6 +55,7 @@ public class Constants {
     public static String TEAM_MANAGER ="feAutomation user";
     public static int WAIT_FOR_ONE_SECOND = 1000;
     public static int WAIT_FOR_TWO_SECOND = 2000;
+    public static int WAIT_FOR_FIVE_SECOND = 5000;
 
     private Constants() {
 
