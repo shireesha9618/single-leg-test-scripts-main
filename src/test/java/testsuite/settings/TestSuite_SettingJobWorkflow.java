@@ -128,7 +128,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> draftStatusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (int i = 0; i < draftStatusList.size(); i++) {
-                softAssert.assertTrue(draftStatusList.get(i).equals("Draft"), "Draft Status Appeared As Expected");
+            softAssert.assertTrue(draftStatusList.get(i).equals("Draft"), "Draft Status Appeared As Expected");
         }
         jobWorkflowCreatePreviewPage.click_StatusClearSelection_Btn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
@@ -536,6 +536,33 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Destination_Lbl(), "Connector 2 Destination Label Is Present As Expected");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Status_Lbl(), "Connector 2 Status Label Is Present As Expected");
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Reason_Lbl(), "Connector 2 Reason Label Is Present As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_038, Verify The UI Of Table Record Present In Draft Tab")
+    public void TC_JobWorkflowSettings_038_Verify_The_UI_Of_Table_Record_Present_In_Draft_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String expectedJobName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_TableData_Link("NAME");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_JobWorkflowDetailHeader_Lbl(), "Job Workflow Detail Header Is Present As Expected");
+        softAssert.assertEqualsIgnoreCase(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobName, "Job Workflow Detail Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DraftStatus_Lbl(), "Active Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ViewServiceAttributes_Btn(), "View Service Attributes Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_SaveAsDraft_Btn(), "Make A Copy Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Validate_Btn(), "Deactivate Button Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Objectives_Lbl(), "Objectives Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Search_Txt(), "Search Text Field Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Tags_DropDown(), "Tags Drop Down Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Diagram_Lbl(), "Diagram Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ZoomIn_Btn(), "Zoom In Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ZoomOut_Btn(), "Zoom Out Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Reset_Btn(), "Reset Button Is Present As Expected");
+
         softAssert.assertAll();
     }
 }
