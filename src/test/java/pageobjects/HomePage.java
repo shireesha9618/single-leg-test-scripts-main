@@ -67,7 +67,7 @@ public class HomePage extends BaseTestClass {
     private final Locator closeSideBar_Icon = Locator.builder().withWeb(By.id("closeSideBar"));
     private final Locator openSideBar_Icon = Locator.builder().withWeb(By.id("openSideBar"));
     private final Locator menu_Icon = Locator.builder().withWeb(By.cssSelector("img[alt='open menu']"));
-    private final Locator close_Menu_Btn = Locator.builder().withWeb(By.xpath("(//*[name()='svg'][@data-icon='circle-xmark'])[1]"));
+    private final Locator closeMenu_Btn = Locator.builder().withWeb(By.xpath("(//*[name()='svg'][@data-icon='circle-xmark'])[1]"));
 
     public static HomePage getInstance() {
         if (_instance == null)

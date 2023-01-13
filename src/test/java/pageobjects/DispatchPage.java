@@ -780,9 +780,8 @@ public class DispatchPage {
         List<String> rider_Names = new ArrayList<>();
         try {
             List<WebElement> riders = ActionHelper.findElements(riderNme_Txt);
-
             for (int i = 0; i < riders.size(); i++) {
-                rider_Names.add(riders.get(1).getText());
+                rider_Names.add(riders.get(i).getText());
             }
         } catch (Exception e) {
             e.printStackTrace();

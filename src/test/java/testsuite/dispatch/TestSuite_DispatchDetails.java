@@ -1,8 +1,6 @@
 package testsuite.dispatch;
 
-
 import base.BaseTestClass;
-
 import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
 import org.testng.annotations.Test;
