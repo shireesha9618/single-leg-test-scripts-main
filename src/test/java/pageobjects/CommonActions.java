@@ -1,6 +1,8 @@
 package pageobjects;
 
+import api.ApiClient;
 import constants.Constants;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
@@ -14,11 +16,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
 import static utility.Utility.acceptAlertIfPresent;
@@ -515,4 +516,19 @@ public class CommonActions {
         cal.add(Calendar.DATE, -days);
         return dateFormat.format(cal.getTime());
     }
+
+    public static String createAnOrderAndDispatchThenGetId() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder("cod");
+        String jobID = ApiClient.getJobID(order.get("orderId"));
+        List<String> jobIDList = new ArrayList<>();
+        jobIDList.add(jobID);
+        HashMap<String, String> dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        return jobID;
+    }
+
+    public static String createAnOrderGetOrderID() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder1("cod");
+        return order.get("clientContainerId");
+    }
+
 }

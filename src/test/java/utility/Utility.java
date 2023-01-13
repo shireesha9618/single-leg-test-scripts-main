@@ -439,20 +439,6 @@ public class Utility {
         return element.isSelected();
     }
 
-    public static String createAnOrderAndDispatch_Then_Get_Id() throws IOException, APIResponseException {
-        HashMap<String, String> order = ApiClient.createOrder("cod");
-        String jobID = ApiClient.getJobID(order.get("orderId"));
-        List<String> jobIDList = new ArrayList<>();
-        jobIDList.add(jobID);
-        HashMap<String, String> dispatch = ApiClient.createAndPublishDispatch(jobIDList);
-        return jobID;
-    }
-
-    public static String createAnOrderGetOrderID() throws IOException, APIResponseException {
-        HashMap<String, String> order = ApiClient.createOrder1("cod");
-        return order.get("clientContainerId");
-    }
-
     public static void scrollRightUsingKeyboardKey(int keyPressCount) {
         Actions actions = new Actions(DriverManager.getDriver());
         for (int i = 0; i < keyPressCount; i++)

@@ -36,7 +36,7 @@ public class AddOrdersPage {
     }
 
     public void clickOn_RemoveOrder_Btn() {
-        ActionHelper.gotoSleep(WAIT_FOR_ONE_SECOND);
+        ActionHelper.waitForLoaderToHide();
         ActionHelper.click(removeOrder_Btn);
         ActionHelper.waitForLoaderToHide();
     }
