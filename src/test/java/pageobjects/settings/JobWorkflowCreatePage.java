@@ -320,4 +320,8 @@ public class JobWorkflowCreatePage {
     public String getText_ShipmentFlow_Txt() {
         return ActionHelper.getText(shipmentFlow_Txt);
     }
+
+    public String getText_WorkflowName_Txt() {
+        return ActionHelper.getText(workflowName_Txt);
+    }
 }

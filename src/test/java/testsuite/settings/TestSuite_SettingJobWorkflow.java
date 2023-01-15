@@ -566,4 +566,37 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
 
         softAssert.assertAll();
     }
+
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_029, Verify Functionality Of Make A Copy Button")
+    public void TC_JobWorkflowSettings_029_Verify_Functionality_Of_Make_A_Copy_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowActivePage.click_MakeACopy_Btn();
+        String expectedJobWorkflowName = jobWorkflowCreatePage.getText_WorkflowName_Txt();
+        jobWorkflowCreatePage.select_ProductType_Txt();
+        jobWorkflowCreatePage.click_Create_Btn();
+        jobWorkflowCreatePreviewPage.fill_Search_Txt(expectedJobWorkflowName);
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl(), expectedJobWorkflowName, "Expected Job Workflow Name Is Matched");
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuStatus_Lbl(), "Active", "Status Is Active As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_035, Verify The Functionality Of Deactivate Button Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_035_Verify_The_Functionality_Of_Deactivate_Button_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        String expectedJobWorkflowName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowActivePage.click_Deactivate_Btn();
+        jobWorkflowActivePage.click_PopUpWindowDeactivate_Btn();
+        jobWorkflowCreatePreviewPage.fill_Search_Txt(expectedJobWorkflowName);
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl(), expectedJobWorkflowName, "Expected Job Workflow Name Is Matched");
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuStatus_Lbl(), "Inactive", "Status Is Inactive As Expected");
+        softAssert.assertAll();
+    }
 }
