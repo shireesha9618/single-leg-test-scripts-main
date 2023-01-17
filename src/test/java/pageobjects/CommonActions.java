@@ -531,4 +531,16 @@ public class CommonActions {
         return order.get("clientContainerId");
     }
 
+    public static String createOrdersAndAddDispatchThenGetId(int numberOfOrdersToBeAddedToDispatch) throws IOException, APIResponseException {
+        HashMap<String, String>  dispatch;
+        List<String> jobIDList = new ArrayList<>();
+        String jobID ;
+        for (int i=0;i<5;i++) {
+            HashMap<String, String> order = ApiClient.createOrder1("cod");
+            jobID = ApiClient.getJobID(order.get("orderId"));
+            jobIDList.add(jobID);
+        }
+        dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        return dispatch.get("dispatchID");
+    }
 }

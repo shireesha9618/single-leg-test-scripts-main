@@ -55,8 +55,8 @@ public class DispatchPage {
     private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
 
     private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[@class='h-full flex border rounded-md']//p"));
-    private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='createdAt']"));
-    private final Locator dateFilterDropdownClosureDate_Radio = Locator.builder().withWeb(By.xpath("//input[@value='updatedAt']"));
+    private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Created Date']"));
+    private final Locator dateFilterDropdownClosureDate_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Closure Date']"));
     private final Locator fromDateField_Txt = Locator.builder().withWeb(By.id("rangePicker"));
     private final Locator toDateField_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='End date']"));
     private final Locator refresh_Btn = Locator.builder().withWeb(By.id("refresh_Btn"));
@@ -71,7 +71,7 @@ public class DispatchPage {
     private final Locator shipmentDetailsTableColumnOrderStatusFailed_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]/div/div[2]/div/p"));
     private final Locator shipmentDetailsTableColumnOrderStatusRemaining_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]/div/div[3]/div/p"));
     private final Locator shipmentDetailsTableColumnActions_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[8]//button"));
-    private final Locator shipmentDetailsTableColumnActionsAddOrder_Radio = Locator.builder().withWeb(By.xpath("//input[@value='addOrders']"));
+    private final Locator shipmentDetailsTableColumnActionsAddOrder_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Add Orders']"));
     private final Locator shipmentDetailsTableColumnActionsViewOrder_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='View Orders']"));
     private final Locator itsEmptyHere_Lbl = Locator.builder().withWeb(By.xpath("//h3[contains(.,\"It's empty here\")]"));
 
@@ -95,6 +95,13 @@ public class DispatchPage {
     private final Locator riderNme_Txt = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']//td[2]//p"));
     private final Locator closeEditColumns_PopUp = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Columns']/following-sibling::*[name()='svg']"));
     private final Locator dispatchTableHeaders_Txt = Locator.builder().withWeb(By.xpath("//th[@class='ant-table-cell']"));
+    private final Locator previousYearCalendar_Btn = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-header-super-prev-btn'])[1]"));
+    private final Locator previousMonthCalendar_Btn = Locator.builder().withWeb(By.xpath("(//span[@class='ant-picker-prev-icon'])[1]"));
+    private final Locator laterYearCalendar_Btn = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-header-super-next-btn'])[2]"));
+    private final Locator laterMonthCalendar_Btn = Locator.builder().withWeb(By.xpath("(//span[@class='ant-picker-next-icon'])[2]"));
+    private final Locator createdFromYearCalendar_Txt = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-year-btn'])[1]"));
+    private final Locator createdFromMonthCalendar_Txt = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-month-btn'])[1]"));
+
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -770,11 +777,11 @@ public class DispatchPage {
     }
 
     public String get_CreatedDispatchDate_Value() {
-        return ActionHelper.getAttribute(createdDate_TxtBox,"value");
+        return ActionHelper.getAttribute(createdDate_TxtBox, "value");
     }
 
     public String get_ClosureDispatchDate_Value() {
-        return ActionHelper.getAttribute(closureDate_TxtBox,"value");
+        return ActionHelper.getAttribute(closureDate_TxtBox, "value");
     }
 
     public void set_CreatedDispatchDate_As(String date) {
@@ -803,7 +810,7 @@ public class DispatchPage {
         return rider_Names;
     }
 
-    public void closeEditColumnsPopUp(){
+    public void closeEditColumnsPopUp() {
         ActionHelper.click(closeEditColumns_PopUp);
     }
 
@@ -815,7 +822,34 @@ public class DispatchPage {
         ActionHelper.click(createdDate_TxtBox);
     }
 
-    public boolean isPresent_CalendarWindow_PopUp(){
+    public boolean isPresent_CalendarWindow_PopUp() {
         return ActionHelper.isPresent(calender_WindowBtn);
     }
+
+    public void click_CalendarPreviousYear_Btn() {
+        ActionHelper.click(previousYearCalendar_Btn);
+    }
+
+    public void click_CalendarPreviousMonth_Btn() {
+        ActionHelper.click(previousMonthCalendar_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public void click_CalendarLaterYear_Btn() {
+        ActionHelper.click(laterYearCalendar_Btn);
+    }
+
+    public void click_CalendarLaterMonth_Btn() {
+        ActionHelper.click(laterMonthCalendar_Btn);
+    }
+
+    public String getValue_CalendarCreatedByFromYear_Txt() {
+        ActionHelper.waitUntilElementVisible(createdFromYearCalendar_Txt.getBy());
+        return ActionHelper.getText(createdFromYearCalendar_Txt);
+    }
+
+    public String getValue_CalendarCreatedByFromMonth_Txt() {
+        return ActionHelper.getText(createdFromMonthCalendar_Txt);
+    }
+
 }

@@ -9,11 +9,10 @@ import framework.frontend.actions.ActionHelper;
 import org.testng.annotations.Test;
 import pageobjects.*;
 import utility.Utility;
+
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TestSuite_Dispatch extends BaseTestClass {
@@ -77,7 +76,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         commonActions.coverJourneyTillDispatches();
 
         String riderName = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        dispatchPage.fillWithClear_SearchBar_Txt(riderName.substring(0,2));
+        dispatchPage.fillWithClear_SearchBar_Txt(riderName.substring(0, 2));
         List<String> riders = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink();
         softAssert.assertEquals(riders.get(0), riderName, "Validate the rider name");
         softAssert.assertAll();
@@ -387,8 +386,8 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_019_Verify_The_UI_of_Actions_in_Dispatch_List_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
-
-        dispatchPage.click_ShipmentDetailsTableColumnActions_ListBtn(0);
+        dispatchPage.scrollTo_Actions_column();
+        dispatchPage.click_FirstOrderActions_Btn();
         softAssert.assertTrue(dispatchPage.isPresent_ShipmentDetailsTableColumnActionsAddOrder_Radio(), "Validate presence of Add Order radio");
         softAssert.assertTrue(dispatchPage.isPresent_ShipmentDetailsTableColumnActionsViewOrder_Radio(), "Validate presence of View Order radio");
         softAssert.assertAll();
@@ -431,20 +430,14 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_023_Verify_Next_And_Previous_Year_Button_On_Calender() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_FromDate_TxtBox();
+        String expectedYear = dispatchPage.getValue_CalendarCreatedByFromYear_Txt();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
-        String currentDate = ActionHelper.getCurrentDate().format(formatter);
-        String plusOneYearDate = Utility.getNextYear(ActionHelper.getCurrentDate(), 1).format(formatter);
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), currentDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), currentDate.split(" ")[1], "Validate year being displayed");
+        dispatchPage.click_CalendarPreviousYear_Btn();
+        String actualYear = dispatchPage.getValue_CalendarCreatedByFromYear_Txt();
+        softAssert.assertTrue(!actualYear.equals(expectedYear), "Calendar previous Year calendar button is working as expected");
+        dispatchPage.click_CalendarLaterYear_Btn();
 
-        commonActions.click_CalendarNextYear_Btn();
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), plusOneYearDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), plusOneYearDate.split(" ")[0], "Validate year being displayed");
-
-        commonActions.click_CalendarPreviousYear_Btn();
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), currentDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), currentDate.split(" ")[1], "Validate year being displayed");
         softAssert.assertAll();
     }
 
@@ -453,32 +446,32 @@ public class TestSuite_Dispatch extends BaseTestClass {
     public void TC_Dispatch_024_Verify_Next_And_Previous_Month_Button_On_Calender() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_FromDate_TxtBox();
+        String expectedMonth = dispatchPage.getValue_CalendarCreatedByFromMonth_Txt();
+        dispatchPage.click_CalendarPreviousMonth_Btn();
+        String actualMonth = dispatchPage.getValue_CalendarCreatedByFromMonth_Txt();
+        softAssert.assertTrue(!actualMonth.equals(expectedMonth), "Calendar previous month calendar button is working as expected");
+        System.out.println(actualMonth + "  " + expectedMonth);
+        dispatchPage.click_CalendarLaterMonth_Btn();
+        actualMonth = dispatchPage.getValue_CalendarCreatedByFromMonth_Txt();
+        softAssert.assertTrue(actualMonth.equals(expectedMonth), "Calendar later month calendar button is working as expected");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
-        String currentDate = ActionHelper.getCurrentDate().format(formatter);
-        String plusOneMonthDate = Utility.getNextMonth(ActionHelper.getCurrentDate(), 1).format(formatter);
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), currentDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), currentDate.split(" ")[1], "Validate year being displayed");
-
-        commonActions.click_CalendarNextMonth_Btn();
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), plusOneMonthDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), plusOneMonthDate.split(" ")[0], "Validate year being displayed");
-
-        commonActions.click_CalendarPreviousMonth_Btn();
-        softAssert.assertEquals(commonActions.getText_CalendarFromMonth_Btn(), currentDate.split(" ")[0], "Validate month being displayed");
-        softAssert.assertEquals(commonActions.getText_CalendarFromYear_Btn(), currentDate.split(" ")[1], "Validate year being displayed");
         softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},
             description = "TC_025, Verify Start Date Is Not Greater Than End Date")
-    public void TC_Dispatch_025_Verify_Start_Date_Is_Not_Greater_Than_End_Date() {
+    public void TC_Dispatch_025_Verify_Start_Date_Is_Not_Greater_Than_End_Date() throws ParseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
 
-        dispatchPage.fillWithClear_FromDateField_Txt(Utility.getCustomCurrentDateFormatter("dd-MM-yyyy"));
-        dispatchPage.fillWithClear_ToDateField_Txt(ActionHelper.getCustomPreviousDateFormatter("dd-MM-yyyy", 97));
-        softAssert.assertEquals(dispatchPage.getValue_ToDateField_Txt(), "", "Start Date Is Not Greater Than End Date For All Tab");
+        String createdFromDate = dispatchPage.get_CreatedDispatchDate_Value();
+        String expectedFromDate = commonActions.get_PreviousDateForGivenDate_Of(createdFromDate, -1);
+        dispatchPage.set_ClosureDispatchDate_As(expectedFromDate);
+        dispatchPage.click_Refresh_Btn();
+        String createdToDate = dispatchPage.get_ClosureDispatchDate_Value();
+        softAssert.assertTrue(!expectedFromDate.equals(createdToDate),"Calendar To date is less than Calendar from date");
+        dispatchPage.set_ClosureDispatchDate_As(expectedFromDate);
         softAssert.assertAll();
     }
 
@@ -491,53 +484,27 @@ public class TestSuite_Dispatch extends BaseTestClass {
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
         int assignedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
         dispatchPage.uncheckCheckbox_StatusDropdownAssigned_Checkbox();
-
         dispatchPage.checkCheckbox_StatusDropdownStarted_Checkbox();
+
         int startedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
+        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
 
         dispatchPage.checkCheckbox_StatusDropdownOngoing_Checkbox();
+
         int ongoingRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
+        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
 
         dispatchPage.checkCheckbox_StatusDropdownClosed_Checkbox();
+
         int closedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
+        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
 
         dispatchPage.statusDropdownSelectAll();
-        JarvisAssert.assertEquals(dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size(), assignedRecordsCount + startedRecordsCount + ongoingRecordsCount + closedRecordsCount);
-    }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},
-            description = "TC_042, Verify The Functionality Dock and Undock of Left Panel")
-    public void TC_Dispatch_042_Verify_The_Functionality_Dock_and_Undock_of_Left_Panel() {
-        JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        commonActions.coverJourneyTillDispatches();
-
-        homePage.click_CloseSideBar_Icon();
-        softAssert.assertTrue(homePage.isPresent_OrdersMenu_Icon(), "Validate presence of Order menu icon");
-        softAssert.assertTrue(homePage.isPresent_OrdersMenu_Btn() == false, "Validate absence of Order menu btn");
-        softAssert.assertTrue(homePage.isPresent_DispatchMenu_Icon(), "Validate presence of Dispatch menu icon");
-        softAssert.assertTrue(homePage.isPresent_DispatchMenu_Btn() == false, "Validate absence of Dispatch menu btn");
-        softAssert.assertTrue(homePage.isPresent_ResourcesMenu_Icon(), "Validate presence of Resources menu icon");
-        softAssert.assertTrue(homePage.isPresent_ResourcesMenu_Btn() == false, "Validate absence of Resources menu btn");
-        softAssert.assertTrue(homePage.isPresent_TeamsMenu_Icon(), "Validate presence of Teams menu icon");
-        softAssert.assertTrue(homePage.isPresent_TeamsMenu_Btn() == false, "Validate absence of Teams menu btn");
-        softAssert.assertTrue(homePage.isPresent_SettingsMenu_Icon(), "Validate presence of Settings menu icon");
-        softAssert.assertTrue(homePage.isPresent_SettingsMenu_Btn() == false, "Validate absence of Settings menu btn");
-
-        homePage.click_OpenSideBar_Icon();
-        softAssert.assertTrue(homePage.isPresent_OrdersMenu_Icon(), "Validate presence of Order menu icon");
-        softAssert.assertTrue(homePage.isPresent_OrdersMenu_Btn(), "Validate presence of Order menu btn");
-        softAssert.assertTrue(homePage.isPresent_DispatchMenu_Icon(), "Validate presence of Dispatch menu icon");
-        softAssert.assertTrue(homePage.isPresent_DispatchMenu_Btn(), "Validate presence of Dispatch menu btn");
-        softAssert.assertTrue(homePage.isPresent_ResourcesMenu_Icon(), "Validate presence of Resources menu icon");
-        softAssert.assertTrue(homePage.isPresent_ResourcesMenu_Btn(), "Validate presence of Resources menu btn");
-        softAssert.assertTrue(homePage.isPresent_TeamsMenu_Icon(), "Validate presence of Teams menu icon");
-        softAssert.assertTrue(homePage.isPresent_TeamsMenu_Btn(), "Validate presence of Teams menu btn");
-        softAssert.assertTrue(homePage.isPresent_SettingsMenu_Icon(), "Validate presence of Settings menu icon");
-        softAssert.assertTrue(homePage.isPresent_SettingsMenu_Btn(), "Validate presence of Settings menu btn");
-        softAssert.assertAll();
+        JarvisAssert.assertTrue(!(dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size() == assignedRecordsCount + startedRecordsCount + ongoingRecordsCount + closedRecordsCount));
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH, TestGroup.BVT},

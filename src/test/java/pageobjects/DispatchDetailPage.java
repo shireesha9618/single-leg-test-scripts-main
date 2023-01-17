@@ -13,7 +13,7 @@ import java.util.List;
 public class DispatchDetailPage {
     private static DispatchDetailPage _instance;
 
-    private final Locator header_Lbl = Locator.builder().withWeb(By.id("header_Lbl"));
+    private final Locator header_Lbl = Locator.builder().withWeb(By.id("headerLabel"));
     private final Locator dispatchStatus_Lbl = Locator.builder().withWeb(By.xpath("//h6"));
     private final Locator edit_Img = Locator.builder().withWeb(By.xpath("//div[@id='headerLabel']/following-sibling::*"));
     private final Locator dispatchDetailBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch Detail']"));
@@ -65,7 +65,7 @@ public class DispatchDetailPage {
     private final Locator tableActionsDropDownModifyColumnsLinkCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../../../../following-sibling::div/button/p[text()='Cancel']"));
     private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
 
-    private final Locator scanToAddOrders_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Scan to Add Orders']"));
+    private final Locator scanToAddOrders_Btn = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Scan to Add Orders']"));
     private final Locator refresh_Btn = Locator.builder().withWeb(By.id("refreshButton"));
     private final Locator downloadRunSheet_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Download Run Sheet']"));
 
