@@ -2,13 +2,15 @@ package testsuite.dispatch;
 
 import base.BaseTestClass;
 import constants.TestGroup;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisSoftAssert;
 import org.testng.annotations.Test;
-import pageobjects.CommonActions;
-import pageobjects.DispatchDetailPage;
-import pageobjects.DispatchPage;
-import pageobjects.HomePage;
-import pageobjects.ScanPage;
+import pageobjects.*;
+import utility.Utility;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestSuite_DispatchDetails extends BaseTestClass {
 
@@ -17,6 +19,8 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
     DispatchDetailPage dispatchDetailPage = DispatchDetailPage.getInstance();
     HomePage homePage = HomePage.getInstance();
     ScanPage scanPage = ScanPage.getInstance();
+    AddOrdersPage addOrdersPage = new AddOrdersPage();
+    AddToDispatchPage addToDispatchPage = new AddToDispatchPage();
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
             description = "TC_001, Verify UI Of Dispatch Record/Detail For Assigned Status")
@@ -262,4 +266,136 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
         softAssert.assertTrue(commonActions.getWebElementList_TableDataList_Lbl("ORDER ID").size() <= 100, "Validate records present are not more than 100");
         softAssert.assertAll();
     }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_013, Verify UI Of Add To Dispatch Button On Dispatch Scan")
+    public void TC_DispatchDetail_013_Verify_UI_Of_Add_To_Dispatch_Button_On_Dispatch_Scan() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        String orderId = CommonActions.createAnOrderGetOrderID();
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        dispatchDetailPage.click_ScanToAddOrders_Btn();
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderId);
+        softAssert.assertTrue(addOrdersPage.isEnabled_Dispatch_Btn(), "Add to Dispatch button is enabled as expected");
+        addOrdersPage.click_AddToDispatch_Btn();
+        softAssert.assertTrue(addToDispatchPage.isPresent_Header_lbl(), "Add to dispatch header is present as expected");
+        softAssert.assertTrue(addToDispatchPage.isPresent_AddToDispatch_Btn(), "Add to dispatch button is present as expected");
+        softAssert.assertTrue(addToDispatchPage.isPresent_Cancel_Btn(), "Cancel button is present as expected");
+        addToDispatchPage.click_Cancel_Btn();
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_014, Verify Functionality Of Add To Dispatch Button On Dispatch Scan")
+    public void TC_DispatchDetail_014_Verify_Functionality_Of_Add_To_Dispatch_Button_On_Dispatch_Scan() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        String orderId = CommonActions.createAnOrderGetOrderID();
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        dispatchDetailPage.click_ScanToAddOrders_Btn();
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderId);
+        softAssert.assertTrue(addOrdersPage.isEnabled_Dispatch_Btn(), "Add to Dispatch button is enabled as expected");
+        addOrdersPage.click_AddToDispatch_Btn();
+        softAssert.assertTrue(addToDispatchPage.isPresent_Header_lbl(), "Add to dispatch header is present as expected");
+
+        addToDispatchPage.click_AddToDispatch_Btn();
+        dispatchDetailPage.fillWithClear_SearchBar_Txt(orderId);
+        softAssert.assertEquals(dispatchDetailPage.getValue_OrderId_Txt(0), orderId, "The Added order is added to dispatch as expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_015, Verify Functionality Of Scan Packages On Dispatch Scan With Valid Data")
+    public void TC_DispatchDetail_015_Verify_Functionality_Of_Scan_Packages_On_Dispatch_Scan_With_Valid_Data() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        String orderIdOne = CommonActions.createAnOrderGetOrderID();
+        String orderIdTwo = CommonActions.createAnOrderGetOrderID();
+        System.out.println(orderIdTwo + " " + orderIdOne);
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        dispatchDetailPage.click_ScanToAddOrders_Btn();
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderIdOne);
+        softAssert.assertTrue(addOrdersPage.isEnabled_Dispatch_Btn(), "Add to Dispatch button is enabled as expected");
+        softAssert.assertEquals(scanPage.get_NoOfPackageScanned_Txt(), "1 package scanned. Continue scanning to add more", "Package added text is showing as expected");
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderIdTwo);
+        softAssert.assertEquals(scanPage.get_NoOfPackageScanned_Txt(), "2 packages scanned. Continue scanning to add more", "Newly scanned Package added text is showing as expected");
+        addOrdersPage.clickOn_RemoveOrder_Btn(1);
+        softAssert.assertEquals(scanPage.get_NoOfPackageScanned_Txt(), "1 package scanned. Continue scanning to add more", "Package added text is showing as expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_016, Verify Functionality Of Scan Packages On Dispatch Scan With Valid Data")
+    public void TC_DispatchDetail_016_Verify_Functionality_Of_Scan_Packages_On_Dispatch_Scan_With_InValid_Data(){
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        String orderId = dispatchDetailPage.getValue_OrderId_Txt(0);
+        dispatchDetailPage.click_ScanToAddOrders_Btn();
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderId);
+
+        softAssert.assertContainsIgnoreCase(scanPage.getText_PopUpMessage_Txt(), "package_error", "Error pop up message when you added order which is already part of another dispatch is present as expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_017 & TC_018, Verify Functionality Of Next Page Pagination Button")
+    public void TC_DispatchDetail_017_And_TC_018_Verify_Functionality_Of_Next_Page_Pagination_Button() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        CommonActions.createOrdersAndAddDispatchThenGetId(11);
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        commonActions.chooseNoOfRecordsToBeDisplayedPerPage(10);
+        commonActions.click_PaginationNext_Btn();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_OrderId_Txt(),"Next page button is working as expected");
+        commonActions.click_PaginationPrevious_Btn();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_OrderId_Txt(),"Previous page button is working as expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
+            description = "TC_020 & TC_021, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
+    public void TC_DispatchDetail_020_And_TC_021_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() throws IOException, APIResponseException {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+
+        commonActions.coverJourneyTillDispatches();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        commonActions.chooseNoOfRecordsToBeDisplayedPerPage(50);
+
+        int numberOfOrdersPresent = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
+        List<String> orderIds = CommonActions.createOrdersGetIdsAsList(11 - numberOfOrdersPresent);
+
+        softAssert.assertTrue(dispatchDetailPage.isPresent_dispatchDetailBreadCrumb_Link(), "Validate presence of Dispatch Detail breadcrumb");
+        String expectedEleventhOrderId = dispatchDetailPage.getValue_OrderId_Txt(0);
+        dispatchDetailPage.click_ScanToAddOrders_Btn();
+        addOrdersPage.fill_SearchByOrderId_TxtBox(orderIds);
+        dispatchDetailPage.click_DispatchList_Btn();
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        commonActions.chooseNoOfRecordsToBeDisplayedPerPage(10);
+        commonActions.click_PaginationNext_Btn();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_OrderId_Txt(),"Next page button is working as expected");
+        commonActions.click_PaginationPrevious_Btn();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_OrderId_Txt(),"Previous page button is working as expected");
+        String expectedFirstOrderId = dispatchDetailPage.getValue_OrderId_Txt(0);
+        commonActions.select_PaginationBlock_Txt(2);
+        String actualEleventhOrderId = dispatchDetailPage.getValue_OrderId_Txt(0);
+        softAssert.assertEquals(actualEleventhOrderId,expectedEleventhOrderId,"Pagination block second page button is working as expected");
+
+        commonActions.select_PaginationBlock_Txt(1);
+        String actualFirstOrderId = dispatchDetailPage.getValue_OrderId_Txt(0);
+        softAssert.assertEquals(actualFirstOrderId,expectedFirstOrderId,"Pagination block first page button is working as expected");
+
+        softAssert.assertAll();
+    }
+
+
 }

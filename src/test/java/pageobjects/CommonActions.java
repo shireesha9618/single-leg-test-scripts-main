@@ -333,6 +333,7 @@ public class CommonActions {
         click_PaginationSelectedItem_Lbl();
         Utility.clickWebElementContainingText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl), String.valueOf(no));
         CommonActions.getInstance().waitTillLoaderDisappears();
+        Utility.scrollDownUsingKeyboardKey(2);
     }
 
     public void selectPaginationBlock(String label) {
@@ -532,15 +533,24 @@ public class CommonActions {
     }
 
     public static String createOrdersAndAddDispatchThenGetId(int numberOfOrdersToBeAddedToDispatch) throws IOException, APIResponseException {
-        HashMap<String, String>  dispatch;
+        Map<String, String> dispatch;
         List<String> jobIDList = new ArrayList<>();
-        String jobID ;
-        for (int i=0;i<5;i++) {
+        for (int i = 0; i < numberOfOrdersToBeAddedToDispatch; i++) {
             HashMap<String, String> order = ApiClient.createOrder1("cod");
-            jobID = ApiClient.getJobID(order.get("orderId"));
-            jobIDList.add(jobID);
+            jobIDList.add(order.get("clientContainerId"));
         }
         dispatch = ApiClient.createAndPublishDispatch(jobIDList);
         return dispatch.get("dispatchID");
+    }
+
+    public static List<String> createOrdersGetIdsAsList(int numberOfOrdersRequiredToCreate) throws IOException, APIResponseException {
+        List<String> jobIDList = new ArrayList<>();
+        if (numberOfOrdersRequiredToCreate > 0) {
+            for (int i = 0; i < numberOfOrdersRequiredToCreate; i++) {
+                HashMap<String, String> order = ApiClient.createOrder1("cod");
+                jobIDList.add(order.get("clientContainerId"));
+            }
+        }
+        return jobIDList;
     }
 }

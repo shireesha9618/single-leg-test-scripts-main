@@ -5,6 +5,8 @@ import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
 
 public class AddOrdersPage {
@@ -12,7 +14,7 @@ public class AddOrdersPage {
     private final Locator header_Txt = Locator.builder().withWeb(By.xpath("//h1//div[contains(text(),'Add Orders')]"));
     private final Locator addToDispatch_Btn = Locator.builder().withWeb(By.xpath("//div[contains(@class,'ml-auto')]//button/p"));
     private final Locator searchbyOrderId_TxtBox = Locator.builder().withWeb(By.id("package-id-inpt"));
-    private final Locator removeOrder_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr[2]/td[1]//*[name()='svg']"));
+    private final Locator removeOrder_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1]//*[name()='svg']"));
     private final Locator youDontHaveAnyScannedShipments_Txt = Locator.builder().withWeb(By.xpath("//p[contains(text(),'You don’t have any scanned shipments')]"));
     private final Locator inventoryInHand_Lbl = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Inventory in hand']"));
     private final Locator inventoryInHand_Value = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Inventory in hand']/preceding-sibling::p"));
@@ -34,9 +36,9 @@ public class AddOrdersPage {
         ActionHelper.waitForLoaderToHide();
     }
 
-    public void clickOn_RemoveOrder_Btn() {
+    public void clickOn_RemoveOrder_Btn(int orderIndexNumber) {
         ActionHelper.waitForLoaderToHide();
-        ActionHelper.click(removeOrder_Btn);
+        ActionHelper.click(ActionHelper.findElements(removeOrder_Btn).get(orderIndexNumber));
         ActionHelper.waitForLoaderToHide();
     }
 
@@ -60,5 +62,17 @@ public class AddOrdersPage {
         ActionHelper.waitForLoaderToHide();
         ActionHelper.waitUntilElementVisible(expectedCash_Value.getBy());
         return Integer.parseInt(ActionHelper.getText(expectedCash_Value).split("\\.")[0]);
+    }
+
+    public void click_AddToDispatch_Btn(){
+        ActionHelper.click(addToDispatch_Btn);
+    }
+
+    public void fill_SearchByOrderId_TxtBox(List<String> orderIds) {
+        for (String orderId : orderIds) {
+            ActionHelper.sendKeysWithClear(searchbyOrderId_TxtBox.getBy(), orderId);
+            System.out.println(orderId);
+            ActionHelper.waitForLoaderToHide();
+        }
     }
 }

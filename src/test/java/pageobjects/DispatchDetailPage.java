@@ -10,6 +10,8 @@ import utility.Utility;
 
 import java.util.List;
 
+import static constants.Constants.WAIT_FOR_ONE_SECOND;
+
 public class DispatchDetailPage {
     private static DispatchDetailPage _instance;
 
@@ -94,6 +96,9 @@ public class DispatchDetailPage {
 
     private final Locator successfullyUpdatedPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Successfully updated']"));
     private final Locator reloadingDispatchDataPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Reloading dispatch data']"));
+    private final Locator orderId_Txt = Locator.builder().withWeb(By.xpath("//tr[contains(@data-row-key,'job')]/td[2]"));
+    private final Locator dispatchList_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'Dispatch List')]"));
+
 
     public static DispatchDetailPage getInstance() {
         if (_instance == null) _instance = new DispatchDetailPage();
@@ -186,6 +191,7 @@ public class DispatchDetailPage {
 
     public void fill_SearchBar_Txt(String value) {
         ActionHelper.fill(searchBar_Txt, value);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void fillWithClear_SearchBar_Txt(String value) {
@@ -790,4 +796,20 @@ public class DispatchDetailPage {
         List<WebElement> orders = CommonActions.getInstance().getWebElementList_TableDataList_Lbl("ORDER ID");
         ActionHelper.waitUntilElementClickable(orders.get(orders.size() - 1));
     }
+
+    public String getValue_OrderId_Txt(int orderIdIndex){
+        ActionHelper.waitUntilElementVisible(orderId_Txt.getBy());
+        return ActionHelper.getText(ActionHelper.findElements(orderId_Txt).get(orderIdIndex));
+    }
+
+    public boolean isPresent_OrderId_Txt(){
+        return ActionHelper.isPresent(orderId_Txt,WAIT_FOR_ONE_SECOND);
+    }
+
+    public void click_DispatchList_Btn(){
+        Utility.scrollUsingJS(dispatchList_Btn.getBy());
+        ActionHelper.click(dispatchList_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
 }

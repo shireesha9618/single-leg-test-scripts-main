@@ -485,23 +485,14 @@ public class TestSuite_Dispatch extends BaseTestClass {
         int assignedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
         dispatchPage.uncheckCheckbox_StatusDropdownAssigned_Checkbox();
         dispatchPage.checkCheckbox_StatusDropdownStarted_Checkbox();
-
         int startedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
-        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
-
         dispatchPage.checkCheckbox_StatusDropdownOngoing_Checkbox();
-
         int ongoingRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
-        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
-
         dispatchPage.checkCheckbox_StatusDropdownClosed_Checkbox();
-
         int closedRecordsCount = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
-        Utility.scrollUpUsingKeyboardKey();
         dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
-
         dispatchPage.statusDropdownSelectAll();
 
         JarvisAssert.assertTrue(!(dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size() == assignedRecordsCount + startedRecordsCount + ongoingRecordsCount + closedRecordsCount));
@@ -575,7 +566,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
             description = "TC_021, Verify The Functionality of Add Order Button in Actions")
     public void TC_Dispatch_021_Verify_The_Functionality_of_Add_Order_Button_In_Actions() throws IOException, APIResponseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        String orderId = commonActions.createAnOrderGetOrderID();
+        String orderId = CommonActions.createAnOrderGetOrderID();
         commonActions.coverJourneyTillDispatches();
         dispatchPage.scrollTo_Actions_column();
         dispatchPage.click_FirstOrderActions_Btn();
@@ -591,7 +582,7 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertTrue(cashCollectedAfterAddingNewOrder > cashCollectedBeforeAddingNewOrder, "Expected Cash to be collected is greater than after adding a new order as expected");
         softAssert.assertTrue(!AddOrdersPage.getInstance().isPresent_YouDontHaveAnyScannedShipments_Txt(), "You Don't Have Any Scanned Shipments text is present as expected");
 
-        AddOrdersPage.getInstance().clickOn_RemoveOrder_Btn();
+        AddOrdersPage.getInstance().clickOn_RemoveOrder_Btn(0);
         cashCollectedAfterAddingNewOrder = AddOrdersPage.getInstance().getText_ExpectedCashValue_Txt();
 
         softAssert.assertEquals(cashCollectedAfterAddingNewOrder, cashCollectedBeforeAddingNewOrder, "Expected Cash to be collected is equals as expected");

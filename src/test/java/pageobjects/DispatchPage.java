@@ -63,7 +63,7 @@ public class DispatchPage {
 
     private final Locator shipmentDetailsTableHeaderList_Lbl = Locator.builder().withWeb(By.xpath("//thead/tr/th[text()]"));
     private final Locator shipmentDetailsTableColumnRadio_ListRadio = Locator.builder().withWeb(By.xpath("//tbody/tr/td//input"));
-    private final Locator shipmentDetailsTableColumnRider_ListLink = Locator.builder().withWeb(By.xpath("//tbody/tr/td//a"));
+    private final Locator shipmentDetailsTableColumnRider_ListLink = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]"));
     private final Locator shipmentDetailsTableColumnVehicle_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div[br]"));
     private final Locator shipmentDetailsTableColumnStructure_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3][div[br]]/following-sibling::td[1]/div"));
     private final Locator shipmentDetailsTableColumnStatus_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td/div/h6"));
@@ -568,6 +568,7 @@ public class DispatchPage {
     }
 
     public void click_ShipmentDetailsTableColumnRider_ListLink(int index) {
+        CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.click(ActionHelper.findElements(shipmentDetailsTableColumnRider_ListLink.getBy()).get(index));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
