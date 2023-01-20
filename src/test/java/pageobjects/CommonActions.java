@@ -55,6 +55,8 @@ public class CommonActions {
     private final Locator calendarMonth_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-month-btn']"));
     private final Locator calendarYear_Btn = Locator.builder().withWeb(By.xpath("//button[@class='ant-picker-year-btn']"));
     private final Locator calendarChooseDateMonthYear_Btn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[@title='PLACEHOLDER']"));
+    private final Locator popUpErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md max-w-md')]"));
+
 
     public static CommonActions getInstance() {
         if (_instance == null) _instance = new CommonActions();
@@ -497,5 +499,13 @@ public class CommonActions {
                 break;
         }
         return true;
+    }
+
+    public boolean isPresent_PopUpErrorMsg_Lbl() {
+        return ActionHelper.isPresent(popUpErrorMsg_Lbl);
+    }
+
+    public String getText_PopUpErrorMsg_Lbl() {
+        return ActionHelper.getText(popUpErrorMsg_Lbl);
     }
 }

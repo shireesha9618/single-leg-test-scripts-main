@@ -15,7 +15,7 @@ public class JobWorkflowActivePage {
 
     private final Locator descriptionSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h6[text()='Description']"));
     private final Locator objectives_Lbl = Locator.builder().withWeb(By.xpath("//h6[contains(text(),'Objectives ')]"));
-    private final Locator search_Txt = Locator.builder().withWeb(By.name("search-bar"));
+    private final Locator search_Txt = Locator.builder().withWeb(By.name("search"));
     private final Locator tags_DropDown = Locator.builder().withWeb(By.className("css-1d8n9bt"));
 
     private final Locator diagram_Lbl = Locator.builder().withWeb(By.id("canvas"));

@@ -13,6 +13,7 @@ import pageobjects.HomePage;
 import pageobjects.settings.*;
 import utility.Utility;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class TestSuite_SettingJobWorkflow extends BaseTestClass {
@@ -597,6 +598,252 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.fill_Search_Txt(expectedJobWorkflowName);
         softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl(), expectedJobWorkflowName, "Expected Job Workflow Name Is Matched");
         softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuStatus_Lbl(), "Inactive", "Status Is Inactive As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_011, Verify The Validation Functionality Of Create Button In New Job Workflow Page For Duplicate Record")
+    public void TC_JobWorkflowSettings_011_Verify_The_Validation_Functionality_Of_Create_Button_In_New_Job_Workflow_Page_For_Duplicate_Record() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Create_Btn();
+        String duplicateJobWorkflow = jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl();
+        String expectedDuplicateErrorMsg = "Please use a unique name for the new workflow.";
+        jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
+
+        jobWorkflowCreatePage.fill_WorkflowName_Txt(duplicateJobWorkflow);
+        jobWorkflowCreatePage.fill_WorkflowDescription_Txt(sampleData.lorem().sentence(10));
+        jobWorkflowCreatePage.select_ProductType_Txt();
+        jobWorkflowCreatePage.select_ShipmentFlow_Txt("None");
+        jobWorkflowCreatePage.click_Create_Btn();
+
+        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), expectedDuplicateErrorMsg, "Duplicate Error Appeared As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_012, Verify The Functionality Of Create Button In New Job Workflow Page")
+    public void TC_JobWorkflowSettings_012_Verify_The_Functionality_Of_Create_Button_In_New_JobWorkflow_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        String validationSuccessMsg = "Job Workflow created successfully";
+        jobWorkflowPage.click_Create_Btn();
+        jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
+        String jobWorkflowName = jobWorkflowCreatePage.fillCreateJobWorkflow().get("workflowName");
+        jobWorkflowCreatePage.click_Create_Btn();
+        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
+        softAssert.assertEqualsIgnoreCase(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), jobWorkflowName, "Job Workflow Header Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_013, Verify The Functionality Of Table Record Matched With Create Button Record")
+    public void TC_JobWorkflowSettings_013_Verify_The_Functionality_Of_Table_Record_Matched_With_Create_Button_Record() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        String validationSuccessMsg = "Job Workflow created successfully";
+        jobWorkflowPage.click_Create_Btn();
+        jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
+        String jobWorkflowName = jobWorkflowCreatePage.fillCreateJobWorkflow().get("workflowName");
+        jobWorkflowCreatePage.click_Create_Btn();
+        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
+
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        jobWorkflowPage.fill_Search_Text(jobWorkflowName);
+        softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), jobWorkflowName, "Job Workflow Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_042, Verify The Functionality Of Search Bar Of Table Record Present In Draft Tab")
+    public void TC_JobWorkflowSettings_042_Verify_The_Functionality_Of_Search_Bar_Of_Table_Record_Present_In_Draft_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String expectedJobWorkflowName = commonActions.getText_TableData_Lbl("NAME");
+        jobWorkflowActivePage.fill_Search_Txt(expectedJobWorkflowName);
+        softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), expectedJobWorkflowName, "Job Workflow Record Is Present As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_043, Verify The Functionality Of Record Present In Objective Of Job Workflow Description Page Should Matched To Objective Workflows Table Record")
+    public void TC_JobWorkflowSettings_043_Verify_The_Functionality_Of_Record_Present_In_Objective_Of_Job_Workflow_Description_Page_Should_To_Objective_Workflows_Table_Record() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        String expectedObjectiveName = jobWorkflowActivePage.getText_ObjectiveName_Lbl();
+        HomePage.getInstance().click_SettingsMenu_Btn();
+        SettingsPage.getInstance().click_Workflow_Link();
+        WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
+        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_051, Verify The UI Of Save As Draft Button In Job Workflow Description Page")
+    public void TC_JobWorkflowSettings_051_Verify_The_UI_Of_Save_As_Draft_Button_In_Job_Workflow_Description_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowDraftPage.click_SaveAsDraft_Btn();
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_SaveAsDraftPopUp_Btn(), "Save As Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_CancelPopUp_Btn(), "Cancel Button Is Present As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_052, Verify The Functionality Of Cancel Button In Save As Draft Tab")
+    public void TC_JobWorkflowSettings_052_Verify_The_Functionality_Of_Cancel_Button_In_Save_As_Draft_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        String expectedJobWorkflowName = jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl();
+        jobWorkflowDraftPage.click_SaveAsDraft_Btn();
+        jobWorkflowDraftPage.click_CancelPopUp_Btn();
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobWorkflowName, "Job Workflow Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_055, Verify The UI Of View Service Attributes Button In Job Workflow Description Page")
+    public void TC_JobWorkflowSettings_055_Verify_The_UI_Of_View_Service_Attributes_Button_In_Job_Workflow_Description_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowDraftPage.click_ViewServiceAttributes_Btn();
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ServiceAttributeHeader_Lbl(), "Service Attributes Header Label Is Matched As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_ServiceAttributeHeader_Lbl(), "Service Attributes", "Service Attributes Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ServiceAttributeDoorStepAttributeSubHeader_Lbl(), "Door Step Attributes Sub Header Is Present As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_ServiceAttributeDoorStepAttributeSubHeader_Lbl(), "Doorstep Attributes", "Doorstep Attributes Sub Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeKYCVerification_Lbl(), "KYC Verification Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeKYCVerification_Txt(), "KYC Verification Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeOTPVerification_Lbl(), "OTP Verification Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeOTPVerification_Txt(), "OTP Verification Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeQCVerification_Lbl(), "QC Verification Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeQCVerification_Txt(), "QC Verification Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeSignatureCollection_Lbl(), "Signature Collection Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributeSignatureCollection_Txt(), "Signature Collections Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributePaymentOption_Lbl(), "Payment Option Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributePaymentOption_Txt(), "Payment Option Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributePaymentType_Lbl(), "Payment Type Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DoorStepAttributePaymentType_Txt(), "Payment Type Data Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ServiceAttributeOrderAttributeSubHeader_Lbl(), "Order Attribute Sub Header Is Present As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_ServiceAttributeOrderAttributeSubHeader_Lbl(), "Order Attributes", "Order Attributes Sub Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributePlanningMode_Lbl(), "Planning Mode Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributePlanningMode_Txt(), "Planning Mode Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributeProductType_Lbl(), "Product Type Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributeProductType_Txt(), "Product Type Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributeShipmentFlow_Lbl(), "Shipment Flow Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_OrderAttributeShipmentFlow_Txt(), "Shipment Flow Data Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ServiceAttributeBack_Btn(), "Back Button Is Present As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_056, Verify The Functionality Of Back Button In Service Attributes Page")
+    public void TC_JobWorkflowSettings_056_Verify_The_Functionality_Of_Back_Button_In_Service_Attributes_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        String expectedJobWorkflowName = jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl();
+        jobWorkflowDraftPage.click_ViewServiceAttributes_Btn();
+        jobWorkflowDraftPage.click_ServiceAttributeBack_Btn();
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobWorkflowName, "User Is Direct To Description Page As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_057, Verify The Functionality Of Create Button Record Matched With Service Attributes Page")
+    public void TC_JobWorkflowSettings_057_Verify_The_Functionality_Of_Create_Button_Record_Matched_With_Service_Attributes_Page() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Create_Btn();
+        jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
+        HashMap<String, String> fillJobWorkflow = new HashMap<>(jobWorkflowCreatePage.fillCreateJobWorkflow());
+        HashMap<String, String> getDetailJobWorkflow = new HashMap<>(jobWorkflowCreatePage.getDetail_JobWorkflow());
+        jobWorkflowCreatePage.click_Create_Btn();
+        softAssert.assertEqualsIgnoreCase(getDetailJobWorkflow.get("workflowName"), jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), "Job Workflow Header Is Matched As Expected");
+
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        jobWorkflowPage.fill_Search_Text(fillJobWorkflow.get("workflowName"));
+        commonActions.click_TableData_Link("NAME");
+
+        jobWorkflowDraftPage.click_ViewServiceAttributes_Btn();
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_DoorStepAttributeSignatureCollection_Txt(), getDetailJobWorkflow.get("signatureCollection"), "Signature Collection Is Enabled As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_DoorStepAttributePaymentOption_Txt(), getDetailJobWorkflow.get("paymentOption"), "Payment Option Data Is Matched As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_DoorStepAttributePaymentType_Txt(), getDetailJobWorkflow.get("paymentType"), "Payment Type Data Is Matched As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_OrderAttributeProductType_Txt(), getDetailJobWorkflow.get("productType"), "Product Type Data Is Matched As Expected");
+        softAssert.assertEquals(jobWorkflowDraftPage.getText_OrderAttributeShipmentFlow_Txt(), getDetailJobWorkflow.get("shipmentFlow"), "Shipment Flow Data Is Matched As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_058, Verify The UI Of Validate Button")
+    public void TC_JobWorkflowSettings_058_Verify_The_UI_Of_Validate_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowDraftPage.click_Validate_Btn();
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Close_Btn(), "Close Button Appear On Pop As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Dismiss_Btn(), "Dismiss Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ValidationMessagePopUp_Lbl(), "Validation Message On The Pop Up Appeared As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_059, Verify Functionality Of Close Button In Error Validation Message Popup")
+    public void TC_JobWorkflowSettings_059_Verify_Functionality_Of_Close_Button_In_Error_Validation_Message_Popup() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+
+        jobWorkflowDraftPage.click_Validate_Btn();
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Close_Btn(), "Close Button Appear On Pop As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Dismiss_Btn(), "Dismiss Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ValidationMessagePopUp_Lbl(), "Validation Message On The Pop Up Appeared As Expected");
+
+        jobWorkflowDraftPage.click_Close_Btn();
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_Close_Btn(), "Close Button Appear On Pop As Expected");
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_Dismiss_Btn(), "Dismiss Button Is Present As Expected");
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_ValidationMessagePopUp_Lbl(), "Validation Message On The Pop Up Appeared As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_060, Verify Functionality Of Dismiss Button In Error Validation Message Popup")
+    public void TC_JobWorkflowSettings_060_Verify_Functionality_Of_Dismiss_Button_In_Error_Validation_Message_Popup() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_TableData_Link("NAME");
+
+        jobWorkflowDraftPage.click_Validate_Btn();
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Close_Btn(), "Close Button Appear On Pop As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Dismiss_Btn(), "Dismiss Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ValidationMessagePopUp_Lbl(), "Validation Message On The Pop Up Appeared As Expected");
+
+        jobWorkflowDraftPage.click_Dismiss_Btn();
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_Close_Btn(), "Close Button Appear On Pop As Expected");
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_Dismiss_Btn(), "Dismiss Button Is Present As Expected");
+        softAssert.assertTrue(!jobWorkflowDraftPage.isPresent_ValidationMessagePopUp_Lbl(), "Validation Message On The Pop Up Appeared As Expected");
+
         softAssert.assertAll();
     }
 }

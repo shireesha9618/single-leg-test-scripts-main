@@ -41,7 +41,6 @@ public class AddNewFacilityPage {
     private final Locator facilityNameErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility Name*']/../following-sibling::div//p"));
     private final Locator facilityIdErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Facility ID*']/../following-sibling::div//p"));
     private final Locator postalCodeErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Postal Code*']/../following-sibling::div//p"));
-    private final Locator popUpErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md max-w-md')]"));
     private final Locator addressLine1ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 1*']/../following-sibling::div//p"));
     private final Locator addressLine2ErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Address Line 2*']/../following-sibling::div//p"));
     private final Locator stateErrorMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='State*']/../following-sibling::div//p"));
@@ -326,10 +325,6 @@ public class AddNewFacilityPage {
         return ActionHelper.getText(postalCodeErrorMsg_Lbl);
     }
 
-    public boolean isPresent_PopUpErrorMsg_Lbl() {
-        return ActionHelper.isPresent(popUpErrorMsg_Lbl);
-    }
-
     public String getText_AddressLine1ErrorMsg_Lbl() {
         return ActionHelper.getText(addressLine1ErrorMsg_Lbl);
     }
@@ -344,10 +339,6 @@ public class AddNewFacilityPage {
 
     public String getText_CityErrorMsg_Lbl() {
         return ActionHelper.getText(cityErrorMsg_Lbl);
-    }
-
-    public String getText_PopUpErrorMsg_Lbl() {
-        return ActionHelper.getText(popUpErrorMsg_Lbl);
     }
 
     public String getText_DuplicateIdErrorMsgPopUp_Lbl() {
