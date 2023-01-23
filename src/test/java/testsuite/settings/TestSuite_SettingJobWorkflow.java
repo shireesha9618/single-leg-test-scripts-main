@@ -530,14 +530,14 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         softAssert.assertTrue(jobWorkflowActivePage.isPresent_ObjectiveConfigurationName_Lbl(), "Objective Configuration Name Label Is Present AS Expected");
 
         jobWorkflowActivePage.click_Connectors_Btn();
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1_Lbl(), "Connector 1 Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Destination_Lbl(), "Connector 1 Destination Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Status_Lbl(), "Connector 1 Status Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Reason_Lbl(), "Connector 1 Reason Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2_Lbl(), "Connector 2 Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Destination_Lbl(), "Connector 2 Destination Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Status_Lbl(), "Connector 2 Status Label Is Present As Expected");
-        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Reason_Lbl(), "Connector 2 Reason Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorOne_Lbl(), "Connector 1 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorOneDestination_Lbl(), "Connector 1 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorOneStatus_Lbl(), "Connector 1 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorOneReason_Lbl(), "Connector 1 Reason Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorTwo_Lbl(), "Connector 2 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorTwoDestination_Lbl(), "Connector 2 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorTwoStatus_Lbl(), "Connector 2 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ConnectorTwoReason_Lbl(), "Connector 2 Reason Label Is Present As Expected");
         softAssert.assertAll();
     }
 
