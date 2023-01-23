@@ -22,6 +22,36 @@ public class JobWorkflowDraftPage {
     private final Locator zoomOut_Btn = Locator.builder().withWeb(By.xpath("//button[text()='-']"));
     private final Locator reset_Btn = Locator.builder().withWeb(By.xpath("//button[text()='RESET']"));
 
+    private final Locator saveAsDraftPopUp_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Save As Draft']/.."));
+    private final Locator cancelPopUp_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']/.."));
+
+    private final Locator serviceAttributeHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Service Attributes']"));
+    private final Locator serviceAttributeDoorStepAttributeSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Doorstep Attributes']"));
+    private final Locator doorStepAttributeKYCVerification_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='KYC Verification']"));
+    private final Locator doorStepAttributeKYCVerification_Txt = Locator.builder().withWeb(By.xpath("//p[text()='KYC Verification']/following-sibling::p"));
+    private final Locator doorStepAttributeOTPVerification_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='OTP Verification']"));
+    private final Locator doorStepAttributeOTPVerification_Txt = Locator.builder().withWeb(By.xpath("//p[text()='OTP Verification']/following-sibling::p"));
+    private final Locator doorStepAttributeQCVerification_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='QC Verification']"));
+    private final Locator doorStepAttributeQCVerification_Txt = Locator.builder().withWeb(By.xpath("//p[text()='QC Verification']/following-sibling::p"));
+    private final Locator doorStepAttributeSignatureCollection_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Signature Collection']"));
+    private final Locator doorStepAttributeSignatureCollection_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Signature Collection']/following-sibling::p"));
+    private final Locator doorStepAttributePaymentOption_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Payment Option']"));
+    private final Locator doorStepAttributePaymentOption_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Payment Option']/following-sibling::p"));
+    private final Locator doorStepAttributePaymentType_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Payment Type']"));
+    private final Locator doorStepAttributePaymentType_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Payment Type']/following-sibling::p"));
+
+    private final Locator serviceAttributeOrderAttributeSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Order Attributes']"));
+    private final Locator orderAttributePlanningMode_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Planning Mode']"));
+    private final Locator orderAttributePlanningMode_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Planning Mode']/following-sibling::p"));
+    private final Locator orderAttributeProductType_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Product Type']"));
+    private final Locator orderAttributeProductType_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Product Type']/following-sibling::p"));
+    private final Locator orderAttributeShipmentFlow_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Shipment Flow']"));
+    private final Locator orderAttributeShipmentFlow_Txt = Locator.builder().withWeb(By.xpath("//p[text()='Shipment Flow']/following-sibling::p"));
+    private final Locator serviceAttributeBack_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
+    private final Locator validationMessagePopUp_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='flex items-start']//p"));
+    private final Locator dismiss_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex items-start']//button[text()]"));
+    private final Locator close_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Close']/.."));
+
     public static JobWorkflowDraftPage getInstance() {
         if (_instance == null)
             _instance = new JobWorkflowDraftPage();
@@ -114,5 +144,185 @@ public class JobWorkflowDraftPage {
 
     public void click_Reset_Btn() {
         ActionHelper.click(reset_Btn);
+    }
+
+    public boolean isPresent_SaveAsDraftPopUp_Btn() {
+        return ActionHelper.isPresent(saveAsDraftPopUp_Btn);
+    }
+
+    public void click_SaveAsDraftPopUp_Btn() {
+        ActionHelper.click(saveAsDraftPopUp_Btn);
+    }
+
+    public boolean isPresent_CancelPopUp_Btn() {
+        return ActionHelper.isPresent(cancelPopUp_Btn);
+    }
+
+    public void click_CancelPopUp_Btn() {
+        ActionHelper.click(cancelPopUp_Btn);
+    }
+
+    public boolean isPresent_ServiceAttributeHeader_Lbl() {
+        return ActionHelper.isPresent(serviceAttributeHeader_Lbl);
+    }
+
+    public String getText_ServiceAttributeHeader_Lbl() {
+        return ActionHelper.getText(serviceAttributeHeader_Lbl);
+    }
+
+    public boolean isPresent_ServiceAttributeDoorStepAttributeSubHeader_Lbl() {
+        return ActionHelper.isPresent(serviceAttributeDoorStepAttributeSubHeader_Lbl);
+    }
+
+    public String getText_ServiceAttributeDoorStepAttributeSubHeader_Lbl() {
+        return ActionHelper.getText(serviceAttributeDoorStepAttributeSubHeader_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributeKYCVerification_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributeKYCVerification_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributeKYCVerification_Txt() {
+        return ActionHelper.isPresent(doorStepAttributeKYCVerification_Txt);
+    }
+
+    public String getText_DoorStepAttributeKYCVerification_Txt() {
+        return ActionHelper.getText(doorStepAttributeKYCVerification_Txt);
+    }
+
+    public boolean isPresent_DoorStepAttributeOTPVerification_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributeOTPVerification_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributeOTPVerification_Txt() {
+        return ActionHelper.isPresent(doorStepAttributeOTPVerification_Txt);
+    }
+
+    public String getText_DoorStepAttributeOTPVerification_Txt() {
+        return ActionHelper.getText(doorStepAttributeOTPVerification_Txt);
+    }
+
+    public boolean isPresent_DoorStepAttributeQCVerification_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributeQCVerification_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributeQCVerification_Txt() {
+        return ActionHelper.isPresent(doorStepAttributeQCVerification_Txt);
+    }
+
+    public String getText_DoorStepAttributeQCVerification_Txt() {
+        return ActionHelper.getText(doorStepAttributeQCVerification_Txt);
+    }
+
+    public boolean isPresent_DoorStepAttributeSignatureCollection_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributeSignatureCollection_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributeSignatureCollection_Txt() {
+        return ActionHelper.isPresent(doorStepAttributeSignatureCollection_Txt);
+    }
+
+    public String getText_DoorStepAttributeSignatureCollection_Txt() {
+        return ActionHelper.getText(doorStepAttributeSignatureCollection_Txt);
+    }
+
+    public boolean isPresent_DoorStepAttributePaymentOption_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributePaymentOption_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributePaymentOption_Txt() {
+        return ActionHelper.isPresent(doorStepAttributePaymentOption_Txt);
+    }
+
+    public String getText_DoorStepAttributePaymentOption_Txt() {
+        return ActionHelper.getText(doorStepAttributePaymentOption_Txt);
+    }
+
+    public boolean isPresent_DoorStepAttributePaymentType_Lbl() {
+        return ActionHelper.isPresent(doorStepAttributePaymentType_Lbl);
+    }
+
+    public boolean isPresent_DoorStepAttributePaymentType_Txt() {
+        return ActionHelper.isPresent(doorStepAttributePaymentType_Txt);
+    }
+
+    public String getText_DoorStepAttributePaymentType_Txt() {
+        return ActionHelper.getText(doorStepAttributePaymentType_Txt);
+    }
+
+    public boolean isPresent_ServiceAttributeOrderAttributeSubHeader_Lbl() {
+        return ActionHelper.isPresent(serviceAttributeOrderAttributeSubHeader_Lbl);
+    }
+
+    public String getText_ServiceAttributeOrderAttributeSubHeader_Lbl() {
+        return ActionHelper.getText(serviceAttributeOrderAttributeSubHeader_Lbl);
+    }
+
+    public boolean isPresent_OrderAttributePlanningMode_Lbl() {
+        return ActionHelper.isPresent(orderAttributePlanningMode_Lbl);
+    }
+
+    public boolean isPresent_OrderAttributePlanningMode_Txt() {
+        return ActionHelper.isPresent(orderAttributePlanningMode_Txt);
+    }
+
+    public String getText_OrderAttributePlanningMode_Txt() {
+        return ActionHelper.getText(orderAttributePlanningMode_Txt);
+    }
+
+    public boolean isPresent_OrderAttributeProductType_Lbl() {
+        return ActionHelper.isPresent(orderAttributeProductType_Lbl);
+    }
+
+    public boolean isPresent_OrderAttributeProductType_Txt() {
+        return ActionHelper.isPresent(orderAttributeProductType_Txt);
+    }
+
+    public String getText_OrderAttributeProductType_Txt() {
+        return ActionHelper.getText(orderAttributeProductType_Txt);
+    }
+
+    public boolean isPresent_OrderAttributeShipmentFlow_Lbl() {
+        return ActionHelper.isPresent(orderAttributeShipmentFlow_Lbl);
+    }
+
+    public boolean isPresent_OrderAttributeShipmentFlow_Txt() {
+        return ActionHelper.isPresent(orderAttributeShipmentFlow_Txt);
+    }
+
+    public String getText_OrderAttributeShipmentFlow_Txt() {
+        return ActionHelper.getText(orderAttributeShipmentFlow_Txt);
+    }
+
+    public boolean isPresent_ServiceAttributeBack_Btn() {
+        return ActionHelper.isPresent(serviceAttributeBack_Btn);
+    }
+
+    public void click_ServiceAttributeBack_Btn() {
+        ActionHelper.click(serviceAttributeBack_Btn);
+    }
+
+    public boolean isPresent_ValidationMessagePopUp_Lbl() {
+        return ActionHelper.isPresent(validationMessagePopUp_Lbl);
+    }
+
+    public String getText_ValidationMessagePopUp_Lbl() {
+        return ActionHelper.getText(validationMessagePopUp_Lbl);
+    }
+
+    public boolean isPresent_Dismiss_Btn() {
+        return ActionHelper.isPresent(dismiss_Btn);
+    }
+
+    public void click_Dismiss_Btn() {
+        ActionHelper.click(dismiss_Btn);
+    }
+
+    public boolean isPresent_Close_Btn() {
+        return ActionHelper.isPresent(close_Btn);
+    }
+
+    public void click_Close_Btn() {
+        ActionHelper.click(close_Btn);
     }
 }
