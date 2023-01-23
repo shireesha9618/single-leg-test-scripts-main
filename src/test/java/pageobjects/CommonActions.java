@@ -483,6 +483,13 @@ public class CommonActions {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
+    public void click_TableData_Link(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index) + "/a"));
+        ActionHelper.click(data);
+        waitTillLoaderDisappears();
+    }
+
     public boolean isPresent_TableColumnName_Lbl(String tableColumnName) {
         List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
         for (WebElement element : columName) {
@@ -491,5 +498,4 @@ public class CommonActions {
         }
         return true;
     }
-
 }

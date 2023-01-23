@@ -3,8 +3,11 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pageobjects.CommonActions;
 import utility.Utility;
+
+import java.util.List;
 
 public class JobWorkflowPage {
     private static JobWorkflowPage _instance;
@@ -25,6 +28,7 @@ public class JobWorkflowPage {
     private final Locator tableColumnUpdatedOn_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Updated On']"));
     private final Locator tableColumnUpdatedBy_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Updated By']"));
     private final Locator dataTable_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='ant-table-body']"));
+    private final Locator dataTableColumnName_List = Locator.builder().withWeb(By.xpath("//tr/td[1][@class]"));
 
     public static JobWorkflowPage getInstance() {
         if(_instance == null)
@@ -126,5 +130,9 @@ public class JobWorkflowPage {
         click_DataTable_Lbl();
         Utility.scrollRightUsingKeyboardKey(5);
         return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, 2000);
+    }
+
+    public List<WebElement> getList_DataTableColumnName_List() {
+        return ActionHelper.findElements(dataTableColumnName_List);
     }
 }

@@ -3,9 +3,13 @@ package testsuite.settings;
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
 import constants.TestGroup;
+import framework.common.assertion.JarvisAssert;
 import framework.common.assertion.JarvisSoftAssert;
+import framework.frontend.actions.ActionHelper;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pageobjects.CommonActions;
+import pageobjects.HomePage;
 import pageobjects.settings.*;
 import utility.Utility;
 
@@ -16,6 +20,8 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
     CommonActions commonActions = CommonActions.getInstance();
     JobWorkflowCreatePreviewPage jobWorkflowCreatePreviewPage = JobWorkflowCreatePreviewPage.getInstance();
     JobWorkflowCreatePage jobWorkflowCreatePage = JobWorkflowCreatePage.getInstance();
+    JobWorkflowActivePage jobWorkflowActivePage = JobWorkflowActivePage.getInstance();
+    JobWorkflowDraftPage jobWorkflowDraftPage = JobWorkflowDraftPage.getInstance();
     Faker sampleData = new Faker();
 
     private void coverJourneyTillJobWorkflow() {
@@ -108,6 +114,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (String status : statusList) {
+            softAssert.assertEquals(status, "Draft", "Active Status Is Appeared As Expected");
             softAssert.assertEquals(status, "Draft", "Draft Status Appeared As Expected");
         }
         softAssert.assertAll();
@@ -122,9 +129,8 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_StatusDraft_RadioBtn();
         List<String> draftStatusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (int i = 0; i < draftStatusList.size(); i++) {
-                softAssert.assertTrue(draftStatusList.get(i).equals("Draft"), "Draft Status Appeared As Expected");
+            softAssert.assertTrue(draftStatusList.get(i).equals("Draft"), "Draft Status Appeared As Expected");
         }
-
         jobWorkflowCreatePreviewPage.click_StatusClearSelection_Btn();
         List<String> statusList = jobWorkflowCreatePreviewPage.getText_CardMenuStatus_List();
         for (int i = 0; i < statusList.size(); i++) {
@@ -265,6 +271,332 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowPage.fill_Search_Text("@##5$de");
         softAssert.assertTrue(commonActions.isPresent_EmptyTableMsg_Lbl(), "Empty Table Message Appeared As Expected");
         softAssert.assertEquals(commonActions.getText_EmptyTableMsg_Lbl(), "It is Empty here", "Empty Validation Message Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_016, Verify The Functionality Of Search Bar In Job Workflows Page With Valid WorkFlow Name")
+    public void TC_JobWorkflowSettings_016_Verify_The_Functionality_Of_Search_Bar_In_Job_Workflows_Page_With_Valid_WorkFlow_Name() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String jobWorkflowName = commonActions.getText_TableData_Lbl("NAME");
+        jobWorkflowPage.fill_Search_Text(jobWorkflowName);
+        softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), jobWorkflowName, "Job Data Appears On Searching As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_017, Verify The Functionality Of Status Of Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_017_Verify_The_Functionality_Of_Status_Of_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        List<String> statusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
+        for (String status : statusList) {
+            softAssert.assertEquals(status, "Active", "Status Is Active As Expected");
+        }
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_018, Verify The Functionality Of Status Of Record Present In Draft Tab")
+    public void TC_JobWorkflowSettings_018_Verify_The_Functionality_Of_Status_Of_Record_Present_In_Draft_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        List<String> statusList = commonActions.getTextList_TableDataList_Lbl("STATUS");
+        for (String status : statusList) {
+            softAssert.assertEquals(status, "Draft", "Status Is Draft As Expected");
+        }
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_019, Verify Functionality Of Next Page Pagination Button")
+    public void TC_JobWorkflowSettings_019_Verify_Functionality_Of_Next_Page_Pagination_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String firstDataWorkflow = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_PaginationNext_Btn();
+        String elevenDataWorkflow = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertTrue(!firstDataWorkflow.equals(elevenDataWorkflow), "First Data And Eleventh Data Didn't Not Matched As Expected");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_020, Verify Functionality Of Previous Page Pagination Button")
+    public void TC_JobWorkflowSettings_020_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_PaginationNext_Btn();
+        String elevenDataWorkflow = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_PaginationPrevious_Btn();
+        String firstDataWorkflow = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertTrue(!elevenDataWorkflow.equals(firstDataWorkflow), "First Data And Eleventh Data Didn't Not Matched As Expected");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(1), "Page 1 Is Selected As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_021, Verify Functionality Of Vertically Scroll Of Job Workflow Table Using Mouse Scroll Wheel")
+    public void TC_JobWorkflowSettings_021_Verify_Functionality_Of_Vertically_Scroll_Of_Job_Workflow_Table_Using_Mouse_Scroll_Wheel() {
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        List<WebElement> jobWorkflow = jobWorkflowPage.getList_DataTableColumnName_List();
+        Utility.validatePageScrollDown(jobWorkflow.get(jobWorkflow.size() - 1));
+        JarvisAssert.assertTrue(ActionHelper.isPresent(jobWorkflow.get(jobWorkflow.size() - 1), 2000), "Validate Last Element Is Present As Expected");
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_022, Verify Vertically Scroll In Job Workflow Table Using KeyBoard")
+    public void TC_JobWorkflowSettings_022_Verify_Vertically_Scroll_In_Job_Workflow_Table_Using_KeyBoard() {
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        List<WebElement> jobWorkflow = jobWorkflowPage.getList_DataTableColumnName_List();
+        Utility.scrollDownUsingKeyboardKey(5);
+        JarvisAssert.assertTrue(ActionHelper.isPresent(jobWorkflow.get(jobWorkflow.size() - 1), 2000), "Validate Last Element Is Present");
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_023, Verify Displaying Of Job Workflow Table Records In Active Tab As Per Pagination Value")
+    public void TC_JobWorkflowSettings_023_Verify_Displaying_Of_Job_Workflow_Table_Records_In_Active_Tab_As_Per_Pagination_Value() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("10"), "Ten Data Elements Is Selected In Pagination Value As Expected");
+        commonActions.chooseNoOfRecordToBeDisplayed(5);
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("5"), "Five Data Elements Is Selected In Pagination Value As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_024, Verify Displaying Of Job Workflow Table Records In Draft Tab As Per Pagination Value")
+    public void TC_JobWorkflowSettings_024_Verify_Displaying_Of_Job_Workflow_Table_Records_In_Draft_Tab_As_Per_Pagination_Value() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("10"), "Ten Data Elements Is Selected In Pagination Value As Expected");
+        softAssert.assertEquals(commonActions.getTextList_TableDataList_Lbl("NAME").size(), 10, "Number Of Data Displayed Counts 10 As Expected");
+        commonActions.chooseNoOfRecordToBeDisplayed(20);
+        softAssert.assertTrue(commonActions.getText_PaginationSelectedItem_Lbl().contains("20"), "Twenty Data Elements Is Selected In Pagination Value As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_025, Verify Functionality Of Pagination Paging Block")
+    public void TC_JobWorkflowSettings_025_Verify_Functionality_Of_Pagination_Paging_Block() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.select_PaginationBlock_Txt(2);
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Second Page Is Selected As Expected");
+        commonActions.select_PaginationBlock_Txt(5);
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(5), "Fifth Page Is Selected As Expected");
+        commonActions.selectPaginationBlock("4");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(4), "First Page Is Selected As Expected");
+        commonActions.selectPaginationBlock("3");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(3), "Third Page Is Selected As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_026, Verify Functionality Of Pagination Paging Block With Next And Previous Button")
+    public void TC_JobWorkflowSettings_026_Verify_Functionality_Of_Pagination_Paging_Block_With_Next_And_Previous_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String firstJobName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_PaginationNext_Btn();
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected As Expected");
+        commonActions.click_PaginationPrevious_Btn();
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(1), "Page 1 Is Selected As Expected");
+        softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), firstJobName, "First Page First Data Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_027, Verify Functionality Of Pagination Per Page With Paging Block And Next Button")
+    public void TC_JobWorkflowSettings_027_Verify_Functionality_Of_Pagination_Per_Page_With_Paging_Block_And_Next_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        commonActions.click_PaginationNext_Btn();
+        String EleventhJobName = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected On Clicking Next As Expected");
+        commonActions.click_PaginationPrevious_Btn();
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(1), "Page 1 Is Selected As Expected");
+        commonActions.select_PaginationBlock_Txt(2);
+        softAssert.assertTrue(commonActions.isPaginationBlockSelected(2), "Page 2 Is Selected On Selecting 2 From Block As Expected");
+        softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), EleventhJobName, "Second Page First Data Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_028, Verify The UI Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_028_Verify_The_UI_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        String expectedJobName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_TableData_Link("NAME");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_JobWorkflowDetailHeader_Lbl(), "Job Workflow Detail Header Is Present As Expected");
+        softAssert.assertEqualsIgnoreCase(jobWorkflowActivePage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobName, "Job Workflow Detail Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ActiveStatus_Lbl(), "Active Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ViewServiceAttributes_Btn(), "View Service Attributes Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_MakeACopy_Btn(), "Make A Copy Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_DescriptionSubHeader_Lbl(), "Description Sub Header Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Objectives_Lbl(), "Objectives Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Search_Txt(), "Search Text Field Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Tags_DropDown(), "Tags Drop Down Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Diagram_Lbl(), "Diagram Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ZoomIn_Btn(), "Zoom In Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ZoomOut_Btn(), "Zoom Out Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Reset_Btn(), "Reset Button Is Present As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_033, Verify The Functionality Of Search Bar Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_033_Verify_The_Functionality_Of_Search_Bar_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        String expectedTableData = commonActions.getText_TableData_Lbl("NAME");
+        jobWorkflowPage.fill_Search_Text(expectedTableData);
+        String actualTableData = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertEquals(actualTableData, expectedTableData, "Actual Job Workflow Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_034, Verify The Functionality Of Objective Present Below Search Bar Of Table Record Present In Active Tab Should Matched To Objective Workflows")
+    public void TC_JobWorkflowSettings_034_Verify_The_Functionality_Of_Objective_Present_Below_Search_Bar_Of_Table_Record_Present_In_Active_Tab_Should_Matched_To_Objective_Workflows() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        String expectedObjectiveName = jobWorkflowActivePage.getText_ObjectiveName_Lbl();
+        HomePage.getInstance().click_SettingsMenu_Btn();
+        SettingsPage.getInstance().click_Workflow_Link();
+        WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
+        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
+        softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_036, Verify The Functionality Of Cancel Button In Disable Workflow")
+    public void TC_JobWorkflowSettings_036_Verify_The_Functionality_Of_Cancel_Button_In_Disable_Workflow() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
+        String expectedStatus = jobWorkflowActivePage.getText_ActiveStatus_Lbl();
+
+        jobWorkflowActivePage.click_Deactivate_Btn();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowWorkflowAlreadyExistHeader_Lbl(), "Pop Up Window Header Is Present As Expected");
+        softAssert.assertEquals(jobWorkflowActivePage.getText_PopUpWindowWorkflowAlreadyExistHeader_Lbl(), "De-activate Workflow", "Deactivate Workflow Pop Up Window Header");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowDeactivate_Btn(), "Deactivate Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_PopUpWindowCancel_Btn(), "Cancel Button Is Present As Expected");
+
+        jobWorkflowActivePage.click_PopUpWindowCancel_Btn();
+        softAssert.assertEquals(jobWorkflowActivePage.getText_ActiveStatus_Lbl(), expectedStatus, "Status Is Active As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_037, Verify The Functionality Of Objective Box In Job Workflow Diagram Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_037_Verify_The_Functionality_Of_Objective_Box_In_Job_Workflow_Diagram_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+
+        jobWorkflowActivePage.click_ObjectiveDiagram_Lbl();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ObjectiveConfiguration_Btn(), "Objective Configuration Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connectors_Btn(), "Connector Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ExecutionTaskWorkflowHeader_Lbl(), "Execution Tas Workflow Header Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_ObjectiveConfigurationName_Lbl(), "Objective Configuration Name Label Is Present AS Expected");
+
+        jobWorkflowActivePage.click_Connectors_Btn();
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1_Lbl(), "Connector 1 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Destination_Lbl(), "Connector 1 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Status_Lbl(), "Connector 1 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector1Reason_Lbl(), "Connector 1 Reason Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2_Lbl(), "Connector 2 Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Destination_Lbl(), "Connector 2 Destination Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Status_Lbl(), "Connector 2 Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowActivePage.isPresent_Connector2Reason_Lbl(), "Connector 2 Reason Label Is Present As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_038, Verify The UI Of Table Record Present In Draft Tab")
+    public void TC_JobWorkflowSettings_038_Verify_The_UI_Of_Table_Record_Present_In_Draft_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Draft_Btn();
+        String expectedJobName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_TableData_Link("NAME");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_JobWorkflowDetailHeader_Lbl(), "Job Workflow Detail Header Is Present As Expected");
+        softAssert.assertEqualsIgnoreCase(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), expectedJobName, "Job Workflow Detail Header Label Is Matched As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_DraftStatus_Lbl(), "Active Status Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ViewServiceAttributes_Btn(), "View Service Attributes Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_SaveAsDraft_Btn(), "Make A Copy Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Validate_Btn(), "Deactivate Button Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Objectives_Lbl(), "Objectives Label Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Search_Txt(), "Search Text Field Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Tags_DropDown(), "Tags Drop Down Is Present As Expected");
+
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Diagram_Lbl(), "Diagram Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ZoomIn_Btn(), "Zoom In Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_ZoomOut_Btn(), "Zoom Out Button Is Present As Expected");
+        softAssert.assertTrue(jobWorkflowDraftPage.isPresent_Reset_Btn(), "Reset Button Is Present As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_029, Verify Functionality Of Make A Copy Button")
+    public void TC_JobWorkflowSettings_029_Verify_Functionality_Of_Make_A_Copy_Button() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowActivePage.click_MakeACopy_Btn();
+        String expectedJobWorkflowName = jobWorkflowCreatePage.getText_WorkflowName_Txt();
+        jobWorkflowCreatePage.select_ProductType_Txt();
+        jobWorkflowCreatePage.click_Create_Btn();
+        jobWorkflowCreatePreviewPage.fill_Search_Txt(expectedJobWorkflowName);
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl(), expectedJobWorkflowName, "Expected Job Workflow Name Is Matched");
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuStatus_Lbl(), "Active", "Status Is Active As Expected");
+        softAssert.assertAll();
+    }
+
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.JOB_WORKFLOW, TestGroup.BVT},
+            description = "TC_035, Verify The Functionality Of Deactivate Button Of Table Record Present In Active Tab")
+    public void TC_JobWorkflowSettings_035_Verify_The_Functionality_Of_Deactivate_Button_Of_Table_Record_Present_In_Active_Tab() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobWorkflow();
+        jobWorkflowPage.click_Active_Btn();
+        String expectedJobWorkflowName = commonActions.getText_TableData_Lbl("NAME");
+        commonActions.click_TableData_Link("NAME");
+        jobWorkflowActivePage.click_Deactivate_Btn();
+        jobWorkflowActivePage.click_PopUpWindowDeactivate_Btn();
+        jobWorkflowCreatePreviewPage.fill_Search_Txt(expectedJobWorkflowName);
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuWorkflowName_Lbl(), expectedJobWorkflowName, "Expected Job Workflow Name Is Matched");
+        softAssert.assertEquals(jobWorkflowCreatePreviewPage.getText_CardMenuStatus_Lbl(), "Inactive", "Status Is Inactive As Expected");
         softAssert.assertAll();
     }
 }
