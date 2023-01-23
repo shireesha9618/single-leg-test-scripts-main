@@ -53,6 +53,7 @@ public class Constants {
     public static String DROP_PINCODE="281001";
     public static String RIDER = "Arpit kishoruser";
     public static String TEAM_MANAGER ="feAutomation user";
+    public static final int WAIT_FOR_THREE_SEC = 3000;
 
     private Constants() {
 

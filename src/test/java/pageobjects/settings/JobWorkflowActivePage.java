@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -158,7 +159,7 @@ public class JobWorkflowActivePage {
     }
 
     public boolean isPresent_PopUpWindowDeactivate_Btn() {
-        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, 3000);
+        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public void click_PopUpWindowDeactivate_Btn() {

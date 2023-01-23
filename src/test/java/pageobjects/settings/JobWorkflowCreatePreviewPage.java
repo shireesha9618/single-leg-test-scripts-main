@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -67,7 +68,7 @@ public class JobWorkflowCreatePreviewPage {
     }
 
     public boolean isPresent_StatusActive_RadioBtn() {
-        return ActionHelper.isPresent(statusActive_RadioBtn, 2000);
+        return ActionHelper.isPresent(statusActive_RadioBtn, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public void click_StatusActive_RadioBtn() {
