@@ -662,7 +662,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
         String expectedJobWorkflowName = commonActions.getText_TableData_Lbl("NAME");
-        jobWorkflowActivePage.fill_Search_Txt(expectedJobWorkflowName);
+        jobWorkflowPage.fill_Search_Text(expectedJobWorkflowName);
         softAssert.assertEquals(commonActions.getText_TableData_Lbl("NAME"), expectedJobWorkflowName, "Job Workflow Record Is Present As Expected");
         softAssert.assertAll();
     }

@@ -3,6 +3,7 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import pageobjects.CommonActions;
 import utility.Utility;
 
 public class JobWorkflowActivePage {
