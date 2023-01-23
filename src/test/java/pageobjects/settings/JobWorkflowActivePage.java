@@ -102,6 +102,7 @@ public class JobWorkflowActivePage {
 
     public void fill_Search_Txt(String objectiveName) {
         Utility.sendKeysWithClear(search_Txt.getBy(), objectiveName);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Tags_DropDown() {
