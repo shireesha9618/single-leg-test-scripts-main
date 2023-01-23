@@ -101,7 +101,7 @@ public class DispatchPage {
     private final Locator laterMonthCalendar_Btn = Locator.builder().withWeb(By.xpath("(//span[@class='ant-picker-next-icon'])[2]"));
     private final Locator createdFromYearCalendar_Txt = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-year-btn'])[1]"));
     private final Locator createdFromMonthCalendar_Txt = Locator.builder().withWeb(By.xpath("(//button[@class='ant-picker-month-btn'])[1]"));
-
+    private final Locator statusTableColumn_Txt = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell']//h6"));
 
     public static DispatchPage getInstance() {
         if (_instance == null) _instance = new DispatchPage();
@@ -853,4 +853,10 @@ public class DispatchPage {
         return ActionHelper.getText(createdFromMonthCalendar_Txt);
     }
 
+    public List<String> getValue_StatusAsList_Txt(){
+        List <String> statusTxt = new ArrayList<>();
+        for(WebElement status : ActionHelper.findElements(statusTableColumn_Txt))
+            statusTxt.add(status.getText());
+        return statusTxt;
+    }
 }

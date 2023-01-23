@@ -22,8 +22,7 @@ public class AddOrdersPage {
     private final Locator expectedCash_Value = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Expected cash to be collected']/preceding-sibling::p"));
 
     public static AddOrdersPage getInstance() {
-        if (_instance == null)
-            _instance = new AddOrdersPage();
+        if (_instance == null) _instance = new AddOrdersPage();
         return _instance;
     }
 
@@ -58,21 +57,27 @@ public class AddOrdersPage {
         return ActionHelper.isPresent(expectedCashToBeCollected_Lbl);
     }
 
-    public int getText_ExpectedCashValue_Txt(){
+    public int getText_ExpectedCashValue_Txt() {
         ActionHelper.waitForLoaderToHide();
         ActionHelper.waitUntilElementVisible(expectedCash_Value.getBy());
         return Integer.parseInt(ActionHelper.getText(expectedCash_Value).split("\\.")[0]);
     }
 
-    public void click_AddToDispatch_Btn(){
+    public void click_AddToDispatch_Btn() {
         ActionHelper.click(addToDispatch_Btn);
     }
 
-    public void fill_SearchByOrderId_TxtBox(List<String> orderIds) {
-        for (String orderId : orderIds) {
-            ActionHelper.sendKeysWithClear(searchbyOrderId_TxtBox.getBy(), orderId);
-            System.out.println(orderId);
-            ActionHelper.waitForLoaderToHide();
+    public void fill_SearchByOrderIdOnScanOrdersPage_TxtBox(List<String> orderIds) {
+        if (orderIds.size() > 0) {
+            DispatchDetailPage.getInstance().click_ScanToAddOrders_Btn();
+            for (String orderId : orderIds) {
+                ActionHelper.sendKeysWithClear(searchbyOrderId_TxtBox.getBy(), orderId);
+                System.out.println(orderId);
+                ActionHelper.waitForLoaderToHide();
+            }
+            AddOrdersPage.getInstance().click_AddToDispatch_Btn();
+            AddToDispatchPage.getInstance().click_AddToDispatch_Btn();
         }
     }
+
 }

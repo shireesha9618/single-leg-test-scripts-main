@@ -331,9 +331,8 @@ public class CommonActions {
 
     public void chooseNoOfRecordsToBeDisplayedPerPage(int no) {
         click_PaginationSelectedItem_Lbl();
-        Utility.clickWebElementContainingText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl), String.valueOf(no));
+        Utility.clickWebElementContainingText(DriverManager.getDriver().findElements(paginationPerPageOptionsList_Lbl.getBy()), String.valueOf(no));
         CommonActions.getInstance().waitTillLoaderDisappears();
-        Utility.scrollDownUsingKeyboardKey(2);
     }
 
     public void selectPaginationBlock(String label) {
@@ -537,9 +536,12 @@ public class CommonActions {
         List<String> jobIDList = new ArrayList<>();
         for (int i = 0; i < numberOfOrdersToBeAddedToDispatch; i++) {
             HashMap<String, String> order = ApiClient.createOrder1("cod");
-            jobIDList.add(order.get("clientContainerId"));
+            jobIDList.add(ApiClient.getJobID(order.get("orderId")));
+            System.out.println("order id is  : "   +order.get("orderId"));
         }
         dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        System.out.println("Jobid is : " + jobIDList);
+
         return dispatch.get("dispatchID");
     }
 

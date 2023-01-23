@@ -90,7 +90,7 @@ public class DispatchDetailPage {
     private final Locator assignRiderPopupVehicleId_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Vehicle ID']]/following-sibling::div//input"));
     private final Locator assignRiderPopupRider_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Rider']]/following-sibling::div//input"));
     private final Locator assignRiderPopupOptions_ListBtn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
-    private final Locator assignRiderPopupCross_Img = Locator.builder().withWeb(By.xpath("//p[text()='Assign Rider']/following-sibling::*"));
+    private final Locator assignRiderPopupCross_Img = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Assignment']/../*[name()='svg']"));
     private final Locator assignRiderPopupAssign_Btn = Locator.builder().withWeb(By.id("submitForm"));
     private final Locator assignRiderPopupCancel_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']/preceding-sibling::button[p[text()='Cancel']]"));
 
@@ -98,7 +98,7 @@ public class DispatchDetailPage {
     private final Locator reloadingDispatchDataPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Reloading dispatch data']"));
     private final Locator orderId_Txt = Locator.builder().withWeb(By.xpath("//tr[contains(@data-row-key,'job')]/td[2]"));
     private final Locator dispatchList_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'Dispatch List')]"));
-
+    private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'Dispatch List')]"));
 
     public static DispatchDetailPage getInstance() {
         if (_instance == null) _instance = new DispatchDetailPage();
@@ -812,4 +812,15 @@ public class DispatchDetailPage {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
+    public boolean isPresent_OrderId_Txt(int indexOfOrder){
+        return ActionHelper.isPresent(ActionHelper.findElements(orderId_Txt).get(indexOfOrder),WAIT_FOR_ONE_SECOND);
+    }
+
+    public void scrollToOrderId(int indexOfOrder){
+        Utility.validatePageScrollUp(ActionHelper.findElements(orderId_Txt).get(indexOfOrder));
+    }
+
+    public void click_Cancel_Btn(){
+        ActionHelper.click(cancel_Btn);
+    }
 }

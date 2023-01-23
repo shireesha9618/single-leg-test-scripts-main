@@ -8,7 +8,6 @@ import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
 import org.testng.annotations.Test;
 import pageobjects.*;
-import utility.Utility;
 
 import java.io.IOException;
 import java.text.ParseException;
