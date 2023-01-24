@@ -1,8 +1,6 @@
 package utility;
 
-import api.ApiClient;
 import com.github.javafaker.Faker;
-import framework.backend.APIResponseException;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
@@ -25,7 +23,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.CommonActions;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -444,5 +441,15 @@ public class Utility {
         for (int i = 0; i < keyPressCount; i++)
             actions.sendKeys(Keys.RIGHT);
         actions.build().perform();
+    }
+
+    public static void scrollTillToTheElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"nearest\"});", element);
+
+    }
+
+    public static WebDriver getDriver(){
+        return DriverManager.getDriver();
     }
 }

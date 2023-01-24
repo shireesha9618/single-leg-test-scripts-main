@@ -352,11 +352,11 @@ public class CommonActions {
     }
 
     public void choosePaginationOption(int pagination) {
-        Actions actions = new Actions(DriverManager.getDriver());
-        actions.moveToElement(ActionHelper.findElement(paginationSelectedItem_Lbl)).click().build().perform();
-        for (WebElement options : ActionHelper.findElements(paginationPerPageOptionsList_Lbl)) {
-            if (options.getText().equals(pagination + " / page")) {
-                actions.moveToElement(options).click().build().perform();
+        ActionHelper.waitUntilElementVisible(paginationSelectedItem_Lbl.getBy());
+        CommonActions.getInstance().clickElementUsingActionClass(ActionHelper.findElement(paginationSelectedItem_Lbl));
+        for (WebElement option : ActionHelper.findElements(paginationPerPageOptionsList_Lbl)) {
+            if (option.getText().equals(pagination + " / page")) {
+                CommonActions.getInstance().clickElementUsingActionClass(option);
                 break;
             }
         }
@@ -490,6 +490,13 @@ public class CommonActions {
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
+    public void click_TableData_Link(String tableColumnName) {
+        String index = String.valueOf(indexOfTableColumnName(tableColumnName));
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index) + "/a"));
+        ActionHelper.click(data);
+        waitTillLoaderDisappears();
+    }
+
     public boolean isPresent_TableColumnName_Lbl(String tableColumnName) {
         List<WebElement> columName = ActionHelper.findElementsWithoutWait(By.xpath("//th[contains(@class,'ant-table-cell') and text()]"));
         for (WebElement element : columName) {
@@ -527,7 +534,7 @@ public class CommonActions {
     }
 
     public static String createAnOrderGetOrderID() throws IOException, APIResponseException {
-        HashMap<String, String> order = ApiClient.createOrder1("cod");
+        HashMap<String, String> order = ApiClient.createOrder("cod");
         return order.get("clientContainerId");
     }
 
@@ -535,12 +542,10 @@ public class CommonActions {
         Map<String, String> dispatch;
         List<String> jobIDList = new ArrayList<>();
         for (int i = 0; i < numberOfOrdersToBeAddedToDispatch; i++) {
-            HashMap<String, String> order = ApiClient.createOrder1("cod");
+            HashMap<String, String> order = ApiClient.createOrder("cod");
             jobIDList.add(ApiClient.getJobID(order.get("orderId")));
-            System.out.println("order id is  : "   +order.get("orderId"));
         }
         dispatch = ApiClient.createAndPublishDispatch(jobIDList);
-        System.out.println("Jobid is : " + jobIDList);
 
         return dispatch.get("dispatchID");
     }
@@ -549,10 +554,27 @@ public class CommonActions {
         List<String> jobIDList = new ArrayList<>();
         if (numberOfOrdersRequiredToCreate > 0) {
             for (int i = 0; i < numberOfOrdersRequiredToCreate; i++) {
-                HashMap<String, String> order = ApiClient.createOrder1("cod");
+                HashMap<String, String> order = ApiClient.createOrder("cod");
                 jobIDList.add(order.get("clientContainerId"));
             }
         }
         return jobIDList;
     }
+
+    public static void selectFromDropDown(Locator txtBox,Locator listOptions,String value) {
+        ActionHelper.click(txtBox);
+        ActionHelper.waitUntilElementVisible(listOptions.getBy());
+        for (WebElement rider : DriverManager.getDriver().findElements(listOptions.getBy())) {
+            if (rider.getText().toLowerCase().contains(value.toLowerCase()))
+                ActionHelper.click(rider);
+            break;
+        }
+    }
+
+    public void clickElementUsingActionClass(WebElement element){
+        Actions action = new Actions(DriverManager.getDriver());
+        action.moveToElement(element).click().build().perform();
+    }
+
+
 }

@@ -3,8 +3,11 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pageobjects.CommonActions;
 import utility.Utility;
+
+import java.util.List;
 
 public class JobWorkflowCreatePage {
     private static JobWorkflowCreatePage _instance;
@@ -146,8 +149,9 @@ public class JobWorkflowCreatePage {
         return ActionHelper.getText(productTypeValidationMsg_Lbl);
     }
 
-    public void select_ProductType_Txt(String productType) {
-        Utility.select_FromDropDown_List(productType_Txt.getBy(), productType_List.getBy(), productType);
+    public void select_ProductType_Txt() {
+        List<WebElement> productType = ActionHelper.findElements(productType_List.getBy());
+        Utility.select_FromDropDown_List(productType_Txt.getBy(), productType_List.getBy(), productType.get(0).getText());
     }
 
     public boolean isPresent_ShipmentFlow_Lbl() {
@@ -315,5 +319,9 @@ public class JobWorkflowCreatePage {
 
     public String getText_ShipmentFlow_Txt() {
         return ActionHelper.getText(shipmentFlow_Txt);
+    }
+
+    public String getText_WorkflowName_Txt() {
+        return ActionHelper.getText(workflowName_Txt);
     }
 }

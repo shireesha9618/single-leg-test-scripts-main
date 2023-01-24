@@ -52,7 +52,7 @@ public class DispatchPage {
     private final Locator tableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label = Locator.builder().withWeb(By.xpath("//div[@data-rbd-droppable-id='droppable']/div/div/p"));
     private final Locator tableActionsDropDownModifyColumnsLinkSave_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../../../../following-sibling::div/button/p[text()='Save']"));
     private final Locator tableActionsDropDownModifyColumnsLinkCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../../../../following-sibling::div/button/p[text()='Cancel']"));
-    private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
+    private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Assignment']/following-sibling::*[name()='svg']"));
 
     private final Locator dateFilter_Dropdown = Locator.builder().withWeb(By.xpath("//div[@class='h-full flex border rounded-md']//p"));
     private final Locator dateFilterDropdownCreatedDate_Radio = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Created Date']"));
@@ -63,7 +63,7 @@ public class DispatchPage {
 
     private final Locator shipmentDetailsTableHeaderList_Lbl = Locator.builder().withWeb(By.xpath("//thead/tr/th[text()]"));
     private final Locator shipmentDetailsTableColumnRadio_ListRadio = Locator.builder().withWeb(By.xpath("//tbody/tr/td//input"));
-    private final Locator shipmentDetailsTableColumnRider_ListLink = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]"));
+    private final Locator shipmentDetailsTableColumnRider_ListLink = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]//a"));
     private final Locator shipmentDetailsTableColumnVehicle_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div[br]"));
     private final Locator shipmentDetailsTableColumnStructure_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3][div[br]]/following-sibling::td[1]/div"));
     private final Locator shipmentDetailsTableColumnStatus_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td/div/h6"));
@@ -569,7 +569,9 @@ public class DispatchPage {
 
     public void click_ShipmentDetailsTableColumnRider_ListLink(int index) {
         CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.click(ActionHelper.findElements(shipmentDetailsTableColumnRider_ListLink.getBy()).get(index));
+        WebElement order = ActionHelper.findElements(shipmentDetailsTableColumnRider_ListLink.getBy()).get(index);
+        ActionHelper.waitUntilElementClickable(order);
+        ActionHelper.click(order);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
@@ -606,7 +608,7 @@ public class DispatchPage {
     }
 
     public String getText_ShipmentDetailsTableColumnStatus_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy()).get(index));
+        return  ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy()).get(index));
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnOrderStatusDelivered_ListLbl() {
@@ -858,5 +860,17 @@ public class DispatchPage {
         for(WebElement status : ActionHelper.findElements(statusTableColumn_Txt))
             statusTxt.add(status.getText());
         return statusTxt;
+    }
+
+    public int getValue_IndexOfStatusListLbl_Txt(String statusTxt) {
+        int count =0;
+        List<WebElement> status = ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnStatus_ListLbl.getBy());
+        for(int i =0;i<status.size() ; i++) {
+            if(status.get(i).getText().equalsIgnoreCase(statusTxt)) {
+                count = i;
+                break;
+            }
+        }
+        return count;
     }
 }

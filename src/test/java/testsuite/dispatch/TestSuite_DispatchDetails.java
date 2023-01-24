@@ -102,11 +102,13 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
         dispatchPage.statusDropdownUnselectAll();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
-        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(1);
+        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(1);
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
+        dispatchDetailPage.click_Edit_Img();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_AssignRiderPopupHeader_Lbl(),"Edit Assignment Pop header label is present as expected");
         dispatchPage.click_TableActionsDropDownModifyColumnsLinkCross_Icon();
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertAll();
@@ -120,11 +122,13 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
         dispatchPage.statusDropdownUnselectAll();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
-        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(1);
+        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(1);
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
+        dispatchDetailPage.click_Edit_Img();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_AssignRiderPopupHeader_Lbl(),"Edit Assignment Pop header label is present as expected");
         dispatchDetailPage.click_AssignRiderPopupCancel_Btn();
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertAll();
@@ -138,13 +142,16 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
         dispatchPage.statusDropdownUnselectAll();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
-        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(1);
+        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(1);
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(1);
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
-        dispatchDetailPage.click_AssignRiderPopupAssign_Btn();
-        dispatchDetailPage.getText_AssignRiderPopupOptions_ListBtn(0);
+        dispatchDetailPage.click_Edit_Img();
+        softAssert.assertTrue(dispatchDetailPage.isPresent_AssignRiderPopupHeader_Lbl(),"Edit Assignment Pop header label is present as expected");
+
+        dispatchDetailPage.select_PopUpVehicleId_As("AP03XYZ");
+        dispatchDetailPage.select_PopUpRider_As("Refugio");
         dispatchDetailPage.click_AssignRiderPopupAssign_Btn();
         softAssert.assertTrue(dispatchDetailPage.isPresent_SuccessfullyUpdatedPopup_Lbl(), "Validate presence of Success toast msg");
         softAssert.assertAll();
@@ -166,17 +173,21 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.DISPATCH_DETAIL, TestGroup.BVT},
             description = "TC_008, Verify Functionality Of Remove From Dispatch Button In Dispatch Detail")
-    public void TC_DispatchDetail_008_Verify_Functionality_Of_Remove_From_Dispatch_Button_In_Dispatch_Detail() {
+    public void TC_DispatchDetail_008_Verify_Functionality_Of_Remove_From_Dispatch_Button_In_Dispatch_Detail() throws IOException, APIResponseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillDispatches();
-
-        dispatchPage.statusDropdownUnselectAll();
+        dispatchPage.uncheckCheckbox_StatusDropdownClosed_Checkbox();
+        dispatchPage.uncheckCheckbox_StatusDropdownOngoing_Checkbox();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
+        dispatchPage.uncheckCheckbox_StatusDropdownStarted_Checkbox();
         dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
-        softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
-        softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
+
+        commonActions.chooseNoOfRecordsToBeDisplayedPerPage(50);
+
+        int numberOfOrdersPresent = dispatchPage.getList_ShipmentDetailsTableColumnRider_ListLink().size();
+        List<String> orderIds = CommonActions.createOrdersGetIdsAsList(2 - numberOfOrdersPresent);
+
+        addOrdersPage.fill_SearchByOrderIdOnScanOrdersPage_TxtBox(orderIds);
         int size = dispatchDetailPage.getList_ShipmentDetailsTableColumnCheckbox_ListCheckbox().size();
         dispatchDetailPage.checkCheckbox_ShipmentDetailsTableColumnCheckbox_ListCheckbox(0);
         dispatchDetailPage.click_RemoveFromDispatch_Btn();
@@ -192,9 +203,10 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
         dispatchPage.statusDropdownUnselectAll();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
-        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        int statusIndex  = dispatchPage.getValue_IndexOfStatusListLbl_Txt("Assigned");
+        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(statusIndex);
+        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(statusIndex);
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(statusIndex);
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
         dispatchDetailPage.click_PublishDispatch_Btn();
@@ -213,9 +225,10 @@ public class TestSuite_DispatchDetails extends BaseTestClass {
 
         dispatchPage.statusDropdownUnselectAll();
         dispatchPage.checkCheckbox_StatusDropdownAssigned_Checkbox();
-        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(0);
-        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(0);
-        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(0);
+        int statusIndex  = dispatchPage.getValue_IndexOfStatusListLbl_Txt("Assigned");
+        String status = dispatchPage.getText_ShipmentDetailsTableColumnStatus_ListLbl(statusIndex);
+        String rider = dispatchPage.getText_ShipmentDetailsTableColumnRider_ListLink(statusIndex);
+        dispatchPage.click_ShipmentDetailsTableColumnRider_ListLink(statusIndex);
         softAssert.assertEquals(dispatchDetailPage.getText_Header_Lbl(), rider, "Validate header");
         softAssert.assertEquals(dispatchDetailPage.getText_DispatchStatus_Lbl(), status, "Validate status");
         dispatchDetailPage.click_PublishDispatch_Btn();

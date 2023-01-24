@@ -25,6 +25,7 @@ public class JobWorkflowCreatePreviewPage {
     private final Locator cardMenuStatus_List = Locator.builder().withWeb(By.xpath("//div[@class='flex flex-col space-y-2']/div"));
     private final Locator cardMenuViewMore_Link = Locator.builder().withWeb(By.xpath("(//p[text()='View more'])[1]"));
     private final Locator cardMenuViewServiceAttributes_Link = Locator.builder().withWeb(By.xpath("(//p[text()='View Service Attributes'])[1]"));
+    private final Locator cardMenuStatus_Lbl = Locator.builder().withWeb(By.xpath("(//div[@class='flex flex-col space-y-2']//h6/p)[1]"));
 
     public static JobWorkflowCreatePreviewPage getInstance() {
         if(_instance == null)
@@ -147,5 +148,13 @@ public class JobWorkflowCreatePreviewPage {
 
     public void click_CardMenuViewServiceAttributes_Link() {
         ActionHelper.click(cardMenuViewServiceAttributes_Link);
+    }
+
+    public boolean isPresent_CardMenuStatus_Lbl() {
+        return ActionHelper.isPresent(cardMenuStatus_Lbl);
+    }
+
+    public String getText_CardMenuStatus_Lbl() {
+        return ActionHelper.getText(cardMenuStatus_Lbl);
     }
 }
