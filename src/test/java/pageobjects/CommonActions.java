@@ -1,6 +1,8 @@
 package pageobjects;
 
+import api.ApiClient;
 import constants.Constants;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
@@ -14,8 +16,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utility.Utility;
 
-import java.util.List;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+import static constants.Constants.WAIT_FOR_ONE_SECOND;
 import static utility.Utility.acceptAlertIfPresent;
 
 public class CommonActions {
@@ -105,6 +111,7 @@ public class CommonActions {
         HomePage.getInstance().openDispatchListPage();
         JarvisAssert.assertTrue(DispatchPage.getInstance().isPresent_Header_Lbl());
         JarvisAssert.assertEquals(DispatchPage.getInstance().getText_Header_Lbl(), "Dispatches");
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void coverJourneyTillCreateOrder() {
@@ -131,7 +138,7 @@ public class CommonActions {
             String skipButton = "return document.querySelector(\"body > div.productfruits--container\").shadowRoot.querySelector(\"button.productfruits--btn.productfruits--card-footer-skip-button\")";
             JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
             WebElement element = (WebElement) js.executeScript(skipButton);
-            if (element.isDisplayed())
+            if (ActionHelper.isPresent(element, WAIT_FOR_ONE_SECOND))
                 element.click();
         } catch (Exception e) {
             ExtentLogger.logPass(e.toString());
@@ -326,7 +333,7 @@ public class CommonActions {
 
     public void chooseNoOfRecordsToBeDisplayedPerPage(int no) {
         click_PaginationSelectedItem_Lbl();
-        Utility.clickWebElementContainingText(ActionHelper.findElements(paginationPerPageOptionsList_Lbl), String.valueOf(no));
+        Utility.clickWebElementContainingText(DriverManager.getDriver().findElements(paginationPerPageOptionsList_Lbl.getBy()), String.valueOf(no));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
@@ -347,11 +354,11 @@ public class CommonActions {
     }
 
     public void choosePaginationOption(int pagination) {
-        Actions actions = new Actions(DriverManager.getDriver());
-        actions.moveToElement(ActionHelper.findElement(paginationSelectedItem_Lbl)).click().build().perform();
-        for (WebElement options : ActionHelper.findElements(paginationPerPageOptionsList_Lbl)) {
-            if (options.getText().equals(pagination + " / page")) {
-                actions.moveToElement(options).click().build().perform();
+        ActionHelper.waitUntilElementVisible(paginationSelectedItem_Lbl.getBy());
+        CommonActions.getInstance().clickElementUsingActionClass(ActionHelper.findElement(paginationSelectedItem_Lbl));
+        for (WebElement option : ActionHelper.findElements(paginationPerPageOptionsList_Lbl)) {
+            if (option.getText().equals(pagination + " / page")) {
+                CommonActions.getInstance().clickElementUsingActionClass(option);
                 break;
             }
         }
@@ -499,6 +506,76 @@ public class CommonActions {
                 break;
         }
         return true;
+    }
+
+    public String get_FutureDateForGivenDate_Of(String givenDate, int days) throws ParseException {
+        Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days);
+        return dateFormat.format(cal.getTime());
+    }
+
+    public String get_PreviousDateForGivenDate_Of(String givenDate, int days) throws ParseException {
+        Date date = new SimpleDateFormat("dd-MM-yyyy").parse(givenDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -days);
+        return dateFormat.format(cal.getTime());
+    }
+
+    public static String createAnOrderAndDispatchThenGetId() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder("cod");
+        String jobID = ApiClient.getJobID(order.get("orderId"));
+        List<String> jobIDList = new ArrayList<>();
+        jobIDList.add(jobID);
+        HashMap<String, String> dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        return jobID;
+    }
+
+    public static String createAnOrderGetOrderID() throws IOException, APIResponseException {
+        HashMap<String, String> order = ApiClient.createOrder("cod");
+        return order.get("clientContainerId");
+    }
+
+    public static String createOrdersAndAddDispatchThenGetId(int numberOfOrdersToBeAddedToDispatch) throws IOException, APIResponseException {
+        Map<String, String> dispatch;
+        List<String> jobIDList = new ArrayList<>();
+        for (int i = 0; i < numberOfOrdersToBeAddedToDispatch; i++) {
+            HashMap<String, String> order = ApiClient.createOrder("cod");
+            jobIDList.add(ApiClient.getJobID(order.get("orderId")));
+        }
+        dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+
+        return dispatch.get("dispatchID");
+    }
+
+    public static List<String> createOrdersGetIdsAsList(int numberOfOrdersRequiredToCreate) throws IOException, APIResponseException {
+        List<String> jobIDList = new ArrayList<>();
+        if (numberOfOrdersRequiredToCreate > 0) {
+            for (int i = 0; i < numberOfOrdersRequiredToCreate; i++) {
+                HashMap<String, String> order = ApiClient.createOrder("cod");
+                jobIDList.add(order.get("clientContainerId"));
+            }
+        }
+        return jobIDList;
+    }
+
+    public static void selectFromDropDown(Locator txtBox,Locator listOptions,String value) {
+        ActionHelper.click(txtBox);
+        ActionHelper.waitUntilElementVisible(listOptions.getBy());
+        for (WebElement rider : DriverManager.getDriver().findElements(listOptions.getBy())) {
+            if (rider.getText().toLowerCase().contains(value.toLowerCase()))
+                ActionHelper.click(rider);
+            break;
+        }
+    }
+
+    public void clickElementUsingActionClass(WebElement element){
+        Actions action = new Actions(DriverManager.getDriver());
+        action.moveToElement(element).click().build().perform();
     }
 
     public boolean isPresent_PopUpErrorMsg_Lbl() {

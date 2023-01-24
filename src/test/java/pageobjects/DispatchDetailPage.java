@@ -10,10 +10,12 @@ import utility.Utility;
 
 import java.util.List;
 
+import static constants.Constants.*;
+
 public class DispatchDetailPage {
     private static DispatchDetailPage _instance;
 
-    private final Locator header_Lbl = Locator.builder().withWeb(By.id("header_Lbl"));
+    private final Locator header_Lbl = Locator.builder().withWeb(By.id("headerLabel"));
     private final Locator dispatchStatus_Lbl = Locator.builder().withWeb(By.xpath("//h6"));
     private final Locator edit_Img = Locator.builder().withWeb(By.xpath("//div[@id='headerLabel']/following-sibling::*"));
     private final Locator dispatchDetailBreadCrumb_Link = Locator.builder().withWeb(By.xpath("//p[text()='Dispatch Detail']"));
@@ -30,8 +32,8 @@ public class DispatchDetailPage {
     private final Locator publishDispatch_Btn = Locator.builder().withWeb(By.xpath("//button[@id='publishDispatchButton']"));
     private final Locator publishDispatchCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
     private final Locator confirmPublishDispatch_Btn = Locator.builder().withWeb(By.xpath("//button[@id='publishButton']"));
-    private final Locator removeFromDispatch_Btn = Locator.builder().withWeb(By.xpath("//div[text='Remove From Dispatch']"));
-    private final Locator confirmPublishDispatchHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1[@id='publishHeader']//h1[@id='publishHeader']"));
+    private final Locator removeFromDispatch_Btn = Locator.builder().withWeb(By.xpath("//button[@id='removeJobFromDispatchButton']/p"));
+    private final Locator confirmPublishDispatchHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1[@id='publishHeader']"));
     private final Locator cancelPublishDispatch_Lbl = Locator.builder().withWeb(By.xpath("//button[@id='cancelButton']"));
 
     private final Locator createDispatch_Btn = Locator.builder().withWeb(By.id("createDispatch"));
@@ -65,11 +67,11 @@ public class DispatchDetailPage {
     private final Locator tableActionsDropDownModifyColumnsLinkCancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Select All']/../../../../../following-sibling::div/button/p[text()='Cancel']"));
     private final Locator tableActionsDropDownModifyColumnsLinkCross_Icon = Locator.builder().withWeb(By.xpath("//p[text()='Edit Columns']/following-sibling::*/*"));
 
-    private final Locator scanToAddOrders_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Scan to Add Orders']"));
+    private final Locator scanToAddOrders_Btn = Locator.builder().withWeb(By.xpath("//span[normalize-space()='Scan to Add Orders']"));
     private final Locator refresh_Btn = Locator.builder().withWeb(By.id("refreshButton"));
     private final Locator downloadRunSheet_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Download Run Sheet']"));
 
-    private final Locator shipmentDetailsTableColumnCheckbox_ListCheckbox = Locator.builder().withWeb(By.xpath("//tbody/tr/td//input"));
+    private final Locator shipmentDetailsTableColumnCheckbox_ListCheckbox = Locator.builder().withWeb(By.xpath("//td[@class='ant-table-cell ant-table-selection-column']//input"));
     private final Locator shipmentDetailsTableColumnPickupAddressShowHideName_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[1]/*"));
     private final Locator shipmentDetailsTableColumnPickupAddressName_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[2]/p[1]"));
     private final Locator shipmentDetailsTableColumnPickupAddressAddress_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[7]/div/div[2]/p[2]"));
@@ -83,17 +85,23 @@ public class DispatchDetailPage {
     private final Locator shipmentDetailsTableColumnDropContactName_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[14]/p"));
     private final Locator shipmentDetailsTableColumnDropContactNumber_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr[td//input]/td[14]/div/div[2]/p[1]"));
 
-    private final Locator assignRiderPopupHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Assign Rider']"));
+    private final Locator assignRiderPopupHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Assignment']"));
     private final Locator assignRiderPopupVehicleMode_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Vehicle Model*']]/following-sibling::div//input"));
     private final Locator assignRiderPopupVehicleId_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Vehicle ID']]/following-sibling::div//input"));
     private final Locator assignRiderPopupRider_Txt = Locator.builder().withWeb(By.xpath("//div[h4[text()='Rider']]/following-sibling::div//input"));
+    private final Locator assignRiderPopupRiderList_Options = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option']"));
     private final Locator assignRiderPopupOptions_ListBtn = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']/div"));
-    private final Locator assignRiderPopupCross_Img = Locator.builder().withWeb(By.xpath("//p[text()='Assign Rider']/following-sibling::*"));
+    private final Locator assignRiderPopupCross_Img = Locator.builder().withWeb(By.xpath("//p[normalize-space()='Edit Assignment']/../*[name()='svg']"));
     private final Locator assignRiderPopupAssign_Btn = Locator.builder().withWeb(By.id("submitForm"));
-    private final Locator assignRiderPopupCancel_Btn = Locator.builder().withWeb(By.xpath("//button[@id='submitForm']/preceding-sibling::button[p[text()='Cancel']]"));
+    private final Locator assignRiderPopupCancel_Btn = Locator.builder().withWeb(By.xpath("//div[@class='flex justify-end']//button[@type='button']"));
+    private final Locator assignRiderPopupVehicleModel_TxtBox = Locator.builder().withWeb(By.xpath("//div[h4[text()='Vehicle Model*']]/following-sibling::div//input"));
+    private final Locator assignRiderPopupVehicleModelList_Options = Locator.builder().withWeb(By.xpath("//div[@class='ant-select-item ant-select-item-option']/div[@class='ant-select-item-option-content']"));
 
-    private final Locator successfullyUpdatedPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Successfully updated']"));
+    private final Locator successfullyUpdatedPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md max-w-md transition-all transform duration')]"));
     private final Locator reloadingDispatchDataPopup_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Reloading dispatch data']"));
+    private final Locator orderId_Txt = Locator.builder().withWeb(By.xpath("//tr[contains(@data-row-key,'job')]/td[2]"));
+    private final Locator dispatchList_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'Dispatch List')]"));
+    private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[contains(text(),'Dispatch List')]"));
 
     public static DispatchDetailPage getInstance() {
         if (_instance == null) _instance = new DispatchDetailPage();
@@ -101,7 +109,7 @@ public class DispatchDetailPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        return ActionHelper.isPresent(header_Lbl, WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_Header_Lbl() {
@@ -160,11 +168,11 @@ public class DispatchDetailPage {
         return ActionHelper.isPresent(confirmPublishDispatchHeader_Lbl);
     }
 
-    public void click_PublishDispatchCancel_Btn(){
+    public void click_PublishDispatchCancel_Btn() {
         ActionHelper.click(publishDispatchCancel_Btn);
     }
 
-    public boolean isPresent_PublishDispatchCancel_Btn(){
+    public boolean isPresent_PublishDispatchCancel_Btn() {
         return ActionHelper.isPresent(publishDispatchCancel_Btn);
     }
 
@@ -186,6 +194,7 @@ public class DispatchDetailPage {
 
     public void fill_SearchBar_Txt(String value) {
         ActionHelper.fill(searchBar_Txt, value);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void fillWithClear_SearchBar_Txt(String value) {
@@ -479,7 +488,7 @@ public class DispatchDetailPage {
     }
 
     public void checkCheckbox_ShipmentDetailsTableColumnCheckbox_ListCheckbox(int index) {
-        Utility.checkCheckbox(ActionHelper.findElements(shipmentDetailsTableColumnCheckbox_ListCheckbox.getBy()).get(index));
+        Utility.checkCheckbox(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnCheckbox_ListCheckbox.getBy()).get(index));
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnPickupAddressShowHideName_ListBtn() {
@@ -643,7 +652,7 @@ public class DispatchDetailPage {
     }
 
     public boolean isPresent_AssignRiderPopupHeader_Lbl() {
-        return ActionHelper.isPresent(assignRiderPopupHeader_Lbl);
+        return ActionHelper.isPresent(assignRiderPopupHeader_Lbl, WAIT_FOR_ONE_SECOND);
     }
 
     public String getText_AssignRiderPopupHeader_Lbl() {
@@ -716,6 +725,7 @@ public class DispatchDetailPage {
 
     public void click_Edit_Img() {
         ActionHelper.click(edit_Img);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_AssignRiderPopupCross_Img() {
@@ -752,11 +762,11 @@ public class DispatchDetailPage {
     }
 
     public boolean isPresent_SuccessfullyUpdatedPopup_Lbl() {
-        return ActionHelper.isPresent(successfullyUpdatedPopup_Lbl, 5000);
+        return ActionHelper.isPresent(successfullyUpdatedPopup_Lbl, WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_ReloadingDispatchDataPopup_Lbl() {
-        return ActionHelper.isPresent(reloadingDispatchDataPopup_Lbl, 5000);
+        return ActionHelper.isPresent(reloadingDispatchDataPopup_Lbl, WAIT_FOR_FIVE_SECOND);
     }
 
     public List<WebElement> getList_AssignRiderPopupOptions_ListBtn() {
@@ -789,5 +799,72 @@ public class DispatchDetailPage {
     public void waitTillAllOrdersAreLoaded() {
         List<WebElement> orders = CommonActions.getInstance().getWebElementList_TableDataList_Lbl("ORDER ID");
         ActionHelper.waitUntilElementClickable(orders.get(orders.size() - 1));
+    }
+
+    public String getValue_OrderId_Txt(int orderIdIndex) {
+        ActionHelper.waitUntilElementVisible(orderId_Txt.getBy());
+        return ActionHelper.getText(ActionHelper.findElements(orderId_Txt).get(orderIdIndex));
+    }
+
+    public boolean isPresent_OrderId_Txt() {
+        return ActionHelper.isPresent(orderId_Txt, WAIT_FOR_ONE_SECOND);
+    }
+
+    public void click_DispatchList_Btn() {
+        Utility.scrollUsingJS(dispatchList_Btn.getBy());
+        ActionHelper.click(dispatchList_Btn);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
+
+    public boolean isPresent_OrderId_Txt(int indexOfOrder) {
+        return ActionHelper.isPresent(ActionHelper.findElements(orderId_Txt).get(indexOfOrder), WAIT_FOR_ONE_SECOND);
+    }
+
+    public void scrollToOrderId(int indexOfOrder) {
+        Utility.validatePageScrollUp(ActionHelper.findElements(orderId_Txt).get(indexOfOrder));
+    }
+
+    public void click_Cancel_Btn() {
+        ActionHelper.click(cancel_Btn);
+    }
+
+    public void select_PopUpRider_As(String riderName) {
+        CommonActions.getInstance().clickElementUsingActionClass(ActionHelper.findElement(assignRiderPopupRider_Txt));
+        for (WebElement rider : DriverManager.getDriver().findElements(assignRiderPopupRiderList_Options.getBy())) {
+            if (rider.getText().toLowerCase().contains(riderName.toLowerCase())) {
+                Utility.scrollTillToTheElement(rider);
+                CommonActions.getInstance().clickElementUsingActionClass(rider);
+                break;
+            }
+
+        }
+    }
+
+    public void select_PopUpVehicleModel_As(String vehicleModelNAme) {
+        CommonActions.getInstance().clickElementUsingActionClass(ActionHelper.findElement(assignRiderPopupVehicleModel_TxtBox));
+        for (WebElement rider : DriverManager.getDriver().findElements(assignRiderPopupVehicleModelList_Options.getBy())) {
+            if (rider.getText().toLowerCase().contains(vehicleModelNAme.toLowerCase())) {
+                Utility.scrollTillToTheElement(rider);
+                CommonActions.getInstance().clickElementUsingActionClass(rider);
+                break;
+            }
+        }
+    }
+
+    public void select_PopUpVehicleId_As(String vehicleId) {
+        CommonActions.getInstance().clickElementUsingActionClass(ActionHelper.findElement(assignRiderPopupVehicleId_Txt));
+        for (WebElement rider : DriverManager.getDriver().findElements(assignRiderPopupVehicleModelList_Options.getBy())) {
+            if (rider.getText().toLowerCase().contains(vehicleId.toLowerCase())) {
+                Utility.scrollTillToTheElement(rider);
+                CommonActions.getInstance().clickElementUsingActionClass(rider);
+                break;
+            }
+        }
+    }
+
+    public String getText_UpdatedPopup_Txt() {
+        ActionHelper.waitUntilElementVisible(successfullyUpdatedPopup_Lbl.getBy());
+        ActionHelper.isPresent(successfullyUpdatedPopup_Lbl,WAIT_FOR_TWO_SECOND);
+        return ActionHelper.getText(successfullyUpdatedPopup_Lbl);
     }
 }

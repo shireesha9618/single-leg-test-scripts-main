@@ -27,6 +27,7 @@ public class ScanPage {
     private final Locator cancelAddToDispatch_Btn = Locator.builder().withWeb(By.xpath("(//button[@type='button'])[2]"));
     private final Locator addToDispatchHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1[text()='Add to dispatch']"));
     private final Locator packageNotFound_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Package not Found']"));
+    private final Locator packagePopUpMessage_Txt = Locator.builder().withWeb(By.xpath("//div[contains(@class,'shadow-md')]"));
 
     public static ScanPage getInstance() {
         if (_instance == null) _instance = new ScanPage();
@@ -150,5 +151,9 @@ public class ScanPage {
 
     public String getText_ExpectedCashToBeCollected_Lbl() {
         return ActionHelper.getText(expectedCashToBeCollected_Lbl);
+    }
+
+    public String getText_PopUpMessage_Txt(){
+        return ActionHelper.getText(packagePopUpMessage_Txt);
     }
 }
