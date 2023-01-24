@@ -56,6 +56,7 @@ public class Constants {
     public static int WAIT_FOR_ONE_SECOND = 1000;
     public static int WAIT_FOR_TWO_SECOND = 2000;
     public static int WAIT_FOR_FIVE_SECOND = 5000;
+    public static final int WAIT_FOR_THREE_SEC = 3000;
 
     private Constants() {
 

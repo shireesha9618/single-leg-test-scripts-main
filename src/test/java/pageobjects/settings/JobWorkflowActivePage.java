@@ -1,8 +1,10 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import pageobjects.CommonActions;
 import utility.Utility;
 
 public class JobWorkflowActivePage {
@@ -15,7 +17,7 @@ public class JobWorkflowActivePage {
 
     private final Locator descriptionSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h6[text()='Description']"));
     private final Locator objectives_Lbl = Locator.builder().withWeb(By.xpath("//h6[contains(text(),'Objectives ')]"));
-    private final Locator search_Txt = Locator.builder().withWeb(By.name("search-bar"));
+    private final Locator search_Txt = Locator.builder().withWeb(By.name("search"));
     private final Locator tags_DropDown = Locator.builder().withWeb(By.className("css-1d8n9bt"));
 
     private final Locator diagram_Lbl = Locator.builder().withWeb(By.id("canvas"));
@@ -33,14 +35,14 @@ public class JobWorkflowActivePage {
     private final Locator executionTaskWorkflowHeader_Lbl = Locator.builder().withWeb(By.xpath("//div[@class='w-full']//span"));
     private final Locator objectiveConfigurationName_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Name*']"));
     private final Locator connectors_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Connectors']/.."));
-    private final Locator connector1_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']"));
-    private final Locator connector1Destination_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Destination']"));
-    private final Locator connector1Status_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Status']"));
-    private final Locator connector1Reason_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Reason']"));
-    private final Locator connector2_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']"));
-    private final Locator connector2Destination_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Destination']"));
-    private final Locator connector2Status_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Status']"));
-    private final Locator connector2Reason_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Reason']"));
+    private final Locator connectorOne_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']"));
+    private final Locator connectorOneDestination_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Destination']"));
+    private final Locator connectorOneStatus_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Status']"));
+    private final Locator connectorOneReason_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 1']/..//div[text()='Reason']"));
+    private final Locator connectorTwo_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']"));
+    private final Locator connectorTwoDestination_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Destination']"));
+    private final Locator connectorTwoStatus_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Status']"));
+    private final Locator connectorTwoReason_Lbl = Locator.builder().withWeb(By.xpath("//legend[text()='Connector 2']/..//div[text()='Reason']"));
 
     private final Locator objectiveName_Lbl = Locator.builder().withWeb(By.xpath("(//section//div[@class='flex justify-between'])[1]"));
 
@@ -101,6 +103,7 @@ public class JobWorkflowActivePage {
 
     public void fill_Search_Txt(String objectiveName) {
         Utility.sendKeysWithClear(search_Txt.getBy(), objectiveName);
+        CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public boolean isPresent_Tags_DropDown() {
@@ -156,7 +159,7 @@ public class JobWorkflowActivePage {
     }
 
     public boolean isPresent_PopUpWindowDeactivate_Btn() {
-        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, 3000);
+        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public void click_PopUpWindowDeactivate_Btn() {
@@ -207,60 +210,60 @@ public class JobWorkflowActivePage {
         return ActionHelper.getText(objectiveConfigurationName_Lbl);
     }
 
-    public boolean isPresent_Connector1_Lbl() {
-        return ActionHelper.isPresent(connector1_Lbl);
+    public boolean isPresent_ConnectorOne_Lbl() {
+        return ActionHelper.isPresent(connectorOne_Lbl);
     }
 
-    public boolean isPresent_Connector1Destination_Lbl() {
-        return ActionHelper.isPresent(connector1Destination_Lbl);
+    public boolean isPresent_ConnectorOneDestination_Lbl() {
+        return ActionHelper.isPresent(connectorOneDestination_Lbl);
     }
 
-    public String getText_Connector1Destination_Lbl() {
-        return ActionHelper.getText(connector1Destination_Lbl);
+    public String getText_ConnectorOneDestination_Lbl() {
+        return ActionHelper.getText(connectorOneDestination_Lbl);
     }
 
-    public boolean isPresent_Connector1Status_Lbl() {
-        return ActionHelper.isPresent(connector1Status_Lbl);
+    public boolean isPresent_ConnectorOneStatus_Lbl() {
+        return ActionHelper.isPresent(connectorOneStatus_Lbl);
     }
 
-    public String getText_Connector1Status_Lbl() {
-        return ActionHelper.getText(connector1Status_Lbl);
+    public String getText_ConnectorOneStatus_Lbl() {
+        return ActionHelper.getText(connectorOneStatus_Lbl);
     }
 
-    public boolean isPresent_Connector1Reason_Lbl() {
-        return ActionHelper.isPresent(connector1Reason_Lbl);
+    public boolean isPresent_ConnectorOneReason_Lbl() {
+        return ActionHelper.isPresent(connectorOneReason_Lbl);
     }
 
-    public String getText_Connector1Reason_Lbl() {
-        return ActionHelper.getText(connector1Reason_Lbl);
+    public String getText_ConnectorOneReason_Lbl() {
+        return ActionHelper.getText(connectorOneReason_Lbl);
     }
 
-    public boolean isPresent_Connector2_Lbl() {
-        return ActionHelper.isPresent(connector2_Lbl);
+    public boolean isPresent_ConnectorTwo_Lbl() {
+        return ActionHelper.isPresent(connectorTwo_Lbl);
     }
 
-    public boolean isPresent_Connector2Destination_Lbl() {
-        return ActionHelper.isPresent(connector2Destination_Lbl);
+    public boolean isPresent_ConnectorTwoDestination_Lbl() {
+        return ActionHelper.isPresent(connectorTwoDestination_Lbl);
     }
 
-    public String getText_Connector2Destination_Lbl() {
-        return ActionHelper.getText(connector2Destination_Lbl);
+    public String getText_ConnectorTwoDestination_Lbl() {
+        return ActionHelper.getText(connectorTwoDestination_Lbl);
     }
 
-    public boolean isPresent_Connector2Status_Lbl() {
-        return ActionHelper.isPresent(connector2Status_Lbl);
+    public boolean isPresent_ConnectorTwoStatus_Lbl() {
+        return ActionHelper.isPresent(connectorTwoStatus_Lbl);
     }
 
-    public String getText_Connector2Status_Lbl() {
-        return ActionHelper.getText(connector2Status_Lbl);
+    public String getText_ConnectorTwoStatus_Lbl() {
+        return ActionHelper.getText(connectorTwoStatus_Lbl);
     }
 
-    public boolean isPresent_Connector2Reason_Lbl() {
-        return ActionHelper.isPresent(connector2Reason_Lbl);
+    public boolean isPresent_ConnectorTwoReason_Lbl() {
+        return ActionHelper.isPresent(connectorTwoReason_Lbl);
     }
 
-    public String getText_Connector2Reason_Lbl() {
-        return ActionHelper.getText(connector2Reason_Lbl);
+    public String getText_ConnectorTwoReason_Lbl() {
+        return ActionHelper.getText(connectorTwoReason_Lbl);
     }
 
     public boolean isPresent_ObjectiveDiagram_Lbl() {
