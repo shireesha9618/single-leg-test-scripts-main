@@ -3,6 +3,9 @@ package pageobjects.settings;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import utility.Utility;
+
+import java.util.List;
 
 public class WorkflowExecutionTaskPage {
     private static WorkflowExecutionTaskPage _instance;
@@ -12,6 +15,7 @@ public class WorkflowExecutionTaskPage {
     private final Locator startMenuCard_Link = Locator.builder().withWeb(By.xpath("//p[text()='Start']/ancestor::a"));
     private final Locator startMenuCardHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Start']"));
     private final Locator startMenuCardEditReason_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start']/../following-sibling::div/div"));
+    private final Locator cardMenu_List = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//a//p[contains(@class,'semibold')]"));
 
     public static WorkflowExecutionTaskPage getInstance() {
         if(_instance == null)
@@ -69,5 +73,13 @@ public class WorkflowExecutionTaskPage {
 
     public boolean isEnabled_StartMenuCardEditReason_Btn() {
         return ActionHelper.isEnabled(startMenuCardEditReason_Btn.getBy());
+    }
+
+    public boolean isPresent_CardMenu_List() {
+        return ActionHelper.isPresent(cardMenu_List);
+    }
+
+    public List<String> getTextList_CardMenu_List() {
+        return Utility.getText_ListOfWebElements(cardMenu_List.getBy());
     }
 }

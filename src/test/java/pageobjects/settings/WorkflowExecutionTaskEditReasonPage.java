@@ -1,0 +1,77 @@
+package pageobjects.settings;
+
+import framework.frontend.actions.ActionHelper;
+import framework.frontend.locator.Locator;
+import org.openqa.selenium.By;
+import utility.Utility;
+
+import java.util.List;
+
+public class WorkflowExecutionTaskEditReasonPage {
+    private static WorkflowExecutionTaskEditReasonPage _instance;
+    private final Locator editReasonHeader_Lbl = Locator.builder().withWeb(By.xpath("//h2"));
+    private final Locator executionTask_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Execution Task*']"));
+    private final Locator successReasonCodes_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Success Reason Code(s)']"));
+    private final Locator successReasonCode_List = Locator.builder().withWeb(By.xpath("//h4[text()='Success Reason Code(s)']/../following-sibling::div//span[@title]"));
+    private final Locator failureReasonCode_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Failure Reason Code(s)']"));
+    private final Locator failureReasonCode_List = Locator.builder().withWeb(By.xpath("//h4[text()='Failure Reason Code(s)']/../following-sibling::div//span[@title]"));
+    private final Locator back_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
+    private final Locator save_Btn = Locator.builder().withWeb(By.id("submitForm"));
+
+    public static WorkflowExecutionTaskEditReasonPage getInstance() {
+        if(_instance == null)
+            _instance = new WorkflowExecutionTaskEditReasonPage();
+        return _instance;
+    }
+
+    public boolean isPresent_EditReasonHeader_Lbl() {
+        return ActionHelper.isPresent(editReasonHeader_Lbl);
+    }
+
+    public String getText_EditReasonHeader_Lbl() {
+        return ActionHelper.getText(editReasonHeader_Lbl);
+    }
+
+    public boolean isPresent_ExecutionTask_Lbl() {
+        return ActionHelper.isPresent(executionTask_Lbl);
+    }
+
+    public boolean isPresent_SuccessReasonCodes_Lbl() {
+        return ActionHelper.isPresent(successReasonCodes_Lbl);
+    }
+
+    public boolean isPresent_SuccessReasonCode_List() {
+        return ActionHelper.isPresent(successReasonCode_List);
+    }
+    public List<String> getTextList_successReasonCode_List() {
+        return Utility.getText_ListOfWebElements(successReasonCode_List.getBy());
+    }
+
+    public boolean isPresent_FailureReasonCode_Lbl() {
+        return ActionHelper.isPresent(failureReasonCode_Lbl);
+    }
+
+    public boolean isPresent_FailureReasonCode_List() {
+        return ActionHelper.isPresent(failureReasonCode_List);
+    }
+
+    public List<String> getTextList_FailureReasonCode_List() {
+        return Utility.getText_ListOfWebElements(failureReasonCode_List.getBy());
+    }
+
+    public boolean isPresent_Back_Btn() {
+        return ActionHelper.isPresent(back_Btn);
+    }
+
+    public void click_Back_Btn() {
+        ActionHelper.click(back_Btn);
+    }
+
+    public boolean isPresent_Save_Btn() {
+        return ActionHelper.isPresent(save_Btn);
+    }
+
+    public void click_Save_Btn() {
+        ActionHelper.click(save_Btn);
+    }
+}

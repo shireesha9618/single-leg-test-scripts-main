@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WorkflowExecutionTaskStartPage {
     private static WorkflowExecutionTaskStartPage _instance;
-    private final Locator startHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1"));
+    private final Locator executionTaskDetailHeader_Lbl = Locator.builder().withWeb(By.xpath("//h1"));
     private final Locator createdOn_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Created On']"));
     private final Locator createdOnData_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Created On']/../.."));
     private final Locator updatedOn_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Updated On']"));
@@ -25,12 +25,12 @@ public class WorkflowExecutionTaskStartPage {
         return _instance;
     }
 
-    public boolean isPresent_StartHeader_Lbl() {
-        return ActionHelper.isPresent(startHeader_Lbl);
+    public boolean isPresent_ExecutionTaskDetailHeader_Lbl() {
+        return ActionHelper.isPresent(executionTaskDetailHeader_Lbl);
     }
 
-    public String getText_StartHeader_Lbl() {
-        return ActionHelper.getText(startHeader_Lbl);
+    public String getText_ExecutionTaskDetailHeader_Lbl() {
+        return ActionHelper.getText(executionTaskDetailHeader_Lbl);
     }
 
     public boolean isPresent_CreatedOn_Lbl() {
