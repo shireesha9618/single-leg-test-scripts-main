@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -45,7 +46,7 @@ public class JobWorkflowPage {
     }
 
     public boolean isPresent_JobWorkflowsBreadCrumb_Link() {
-        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link, 2000);
+        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public void click_JobWorkflowsBreadCrumb_Link() {
@@ -129,7 +130,7 @@ public class JobWorkflowPage {
     public boolean isPresent_TableColumnUpdatedBy_Lbl() {
         click_DataTable_Lbl();
         Utility.scrollRightUsingKeyboardKey(5);
-        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, 2000);
+        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public List<WebElement> getList_DataTableColumnName_List() {
