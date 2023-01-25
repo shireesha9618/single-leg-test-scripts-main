@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -17,15 +18,16 @@ public class WorkflowExecutionTaskEditReasonPage {
     private final Locator failureReasonCode_List = Locator.builder().withWeb(By.xpath("//h4[text()='Failure Reason Code(s)']/../following-sibling::div//span[@title]"));
     private final Locator back_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
     private final Locator save_Btn = Locator.builder().withWeb(By.id("submitForm"));
+    private final Locator reasonCodeCross_Icon = Locator.builder().withWeb(By.xpath("(//div[@class='ant-select-selection-overflow']/div//span[@aria-label='close'])[1]"));
 
     public static WorkflowExecutionTaskEditReasonPage getInstance() {
-        if(_instance == null)
+        if (_instance == null)
             _instance = new WorkflowExecutionTaskEditReasonPage();
         return _instance;
     }
 
     public boolean isPresent_EditReasonHeader_Lbl() {
-        return ActionHelper.isPresent(editReasonHeader_Lbl);
+        return ActionHelper.isPresent(editReasonHeader_Lbl, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public String getText_EditReasonHeader_Lbl() {
@@ -43,7 +45,8 @@ public class WorkflowExecutionTaskEditReasonPage {
     public boolean isPresent_SuccessReasonCode_List() {
         return ActionHelper.isPresent(successReasonCode_List);
     }
-    public List<String> getTextList_successReasonCode_List() {
+
+    public List<String> getTextList_SuccessReasonCode_List() {
         return Utility.getText_ListOfWebElements(successReasonCode_List.getBy());
     }
 
@@ -73,5 +76,26 @@ public class WorkflowExecutionTaskEditReasonPage {
 
     public void click_Save_Btn() {
         ActionHelper.click(save_Btn);
+    }
+
+    public boolean isPresent_ReasonCodeCross_Icon() {
+        return ActionHelper.isPresent(reasonCodeCross_Icon);
+    }
+
+    public void click_ReasonCodeCross_Icon() {
+        ActionHelper.click(reasonCodeCross_Icon);
+    }
+
+    private int getReasonCodeCount(String reasonCode) {
+        int reasonCodeCount = 0;
+        switch (reasonCode) {
+            case "success":
+                reasonCodeCount = WorkflowExecutionTaskEditReasonPage.getInstance().getTextList_SuccessReasonCode_List().size();
+                break;
+            case "failure":
+                reasonCodeCount = WorkflowExecutionTaskEditReasonPage.getInstance().getTextList_FailureReasonCode_List().size();
+                break;
+        }
+        return reasonCodeCount;
     }
 }

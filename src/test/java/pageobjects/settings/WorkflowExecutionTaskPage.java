@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -16,15 +17,17 @@ public class WorkflowExecutionTaskPage {
     private final Locator startMenuCardHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Start']"));
     private final Locator startMenuCardEditReason_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Start']/../following-sibling::div/div"));
     private final Locator cardMenu_List = Locator.builder().withWeb(By.xpath("//div[@class='h-full']//a//p[contains(@class,'semibold')]"));
+    private final Locator pickMenuCardEditReason_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Pick']/../following-sibling::div/div"));
+    private final Locator executionTaskValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='No Execution Tasks found']"));
 
     public static WorkflowExecutionTaskPage getInstance() {
-        if(_instance == null)
+        if (_instance == null)
             _instance = new WorkflowExecutionTaskPage();
         return _instance;
     }
 
     public boolean isPresent_ExecutionTaskHeader_Lbl() {
-        return ActionHelper.isPresent(executionTaskHeader_Lbl);
+        return ActionHelper.isPresent(executionTaskHeader_Lbl, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public String getText_ExecutionTaskHeader_Lbl() {
@@ -81,5 +84,21 @@ public class WorkflowExecutionTaskPage {
 
     public List<String> getTextList_CardMenu_List() {
         return Utility.getText_ListOfWebElements(cardMenu_List.getBy());
+    }
+
+    public boolean isPresent_PickMenuCardEditReason_Btn() {
+        return ActionHelper.isPresent(pickMenuCardEditReason_Btn);
+    }
+
+    public void click_PickMenuCardEditReason_Btn() {
+        ActionHelper.click(pickMenuCardEditReason_Btn);
+    }
+
+    public boolean isPresent_ExecutionTaskValidationMsg_Lbl() {
+        return ActionHelper.isPresent(executionTaskValidationMsg_Lbl);
+    }
+
+    public String getText_ExecutionTaskValidationMsg_Lbl() {
+        return ActionHelper.getText(executionTaskValidationMsg_Lbl);
     }
 }

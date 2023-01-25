@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -18,15 +19,16 @@ public class WorkflowExecutionTaskStartPage {
     private final Locator reasonCodeSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Reason Codes']"));
     private final Locator reasonCodeSubHeaderSuccessList_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Success']/following-sibling::p//p"));
     private final Locator reasonCodeSubHeaderFailureList_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Failure']/following-sibling::p//p"));
+    private final Locator description_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Description']"));
 
     public static WorkflowExecutionTaskStartPage getInstance() {
-        if(_instance == null)
+        if (_instance == null)
             _instance = new WorkflowExecutionTaskStartPage();
         return _instance;
     }
 
     public boolean isPresent_ExecutionTaskDetailHeader_Lbl() {
-        return ActionHelper.isPresent(executionTaskDetailHeader_Lbl);
+        return ActionHelper.isPresent(executionTaskDetailHeader_Lbl, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public String getText_ExecutionTaskDetailHeader_Lbl() {
@@ -66,7 +68,7 @@ public class WorkflowExecutionTaskStartPage {
     }
 
     public List<String> getList_ReasonCodeSubHeaderSuccessList_Lbl() {
-      return Utility.getText_ListOfWebElements(reasonCodeSubHeaderSuccessList_Lbl.getBy());
+        return Utility.getText_ListOfWebElements(reasonCodeSubHeaderSuccessList_Lbl.getBy());
     }
 
     public boolean isPresent_ReasonCodeSubHeaderFailureList_Lbl() {
@@ -75,5 +77,13 @@ public class WorkflowExecutionTaskStartPage {
 
     public List<String> getList_ReasonCodeSubHeaderFailureList_Lbl() {
         return Utility.getText_ListOfWebElements(reasonCodeSubHeaderFailureList_Lbl.getBy());
+    }
+
+    public boolean isPresent_UpdatedOnData_Lbl() {
+        return ActionHelper.isPresent(updatedOnData_Lbl);
+    }
+
+    public boolean isPresent_Description_Lbl() {
+        return ActionHelper.isPresent(description_Lbl);
     }
 }
