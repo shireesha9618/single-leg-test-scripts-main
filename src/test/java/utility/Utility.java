@@ -26,12 +26,7 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utility {
@@ -413,7 +408,7 @@ public class Utility {
     }
 
     public static boolean isChecked_Input_CheckBox(WebElement element) {
-        return element.getAttribute("class").contains("checked");
+        return element.isSelected();
     }
 
     public static void sendKeysWithClear(WebElement element, String input) {
@@ -446,5 +441,15 @@ public class Utility {
         for (int i = 0; i < keyPressCount; i++)
             actions.sendKeys(Keys.RIGHT);
         actions.build().perform();
+    }
+
+    public static void scrollTillToTheElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"nearest\"});", element);
+
+    }
+
+    public static WebDriver getDriver(){
+        return DriverManager.getDriver();
     }
 }
