@@ -1,6 +1,8 @@
 package pageobjects;
 
+import api.ApiClient;
 import constants.Constants;
+import framework.backend.APIResponseException;
 import framework.common.assertion.JarvisAssert;
 import framework.common.logger.ExtentLogger;
 import framework.frontend.actions.ActionHelper;
