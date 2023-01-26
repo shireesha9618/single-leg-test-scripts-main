@@ -488,7 +488,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         HomePage.getInstance().click_SettingsMenu_Btn();
         SettingsPage.getInstance().click_Workflow_Link();
         WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
-        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        ObjectiveWorkflowsListPage.getInstance().fill_SearchBar_Txt(expectedObjectiveName);
         String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
         softAssert.assertAll();
@@ -678,7 +678,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         HomePage.getInstance().click_SettingsMenu_Btn();
         SettingsPage.getInstance().click_Workflow_Link();
         WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
-        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        ObjectiveWorkflowsListPage.getInstance().fill_SearchBar_Txt(expectedObjectiveName);
         String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
         softAssert.assertAll();

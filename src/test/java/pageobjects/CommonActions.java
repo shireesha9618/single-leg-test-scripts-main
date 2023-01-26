@@ -14,12 +14,21 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import pageobjects.settings.ObjectiveWorkflowsListPage;
+import pageobjects.settings.SettingsPage;
+import pageobjects.settings.WorkflowPage;
 import utility.Utility;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static constants.Constants.WAIT_FOR_ONE_SECOND;
 import static utility.Utility.acceptAlertIfPresent;
@@ -307,6 +316,17 @@ public class CommonActions {
         waitTillLoaderDisappears();
     }
 
+    public void coverJourneyTillObjectiveWorkflowListPage() {
+        performCommonAction();
+        click_SkipIfPresent_Btn();
+        HomePage.getInstance().selectTeam(Constants.TEAM);
+        HomePage.getInstance().click_SettingsMenu_Btn();
+        SettingsPage.getInstance().click_Workflow_Link();
+        WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
+        waitTillLoaderDisappears();
+        Assert.assertTrue(ObjectiveWorkflowsListPage.getInstance().isPresent_Header_Lbl());
+    }
+
     public String getCurrentPageUrl() {
         return DriverManager.getDriver().getCurrentUrl();
     }
@@ -563,7 +583,7 @@ public class CommonActions {
         return jobIDList;
     }
 
-    public static void selectFromDropDown(Locator txtBox,Locator listOptions,String value) {
+    public static void selectFromDropDown(Locator txtBox, Locator listOptions, String value) {
         ActionHelper.click(txtBox);
         ActionHelper.waitUntilElementVisible(listOptions.getBy());
         for (WebElement rider : DriverManager.getDriver().findElements(listOptions.getBy())) {
@@ -573,7 +593,7 @@ public class CommonActions {
         }
     }
 
-    public void clickElementUsingActionClass(WebElement element){
+    public void clickElementUsingActionClass(WebElement element) {
         Actions action = new Actions(DriverManager.getDriver());
         action.moveToElement(element).click().build().perform();
     }

@@ -26,7 +26,12 @@ import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utility {
@@ -429,7 +434,7 @@ public class Utility {
     }
 
     public static boolean isRadioSelected(By by) {
-        return isRadioSelected(ActionHelper.findElement(by));
+        return isRadioSelected((WebElement) getDriver().findElement(by));
     }
 
     public static boolean isRadioSelected(WebElement element) {
@@ -443,13 +448,19 @@ public class Utility {
         actions.build().perform();
     }
 
-    public static void scrollTillToTheElement(WebElement element){
+    public static void scrollTillToTheElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"nearest\"});", element);
 
     }
 
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
         return DriverManager.getDriver();
+    }
+
+    public static String getRepeatingCharacterString(char c, int count) {
+        String output = "";
+        for (int i = 1; i <= count; i++) output = output + c;
+        return output;
     }
 }
