@@ -16,6 +16,10 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
     WorkflowExecutionTaskEditReasonPage workflowExecutionTaskEditReasonPage = WorkflowExecutionTaskEditReasonPage.getInstance();
     WorkflowExecutionTaskStartPage workflowExecutionTaskStartPage = WorkflowExecutionTaskStartPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
+    List<String> reasonCodeList = ApiClient.getReasonList();
+
+    public TestSuite_WorkflowExecutionTask() throws APIResponseException {
+    }
 
     private void coverJourneyTillJobExecutionTask() {
         commonActions.coverJourneyTillSettings();
@@ -29,22 +33,21 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
     public void TC_ExecutionTask_001_To_Verify_Functionality_To_View_And_Edit_The_List_Of_Allowed_Reason_Codes() throws APIResponseException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
-        List<String> expectedReasonCodes = ApiClient.getReasonList();
         workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
 
         List<String> actualSuccessReasonCode = workflowExecutionTaskEditReasonPage.getTextList_SuccessReasonCode_List();
         for (int i = 0; i < actualSuccessReasonCode.size(); i++) {
-            for (int j = 0; j < expectedReasonCodes.size(); j++) {
-                if (actualSuccessReasonCode.get(i) == expectedReasonCodes.get(j))
-                    softAssert.assertTrue(actualSuccessReasonCode.get(i).equals(expectedReasonCodes.get(j)), "Success Reason Code Is Present As Expected");
+            for (int j = 0; j < reasonCodeList.size(); j++) {
+                if (actualSuccessReasonCode.get(i) == reasonCodeList.get(j))
+                    softAssert.assertTrue(actualSuccessReasonCode.get(i).equals(reasonCodeList.get(j)), "Success Reason Code Is Present As Expected");
             }
         }
 
         List<String> actualEditReasonCode = workflowExecutionTaskEditReasonPage.getTextList_FailureReasonCode_List();
         for (int i = 0; i < actualEditReasonCode.size(); i++) {
-            for (int j = 0; j < expectedReasonCodes.size(); j++) {
-                if (actualEditReasonCode.get(i) == expectedReasonCodes.get(j))
-                    softAssert.assertTrue(actualEditReasonCode.get(i).equals(expectedReasonCodes.get(j)), "Failure Reason Code Is Present As Expected");
+            for (int j = 0; j < reasonCodeList.size(); j++) {
+                if (actualEditReasonCode.get(i) == reasonCodeList.get(j))
+                    softAssert.assertTrue(actualEditReasonCode.get(i).equals(reasonCodeList.get(j)), "Failure Reason Code Is Present As Expected");
             }
         }
         softAssert.assertAll();
@@ -116,7 +119,6 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_PickMenuCardEditReason_Btn();
-        List<String> expectedReasonCodes = ApiClient.getReasonList();
 
         softAssert.assertTrue(workflowExecutionTaskEditReasonPage.isPresent_EditReasonHeader_Lbl(), "Edit Reason Header Label Is Present As Expected");
         softAssert.assertEquals(workflowExecutionTaskEditReasonPage.getText_EditReasonHeader_Lbl(), "Edit Reason(s)", "Edit Reason Header Label Is Matched As Expected");
@@ -126,17 +128,17 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
 
         List<String> actualSuccessReasonCode = workflowExecutionTaskEditReasonPage.getTextList_SuccessReasonCode_List();
         for (int i = 0; i < actualSuccessReasonCode.size(); i++) {
-            for (int j = 0; j < expectedReasonCodes.size(); j++) {
-                if (actualSuccessReasonCode.get(i) == expectedReasonCodes.get(j))
-                    softAssert.assertTrue(actualSuccessReasonCode.get(i).equals(expectedReasonCodes.get(j)), "Success Reason Code Is Present As Expected");
+            for (int j = 0; j < reasonCodeList.size(); j++) {
+                if (actualSuccessReasonCode.get(i) == reasonCodeList.get(j))
+                    softAssert.assertTrue(actualSuccessReasonCode.get(i).equals(reasonCodeList.get(j)), "Success Reason Code Is Present As Expected");
             }
         }
 
         List<String> actualEditReasonCode = workflowExecutionTaskEditReasonPage.getTextList_FailureReasonCode_List();
         for (int i = 0; i < actualEditReasonCode.size(); i++) {
-            for (int j = 0; j < expectedReasonCodes.size(); j++) {
-                if (actualEditReasonCode.get(i) == expectedReasonCodes.get(j))
-                    softAssert.assertTrue(actualEditReasonCode.get(i).equals(expectedReasonCodes.get(j)), "Failure Reason Code Is Present As Expected");
+            for (int j = 0; j < reasonCodeList.size(); j++) {
+                if (actualEditReasonCode.get(i) == reasonCodeList.get(j))
+                    softAssert.assertTrue(actualEditReasonCode.get(i).equals(reasonCodeList.get(j)), "Failure Reason Code Is Present As Expected");
             }
         }
         softAssert.assertAll();
@@ -210,6 +212,24 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
-        System.out.println("list of elements " + workflowExecutionTaskEditReasonPage.reasonCodesList());
+
+        workflowExecutionTaskEditReasonPage.clickReasonCodes("success",20);
+        softAssert.assertTrue(commonActions.isPresent_PopUpValidationMsg_Lbl(), "Pop Up Validation Message For Maximum Success Reason Code Appeared As Expected");
+
+        workflowExecutionTaskEditReasonPage.clickReasonCodes("success",20);
+        softAssert.assertTrue(commonActions.isPresent_PopUpValidationMsg_Lbl(), "Pop Up Validation Message For Maximum Failure Reason Code Appeared As Expected");
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ET_WORKFLOW, TestGroup.BVT},
+            description = "TC_013, To Verify Functionality Allowed List Of Reason")
+    public void TC_ExecutionTask_013_To_Verify_Functionality_Allowed_List_Of_Reason() {
+        JarvisSoftAssert softAssert = new JarvisSoftAssert();
+        coverJourneyTillJobExecutionTask();
+        workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
+        softAssert.assertTrue(workflowExecutionTaskEditReasonPage.allowedReasonCodesList("success").size() > 0, "List Of Allowed Reason Code Is Present As Expected");
+        softAssert.assertTrue(workflowExecutionTaskEditReasonPage.allowedReasonCodesList("failure").size() > 0, "List Of Allowed Reason Code Is Present As Expected");
+        softAssert.assertAll();
     }
 }
