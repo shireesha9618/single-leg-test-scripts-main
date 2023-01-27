@@ -210,6 +210,6 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
-        System.out.println("sjsdflksf " + workflowExecutionTaskEditReasonPage.reasonCodesList());
+        System.out.println("list of elements " + workflowExecutionTaskEditReasonPage.reasonCodesList());
     }
 }

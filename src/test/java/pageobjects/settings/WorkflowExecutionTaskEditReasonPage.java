@@ -10,6 +10,8 @@ import utility.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class WorkflowExecutionTaskEditReasonPage {
     private static WorkflowExecutionTaskEditReasonPage _instance;
@@ -128,21 +130,23 @@ public class WorkflowExecutionTaskEditReasonPage {
         return abcd;
     }*/
 
-    public List<String> reasonCodesList() {
-        List<String> abcd = new ArrayList<>();
+    public Set<String> reasonCodesList() {
+        Set<String> abcd = new TreeSet<>();
         click_SuccessReasonCode_TxtField();
         CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilElementVisible(abc.getBy());
         Utility.scrollDownUsingKeyboardKey(7);
-        List<WebElement> reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
-        for(int i = 0; i < 11; i++) {
+        List<WebElement> reasonCodes;
+        for (int i = 0; i < 11; i++) {
             Utility.scrollDownUsingKeyboardKey(7);
             ActionHelper.gotoSleep(4000);
             reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+            for (WebElement reasonCode : reasonCodes) {
+                if (!reasonCode.getText().isEmpty())
+                    abcd.add(reasonCode.getText());
+            }
         }
-
-        for(WebElement reasonCode : reasonCodes)
-            abcd.add(reasonCode.getText());
+        System.out.println(abcd.size());
         return abcd;
     }
 }
