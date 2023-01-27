@@ -118,7 +118,7 @@ public class WorkflowExecutionTaskEditReasonPage {
 
     public Set<String> allowedReasonCodesList(String reasonCode) {
         Set<String> reasonCodeList = new TreeSet<>();
-        switch (reasonCode){
+        switch (reasonCode) {
             case "success":
                 click_SuccessReasonCode_TxtField();
                 break;
@@ -144,7 +144,7 @@ public class WorkflowExecutionTaskEditReasonPage {
 
     public void clickReasonCodes(String reasonCode, int noOfReasonCodes) {
         int count = 0;
-        switch (reasonCode){
+        switch (reasonCode) {
             case "success":
                 click_SuccessReasonCode_TxtField();
                 break;
@@ -160,10 +160,10 @@ public class WorkflowExecutionTaskEditReasonPage {
             reasonCodes = ActionHelper.findElementsWithoutWait(reasonCodeDropDown_List.getBy());
         }
 
-        for(int i = 0; i < reasonCodes.size(); i++) {
+        for (int i = 0; i < reasonCodes.size(); i++) {
             ActionHelper.click(reasonCodes.get(i));
             count++;
-            if(noOfReasonCodes == count)
+            if (noOfReasonCodes == count)
                 break;
         }
     }

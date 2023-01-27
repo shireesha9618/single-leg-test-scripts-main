@@ -213,10 +213,10 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
 
-        workflowExecutionTaskEditReasonPage.clickReasonCodes("success",20);
+        workflowExecutionTaskEditReasonPage.clickReasonCodes("success", 20);
         softAssert.assertTrue(commonActions.isPresent_PopUpValidationMsg_Lbl(), "Pop Up Validation Message For Maximum Success Reason Code Appeared As Expected");
 
-        workflowExecutionTaskEditReasonPage.clickReasonCodes("success",20);
+        workflowExecutionTaskEditReasonPage.clickReasonCodes("success", 20);
         softAssert.assertTrue(commonActions.isPresent_PopUpValidationMsg_Lbl(), "Pop Up Validation Message For Maximum Failure Reason Code Appeared As Expected");
 
         softAssert.assertAll();
