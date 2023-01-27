@@ -4,8 +4,11 @@ import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import pageobjects.CommonActions;
 import utility.Utility;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkflowExecutionTaskEditReasonPage {
@@ -19,6 +22,8 @@ public class WorkflowExecutionTaskEditReasonPage {
     private final Locator back_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
     private final Locator save_Btn = Locator.builder().withWeb(By.id("submitForm"));
     private final Locator reasonCodeCross_Icon = Locator.builder().withWeb(By.xpath("(//div[@class='ant-select-selection-overflow']/div//span[@aria-label='close'])[1]"));
+    private final Locator abc = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']//div[@aria-selected='false']/div"));
+    private final Locator successReasonCode_TxtField = Locator.builder().withWeb(By.xpath("//h4[text()='Success Reason Code(s)']/../following-sibling::div"));
 
     public static WorkflowExecutionTaskEditReasonPage getInstance() {
         if (_instance == null)
@@ -97,5 +102,46 @@ public class WorkflowExecutionTaskEditReasonPage {
                 break;
         }
         return reasonCodeCount;
+    }
+
+    public boolean isPresent_SuccessReasonCode_TxtField() {
+        return ActionHelper.isPresent(successReasonCode_TxtField);
+    }
+
+    public void click_SuccessReasonCode_TxtField() {
+        ActionHelper.click(successReasonCode_TxtField);
+    }
+
+    /*public List<String> reasonCodesList() {
+        click_SuccessReasonCode_TxtField();
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.waitUntilElementVisible(abc.getBy());
+        List<WebElement> reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+        Utility.scrollTillToTheElement(reasonCodes.get(reasonCodes.size() - 1));
+        reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+        Utility.scrollTillToTheElement(reasonCodes.get(reasonCodes.size() - 1));
+        List<String> abcd = new ArrayList<>();
+        reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+        for (WebElement reasonCode : reasonCodes) {
+            abcd.add(reasonCode.getText());
+        }
+        return abcd;
+    }*/
+
+    public List<String> reasonCodesList() {
+        List<String> abcd = new ArrayList<>();
+        click_SuccessReasonCode_TxtField();
+        CommonActions.getInstance().waitTillLoaderDisappears();
+        ActionHelper.waitUntilElementVisible(abc.getBy());
+        Utility.scrollDownUsingKeyboardKey(7);
+        List<WebElement> reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+        for(int i = 0; i < 11; i++) {
+            Utility.scrollDownUsingKeyboardKey(7);
+            reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
+        }
+
+        for(WebElement reasonCode : reasonCodes)
+            abcd.add(reasonCode.getText());
+        return abcd;
     }
 }
