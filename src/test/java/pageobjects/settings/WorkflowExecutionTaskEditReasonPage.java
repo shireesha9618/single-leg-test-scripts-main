@@ -137,6 +137,7 @@ public class WorkflowExecutionTaskEditReasonPage {
         List<WebElement> reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
         for(int i = 0; i < 11; i++) {
             Utility.scrollDownUsingKeyboardKey(7);
+            ActionHelper.gotoSleep(4000);
             reasonCodes = ActionHelper.findElementsWithoutWait(abc.getBy());
         }
 
