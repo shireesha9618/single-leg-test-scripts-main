@@ -1,5 +1,6 @@
 package testsuite.endtoend;
 
+import api.ApiClient;
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
 import constants.Constants;
@@ -17,7 +18,10 @@ import pageobjects.ViewOrderPage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestSuite_EndToEnd extends BaseTestClass {
     CreateNewOrderPage createNewOrderPage = CreateNewOrderPage.getInstance();
@@ -30,7 +34,7 @@ public class TestSuite_EndToEnd extends BaseTestClass {
     @Test(groups = {TestGroup.SMOKE, TestGroup.REGRESSION},
             description = "Verify End to End Test Case",
             priority = 1)
-    public void TC_EndToEnd_Verify_End_To_End_From_Order_To_Publish_Dispatch_Flow() throws IOException, APIResponseException, AWTException {
+    public void TC_EndToEnd_Verify_End_To_End_From_Order_To_Publish_Dispatch_Flow() throws IOException, APIResponseException, AWTException, AWTException {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillCreateOrder();
         softAssert.assertTrue(HomePage.getInstance().isPresent_TeamDropdown_Txt(), "Team dropdown text is present as expected");
@@ -78,7 +82,7 @@ public class TestSuite_EndToEnd extends BaseTestClass {
 
         createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
         createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
-        String orderAmount = String.valueOf(sampleData.number().numberBetween(99,10000));
+        String orderAmount = String.valueOf(sampleData.number().numberBetween(99, 10000));
         createNewOrderPage.fillWithClear_PaymentDetailsOrderAmount_Txt(orderAmount);
         createNewOrderPage.click_CreateBtn_WithWait();
         viewOrdersPage.click_Refresh_Btn();
@@ -152,5 +156,23 @@ public class TestSuite_EndToEnd extends BaseTestClass {
         softAssert.assertEquals(dispatchDetailPage.get_CashInHand_Lbl(), "0", "Cash In Hand is matched as expected");
 
         softAssert.assertAll();
+    }
+
+    @Test(groups = {TestGroup.SMOKE, TestGroup.REGRESSION},
+            description = "Verify End to End Test Case",
+            priority = 1)
+    public void TC_EndToEnd_Verify_End_To_End_From_Order_To_Publish_Dqispatch_Flow() throws IOException, APIResponseException {
+
+        Map<String, String> dispatch;
+        List<String> jobIDList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            HashMap<String, String> order = ApiClient.createOrder("cod");
+            jobIDList.add(ApiClient.getJobID(order.get("orderId")));
+            System.out.println("order id is  : " + order.get("orderId"));
+        }
+        dispatch = ApiClient.createAndPublishDispatch(jobIDList);
+        System.out.println("Jobid is : " + jobIDList);
+
+        System.out.println(dispatch.get("dispatchID"));
     }
 }

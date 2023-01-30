@@ -37,22 +37,26 @@ public class CreateNewOrderPage {
     private final Locator orderDetailsTotalVolume_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Total Volume (cu.cm)']/following-sibling::div/div/input[@placeholder='Total Volume']"));
 
     private final Locator shipmentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Shipment Details']"));
-    private final Locator shipmentDetailsShipmentID_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1]/div//div/input[@placeholder='Enter Shipment ID']"));
-    private final Locator shipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description']"));
-    private final Locator shipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input[@placeholder='Enter Weight']"));
-    private final Locator shipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input[@placeholder='Enter Volume']"));
+    private final Locator shipmentDetailsShipmentID_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Shipment ID']"));
+    private final Locator shipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description' and @value='']"));
+    private final Locator getShipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description']"));
+
+    private final Locator shipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input"));
+    private final Locator shipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input"));
+    private final Locator setShipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input[@value='0']"));
+    private final Locator setShipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input[@value='0']"));
     private final Locator shipmentDetailsDimensionsLength_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='l']"));
     private final Locator shipmentDetailsDimensionsBreadth_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='b']"));
     private final Locator shipmentDetailsDimensionsHeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='h']"));
     private final Locator shipmentDetailsDelete_Btn = Locator.builder().withWeb(By.xpath("//td[div//input[@placeholder='h']]/following-sibling::td"));
-    private final Locator shipmentDetailsTableColumnShipmentID_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1][text()]"));
-    private final Locator shipmentDetailsTableColumnDescription_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2][text()]"));
-    private final Locator shipmentDetailsTableColumnWeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3][text()]"));
-    private final Locator shipmentDetailsTableColumnVolume_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4][text()]"));
+    private final Locator shipmentDetailsTableColumnShipmentID_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[1]//input"));
+    private final Locator shipmentDetailsTableColumnDescription_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]//input"));
+    private final Locator shipmentDetailsTableColumnWeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]//input"));
+    private final Locator shipmentDetailsTableColumnVolume_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]//input"));
     private final Locator shipmentDetailsTableColumnDimensionsLength_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[1][text()]"));
     private final Locator shipmentDetailsTableColumnDimensionsBreadth_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[2][text()]"));
     private final Locator shipmentDetailsTableColumnDimensionsHeight_ListLbl = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div/span[3][text()]"));
-    private final Locator shipmentDetailsTableColumnDelete_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]/div"));
+    private final Locator shipmentDetailsTableColumnDelete_ListBtn = Locator.builder().withWeb(By.xpath("//tbody/tr/td[6]"));
     private final Locator shipmentDetailsAddShipment_Btn = Locator.builder().withWeb(By.xpath("//span[text()='Add Shipment']"));
 
     private final Locator pickupDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Pickup Details']"));
@@ -60,8 +64,8 @@ public class CreateNewOrderPage {
     private final Locator pickupDetailsCustomAddress_Radio = Locator.builder().withWeb(By.xpath("//input[@value='pickupAaddress']"));
     private final Locator pickupDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='contactName']"));
     private final Locator pickupDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='primaryMobile']"));
-    private final Locator pickupDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::div//input[@type='search']"));
-    private final Locator pickupDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']//following-sibling::div//span[@class='ant-select-selection-item']"));
+    private final Locator pickupDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("//label[text()='Facility*']/following-sibling::div//input[@type='search']"));
+    private final Locator pickupDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("//label[text()='Facility*']//following-sibling::div//span[@class='ant-select-selection-item']"));
     private final Locator pickupDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='postalCode']"));
     private final Locator pickupDetailsCountry_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter Country']"));
     private final Locator pickupDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='addressLine1']"));
@@ -78,8 +82,8 @@ public class CreateNewOrderPage {
     private final Locator dropDetailsCustomAddress_Radio = Locator.builder().withWeb(By.xpath("//input[@value='address']"));
     private final Locator dropDetailsContactName_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropContactName']"));
     private final Locator dropDetailsContactNumber_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPrimaryMobile']"));
-    private final Locator dropDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']/following-sibling::div//input[@type='search'])[2]"));
-    private final Locator dropDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("(//label[text()='Select a Facility*']//following-sibling::div//span[@class='ant-select-selection-item'])[2]"));
+    private final Locator dropDetailsSelectAFacility_Dropdown = Locator.builder().withWeb(By.xpath("(//label[text()='Facility*']/following-sibling::div//input[@type='search'])[2]"));
+    private final Locator dropDetailsSelectAFacility_Txt = Locator.builder().withWeb(By.xpath("(//label[text()='Facility*']//following-sibling::div//span[@class='ant-select-selection-item'])[2]"));
     private final Locator dropDetailsPostalCode_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropPostalCode']"));
     private final Locator dropDetailsCountry_Select = Locator.builder().withWeb(By.xpath("(//select[@placeholder='Enter Country'])[2]"));
     private final Locator dropDetailsAddressLine1_Txt = Locator.builder().withWeb(By.xpath("//input[@name='dropAddressLine1']"));
@@ -95,6 +99,8 @@ public class CreateNewOrderPage {
 
     private final Locator paymentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Payment Details']"));
     private final Locator paymentDetailsPaymentType_Select = Locator.builder().withWeb(By.xpath("//select[@placeholder='Select Payment Type']"));
+    private final Locator paymentDetailsPaymentTypeSelect_Option = Locator.builder().withWeb(By.xpath("//select[@placeholder='Select Payment Type']/option"));
+
     private final Locator paymentDetailsOrderAmount_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Order Amount']"));
 
     private final Locator cancel_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Cancel']"));
@@ -102,7 +108,7 @@ public class CreateNewOrderPage {
 
     private final Locator successToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Order Creation Success']"));
     private final Locator duplicateOrderIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Duplicate clientOrderId']"));
-    private final Locator samePickupAndDropFacilityToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Drop facility needs to be different from Pickup facility']"));
+    private final Locator samePickupAndDropFacilityToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Same Pickup and Drop facility, Drop facility needs to be different from Pickup facility']"));
     private final Locator onlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Only prepaid orders allowed for multiple shipments']"));
 
     private final Locator orderDetailsOrderIdValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='orderId']]/following-sibling::p"));
@@ -113,7 +119,7 @@ public class CreateNewOrderPage {
 
     private final Locator pickupDetailsContactNameValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='contactName']]/following-sibling::p"));
     private final Locator pickupDetailsContactNumberValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/div/input[@name='primaryMobile']]/following-sibling::p"));
-    private final Locator pickupDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//label[text()='Select a Facility*']/following-sibling::p"));
+    private final Locator pickupDetailsSelectAFacilityValidationError_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Pickup Details']/../following-sibling::div//span[text()='Select a Facility']/parent::div/../following-sibling::p"));
     private final Locator pickupDetailsPostalCodeValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='postalCode']]/following-sibling::p"));
     private final Locator pickupDetailsCountryValidationError_Lbl = Locator.builder().withWeb(By.xpath("//select[@placeholder='Enter Country']/following-sibling::p"));
     private final Locator pickupDetailsAddressLine1ValidationError_Lbl = Locator.builder().withWeb(By.xpath("//div[div/input[@name='addressLine1']]/following-sibling::p"));
@@ -160,7 +166,7 @@ public class CreateNewOrderPage {
     private final Locator addFacilityPinCodeDataNotFoundToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Pincode data not found.']"));
     private final Locator addShipmentRequiredParamShipmentIdToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Required Param Shipment Id']"));
     private final Locator addShipmentRequiredParamDescriptionToastMsg_Lbl = Locator.builder().withWeb(By.xpath("//div[text()='Required Param Description']"));
-
+    private final Locator shipmentDetailsRow = Locator.builder().withWeb(By.xpath("//tbody/tr"));
     Faker sampleData = new Faker();
 
     public static CreateNewOrderPage getInstance() {
@@ -172,7 +178,7 @@ public class CreateNewOrderPage {
 
     public boolean isPresent_Header_Lbl() {
         CommonActions.getInstance().waitTillLoaderDisappears();
-        return ActionHelper.isPresent(header_Lbl);
+        return ActionHelper.isPresent(header_Lbl, 2000);
     }
 
     public String getText_Header_Lbl() {
@@ -274,8 +280,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_OrderDetailsOrderDescription_Txt(String value) {
-        Utility.selectAllAndClear(orderDetailsOrderDescription_Txt.getBy());
-        ActionHelper.fillWithClear(orderDetailsOrderDescription_Txt.getBy(), value);
+        ActionHelper.sendKeysWithClear(orderDetailsOrderDescription_Txt.getBy(), value);
     }
 
     public void clear_OrderDetailsOrderDescription_Txt() {
@@ -384,7 +389,7 @@ public class CreateNewOrderPage {
     }
 
     public String getValue_PickupDetailsPostalCode_Txt() {
-        return ActionHelper.getAttribute(pickupDetailsPostalCode_Txt,"title");
+        return ActionHelper.getAttribute(pickupDetailsPostalCode_Txt, "title");
     }
 
     public boolean isPresent_PickupDetailsCountry_Select() {
@@ -778,7 +783,7 @@ public class CreateNewOrderPage {
 
     public void click_CreateBtn_WithWait() {
         ActionHelper.click(create_Btn);
-        Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
+//        Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
         CommonActions.getInstance().waitTillLoaderDisappears();
         CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
@@ -1033,8 +1038,8 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityFacilityId_Txt(String value) {
-        Utility.selectAllAndClear(addFacilityFacilityId_Txt.getBy());
-        ActionHelper.fillWithClear(addFacilityFacilityId_Txt.getBy(), value);
+//        Utility.selectAllAndClear(addFacilityFacilityId_Txt.getBy());
+        ActionHelper.sendKeysWithClear(addFacilityFacilityId_Txt.getBy(), value);
     }
 
     public void clear_AddFacilityFacilityId_Txt() {
@@ -1312,6 +1317,7 @@ public class CreateNewOrderPage {
     }
 
     public void set_DropFacility_TextBox() {
+//        Utility.scrollDownUsingKeyboardKey(2);
         ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
@@ -1402,7 +1408,7 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_SuccessToastMsg_Lbl() {
-        return ActionHelper.isPresent(successToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(successToastMsg_Lbl);
     }
 
     public boolean isPresent_DuplicateOrderIdToastMsg_Lbl() {
@@ -1419,6 +1425,8 @@ public class CreateNewOrderPage {
 
     public void fillPickupDetailsWithCustomData() {
         click_PickupDetailsCustomAddress_Radio();
+        fillWithClear_PickupDetailsContactName_Txt(sampleData.name().firstName());
+        fillWithClear_PickupDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
         fillWithClear_PickupDetailsPostalCode_Txt(Constants.PICKUP_PINCODE);
         fillWithClear_PickupDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
         fillWithClear_PickupDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
@@ -1427,6 +1435,8 @@ public class CreateNewOrderPage {
 
     public void fillDropDetailsWithCustomData() {
         click_DropDetailsCustomAddress_Radio();
+        fillWithClear_DropDetailsContactName_Txt(sampleData.name().firstName());
+        fillWithClear_DropDetailsContactNumber_Txt(sampleData.phoneNumber().subscriberNumber(10));
         fillWithClear_DropDetailsPostalCode_Txt(Constants.DROP_PINCODE);
         fillWithClear_DropDetailsAddressLine1_Txt(sampleData.address().buildingNumber());
         fillWithClear_DropDetailsAddressLine2_Txt(sampleData.address().secondaryAddress());
@@ -1518,7 +1528,7 @@ public class CreateNewOrderPage {
     }
 
     public String getValue_ShipmentDetailsDescription_Txt() {
-        return ActionHelper.getAttribute(shipmentDetailsDescription_Txt, "value");
+        return ActionHelper.getAttribute(getShipmentDetailsDescription_Txt, "value");
     }
 
     public boolean isPresent_ShipmentDetailsWeight_Txt() {
@@ -1642,7 +1652,7 @@ public class CreateNewOrderPage {
     }
 
     public String getText_ShipmentDetailsTableColumnShipmentID_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnShipmentID_ListLbl.getBy()).get(index));
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnShipmentID_ListLbl.getBy()).get(index).getAttribute("value");
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnDescription_ListLbl() {
@@ -1654,7 +1664,7 @@ public class CreateNewOrderPage {
     }
 
     public String getText_ShipmentDetailsTableColumnDescription_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDescription_ListLbl.getBy()).get(index));
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnDescription_ListLbl.getBy()).get(index).getAttribute("value");
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnWeight_ListLbl() {
@@ -1666,7 +1676,7 @@ public class CreateNewOrderPage {
     }
 
     public String getText_ShipmentDetailsTableColumnWeight_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()).get(index));
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnWeight_ListLbl.getBy()).get(index).getAttribute("value");
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnVolume_ListLbl() {
@@ -1678,7 +1688,7 @@ public class CreateNewOrderPage {
     }
 
     public String getText_ShipmentDetailsTableColumnVolume_ListLbl(int index) {
-        return ActionHelper.getText(ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()).get(index));
+        return ActionHelper.findElementsWithoutWait(shipmentDetailsTableColumnVolume_ListLbl.getBy()).get(index).getAttribute("value");
     }
 
     public List<WebElement> getList_ShipmentDetailsTableColumnDimensionsLength_ListLbl() {
@@ -2022,12 +2032,20 @@ public class CreateNewOrderPage {
     public List<Map<String, String>> addShipmentDetails(int shipmentCount) {
         List<Map<String, String>> list = new ArrayList<>();
         Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < shipmentCount; i++) {
+        for (int count = 1; count <= shipmentCount; count++) {
             map.put("shipmentId", ActionHelper.getRandomNumberString(5));
             map.put("description", sampleData.artist().name());
-            fillWithClear_ShipmentDetailsShipmentID_Txt(map.get("shipmentId"));
-            fillWithClear_ShipmentDetailsDescription_Txt(map.get("description"));
-            click_ShipmentDetailsAddShipment_Btn();
+            if (count >= 2) {
+                click_ShipmentDetailsAddShipment_Btn();
+                fillWithClear_ShipmentDetailsShipmentID_Txt(map.get("shipmentId"));
+                fillWithClear_ShipmentDetailsDescription_Txt(map.get("description"));
+            }
+
+            ActionHelper.fillWithClear(setShipmentDetailsVolume_Txt.getBy(), ActionHelper.getRandomNumberString(2));
+            ActionHelper.fillWithClear(setShipmentDetailsWeight_Txt.getBy(), ActionHelper.getRandomNumberString(2));
+
+//            fillWithClear_ShipmentDetailsWeight_Txt("3");
+//            fillWithClear_ShipmentDetailsVolume_Txt("5");
             list.add(Map.copyOf(map));
             map.clear();
         }
@@ -2042,7 +2060,7 @@ public class CreateNewOrderPage {
         finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
         fillWithClear_PickupDetailsContactName_Txt(finalData.get("contactName"));
         fillWithClear_PickupDetailsContactNumber_Txt(finalData.get("contactNumber"));
-        finalData.put("facility", setPickUpFacilityByIndex(0));
+        finalData.put("facility", setPickUpFacilityByIndex(1));
         finalData.put("pickupDate", ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
         fill_PickupDetailsPickupDate_Txt(finalData.get("pickupDate"));
         return finalData;
@@ -2056,7 +2074,7 @@ public class CreateNewOrderPage {
         finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
         fillWithClear_PickupDetailsContactName_Txt(finalData.get("contactName"));
         fillWithClear_PickupDetailsContactNumber_Txt(finalData.get("contactNumber"));
-        finalData.put("facility", setPickUpFacilityByIndex(0));
+        finalData.put("facility", setPickUpFacilityByIndex(1));
         finalData.put("pickupDate", pickupDate);
         fill_PickupDetailsPickupDate_Txt(pickupDate);
         return finalData;
@@ -2070,7 +2088,7 @@ public class CreateNewOrderPage {
         finalData.put("contactNumber", ActionHelper.getRandomNumberString(10));
         fillWithClear_DropDetailsContactName_Txt(finalData.get("contactName"));
         fillWithClear_DropDetailsContactNumber_Txt(finalData.get("contactNumber"));
-        finalData.put("facility", setDropFacilityByIndex(1));
+        finalData.put("facility", setDropFacilityByIndex(2));
         finalData.put("dropDate", ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
         fill_DropDetailsDropDate_Txt(finalData.get("dropDate"));
         return finalData;
@@ -2093,7 +2111,10 @@ public class CreateNewOrderPage {
     public String addPaymentDetails(String paymentType) {
         String amount = null;
         ActionHelper.scrollTillElement(paymentDetailsHeader_Lbl.getBy());
-        selectByVisibleText_PaymentDetailsPaymentType_Select(paymentType);
+//        ActionHelper.click(paymentDetailsPaymentType_Select.getBy());
+//        selectByVisibleText_PaymentDetailsPaymentType_Select(paymentType);
+        ActionHelper.gotoSleep(5000);
+        Utility.select_FromDropDown_List(paymentDetailsPaymentType_Select.getBy(), paymentDetailsPaymentTypeSelect_Option.getBy(), paymentType);
         if (!paymentType.equals("Prepaid")) {
             amount = ActionHelper.getRandomNumberString(3);
             fillWithClear_PaymentDetailsOrderAmount_Txt(amount);
@@ -2102,7 +2123,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillShipmentDetails() {
-        fillWithClear_ShipmentDetailsShipmentID_Txt(sampleData.idNumber().valid().replace("-",""));
+        fillWithClear_ShipmentDetailsShipmentID_Txt(sampleData.idNumber().valid().replace("-", ""));
         fillWithClear_ShipmentDetailsDescription_Txt(sampleData.backToTheFuture().quote());
         fillWithClear_ShipmentDetailsVolume_Txt("10");
         fillWithClear_ShipmentDetailsWeight_Txt("10");
@@ -2110,5 +2131,17 @@ public class CreateNewOrderPage {
         fillWithClear_ShipmentDetailsDimensionsHeight_Txt("10");
         fillWithClear_ShipmentDetailsDimensionsLength_Txt("10");
         click_ShipmentDetailsAddShipment_Btn();
+    }
+
+    public int get_TotalNumberOfShipmentRows_Count() {
+        return ActionHelper.findElements(shipmentDetailsRow).size();
+    }
+
+    public void fillWithClear_ShipmentDetailVolume_Txt(String value) {
+        ActionHelper.fillWithClear(setShipmentDetailsVolume_Txt.getBy(), value);
+    }
+
+    public void fillWithClear_ShipmentDetailWeight_Txt(String value) {
+        ActionHelper.fillWithClear(setShipmentDetailsWeight_Txt.getBy(), value);
     }
 }

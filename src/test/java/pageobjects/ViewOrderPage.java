@@ -58,9 +58,9 @@ public class ViewOrderPage {
     private final Locator tabHeaderDropPostalCode_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[10]/span"));
     private final Locator tabHeaderPaymentType_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[11]/div/h6"));
     private final Locator tabHeaderAmount_ListLbl = Locator.builder().withWeb(By.xpath("//tr[contains(@class, 'ant-table-row')]/td[12]/span"));
-    private final Locator firstElementOrderId_Txt = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[2]"));
-    private final Locator firstElementStatus_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[3]"));
-    private final Locator firstElementNoOfShipment_Lbl = Locator.builder().withWeb(By.xpath(" //tbody[@class='ant-table-tbody']/tr[2]/td[4]"));
+    private final Locator firstElementOrderId_Txt = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']/tr[2]/td[2]/a/a"));
+    private final Locator firstElementStatus_Lbl = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']/tr[2]/td[3]"));
+    private final Locator firstElementNoOfShipment_Lbl = Locator.builder().withWeb(By.xpath("//tbody[@class='ant-table-tbody']/tr[2]/td[4]"));
     private final Locator assignRiderDropDownManualHeader_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Manual Assignment']"));
     private final Locator assignRiderDropDownManualRider_DropDown = Locator.builder().withWeb(By.xpath("//div[h4[text()='Rider*']]/following-sibling::div//input[@type='search']"));
     private final Locator assignRiderDropDownManualRiderDropDownData_Lbl = Locator.builder().withWeb(By.xpath("(//div[@class='flex flex-col']/p[1])[1]"));
@@ -653,6 +653,7 @@ public class ViewOrderPage {
     }
 
     public String get_FirstElementStatus_Lbl() {
+        ActionHelper.gotoSleep(5000);
         return ActionHelper.getText(firstElementStatus_Lbl);
     }
 
