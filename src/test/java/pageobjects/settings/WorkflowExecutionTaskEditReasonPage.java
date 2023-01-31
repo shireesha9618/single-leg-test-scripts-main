@@ -139,6 +139,14 @@ public class WorkflowExecutionTaskEditReasonPage {
                     reasonCodeList.add(element.getText());
             }
         }
+        switch (reasonCode) {
+            case "success":
+                click_SuccessReasonCode_TxtField();
+                break;
+            case "failure":
+                click_FailureReasonCode_TxtField();
+                break;
+        }
         return reasonCodeList;
     }
 
