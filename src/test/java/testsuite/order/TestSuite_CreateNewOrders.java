@@ -153,6 +153,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
     public void TC_CreateNewOrder_004_Verify_The_Functionality_Of_Breadcrumb_Menu_For_Create_New_Order_page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillCreateOrder();
+
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
         softAssert.assertTrue(createNewOrderPage.isPresent_CreateOrderBreadcrumb_Link(), "Validate presence of Create Order Breadcrumb");
@@ -165,6 +166,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
         createNewOrderPage.click_Cancel_Btn();
         softAssert.assertTrue(viewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertAll();
@@ -176,6 +178,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         commonActions.coverJourneyTillCreateOrder();
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
+
         createNewOrderPage.clear_OrderDetailsOrderId_Txt();
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderIdValidationError_Lbl(), "Validate presence of validation error message for Order Id field");
@@ -285,6 +288,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
         createNewOrderPage.clear_PickupDetailsContactName_Txt();
         createNewOrderPage.click_Create_Btn();
+
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNameValidationError_Lbl(), "Validate presence of validation error message for Contact Name field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsContactNameValidationError_Lbl(), "Required", "Validate text of validation error message for Contact Name field");
         softAssert.assertAll();
@@ -459,7 +463,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //BUG
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_026, Verify The Validation Functionality of Address Line 1 of Pickup Details for Maximum Character")
     public void TC_CreateNewOrder_026_Verify_The_Validation_Functionality_of_Address_Line_1_of_Pickup_Details_for_Maximum_Character() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -489,7 +492,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //Bug
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_028, Verify The Validation Functionality of City of Pickup Details For Special And Numeric Character ")
     public void TC_CreateNewOrder_028_Verify_The_Validation_Functionality_of_City_of_Pickup_Details_For_Special_And_Numeric_Character() {
         List<String> inputs = List.of("@@@@@", "aa!@$", "aa112", "aa1@1$", "11223");
@@ -637,6 +639,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_PickupDetailsCustomAddress_Radio();
         createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt("Max length.");
         createNewOrderPage.click_Create_Btn();
+
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsPostalCodeValidationError_Lbl(), "Validate presence of validation error message for Postal Code field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsPostalCodeValidationError_Lbl(), "Length must be smaller than 6", "Validate validation error message for Postal Code field");
         softAssert.assertAll();
@@ -1091,11 +1094,10 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
 
         String orderId = faker.idNumber().valid().replace("-", "");
         createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(orderId);
-        createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
         createNewOrderPage.fillShipmentDetails();
         createNewOrderPage.fillPickupDetailsWithCustomData();
         createNewOrderPage.fillDropDetailsWithCustomData();
-        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Prepaid");
+        createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Pickup");
         createNewOrderPage.click_CreateBtn_WithWait();
 
         viewOrderPage.fillWithClear_SearchBar_Txt(orderId);
@@ -1150,7 +1152,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //creating state
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_070, Verify The Functionality of Collect at Pickup in Payment Type with order Amount")
     public void TC_CreateNewOrder_070_Verify_The_Functionality_of_Collect_at_Pickup_in_Payment_Type_with_order_Amount() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -1220,7 +1221,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //bug
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_073, Verify The Validation Functionality For Duplicate Order ID In Create New Order Page ")
     public void TC_CreateNewOrder_073_Verify_The_Validation_Functionality_For_Duplicate_Order_ID_In_Create_New_Order_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -1605,15 +1605,17 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(faker.idNumber().valid());
+        createNewOrderPage.fillWithClear_OrderDetailsOrderId_Txt(faker.number().digits(10));
         createNewOrderPage.fillWithClear_OrderDetailsOrderDescription_Txt(faker.backToTheFuture().quote());
         createNewOrderPage.fill_PickupDetailsContactName_Txt(faker.name().fullName());
         createNewOrderPage.fill_PickupDetailsContactNumber_Txt(faker.phoneNumber().subscriberNumber(10));
+        createNewOrderPage.fill_PickupDetailsPickupDate_Txt(ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
         createNewOrderPage.set_PickUpFacility_TextBox();
         createNewOrderPage.fill_DropDetailsContactName_Txt(faker.name().fullName());
         createNewOrderPage.fill_DropDetailsContactNumber_Txt(faker.phoneNumber().subscriberNumber(10));
         createNewOrderPage.click_DropDetailsFacilityStore_Radio();
         createNewOrderPage.set_DropFacility_TextBox();
+        createNewOrderPage.fill_DropDetailsDropDate_Txt(ActionHelper.getCurrentDay() + "-" + ActionHelper.getCurrentMonth() + "-" + ActionHelper.getCurrentYear());
         createNewOrderPage.selectByVisibleText_PaymentDetailsPaymentType_Select("Collect At Delivery");
         createNewOrderPage.click_Create_Btn();
 
@@ -1969,7 +1971,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    //dropdown issue
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_118, Verify The Functionality of creating order with multiple shipments of COD Payment type")
     public void TC_CreateNewOrder_118_Verify_The_Functionality_of_creating_order_with_multiple_shipments_of_COD_Payment_type() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
@@ -1981,13 +1982,12 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.addShipmentDetails(2);
         createNewOrderPage.addFacilityPickupDetails();
         createNewOrderPage.addFacilityDropDetails();
-        createNewOrderPage.addPaymentDetails("Prepaid");
+        createNewOrderPage.addPaymentDetails("Cash On Delhivery");
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_SuccessToastMsg_Lbl(), "Validate presence of Success toast msg");
         softAssert.assertAll();
     }
 
-    //confusion
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_ORDER, TestGroup.BVT}, description = "TC_119, Verify The Functionality of creating order with multiple shipments of COD Payment type")
     public void TC_CreateNewOrder_119_Verify_The_Functionality_of_creating_order_with_multiple_shipments_of_COD_Payment_type() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();

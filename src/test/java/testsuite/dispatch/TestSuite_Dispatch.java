@@ -595,6 +595,4 @@ public class TestSuite_Dispatch extends BaseTestClass {
         softAssert.assertEquals(DispatchPage.getInstance().getText_Header_Lbl(), "Dispatches", "Validate header lbl");
         softAssert.assertAll();
     }
-
-
 }
