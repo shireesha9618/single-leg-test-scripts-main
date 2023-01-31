@@ -24,7 +24,8 @@ public class WorkflowExecutionTaskEditReasonPage {
     private final Locator back_Btn = Locator.builder().withWeb(By.xpath("//p[text()='Back']/.."));
     private final Locator save_Btn = Locator.builder().withWeb(By.id("submitForm"));
     private final Locator reasonCodeCross_Icon = Locator.builder().withWeb(By.xpath("(//div[@class='ant-select-selection-overflow']/div//span[@aria-label='close'])[1]"));
-    private final Locator reasonCodeDropDown_List = Locator.builder().withWeb(By.xpath("//div[@class='rc-virtual-list-holder-inner']//div[@aria-selected='false']/div"));
+    private final Locator successReasonCodeDropDownList_Options = Locator.builder().withWeb(By.xpath("//div[@id='rc_select_1_list']/following-sibling::div//div[@aria-selected='false']/div"));
+    private final Locator failureReasonCodeDropDownList_Options = Locator.builder().withWeb(By.xpath("//div[@id='rc_select_2_list']/following-sibling::div//div[@aria-selected='false']/div"));
     private final Locator successReasonCode_TxtField = Locator.builder().withWeb(By.xpath("//h4[text()='Success Reason Code(s)']/../following-sibling::div"));
     private final Locator failureReasonCode_TxtField = Locator.builder().withWeb(By.xpath("//h4[text()='Failure Reason Code(s)']/../following-sibling::div"));
 
@@ -118,28 +119,36 @@ public class WorkflowExecutionTaskEditReasonPage {
 
     public Set<String> allowedReasonCodesList(String reasonCode) {
         Set<String> reasonCodeList = new TreeSet<>();
-        switch (reasonCode) {
+        switch (reasonCode.toLowerCase()) {
             case "success":
                 click_SuccessReasonCode_TxtField();
+                reasonCodeList = getUnselectedReasonCodeList(reasonCode,successReasonCodeDropDownList_Options);
                 break;
             case "failure":
                 click_FailureReasonCode_TxtField();
+                reasonCodeList = getUnselectedReasonCodeList(reasonCode,failureReasonCodeDropDownList_Options);
                 break;
         }
+        System.out.println("List Of "+reasonCode+" reasonCode are : " +reasonCodeList);
+        return reasonCodeList;
+    }
+
+    private Set<String> getUnselectedReasonCodeList(String reasonCode,Locator reasonCodeDropDown_List){
+        Set<String> reasonCodeList = new TreeSet<>();
         CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilElementVisible(reasonCodeDropDown_List.getBy());
-        Utility.scrollDownUsingKeyboardKey(7);
         List<WebElement> reasonCodes;
         for (int i = 0; i < 11; i++) {
             Utility.scrollDownUsingKeyboardKey(7);
-            ActionHelper.gotoSleep(4000);
+            //ActionHelper.gotoSleep(4000);
+            CommonActions.getInstance().waitTillLoaderDisappears();
             reasonCodes = ActionHelper.findElementsWithoutWait(reasonCodeDropDown_List.getBy());
             for (WebElement element : reasonCodes) {
                 if (!element.getText().isEmpty())
                     reasonCodeList.add(element.getText());
             }
         }
-        switch (reasonCode) {
+        switch (reasonCode.toLowerCase()) {
             case "success":
                 click_SuccessReasonCode_TxtField();
                 break;
@@ -161,11 +170,11 @@ public class WorkflowExecutionTaskEditReasonPage {
                 break;
         }
         CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.waitUntilElementVisible(reasonCodeDropDown_List.getBy());
+        ActionHelper.waitUntilElementVisible(successReasonCodeDropDownList_Options.getBy());
         List<WebElement> reasonCodes = new ArrayList<>();
         for (int i = 0; i < 11; i++) {
             Utility.scrollDownUsingKeyboardKey(7);
-            reasonCodes = ActionHelper.findElementsWithoutWait(reasonCodeDropDown_List.getBy());
+            reasonCodes = ActionHelper.findElementsWithoutWait(successReasonCodeDropDownList_Options.getBy());
         }
 
         for (int i = 0; i < reasonCodes.size(); i++) {
