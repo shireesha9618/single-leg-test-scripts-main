@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -25,6 +26,7 @@ public class JobWorkflowCreatePreviewPage {
     private final Locator cardMenuStatus_List = Locator.builder().withWeb(By.xpath("//div[@class='flex flex-col space-y-2']/div"));
     private final Locator cardMenuViewMore_Link = Locator.builder().withWeb(By.xpath("(//p[text()='View more'])[1]"));
     private final Locator cardMenuViewServiceAttributes_Link = Locator.builder().withWeb(By.xpath("(//p[text()='View Service Attributes'])[1]"));
+    private final Locator cardMenuStatus_Lbl = Locator.builder().withWeb(By.xpath("(//h6/p)[1]"));
 
     public static JobWorkflowCreatePreviewPage getInstance() {
         if(_instance == null)
@@ -66,7 +68,7 @@ public class JobWorkflowCreatePreviewPage {
     }
 
     public boolean isPresent_StatusActive_RadioBtn() {
-        return ActionHelper.isPresent(statusActive_RadioBtn, 2000);
+        return ActionHelper.isPresent(statusActive_RadioBtn, Constants.WAIT_FOR_THREE_SEC);
     }
 
     public void click_StatusActive_RadioBtn() {
@@ -147,5 +149,13 @@ public class JobWorkflowCreatePreviewPage {
 
     public void click_CardMenuViewServiceAttributes_Link() {
         ActionHelper.click(cardMenuViewServiceAttributes_Link);
+    }
+
+    public boolean isPresent_CardMenuStatus_Lbl() {
+        return ActionHelper.isPresent(cardMenuStatus_Lbl);
+    }
+
+    public String getText_CardMenuStatus_Lbl() {
+        return ActionHelper.getText(cardMenuStatus_Lbl);
     }
 }

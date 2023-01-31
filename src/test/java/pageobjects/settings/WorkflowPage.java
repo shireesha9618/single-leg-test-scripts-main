@@ -55,4 +55,9 @@ public class WorkflowPage {
         ActionHelper.click(jobWorkflow_Link);
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
+
+    public void click_ObjectiveWorkflow_Link() {
+        ActionHelper.click(objectiveWorkflow_Link);
+        CommonActions.getInstance().waitTillLoaderDisappears();
+    }
 }

@@ -1,10 +1,15 @@
 package pageobjects.settings;
 
+import com.github.javafaker.Faker;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pageobjects.CommonActions;
 import utility.Utility;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class JobWorkflowCreatePage {
     private static JobWorkflowCreatePage _instance;
@@ -23,7 +28,7 @@ public class JobWorkflowCreatePage {
     private final Locator otherAttributesSubHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Order Attributes*']"));
     private final Locator productType_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Product Type']"));
     private final Locator productType_Txt = Locator.builder().withWeb(By.id("rc_select_1"));
-    private final Locator productType_List = Locator.builder().withWeb(By.xpath("(//div[@class='rc-virtual-list-holder-inner'])[1]/div"));
+    private final Locator productType_List = Locator.builder().withWeb(By.xpath("(//div[@class='rc-virtual-list-holder-inner'])[1]/div/div"));
     private final Locator productTypeValidationMsg_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Product Type']/../following-sibling::div//p"));
     private final Locator shipmentFlow_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Shipment Flow']"));
     private final Locator shipmentFlow_Txt = Locator.builder().withWeb(By.id("rc_select_2"));
@@ -46,6 +51,7 @@ public class JobWorkflowCreatePage {
     private final Locator create_Btn = Locator.builder().withWeb(By.id("submitForm"));
     String dropDownList = "//div[@class='rc-virtual-list-holder-inner']//div[text()='abc']";
     String productTypeDropDownList = "(//div[@class='rc-virtual-list-holder-inner'])[1]";
+    Faker sampleData = new Faker();
 
     public static JobWorkflowCreatePage getInstance() {
         if (_instance == null)
@@ -146,8 +152,10 @@ public class JobWorkflowCreatePage {
         return ActionHelper.getText(productTypeValidationMsg_Lbl);
     }
 
-    public void select_ProductType_Txt(String productType) {
-        Utility.select_FromDropDown_List(productType_Txt.getBy(), productType_List.getBy(), productType);
+    public void select_ProductType_Txt() {
+        ActionHelper.click(productType_Txt);
+        List<WebElement> productType = ActionHelper.findElements(productType_List.getBy());
+        Utility.select_FromDropDown_List(productType_Txt.getBy(), productType_List.getBy(), productType.get(0).getText());
     }
 
     public boolean isPresent_ShipmentFlow_Lbl() {
@@ -315,5 +323,67 @@ public class JobWorkflowCreatePage {
 
     public String getText_ShipmentFlow_Txt() {
         return ActionHelper.getText(shipmentFlow_Txt);
+    }
+
+    public String getText_WorkflowName_Txt() {
+        return ActionHelper.getText(workflowName_Txt);
+    }
+
+    public HashMap<String, String> fillCreateJobWorkflow() {
+        HashMap<String, String> workflow = new HashMap<>();
+        String workflowName = "JobFlow_" + sampleData.job().field();
+        String workflowDescription = sampleData.lorem().sentence(10);
+
+        fill_WorkflowName_Txt(workflowName);
+        fill_WorkflowDescription_Txt(workflowDescription);
+        select_ProductType_Txt();
+        select_ShipmentFlow_Txt("None");
+
+        workflow.put("workflowName", workflowName);
+        workflow.put("workflowDescription", workflowDescription);
+        workflow.put("productType", getText_ProductType_Txt());
+        workflow.put("shipmentFlow", getText_ShipmentFlow_Txt());
+
+        return workflow;
+    }
+
+    public String getText_PaymentOption_Txt() {
+        return ActionHelper.getText(paymentOption_Txt);
+    }
+
+    public String getText_WorkflowDescription_Txt() {
+        return ActionHelper.getText(workflowDescription_Txt);
+    }
+
+    public String getText_PaymentType_Txt() {
+        return ActionHelper.getText(paymentType_Txt);
+    }
+
+    public String getText_SignatureCollection_Txt() {
+        if (!isChecked_Btn(signatureCollection_Btn))
+            return "Enabled";
+        else
+            return "Disabled";
+    }
+
+    public HashMap<String, String> getDetail_JobWorkflow() {
+        HashMap<String, String> jobWorkflow = new HashMap<>();
+        String workflowName = getText_WorkflowName_Txt();
+        String workflowDescription = getText_WorkflowDescription_Txt();
+        String productType = getText_ProductType_Txt();
+        String shipmentFlow = getText_ShipmentFlow_Txt();
+        String signatureCollection = getText_SignatureCollection_Txt();
+        String paymentOption = getText_PaymentOption_Txt();
+        String paymentType = getText_PaymentType_Txt();
+
+        jobWorkflow.put("workflowName", workflowName);
+        jobWorkflow.put("workflowDescription", workflowDescription);
+        jobWorkflow.put("productType", productType);
+        jobWorkflow.put("shipmentFlow", shipmentFlow);
+        jobWorkflow.put("signatureCollection", signatureCollection);
+        jobWorkflow.put("paymentOption", paymentOption);
+        jobWorkflow.put("paymentType", paymentType);
+
+        return jobWorkflow;
     }
 }
