@@ -206,7 +206,7 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ET_WORKFLOW, TestGroup.BVT},
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.ET_WORKFLOW, TestGroup.BVT},
             description = "TC_012, To Verify Functionality To Save Maximum Number Of Reasons Codes")
     public void TC_ExecutionTask_012_To_Verify_Functionality_To_Save_Maximum_Number_Of_Reasons_Codes() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();

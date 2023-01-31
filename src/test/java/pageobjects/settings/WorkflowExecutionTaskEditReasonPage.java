@@ -122,25 +122,23 @@ public class WorkflowExecutionTaskEditReasonPage {
         switch (reasonCode.toLowerCase()) {
             case "success":
                 click_SuccessReasonCode_TxtField();
-                reasonCodeList = getUnselectedReasonCodeList(reasonCode,successReasonCodeDropDownList_Options);
+                reasonCodeList = getUnselectedReasonCodeList(reasonCode, successReasonCodeDropDownList_Options);
                 break;
             case "failure":
                 click_FailureReasonCode_TxtField();
-                reasonCodeList = getUnselectedReasonCodeList(reasonCode,failureReasonCodeDropDownList_Options);
+                reasonCodeList = getUnselectedReasonCodeList(reasonCode, failureReasonCodeDropDownList_Options);
                 break;
         }
-        System.out.println("List Of "+reasonCode+" reasonCode are : " +reasonCodeList);
         return reasonCodeList;
     }
 
-    private Set<String> getUnselectedReasonCodeList(String reasonCode,Locator reasonCodeDropDown_List){
+    private Set<String> getUnselectedReasonCodeList(String reasonCode, Locator reasonCodeDropDown_List) {
         Set<String> reasonCodeList = new TreeSet<>();
         CommonActions.getInstance().waitTillLoaderDisappears();
         ActionHelper.waitUntilElementVisible(reasonCodeDropDown_List.getBy());
         List<WebElement> reasonCodes;
         for (int i = 0; i < 11; i++) {
             Utility.scrollDownUsingKeyboardKey(7);
-            //ActionHelper.gotoSleep(4000);
             CommonActions.getInstance().waitTillLoaderDisappears();
             reasonCodes = ActionHelper.findElementsWithoutWait(reasonCodeDropDown_List.getBy());
             for (WebElement element : reasonCodes) {
@@ -161,20 +159,27 @@ public class WorkflowExecutionTaskEditReasonPage {
 
     public void clickReasonCodes(String reasonCode, int noOfReasonCodes) {
         int count = 0;
+        List<WebElement> reasonCodes = new ArrayList<>();
         switch (reasonCode) {
             case "success":
                 click_SuccessReasonCode_TxtField();
+                CommonActions.getInstance().waitTillLoaderDisappears();
+                ActionHelper.waitUntilElementVisible(successReasonCodeDropDownList_Options.getBy());
+                for (int i = 0; i < 11; i++) {
+                    Utility.scrollDownUsingKeyboardKey(7);
+                    reasonCodes = ActionHelper.findElementsWithoutWait(successReasonCodeDropDownList_Options.getBy());
+                }
                 break;
+
             case "failure":
                 click_FailureReasonCode_TxtField();
+                CommonActions.getInstance().waitTillLoaderDisappears();
+                ActionHelper.waitUntilElementVisible(failureReasonCodeDropDownList_Options.getBy());
+                for (int i = 0; i < 11; i++) {
+                    Utility.scrollDownUsingKeyboardKey(7);
+                    reasonCodes = ActionHelper.findElementsWithoutWait(failureReasonCodeDropDownList_Options.getBy());
+                }
                 break;
-        }
-        CommonActions.getInstance().waitTillLoaderDisappears();
-        ActionHelper.waitUntilElementVisible(successReasonCodeDropDownList_Options.getBy());
-        List<WebElement> reasonCodes = new ArrayList<>();
-        for (int i = 0; i < 11; i++) {
-            Utility.scrollDownUsingKeyboardKey(7);
-            reasonCodes = ActionHelper.findElementsWithoutWait(successReasonCodeDropDownList_Options.getBy());
         }
 
         for (int i = 0; i < reasonCodes.size(); i++) {
