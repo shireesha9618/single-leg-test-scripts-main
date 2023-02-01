@@ -966,7 +966,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String[] postalCodeSampleData = {"34", "1", "980"};
         for (String postalCode : postalCodeSampleData) {
             addNewFacilityPage.fill_PostalCode_Txt(postalCode);
-            softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appears As Expected");
+            softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appears As Expected");
             addNewFacilityPage.click_Create_Btn();
             softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Not correct format", "Postal Code Minimum Character Error Message Appeared As Expected");
         }
@@ -980,7 +980,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         addNewFacilityPage.fill_PostalCode_Txt(String.valueOf(sampleData.number().digits(15)));
-        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appeared As Expected");
+        softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Appeared As Expected");
         addNewFacilityPage.click_Create_Btn();
         softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Not correct format", "Postal Code Maximum Character Error Message Appeared As Expected");
         softAssert.assertAll();
@@ -995,7 +995,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         String[] invalidPostalCode = {"@", "112#$dsw", "acvf", "32^_WR988"};
         for (String postalCode : invalidPostalCode) {
             addNewFacilityPage.fill_PostalCode_Txt(postalCode);
-            softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Pop Up Appeared As Expected");
+            softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Message Pop Up Appeared As Expected");
             addNewFacilityPage.click_Create_Btn();
             softAssert.assertEquals(addNewFacilityPage.getText_PostalCodeErrorMsg_Lbl(), "Not correct format", "Postal Code Incorrect Format Error Message Appeared As Expected");
         }
@@ -1014,7 +1014,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.waitTillLoaderDisappears();
         addNewFacilityPage.fill_AddressLine1_Txt(sampleData.address().streetName());
         addNewFacilityPage.fill_AddressLine2_Txt(sampleData.address().streetName());
-        softAssert.assertTrue(!commonActions.isPresent_PopUpErrorMsg_Lbl(), "Pop Up Error Message Is Not Present As Expected");
+        softAssert.assertTrue(!commonActions.isPresent_PopUpValidationMsg_Lbl(), "Pop Up Error Message Is Not Present As Expected");
         addNewFacilityPage.click_Create_Btn();
         softAssert.assertEquals(commonActions.getText_TableData_Lbl("POSTAL CODE"), validPostalCode, "Postal Code Is Matched As Expected");
         softAssert.assertAll();
@@ -1027,7 +1027,7 @@ public class TestSuite_Facilities extends BaseTestClass {
         commonActions.coverJourneyTillFacility();
         facilitiesPage.click_NewFacility_Btn();
         addNewFacilityPage.fill_PostalCode_Txt("123456789");
-        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Text Is Matched As Expected");
+        softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), "Pincode data not found.", "Pin Code Data Not Found Text Is Matched As Expected");
         softAssert.assertAll();
     }
 
