@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -46,7 +47,7 @@ public class ObjectiveWorkflowCreatePage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        return ActionHelper.isPresent(header_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_Header_Lbl() {
@@ -276,7 +277,7 @@ public class ObjectiveWorkflowCreatePage {
     }
 
     public boolean isPresent_ObjectiveWorkflowDuplicatedSuccessfullyToastMsg_Lbl() {
-        return ActionHelper.isPresent(objectiveWorkflowDuplicatedSuccessfullyToastMsg_Lbl, 10000);
+        return ActionHelper.isPresent(objectiveWorkflowDuplicatedSuccessfullyToastMsg_Lbl, Constants.WAIT_FOR_TEN_SECOND);
     }
 
     public void createWorkflow(String name, String description) {

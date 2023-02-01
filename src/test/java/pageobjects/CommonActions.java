@@ -169,7 +169,7 @@ public class CommonActions {
     }
 
     public Boolean isPresent_Skip_Btn() {
-        return ActionHelper.isPresent(skip_Btn, 3000);
+        return ActionHelper.isPresent(skip_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public String getText_PaginationCurrentlyShowingCount_Lbl() {
@@ -301,7 +301,7 @@ public class CommonActions {
     }
 
     public boolean isPresent_EmptyTableMsg_Lbl() {
-        return ActionHelper.isPresent(emptyTableMsg_Lbl, 4000);
+        return ActionHelper.isPresent(emptyTableMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_EmptyTableMsg_Lbl() {

@@ -2,6 +2,7 @@ package testsuite.settings;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;
+import constants.Constants;
 import constants.TestGroup;
 import framework.common.assertion.JarvisSoftAssert;
 import framework.frontend.actions.ActionHelper;
@@ -37,10 +38,7 @@ public class TestSuite_ObjectiveWorkflow extends BaseTestClass {
         List<String> expectedTabHeaders = new ArrayList<>(List.of("NAME", "OBJECTIVE TYPE", "PAYMENT TYPE", "STATUS", "DESCRIPTION",
                 "CREATED ON", "CREATED BY", "UPDATED ON", "UPDATED BY"));
         Collections.sort(expectedTabHeaders);
-        for (int i = 0; i < expectedTabHeaders.size(); i++) {
-            softAssert.assertEquals(actualTabHeadersLabels.get(i), expectedTabHeaders.get(i), "Validate Table Header label is matched as expected");
-        }
-
+        softAssert.assertTrue(actualTabHeadersLabels.equals(expectedTabHeaders), "Validate the Tab Headers");
         softAssert.assertTrue(objectiveWorkflowsListPage.isPresent_ObjectiveType_DropDown(), "Check Visibility of Objective Type dropdown");
         softAssert.assertTrue(objectiveWorkflowsListPage.isPresent_ActiveTab_Btn(), "Check Visibility of Active tab");
         softAssert.assertTrue(objectiveWorkflowsListPage.isPresent_DraftTab_Btn(), "Check Visibility of Draft tab");
@@ -121,8 +119,7 @@ public class TestSuite_ObjectiveWorkflow extends BaseTestClass {
             softAssert.assertEquals(objective, "Return", "Validate the Objective");
         objectiveWorkflowsListPage.click_ObjectiveTypeDropDownClearSelection_Btn();
         List<String> actualObjectiveList = commonActions.getTextList_TableDataList_Lbl("OBJECTIVE TYPE");
-        for (int i = 0; i < expectedObjectiveList.size(); i++)
-            softAssert.assertEquals(actualObjectiveList.get(i), expectedObjectiveList.get(i), "Validate the Objective");
+        softAssert.assertTrue(actualObjectiveList.equals(expectedObjectiveList), "Validate the Objective List");
         softAssert.assertAll();
     }
 
@@ -311,8 +308,7 @@ public class TestSuite_ObjectiveWorkflow extends BaseTestClass {
         List<String> expectedTabHeaders = new ArrayList<>(List.of("NAME", "OBJECTIVE TYPE", "PAYMENT TYPE", "STATUS", "DESCRIPTION",
                 "CREATED ON", "CREATED BY", "UPDATED ON", "UPDATED BY"));
         Collections.sort(expectedTabHeaders);
-        for (int i = 0; i < expectedTabHeaders.size(); i++)
-            softAssert.assertEquals(actualTabHeadersLabels.get(i), expectedTabHeaders.get(i), "Validate Table Header label is matched as expected");
+        softAssert.assertTrue(actualTabHeadersLabels.equals(expectedTabHeaders), "Validate Table Header label is matched as expected");
         softAssert.assertAll();
     }
 
@@ -406,7 +402,7 @@ public class TestSuite_ObjectiveWorkflow extends BaseTestClass {
         commonActions.coverJourneyTillObjectiveWorkflowListPage();
         List<WebElement> elements = commonActions.getWebElementList_TableDataList_Lbl("NAME");
         Utility.validatePageScrollDown(elements.get(elements.size() - 1));
-        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 5000), "Validate last element is present");
+        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), Constants.WAIT_FOR_FIVE_SECOND), "Validate last element is present");
         softAssert.assertAll();
     }
 
@@ -417,7 +413,7 @@ public class TestSuite_ObjectiveWorkflow extends BaseTestClass {
         commonActions.coverJourneyTillObjectiveWorkflowListPage();
         List<WebElement> elements = commonActions.getWebElementList_TableDataList_Lbl("NAME");
         Utility.scrollDownUsingKeyboardKey(10);
-        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), 5000), "Validate last element is present");
+        softAssert.assertTrue(ActionHelper.isPresent(elements.get(elements.size() - 1), Constants.WAIT_FOR_FIVE_SECOND), "Validate last element is present");
         softAssert.assertAll();
     }
 

@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.common.assertion.JarvisAssert;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
@@ -182,7 +183,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownAvailableValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownAvailableValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownAvailableValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownAvailableValue_Radio() {
@@ -191,7 +192,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownBusyValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownBusyValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownBusyValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownBusyValue_Radio() {
@@ -201,7 +202,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownUnAvailableValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownUnAvailableValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownUnAvailableValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownUnAvailableValue_Radio() {
@@ -211,7 +212,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownTerminalValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownTerminalValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownTerminalValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownTerminalValue_Radio() {
@@ -221,7 +222,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownAllocatedValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownAllocatedValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownAllocatedValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownAllocatedValue_Radio() {
@@ -231,7 +232,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownInActiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownInactiveValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownInactiveValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownInActiveValue_Radio() {
@@ -241,7 +242,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownDeBoardingValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownDeboardingValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownDeboardingValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownDeBoardingValue_Radio() {
@@ -251,7 +252,7 @@ public class RidersPage {
     }
 
     public boolean isEnabled_StatusDropDownOnboardingValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownOnboardingValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownOnboardingValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownOnboardingValue_Radio() {
@@ -261,7 +262,7 @@ public class RidersPage {
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
-        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, 2000);
+        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownClearSelection_Btn() {
@@ -329,7 +330,7 @@ public class RidersPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsLinkSave_Btn() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkSave_Btn, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkSave_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_MoreActionsDropDownModifyColumnsLinkSave_Btn() {
@@ -337,7 +338,7 @@ public class RidersPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsLinkCancel_Btn() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkCancel_Btn, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkCancel_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_MoreActionsDropDownModifyColumnsLinkCancel_Btn() {
@@ -345,7 +346,7 @@ public class RidersPage {
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsStatusCross_Icon() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsStatusCross_Icon, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsStatusCross_Icon, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_MoreActionsDropDownModifyColumnsStatusCross_Icon() {
@@ -370,7 +371,7 @@ public class RidersPage {
 
     public boolean isPresent_EditColumnsHeader_Lbl() {
         ActionHelper.waitForLoaderToHide();
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkHeader_Lbl, 5000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_ModifyColumns_SearchBar() {
@@ -541,7 +542,7 @@ public class RidersPage {
                                                                                           int toIndex) {
         List<WebElement> elements = ActionHelper.findElements(moreActionsDropDownModifyColumnsLinkSelectedOptionsList_Label);
         Actions actions = new Actions(DriverManager.getDriver());
-        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(5000).perform();
+        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(Constants.WAIT_FOR_FIVE_SECOND).perform();
     }
 
     public void click_EditColumnsSelectAllWithSave_Btn() {

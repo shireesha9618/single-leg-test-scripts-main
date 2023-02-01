@@ -1000,7 +1000,7 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_AddNewFacilityHeader_Lbl() {
-        return ActionHelper.isPresent(addNewFacilityHeader_Lbl, 5000);
+        return ActionHelper.isPresent(addNewFacilityHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_AddFacilityFacilityName_Txt() {
@@ -1272,15 +1272,15 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_AddFacilityPinCodeDataNotFoundToastMsg_Lbl() {
-        return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(addFacilityPinCodeDataNotFoundToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_AddShipmentRequiredParamShipmentIdToastMsg_Lbl() {
-        return ActionHelper.isPresent(addShipmentRequiredParamShipmentIdToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(addShipmentRequiredParamShipmentIdToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_AddShipmentRequiredParamDescriptionToastMsg_Lbl() {
-        return ActionHelper.isPresent(addShipmentRequiredParamDescriptionToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(addShipmentRequiredParamDescriptionToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void validateAndCreateFacility(String input, String postalCode) throws AWTException {
@@ -1402,19 +1402,19 @@ public class CreateNewOrderPage {
     }
 
     public boolean isPresent_SuccessToastMsg_Lbl() {
-        return ActionHelper.isPresent(successToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(successToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_DuplicateOrderIdToastMsg_Lbl() {
-        return ActionHelper.isPresent(duplicateOrderIdToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(duplicateOrderIdToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_SamePickupAndDropFacilityToastMsg_Lbl() {
-        return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(samePickupAndDropFacilityToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_OnlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl() {
-        return ActionHelper.isPresent(onlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl, 5000);
+        return ActionHelper.isPresent(onlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void fillPickupDetailsWithCustomData() {

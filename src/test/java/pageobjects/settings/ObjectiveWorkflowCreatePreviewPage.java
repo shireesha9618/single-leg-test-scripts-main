@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -42,7 +43,7 @@ public class ObjectiveWorkflowCreatePreviewPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        return ActionHelper.isPresent(header_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_Header_Lbl() {

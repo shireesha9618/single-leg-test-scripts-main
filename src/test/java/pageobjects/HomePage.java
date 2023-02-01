@@ -1,6 +1,7 @@
 package pageobjects;
 
 import base.BaseTestClass;
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -77,7 +78,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginButton_Btn() {
-        return ActionHelper.isPresent(loginButton_Btn, 3000);
+        return ActionHelper.isPresent(loginButton_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void openDispatchListPage() {
@@ -108,7 +109,7 @@ public class HomePage extends BaseTestClass {
 
 
     public boolean isPresent_DelhiveryLogo_Img() {
-        return ActionHelper.isPresent(delhiveryLogo_Img, 4000);
+        return ActionHelper.isPresent(delhiveryLogo_Img, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_DelhiveryLogo_Img() {
@@ -117,7 +118,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_UserProfile_Img() {
-        return ActionHelper.isPresent(userProfile_Img, 2000);
+        return ActionHelper.isPresent(userProfile_Img, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_UserProfile_Img() {
@@ -126,7 +127,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_Logout_Btn() {
-        return ActionHelper.isPresent(logout_Btn, 5000);
+        return ActionHelper.isPresent(logout_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_Logout_Btn() {
@@ -146,7 +147,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_ResourcesMenu_Btn() {
-        return ActionHelper.isPresent(resourcesMenu_Btn, 2000);
+        return ActionHelper.isPresent(resourcesMenu_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_Resources_Btn() {
@@ -155,7 +156,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_RidersMenu_Btn() {
-        return ActionHelper.isPresent(ridersMenu_Btn, 2000);
+        return ActionHelper.isPresent(ridersMenu_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_RidersMenu_Btn() {
@@ -165,7 +166,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_Skip_Btn() {
-        return ActionHelper.isPresent(skip_Btn, 10000);
+        return ActionHelper.isPresent(skip_Btn, Constants.WAIT_FOR_TEN_SECOND);
     }
 
     public String get_TeamDropdown_Txt() {
@@ -173,7 +174,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public Boolean isPresent_TeamDropdown_Txt() {
-        return ActionHelper.isPresent(selectTeam_Txt, 10000);
+        return ActionHelper.isPresent(selectTeam_Txt, Constants.WAIT_FOR_TEN_SECOND);
     }
 
     public void selectTeam2(String input) {
@@ -227,7 +228,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_OpenMenu_Btn() {
-        return ActionHelper.isPresent(openMenu_Btn, 3000);
+        return ActionHelper.isPresent(openMenu_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void click_OpenMenu_Btn() {
@@ -235,8 +236,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public void click_OpenMenuCross_Btn() {
-        int TIMEOUT = 5000;
-        if (ActionHelper.isPresent(openMenuCross_Btn, TIMEOUT))
+        if (ActionHelper.isPresent(openMenuCross_Btn, Constants.WAIT_FOR_FIVE_SECOND))
             ActionHelper.click(openMenuCross_Btn);
     }
 
@@ -296,7 +296,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_leftPanel_Btn() {
-        return ActionHelper.isPresent(leftPanel_Btn, 6000);
+        return ActionHelper.isPresent(leftPanel_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void unDock_LeftPanel_Btn() {
@@ -373,7 +373,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_LeftPanel_Btn() {
-        return ActionHelper.isPresent(leftPanel_Btn, 5000);
+        return ActionHelper.isPresent(leftPanel_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void expand_LeftPanel_Btn() {

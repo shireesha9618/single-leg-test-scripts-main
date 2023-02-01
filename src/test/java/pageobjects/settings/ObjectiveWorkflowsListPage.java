@@ -1,5 +1,6 @@
 package pageobjects.settings;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -160,7 +161,7 @@ public class ObjectiveWorkflowsListPage {
     }
 
     public boolean isPresent_ObjectiveTypeDropDownClearSelection_Btn() {
-        return ActionHelper.isPresent(objectiveTypeDropDownClearSelection_Btn, 5000);
+        return ActionHelper.isPresent(objectiveTypeDropDownClearSelection_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_ObjectiveTypeDropDownClearSelection_Btn() {

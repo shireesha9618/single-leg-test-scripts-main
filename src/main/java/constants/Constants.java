@@ -18,7 +18,7 @@ public class Constants {
     public static final String SYSTEM_DATE_FORMAT = "dd-MM-yyyy";
     public static final String ENV = Utils.getValueFromConfig("environment");
     public static final String DISPATCH_TYPE_ID = Utils.getValueFromConfig("DISPATCH_TYPE_ID");
-    public static final String UU_ID =  Utils.getValueFromConfig("UU_ID");
+    public static final String UU_ID = Utils.getValueFromConfig("UU_ID");
     public static String clientId = Utils.getValueFromConfig("clientId");
     public static String clientSecret = Utils.getValueFromConfig("clientSecret");
     public static String X_COREOS_REQUEST_ID = Utils.getValueFromConfig("X_COREOS_REQUEST_ID");
@@ -49,14 +49,15 @@ public class Constants {
 
     public static String ORDER_AMOUNT = Utils.getValueFromConfig("ORDER_AMOUNT");
     public static String TEAM = "QATeam";
-    public static String PICKUP_PINCODE="208014";
-    public static String DROP_PINCODE="281001";
+    public static String PICKUP_PINCODE = "208014";
+    public static String DROP_PINCODE = "281001";
     public static String RIDER = "Arpit kishoruser";
-    public static String TEAM_MANAGER ="feAutomation user";
-    public static int WAIT_FOR_ONE_SECOND = 1000;
-    public static int WAIT_FOR_TWO_SECOND = 2000;
-    public static int WAIT_FOR_FIVE_SECOND = 5000;
-    public static final int WAIT_FOR_THREE_SEC = 3000;
+    public static String TEAM_MANAGER = "feAutomation user";
+    public static final int WAIT_FOR_ONE_SECOND = 1000;
+    public static final int WAIT_FOR_TWO_SECOND = 2000;
+    public static final int WAIT_FOR_THREE_SECOND = 3000;
+    public static final int WAIT_FOR_FIVE_SECOND = 5000;
+    public static final int WAIT_FOR_TEN_SECOND = 10000;
 
     private Constants() {
 
@@ -82,10 +83,10 @@ public class Constants {
         public static final String FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_ACTIVE_DEBOARD");
         public static final String FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE = Utils.getValueFromConfig("FACILITY_STATUS_EVENT_CODE_INACTIVE_INACTIVE");
 
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE="E-945";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED="E-943";
-        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING="E-944";
-        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE="E-946";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_AVAILABLE = "E-945";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_ALLOCATED = "E-943";
+        public static final String USER_STATUS_EVENT_CODE_ACTIVE_DEBOARDING = "E-944";
+        public static final String USER_STATUS_EVENT_CODE_INACTIVE_INACTIVE = "E-946";
 
     }
 

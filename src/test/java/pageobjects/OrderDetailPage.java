@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -63,7 +64,7 @@ public class OrderDetailPage {
     }
 
     public boolean isPresent_Header_Lbl() {
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        return ActionHelper.isPresent(header_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_Header_Lbl() {
@@ -154,7 +155,7 @@ public class OrderDetailPage {
     }
 
     public boolean isPresent_OrderDetailsHeader_Lbl() {
-        return ActionHelper.isPresent(orderDetailsHeader_Lbl, 5000);
+        return ActionHelper.isPresent(orderDetailsHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_OrderDetailsDescription_Lbl() {
@@ -174,7 +175,7 @@ public class OrderDetailPage {
     }
 
     public boolean isPresent_PaymentDetailsHeader_Lbl() {
-        return ActionHelper.isPresent(paymentDetailsHeader_Lbl, 5000);
+        return ActionHelper.isPresent(paymentDetailsHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_PaymentDetailsPaymentType_Lbl() {
@@ -194,7 +195,7 @@ public class OrderDetailPage {
     }
 
     public boolean isPresent_TrackingDetailsHeader_Lbl() {
-        return ActionHelper.isPresent(trackingDetailsHeader_Lbl, 5000);
+        return ActionHelper.isPresent(trackingDetailsHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public List<String> getText_TrackingDetailsEventCodeList_Lbl() {

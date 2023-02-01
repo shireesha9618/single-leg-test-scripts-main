@@ -68,7 +68,7 @@ public class JobWorkflowCreatePreviewPage {
     }
 
     public boolean isPresent_StatusActive_RadioBtn() {
-        return ActionHelper.isPresent(statusActive_RadioBtn, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(statusActive_RadioBtn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void click_StatusActive_RadioBtn() {
