@@ -653,8 +653,10 @@ public class ViewOrderPage {
     }
 
     public String get_FirstElementStatus_Lbl() {
-        ActionHelper.gotoSleep(5000);
-        return ActionHelper.getText(firstElementStatus_Lbl);
+        if (isPresent_FirstElementStatus_Lbl())
+            return ActionHelper.getText(firstElementStatus_Lbl);
+        else
+            return null;
     }
 
     public String get_FirstElementNoOfShipment_Lbl() {
@@ -880,5 +882,9 @@ public class ViewOrderPage {
 
     public String getText_AssignRiderDropDownAutomaticAssignmentOK_Btn() {
         return ActionHelper.getText(assignRiderDropDownAutomaticAssignmentOK_Btn);
+    }
+
+    public Boolean isPresent_FirstElementStatus_Lbl() {
+        return ActionHelper.isPresent(firstElementStatus_Lbl, 5000);
     }
 }

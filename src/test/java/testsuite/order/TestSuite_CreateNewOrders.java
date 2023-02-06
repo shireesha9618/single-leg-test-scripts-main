@@ -1764,8 +1764,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderIdValidationError_Lbl(), "Validate presence of validation error message for Order Id field");
         softAssert.assertTrue(createNewOrderPage.isPresent_OrderDetailsOrderDescriptionValidationError_Lbl(), "Validate presence of validation error message for Order Description field");
 
-//        softAssert.assertTrue(createNewOrderPage.isPresent_ShipmentDetailsValidationError_Lbl(), "Validate presence of validation error message for Shipment field");
-
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNameValidationError_Lbl(), "Validate presence of validation error message for Contact Name field");
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsContactNumberValidationError_Lbl(), "Validate presence of validation error message for Contact Number field");
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsSelectAFacilityValidationError_Lbl(), "Validate presence of validation error message for Select A Facility field");
@@ -1995,13 +1993,16 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertTrue(createNewOrderPage.isPresent_Header_Lbl(), "Check Visibility of Header");
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
-        createNewOrderPage.addOrderDetails();
+        Map<String, String> orderData = createNewOrderPage.addOrderDetails();
         createNewOrderPage.addShipmentDetails(2);
         createNewOrderPage.addFacilityPickupDetails();
         createNewOrderPage.addFacilityDropDetails();
         createNewOrderPage.addPaymentDetails("Collect At Delivery");
         createNewOrderPage.click_Create_Btn();
-//        softAssert.assertTrue(createNewOrderPage.isPresent_OnlyPrepaidOrdersAllowedForMultipleShipmentsToastMsg_Lbl(), "Validate presence of error toast msg");
+        viewOrderPage.fillWithClear_SearchBar_Txt(orderData.get("orderId"));
+        softAssert.assertEquals(viewOrderPage.get_FirstElementOrderId_Txt(), orderData.get("orderId"), "Order id is matched as expected");
+        softAssert.assertEquals(viewOrderPage.get_FirstElementStatus_Lbl(), "Created", "Status is matched as expected");
+        softAssert.assertAll();
         softAssert.assertAll();
     }
 

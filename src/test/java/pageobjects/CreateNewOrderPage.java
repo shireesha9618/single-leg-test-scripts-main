@@ -38,11 +38,12 @@ public class CreateNewOrderPage {
 
     private final Locator shipmentDetailsHeader_Lbl = Locator.builder().withWeb(By.xpath("//h4[text()='Shipment Details']"));
     private final Locator shipmentDetailsShipmentID_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Shipment ID']"));
+    private final Locator shipmentDetailsShipmentId_Txt = Locator.builder().withWeb(By.xpath("//input[@placeholder='Enter Shipment ID' and @value='']"));
     private final Locator shipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description' and @value='']"));
     private final Locator getShipmentDetailsDescription_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[2]/div//div/input[@placeholder='Enter Description']"));
 
-    private final Locator shipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input"));
-    private final Locator shipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input"));
+    private final Locator shipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//td[3]/div//div/input[@placeholder='Enter Weight']"));
+    private final Locator shipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//td[4]/div//div/input[@placeholder='Enter Volume']"));
     private final Locator setShipmentDetailsVolume_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[4]/div//div/input[@value='0']"));
     private final Locator setShipmentDetailsWeight_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[3]/div//div/input[@value='0']"));
     private final Locator shipmentDetailsDimensionsLength_Txt = Locator.builder().withWeb(By.xpath("//tbody/tr/td[5]/div//div/input[@placeholder='l']"));
@@ -783,7 +784,6 @@ public class CreateNewOrderPage {
 
     public void click_CreateBtn_WithWait() {
         ActionHelper.click(create_Btn);
-//        Assert.assertTrue(isPresent_SuccessToastMsg_Lbl());
         CommonActions.getInstance().waitTillLoaderDisappears();
         CommonActions.getInstance().click_SkipIfPresent_Btn();
     }
@@ -1038,7 +1038,6 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_AddFacilityFacilityId_Txt(String value) {
-//        Utility.selectAllAndClear(addFacilityFacilityId_Txt.getBy());
         ActionHelper.sendKeysWithClear(addFacilityFacilityId_Txt.getBy(), value);
     }
 
@@ -1312,12 +1311,13 @@ public class CreateNewOrderPage {
     }
 
     public void set_PickUpFacility_TextBox() {
+        ActionHelper.scrollTillElement(pickupDetailsSelectAFacility_Dropdown.getBy());
         ActionHelper.sendKeysWithClear(pickupDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
 
     public void set_DropFacility_TextBox() {
-//        Utility.scrollDownUsingKeyboardKey(2);
+        ActionHelper.scrollTillElement(dropDetailsSelectAFacility_Dropdown.getBy());
         ActionHelper.sendKeysWithClear(dropDetailsSelectAFacility_Dropdown.getBy(), Keys.chord("facility" + Keys.DOWN + Keys.ENTER));
         CommonActions.getInstance().waitTillLoaderDisappears();
     }
@@ -1500,7 +1500,7 @@ public class CreateNewOrderPage {
     }
 
     public void fillWithClear_ShipmentDetailsShipmentID_Txt(String value) {
-        ActionHelper.fillWithClear(shipmentDetailsShipmentID_Txt.getBy(), value);
+        ActionHelper.fillWithClear(shipmentDetailsShipmentId_Txt.getBy(), value);
     }
 
     public void clear_ShipmentDetailsShipmentID_Txt() {
@@ -1784,11 +1784,11 @@ public class CreateNewOrderPage {
     }
 
     public void fill_PickupDetailsPickupDate_Txt(String value) {
-        ActionHelper.fill(pickupDetailsPickupDate_Txt, value);
+        ActionHelper.sendKeysWithClear(pickupDetailsPickupDate_Txt.getBy(), value);
     }
 
     public void fillWithClear_PickupDetailsPickupDate_Txt(String value) {
-        ActionHelper.fillWithClear(pickupDetailsPickupDate_Txt.getBy(), value);
+        ActionHelper.sendKeysWithClear(pickupDetailsPickupDate_Txt.getBy(), value);
     }
 
     public void clear_PickupDetailsPickupDate_Txt() {
@@ -1868,7 +1868,7 @@ public class CreateNewOrderPage {
     }
 
     public void fill_DropDetailsDropDate_Txt(String value) {
-        ActionHelper.fill(dropDetailsDropDate_Txt, value);
+        ActionHelper.sendKeysWithClear(dropDetailsDropDate_Txt.getBy(), value);
     }
 
     public void fillWithClear_DropDetailsDropDate_Txt(String value) {
@@ -2043,9 +2043,6 @@ public class CreateNewOrderPage {
 
             ActionHelper.fillWithClear(setShipmentDetailsVolume_Txt.getBy(), ActionHelper.getRandomNumberString(2));
             ActionHelper.fillWithClear(setShipmentDetailsWeight_Txt.getBy(), ActionHelper.getRandomNumberString(2));
-
-//            fillWithClear_ShipmentDetailsWeight_Txt("3");
-//            fillWithClear_ShipmentDetailsVolume_Txt("5");
             list.add(Map.copyOf(map));
             map.clear();
         }
@@ -2111,9 +2108,6 @@ public class CreateNewOrderPage {
     public String addPaymentDetails(String paymentType) {
         String amount = null;
         ActionHelper.scrollTillElement(paymentDetailsHeader_Lbl.getBy());
-//        ActionHelper.click(paymentDetailsPaymentType_Select.getBy());
-//        selectByVisibleText_PaymentDetailsPaymentType_Select(paymentType);
-        ActionHelper.gotoSleep(5000);
         Utility.select_FromDropDown_List(paymentDetailsPaymentType_Select.getBy(), paymentDetailsPaymentTypeSelect_Option.getBy(), paymentType);
         if (!paymentType.equals("Prepaid")) {
             amount = ActionHelper.getRandomNumberString(3);
