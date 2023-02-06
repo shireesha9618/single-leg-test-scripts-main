@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -58,7 +59,7 @@ public class CreateNewTeamPage {
     }
 
     public Boolean isPresent_Header_lbl() {
-        return ActionHelper.isPresent(header_Lbl, 3000);
+        return ActionHelper.isPresent(header_Lbl, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public boolean isPresent_Cancel_Btn() {

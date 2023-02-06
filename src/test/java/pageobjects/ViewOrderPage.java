@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -596,7 +597,7 @@ public class ViewOrderPage {
     }
 
     public boolean isPresent_AssignRiderDropDownManualHeader_Lbl() {
-        return ActionHelper.isPresent(assignRiderDropDownManualHeader_Lbl, 5000);
+        return ActionHelper.isPresent(assignRiderDropDownManualHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_AssignRiderDropDownManualRider_DropDown() {
@@ -676,19 +677,19 @@ public class ViewOrderPage {
     }
 
     public boolean isPresent_DispatchCreationInProgressPopUpMsg_Lbl() {
-        return ActionHelper.isPresent(dispatchCreationInProgressPopUpMsg_Lbl, 5000);
+        return ActionHelper.isPresent(dispatchCreationInProgressPopUpMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_DispatchCreatedPopUpMsg_Lbl() {
-        return ActionHelper.isPresent(dispatchCreatedPopUpMsg_Lbl, 5000);
+        return ActionHelper.isPresent(dispatchCreatedPopUpMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_DispatchPublishedPopUpMsg_Lbl() {
-        return ActionHelper.isPresent(dispatchPublishedPopUpMsg_Lbl, 5000);
+        return ActionHelper.isPresent(dispatchPublishedPopUpMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_AssignRiderDropDownAutomaticAssignmentHeader_Lbl() {
-        return ActionHelper.isPresent(assignRiderDropDownAutomaticAssignmentHeader_Lbl, 5000);
+        return ActionHelper.isPresent(assignRiderDropDownAutomaticAssignmentHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_AssignRiderDropDownAutomaticAssignmentHeader_Lbl() {
@@ -823,7 +824,7 @@ public class ViewOrderPage {
     }
 
     public boolean isPresent_ItsEmptyHereMsg_Lbl() {
-        return ActionHelper.isPresent(itsEmptyHereMsg_Lbl, 5000);
+        return ActionHelper.isPresent(itsEmptyHereMsg_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public List<WebElement> getList_AssignRiderDropDownAutomaticAssignmentHour_ListBtn() {

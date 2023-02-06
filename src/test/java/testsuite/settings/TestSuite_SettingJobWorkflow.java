@@ -488,7 +488,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         HomePage.getInstance().click_SettingsMenu_Btn();
         SettingsPage.getInstance().click_Workflow_Link();
         WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
-        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        ObjectiveWorkflowsListPage.getInstance().fill_SearchBar_Txt(expectedObjectiveName);
         String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
         softAssert.assertAll();
@@ -617,7 +617,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePage.select_ShipmentFlow_Txt("None");
         jobWorkflowCreatePage.click_Create_Btn();
 
-        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), expectedDuplicateErrorMsg, "Duplicate Error Appeared As Expected");
+        softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), expectedDuplicateErrorMsg, "Duplicate Error Appeared As Expected");
         softAssert.assertAll();
     }
 
@@ -631,7 +631,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
         String jobWorkflowName = jobWorkflowCreatePage.fillCreateJobWorkflow().get("workflowName");
         jobWorkflowCreatePage.click_Create_Btn();
-        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
+        softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
         softAssert.assertEqualsIgnoreCase(jobWorkflowDraftPage.getText_JobWorkflowDetailHeader_Lbl(), jobWorkflowName, "Job Workflow Header Is Matched As Expected");
         softAssert.assertAll();
     }
@@ -646,7 +646,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         jobWorkflowCreatePreviewPage.click_NewWorkflow_Link();
         String jobWorkflowName = jobWorkflowCreatePage.fillCreateJobWorkflow().get("workflowName");
         jobWorkflowCreatePage.click_Create_Btn();
-        softAssert.assertEquals(commonActions.getText_PopUpErrorMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
+        softAssert.assertEquals(commonActions.getText_PopUpValidationMsg_Lbl(), validationSuccessMsg, "Success Message Appeared As Expected");
 
         coverJourneyTillJobWorkflow();
         jobWorkflowPage.click_Draft_Btn();
@@ -678,7 +678,7 @@ public class TestSuite_SettingJobWorkflow extends BaseTestClass {
         HomePage.getInstance().click_SettingsMenu_Btn();
         SettingsPage.getInstance().click_Workflow_Link();
         WorkflowPage.getInstance().click_ObjectiveWorkflow_Link();
-        ObjectiveWorkflowPage.getInstance().fill_Search_Txt(expectedObjectiveName);
+        ObjectiveWorkflowsListPage.getInstance().fill_SearchBar_Txt(expectedObjectiveName);
         String actualObjectiveName = commonActions.getText_TableData_Lbl("NAME");
         softAssert.assertEquals(expectedObjectiveName, actualObjectiveName, "Objective Name Is Matched As Expected");
         softAssert.assertAll();

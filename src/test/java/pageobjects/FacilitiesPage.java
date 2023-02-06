@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -117,7 +118,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_Search_Txt() {
-        return ActionHelper.isPresent(search_Txt, 5000);
+        return ActionHelper.isPresent(search_Txt, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void fill_Search_Txt(String facilityName) {
@@ -126,7 +127,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_Status_DropDown() {
-        return ActionHelper.isPresent(status_DropDown, 2000);
+        return ActionHelper.isPresent(status_DropDown, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_Status_DropDown() {
@@ -142,7 +143,7 @@ public class FacilitiesPage {
     }
 
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownActiveValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownActiveValue_Radio() {
@@ -187,7 +188,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
-        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, 5000);
+        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownClearSelection_Btn() {
@@ -235,7 +236,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsSelectAll_Btn() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsSelectAll_Btn, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsSelectAll_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_MoreActionsDropDownModifyColumnsSelectAll_Btn() {
@@ -341,7 +342,7 @@ public class FacilitiesPage {
     public void dragAndDrop_MoreActionsDropDownModifyColumnDragOptionsList_Lbl(int fromIndex, int toIndex) {
         List<WebElement> elements = ActionHelper.findElements(moreActionsDropDownModifyColumnDragOptionsList_Lbl);
         Actions actions = new Actions(DriverManager.getDriver());
-        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(5000).perform();
+        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(Constants.WAIT_FOR_FIVE_SECOND).perform();
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnCheckBoxDataList_CheckBox() {
@@ -461,7 +462,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_Deactivate_Btn() {
-        return ActionHelper.isPresent(deactivate_Btn, 2000);
+        return ActionHelper.isPresent(deactivate_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_Deactivate_Btn() {
@@ -470,7 +471,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_DeactivateFacilityHeader_Lbl() {
-        return ActionHelper.isPresent(deactivateFacilityHeader_Lbl, 2000);
+        return ActionHelper.isPresent(deactivateFacilityHeader_Lbl, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public String getText_DeactivateFacilityHeader_Lbl() {
@@ -486,7 +487,7 @@ public class FacilitiesPage {
     }
 
     public boolean isPresent_DeactivateFacilityDeactivate_Btn() {
-        return ActionHelper.isPresent(deactivateFacilityDeactivate_Btn, 2000);
+        return ActionHelper.isPresent(deactivateFacilityDeactivate_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_DeactivateFacilityDeactivate_Btn() {

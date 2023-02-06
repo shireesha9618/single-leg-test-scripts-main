@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -25,7 +26,7 @@ public class TeamEditPage {
 
     public Boolean isPresent_Header_lbl() {
         CommonActions.getInstance().waitTillLoaderTxtDisappears();
-        return ActionHelper.isPresent(header_Lbl, 5000);
+        return ActionHelper.isPresent(header_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void set_TeamName_TextBox(String teamName) {
