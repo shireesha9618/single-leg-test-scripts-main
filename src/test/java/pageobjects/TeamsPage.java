@@ -1,7 +1,7 @@
 package pageobjects;
 
 import base.BaseTestClass;
-import framework.common.assertion.JarvisAssert;
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -138,7 +138,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownActiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownValue_Radio(String input) {
@@ -151,7 +151,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownPauseValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownPauseValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownPauseValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownPauseValue_Radio() {
@@ -160,7 +160,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownDeBoardValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownDeBoardValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownDeBoardValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownDeBoardValue_Radio() {
@@ -169,7 +169,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownInactiveValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownInactiveValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownInactiveValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownTerminalValue_Radio() {
@@ -178,7 +178,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownTerminalValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownTerminalValue_Radio.getBy(), 4000);
+        return ActionHelper.isEnabled(statusDropDownTerminalValue_Radio.getBy(), Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_StatusDropDownInactiveValue_Radio() {
@@ -193,7 +193,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isEnabled_StatusDropDownOnboardingValue_Radio() {
-        return ActionHelper.isEnabled(statusDropDownOnboardingValue_Radio.getBy(), 2000);
+        return ActionHelper.isEnabled(statusDropDownOnboardingValue_Radio.getBy(), Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownOnboardingValue_Radio() {
@@ -203,7 +203,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isPresent_StatusDropDownClearSelection_Btn() {
-        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, 2000);
+        return ActionHelper.isPresent(statusDropDownClearSelection_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public void click_StatusDropDownClearSelection_Btn() {
@@ -315,12 +315,12 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsLinkCancel_Btn() {
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkCancel_Btn, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkCancel_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsLinkSave_Btn() {
         Utility.scrollUsingJSToTheLastElement(moreActionsDropDownModifyColumnsLinkSave_Btn.getBy());
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkSave_Btn, 2000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkSave_Btn, Constants.WAIT_FOR_TWO_SECOND);
     }
 
     public boolean isPresent_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn() {
@@ -333,7 +333,7 @@ public class TeamsPage extends BaseTestClass {
 
     public boolean isPresent_EditColumnsHeader_Lbl() {
         commonActions.waitTillLoaderDisappears();
-        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkHeader_Lbl, 5000);
+        return ActionHelper.isPresent(moreActionsDropDownModifyColumnsLinkHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_MoreActionsDropDownModifyColumnsLinkSelectAll_Btn() {
@@ -377,7 +377,7 @@ public class TeamsPage extends BaseTestClass {
                                                                                           int toIndex) {
         List<WebElement> elements = ActionHelper.findElements(moreActionsDropDownModifyColumnsLinkSelectedOptionsList_Label);
         Actions actions = new Actions(DriverManager.getDriver());
-        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(5000).perform();
+        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(Constants.WAIT_FOR_FIVE_SECOND).perform();
     }
 
     public void click_MoreActionsDropDownModifyColumnsStatus_CheckBox() {
@@ -418,7 +418,7 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public boolean isPresent_Deactivate_Btn() {
-        return ActionHelper.isPresent(deactivate_Btn, 5000);
+        return ActionHelper.isPresent(deactivate_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_SelectAll_CheckBox() {

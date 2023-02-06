@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.frontend.managers.DriverManager;
@@ -270,7 +271,7 @@ public class DispatchDetailPage {
     }
 
     public boolean isPresent_TableActionsDropDownModifyColumnsLinkHeader_Lbl() {
-        return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkHeader_Lbl, 5000);
+        return ActionHelper.isPresent(tableActionsDropDownModifyColumnsLinkHeader_Lbl, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_TableActionsDropDownModifyColumnsLinkHeader_Lbl() {
@@ -351,7 +352,7 @@ public class DispatchDetailPage {
     public void dragAndDrop_TableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label(int fromIndex, int toIndex) {
         List<WebElement> elements = ActionHelper.findElements(tableActionsDropDownModifyColumnsLinkSelectedOptionsList_Label);
         Actions actions = new Actions(DriverManager.getDriver());
-        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(5000).perform();
+        actions.clickAndHold(elements.get(fromIndex)).moveByOffset(-10, 0).moveToElement(elements.get(toIndex)).release().pause(Constants.WAIT_FOR_FIVE_SECOND).perform();
     }
 
 

@@ -46,7 +46,7 @@ public class JobWorkflowPage {
     }
 
     public boolean isPresent_JobWorkflowsBreadCrumb_Link() {
-        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(jobWorkflowsBreadCrumb_Link, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void click_JobWorkflowsBreadCrumb_Link() {
@@ -130,7 +130,7 @@ public class JobWorkflowPage {
     public boolean isPresent_TableColumnUpdatedBy_Lbl() {
         click_DataTable_Lbl();
         Utility.scrollRightUsingKeyboardKey(5);
-        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(tableColumnUpdatedBy_Lbl, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public List<WebElement> getList_DataTableColumnName_List() {

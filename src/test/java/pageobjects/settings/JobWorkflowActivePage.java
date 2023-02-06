@@ -159,7 +159,7 @@ public class JobWorkflowActivePage {
     }
 
     public boolean isPresent_PopUpWindowDeactivate_Btn() {
-        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(popUpWindowDeactivate_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void click_PopUpWindowDeactivate_Btn() {

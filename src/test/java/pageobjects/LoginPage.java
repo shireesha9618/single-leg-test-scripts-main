@@ -1,6 +1,7 @@
 package pageobjects;
 
 import base.BaseTestClass;
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import framework.utils.GmailHelper;
@@ -31,7 +32,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_UserId_Txt() {
-        return ActionHelper.isPresent(userId_Txt, 3000);
+        return ActionHelper.isPresent(userId_Txt, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public void fill_UserId_Txt(String userId) {
@@ -56,11 +57,11 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_SendOTP_Btn() {
-        return ActionHelper.isPresent(sendOTP_Btn, 3000);
+        return ActionHelper.isPresent(sendOTP_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public boolean isPresent_LoginHomeScreen_Btn() {
-        return ActionHelper.isPresent(loginHomeScreen_Btn, 1000);
+        return ActionHelper.isPresent(loginHomeScreen_Btn, Constants.WAIT_FOR_ONE_SECOND);
     }
 
     public void click_Login_Btn() {
@@ -79,7 +80,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithEmail_Lnk() {
-        return ActionHelper.isPresent(loginWithEmail_Lnk, 5000);
+        return ActionHelper.isPresent(loginWithEmail_Lnk, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public boolean isPresent_LoginOTPIncorrectErrorMsg_Txt() {
@@ -139,7 +140,7 @@ public class LoginPage extends BaseTestClass {
     }
 
     public boolean isPresent_LoginWithOtp_Lnk() {
-        return ActionHelper.isPresent(loginWithOTP_Lnk, 5000);
+        return ActionHelper.isPresent(loginWithOTP_Lnk, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public String getText_PlaceHolder_Txt() {

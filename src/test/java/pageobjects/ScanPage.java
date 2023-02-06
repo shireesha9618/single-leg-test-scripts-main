@@ -1,5 +1,6 @@
 package pageobjects;
 
+import constants.Constants;
 import framework.frontend.actions.ActionHelper;
 import framework.frontend.locator.Locator;
 import org.openqa.selenium.By;
@@ -51,8 +52,7 @@ public class ScanPage {
     }
 
     public boolean isPresent_EnterShipmentId_Txt() {
-        int TIMEOUT = 30000;
-        return ActionHelper.isPresent(enterShipmentId_Txt, TIMEOUT);
+        return ActionHelper.isPresent(enterShipmentId_Txt, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void fill_EnterShipmentId_Txt(String shipment) {
@@ -66,8 +66,7 @@ public class ScanPage {
     }
 
     public boolean isPresent_AddToDispatch_Btn() {
-        int TIMEOUT = 30000;
-        return ActionHelper.isPresent(addToDispatch_Btn, TIMEOUT);
+        return ActionHelper.isPresent(addToDispatch_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_AddToDispatch_Btn() {
@@ -83,8 +82,7 @@ public class ScanPage {
     }
 
     public boolean isPresent_DeleteIconForAddedPackage_Btn() {
-        int TIMEOUT = 30000;
-        return ActionHelper.isPresent(deleteIconForAddedPackage_Btn, TIMEOUT);
+        return ActionHelper.isPresent(deleteIconForAddedPackage_Btn, Constants.WAIT_FOR_FIVE_SECOND);
     }
 
     public void click_DeleteIconForAddedPackage_Btn() {
