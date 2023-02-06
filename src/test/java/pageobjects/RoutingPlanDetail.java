@@ -17,17 +17,6 @@ public class RoutingPlanDetail {
     private final Locator planDate_Lbl = Locator.builder().withWeb(By.xpath("//p[text()='Plan Date']"));
     private final Locator planDateData_Lbl = Locator.builder().withWeb(By.xpath("//input[@placeholder='Select date']"));
 
-    private final Locator tableColumnNameVehicleModelTesting_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Vehicle Model testing testing testing']"));
-    private final Locator tableColumnNameVehicleId_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Vehicle ID']"));
-    private final Locator tableColumnNameRiderName_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Rider Name']"));
-    private final Locator tableColumnNameStartTime_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Start Time']"));
-    private final Locator tableColumnNameEndTime_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='End Time']"));
-    private final Locator tableColumnNameMaxDistance_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Max. Distance (KM)']"));
-    private final Locator tableColumnNameMaxTime_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Max. Time (Hours)']"));
-    private final Locator tableColumnNameMaxShipments_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Max. Shipments']"));
-    private final Locator tableColumnNameMaxWeight_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Max. Weight (KG)']"));
-    private final Locator tableColumnNameMaxVolume_Lbl = Locator.builder().withWeb(By.xpath("//th[text()='Max. Volume (CU.M)}']"));
-
     private final Locator vehicleId_List = Locator.builder().withWeb(By.xpath("//tr[@class='ant-table-row ant-table-row-level-0']/td/select[not(contains(@name,'Select Rider'))]"));
     private final Locator vehicleModelTestingCheckbox_List = Locator.builder().withWeb(By.xpath("(//tr[@class='ant-table-row ant-table-row-level-0']/td/p/input)[abc]"));
 
@@ -91,46 +80,6 @@ public class RoutingPlanDetail {
 
     public void click_PlanDateData_Lbl() {
         ActionHelper.click(planDateData_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameVehicleModelTesting_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameVehicleModelTesting_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameVehicleId_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameVehicleId_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameRiderName_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameRiderName_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameStartTime_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameStartTime_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameEndTime_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameEndTime_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameMaxDistance_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameMaxDistance_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameMaxTime_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameMaxTime_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameMaxShipments_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameMaxShipments_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameMaxWeight_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameMaxWeight_Lbl);
-    }
-
-    public boolean isPresent_TableColumnNameMaxVolume_Lbl() {
-        return ActionHelper.isPresent(tableColumnNameMaxVolume_Lbl);
     }
 
     public boolean isPresent_AddItem_Btn() {
