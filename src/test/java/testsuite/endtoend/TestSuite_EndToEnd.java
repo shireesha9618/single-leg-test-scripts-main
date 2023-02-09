@@ -157,22 +157,4 @@ public class TestSuite_EndToEnd extends BaseTestClass {
 
         softAssert.assertAll();
     }
-
-    @Test(groups = {TestGroup.SMOKE, TestGroup.REGRESSION},
-            description = "Verify End to End Test Case",
-            priority = 1)
-    public void TC_EndToEnd_Verify_End_To_End_From_Order_To_Publish_Dqispatch_Flow() throws IOException, APIResponseException {
-
-        Map<String, String> dispatch;
-        List<String> jobIDList = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            HashMap<String, String> order = ApiClient.createOrder("cod");
-            jobIDList.add(ApiClient.getJobID(order.get("orderId")));
-            System.out.println("order id is  : " + order.get("orderId"));
-        }
-        dispatch = ApiClient.createAndPublishDispatch(jobIDList);
-        System.out.println("Jobid is : " + jobIDList);
-
-        System.out.println(dispatch.get("dispatchID"));
-    }
 }

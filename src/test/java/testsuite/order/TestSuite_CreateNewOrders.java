@@ -422,7 +422,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
         createNewOrderPage.set_PickUpFacility_TextBox();
-        System.out.println("********* is " + createNewOrderPage.getValue_PickupDetailsSelectAFacility_Dropdown());
         softAssert.assertTrue(!createNewOrderPage.getValue_PickupDetailsSelectAFacility_Dropdown().equals(""), "Validate some value is selected in Select A Facility dropdown");
         softAssert.assertAll();
     }
@@ -471,7 +470,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         softAssert.assertEquals(createNewOrderPage.getText_Header_Lbl(), "Create New Order", "Validate Header");
 
         createNewOrderPage.click_PickupDetailsCustomAddress_Radio();
-        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt("Max length" + Utility.generateRandomString(256));
+        createNewOrderPage.fillWithClear_PickupDetailsAddressLine1_Txt("Max length" + Utility.generateRandomString(512));
         createNewOrderPage.click_Create_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsAddressLine1ValidationError_Lbl(), "Validate presence of validation error message for Address Line 1 field");
         softAssert.assertEquals(createNewOrderPage.getText_PickupDetailsAddressLine1ValidationError_Lbl(), "Length must be smaller than 512", "Validate text of validation error message for Address Line 1 field");
@@ -621,7 +620,6 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_PickupDetailsCustomAddress_Radio();
 
         for (String input : inputs) {
-            ActionHelper.gotoSleep(5000);
             createNewOrderPage.fillWithClear_PickupDetailsPostalCode_Txt(input);
             createNewOrderPage.click_Create_Btn();
             softAssert.assertTrue(createNewOrderPage.isPresent_PickupDetailsPostalCodeValidationError_Lbl(), "Validate presence of validation error message for Postal Code field");
@@ -1319,7 +1317,7 @@ public class TestSuite_CreateNewOrders extends BaseTestClass {
         createNewOrderPage.click_AddFacilityBtn_PickupDetailsSelectAFacility_Dropdown();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddNewFacilityHeader_Lbl(), "Validate presence of Create New Facility header");
 
-        createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt("Max length" + ActionHelper.generateRandomName(23, 23));
+        createNewOrderPage.fillWithClear_AddFacilityFacilityName_Txt("Max length" + ActionHelper.generateRandomName(32, 32));
         createNewOrderPage.click_AddFacilityCreate_Btn();
         softAssert.assertTrue(createNewOrderPage.isPresent_AddFacilityFacilityNameValidationMsg_Lbl(), "Validate presence of validation error message for Facility Name field");
         softAssert.assertEquals(createNewOrderPage.getText_AddFacilityFacilityNameValidationMsg_Lbl(), "Length must be smaller than 32", "Validate validation error message for Facility Name field");
