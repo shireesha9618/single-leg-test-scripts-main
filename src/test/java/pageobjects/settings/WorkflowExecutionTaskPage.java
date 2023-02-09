@@ -27,7 +27,7 @@ public class WorkflowExecutionTaskPage {
     }
 
     public boolean isPresent_ExecutionTaskHeader_Lbl() {
-        return ActionHelper.isPresent(executionTaskHeader_Lbl, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(executionTaskHeader_Lbl, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public String getText_ExecutionTaskHeader_Lbl() {

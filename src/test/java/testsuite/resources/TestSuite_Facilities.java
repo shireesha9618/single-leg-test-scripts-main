@@ -1,4 +1,4 @@
-package testsuite.resources;
+package testsuite.order.resources;
 
 import base.BaseTestClass;
 import com.github.javafaker.Faker;

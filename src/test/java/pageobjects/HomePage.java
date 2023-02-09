@@ -95,7 +95,8 @@ public class HomePage extends BaseTestClass {
 
     public void openCreateOrderPage() {
         click_OpenMenu_Btn();
-        ActionHelper.click(createOrderMenuItem_Btn);
+        if (isPresent_OpenMenuCreateOrders_Btn())
+            ActionHelper.click(createOrderMenuItem_Btn);
     }
 
     public void openViewOrderPage() {
@@ -451,4 +452,5 @@ public class HomePage extends BaseTestClass {
     public void click_WorkFlowOrders_Btn() {
         ActionHelper.click(workFlowOrders_Btn);
     }
+
 }

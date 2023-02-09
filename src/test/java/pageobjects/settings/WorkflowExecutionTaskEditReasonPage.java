@@ -36,7 +36,7 @@ public class WorkflowExecutionTaskEditReasonPage {
     }
 
     public boolean isPresent_EditReasonHeader_Lbl() {
-        return ActionHelper.isPresent(editReasonHeader_Lbl, Constants.WAIT_FOR_THREE_SEC);
+        return ActionHelper.isPresent(editReasonHeader_Lbl, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public String getText_EditReasonHeader_Lbl() {
