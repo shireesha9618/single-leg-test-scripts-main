@@ -68,15 +68,15 @@ jobs:
 
       - name: Run All Test Scripts
         if: ${{github.event.inputs.suite_type == 'system'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} clean test
 
       - name: Run Specific Fpa Scripts
         if: ${{github.event.inputs.suite_type == 'role'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} clean test
 
       - name: Run Specifies Group of Test Scripts
         if: ${{github.event.inputs.suite_type == 'group'}}
-        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} test
+        run: mvn -s settings.xml -Dthreads=${{github.event.inputs.Thread_Count}} -Denvironment=${{github.event.inputs.environment_type}} -Drole=${{github.event.inputs.role_name}} -Dbrowsertype=${{github.event.inputs.Browser_Type}} -Dsuitetype=group -Dgname=${{github.event.inputs.group_name}} clean test
       
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
