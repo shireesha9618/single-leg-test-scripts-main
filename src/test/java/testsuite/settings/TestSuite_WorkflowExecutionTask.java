@@ -16,10 +16,6 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
     WorkflowExecutionTaskEditReasonPage workflowExecutionTaskEditReasonPage = WorkflowExecutionTaskEditReasonPage.getInstance();
     WorkflowExecutionTaskStartPage workflowExecutionTaskStartPage = WorkflowExecutionTaskStartPage.getInstance();
     CommonActions commonActions = CommonActions.getInstance();
-    List<String> reasonCodeList = ApiClient.getReasonList();
-
-    public TestSuite_WorkflowExecutionTask() throws APIResponseException {
-    }
 
     private void coverJourneyTillJobExecutionTask() {
         commonActions.coverJourneyTillSettings();
@@ -34,6 +30,7 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_StartMenuCardEditReason_Btn();
+        List<String> reasonCodeList = ApiClient.getReasonList();
 
         List<String> actualSuccessReasonCode = workflowExecutionTaskEditReasonPage.getTextList_SuccessReasonCode_List();
         for (int i = 0; i < actualSuccessReasonCode.size(); i++) {
@@ -119,6 +116,7 @@ public class TestSuite_WorkflowExecutionTask extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         coverJourneyTillJobExecutionTask();
         workflowExecutionTaskPage.click_PickMenuCardEditReason_Btn();
+        List<String> reasonCodeList = ApiClient.getReasonList();
 
         softAssert.assertTrue(workflowExecutionTaskEditReasonPage.isPresent_EditReasonHeader_Lbl(), "Edit Reason Header Label Is Present As Expected");
         softAssert.assertEquals(workflowExecutionTaskEditReasonPage.getText_EditReasonHeader_Lbl(), "Edit Reason(s)", "Edit Reason Header Label Is Matched As Expected");
