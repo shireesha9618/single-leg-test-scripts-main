@@ -151,4 +151,8 @@ public class CreateNewTeamPage {
     public void select_RiderDropDown_Btn(String input) {
         Utility.select_FromDropDown_List(selectRider_Dropdown.getBy(),dropdown_List.getBy(),input);
     }
+
+    public void clear_TeamID_TextBox(){
+        Utility.selectAllAndClear(teamID_TextBox.getBy());
+    }
 }

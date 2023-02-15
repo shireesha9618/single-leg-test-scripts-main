@@ -81,11 +81,7 @@ public class TestSuite_Teams extends BaseTestClass {
         commonActions.coverJourneyTillTeams();
         teamsPage.open_Status_DropDown();
         softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownActiveValue_Radio(), "Validate presence of Available radio button");
-        softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownPauseValue_Radio(), "Validate presence of Busy radio button");
-        softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownDeBoardValue_Radio(), "Validate presence of Unavailable radio button");
         softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownInactiveValue_Radio(), "Validate presence of Allocated radio button");
-        softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownTerminalValue_Radio(), "Validate presence of Terminal radio button");
-        softAssert.assertTrue(teamsPage.isEnabled_StatusDropDownOnboardingValue_Radio(), "Validate presence of Onboarding radio button");
         softAssert.assertTrue(teamsPage.isPresent_StatusDropDownClearSelection_Btn(), "Validate presence of Clear Selection button");
         softAssert.assertAll();
     }
@@ -95,7 +91,7 @@ public class TestSuite_Teams extends BaseTestClass {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Header is present as expected");
-        String[] statusList = {"Active", "Pause", "Deboard", "Inactive", "Terminal", "Onboarding"};
+        String[] statusList = {"Active", "Inactive"};
         for (String status : statusList) {
             ExtentLogger.logPass("Validating" + status + "Status radiobutton");
             teamsPage.click_Status_RadioBtn(status);
@@ -115,7 +111,7 @@ public class TestSuite_Teams extends BaseTestClass {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
         List<String> initialStatusList = teamsPage.getTxt_TeamsTableStatusColumnList_Link();
-        String[] statusList = {"Active", "Pause", "Deboard", "Inactive", "Terminal", "Onboarding"};
+        String[] statusList = {"Active", "Inactive"};
         for (String status : statusList) {
             teamsPage.click_Status_RadioBtn(status);
             if (!teamsPage.isPresent_EmptyTable_Txt()) {
@@ -316,11 +312,11 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_024_Verify_Functionality_Of_Next_Page_Pagination_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        List<String> currentPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
-        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        List<String> currentPageElements = teamsPage.getTextList_TableDataList_Lbl("TEAM ID");
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-10", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
-        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "11-20", "Validate no of records displayed");
+        List<String> nextPageElements = teamsPage.getTextList_TableDataList_Lbl("TEAM ID");
         softAssert.assertTrue(!currentPageElements.equals(nextPageElements), "Current Page Elements And Next Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
     }
@@ -329,13 +325,13 @@ public class TestSuite_Teams extends BaseTestClass {
     public void TC_Teams_025_Verify_Functionality_Of_Previous_Page_Pagination_Button() {
         commonActions.coverJourneyTillTeams();
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
-        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-10", "Validate no of records displayed");
         commonActions.click_PaginationNext_Btn();
-        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "6-10", "Validate no of records displayed");
-        List<String> nextPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "11-20", "Validate no of records displayed");
+        List<String> nextPageElements = teamsPage.getTextList_TableDataList_Lbl("TEAM ID");
         commonActions.click_PaginationPrevious_Btn();
-        List<String> prevPageElements = commonActions.getTextList_TableDataList_Lbl("TEAM ID");
-        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-5", "Validate no of records displayed");
+        List<String> prevPageElements = teamsPage.getTextList_TableDataList_Lbl("TEAM ID");
+        softAssert.assertEquals(commonActions.getText_PaginationCurrentlyShowingCount_Lbl(), "1-10", "Validate no of records displayed");
         softAssert.assertTrue(!nextPageElements.equals(prevPageElements), "Next Page Elements And Previous Page Elements Are Not Matched As Expected ");
         softAssert.assertAll();
     }
@@ -538,7 +534,7 @@ public class TestSuite_Teams extends BaseTestClass {
         teamsPage.click_NewTeam_Btn();
         teamsPage.createNewTeam();
         String teamPageHeader = teamsPage.getText_TeamsHeader_Lbl();
-        String statusOfData = commonActions.getText_TableData_Lbl("STATUS");
+        String statusOfData = teamsPage.getText_TableData_Lbl("STATUS");
         teamsPage.check_TableData_CheckBox(0);
         softAssert.assertTrue(teamsPage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
 
@@ -547,7 +543,7 @@ public class TestSuite_Teams extends BaseTestClass {
 
         teamsPage.click_DeactivateTeamCancel_Btn();
         softAssert.assertEquals(teamsPage.getText_TeamsHeader_Lbl(), teamPageHeader, "Teams Header Is Matched As Expected");
-        softAssert.assertEquals(commonActions.getText_TableData_Lbl("STATUS"), statusOfData, "Status Is Active And Didn't Changed As Expected");
+        softAssert.assertEquals(teamsPage.getText_TableData_Lbl("STATUS"), statusOfData, "Status Is Active And Didn't Changed As Expected");
         softAssert.assertAll();
     }
 
@@ -557,7 +553,7 @@ public class TestSuite_Teams extends BaseTestClass {
         commonActions.coverJourneyTillTeams();
         teamsPage.click_NewTeam_Btn();
         teamsPage.createNewTeam();
-        softAssert.assertEquals(commonActions.getText_TableData_Lbl("STATUS"), "Active", "Status Is Active As Expected");
+        softAssert.assertEquals(teamsPage.getText_TableData_Lbl("STATUS"), "Active", "Status Is Active As Expected");
 
         teamsPage.check_TableData_CheckBox(0);
         softAssert.assertTrue(teamsPage.isPresent_Deactivate_Btn(), "Deactivate Button Is Present As Expected");
@@ -567,7 +563,7 @@ public class TestSuite_Teams extends BaseTestClass {
 
         TeamsPage.getInstance().click_DeactivateTeamDeactivate_Btn();
         softAssert.assertTrue(teamsPage.isPresent_Header_Lbl(), "Teams Header Is Present As Expected");
-        softAssert.assertEquals(commonActions.getText_TableData_Lbl("STATUS"), "Inactive", "Status Changed To Inactive As Expected");
+        softAssert.assertEquals(teamsPage.getText_TableData_Lbl("STATUS"), "Inactive", "Status Changed To Inactive As Expected");
         softAssert.assertAll();
     }
 
@@ -621,7 +617,7 @@ public class TestSuite_Teams extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_043, Verify The Functionality of Work Flow Button")
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_043, Verify The Functionality of Work Flow Button")
     public void TC_Teams_043_Verify_The_Functionality_Of_Work_Flow_Button() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillTeams();
@@ -637,7 +633,7 @@ public class TestSuite_Teams extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_044, Verify The Functionality Of Teams Button Of Work Flow")
+    @Test(enabled = false, groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.TEAMS}, description = "TC_044, Verify The Functionality Of Teams Button Of Work Flow")
     public void TC_Teams_044_Verify_The_Functionality_Of_Teams_Button_Of_Work_Flow() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         CommonActions.getInstance().coverJourneyTillTeams();

@@ -85,7 +85,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         teamsPage.click_NewTeam_Btn();
         softAssert.assertTrue(createNewTeamPage.isPresent_Header_Lbl(), "Create Teams Header Is Present As expected");
 
-        createNewTeamPage.fillWithClear_TeamID_TxtBox("");
+        createNewTeamPage.clear_TeamID_TextBox();
         createNewTeamPage.click_Create_Btn();
         softAssert.assertEquals(createNewTeamPage.get_NameValidation_Txt(), "Required", "Name Validation Message Is Matched As Expected");
         softAssert.assertEquals(createNewTeamPage.get_IDValidation_Txt(), "Required", "Name Validation Message Is Matched As Expected");
@@ -106,7 +106,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         String[] dataForMinimum = {"a", "1", "@"};
         for (String value : dataForMinimum) {
             createNewTeamPage.fillWithClear_TeamName_TxtBox(value);
-            softAssert.assertEquals(createNewTeamPage.get_NameValidation_Txt(), "Should be minimum 3", "Name Validation Message Is Matched As Expected");
+            softAssert.assertEquals(createNewTeamPage.get_NameValidation_Txt(), "Length must be greater than 3", "Name Validation Message Is Matched As Expected");
         }
         softAssert.assertAll();
     }
@@ -124,7 +124,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         String[] dataForMaximum = {Utils.generateRandomName(129, 130), String.valueOf(sampleData.number().digits(130))};
         for (String value : dataForMaximum) {
             createNewTeamPage.fillWithClear_TeamName_TxtBox(value);
-            softAssert.assertEquals(createNewTeamPage.get_NameValidation_Txt(), "Can be at max 128", "Name Validation Message Is Matched As Expected");
+            softAssert.assertEquals(createNewTeamPage.get_NameValidation_Txt(), "Length must be smaller than 128", "Name Validation Message Is Matched As Expected");
         }
         softAssert.assertAll();
     }
@@ -160,7 +160,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         String[] dataForMinimum = {"a", "1", "@"};
         for (String value : dataForMinimum) {
             createNewTeamPage.fillWithClear_TeamID_TxtBox(value);
-            softAssert.assertEquals(createNewTeamPage.get_IDValidation_Txt(), "Should be minimum 3", "Name Validation Message Is Matched As Expected");
+            softAssert.assertEquals(createNewTeamPage.get_IDValidation_Txt(), "Length must be greater than 3", "Name Validation Message Is Matched As Expected");
         }
         softAssert.assertAll();
     }
@@ -178,7 +178,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         String[] dataForMaximum = {Utils.generateRandomName(129, 130), String.valueOf(sampleData.number().digits(130))};
         for (String value : dataForMaximum) {
             createNewTeamPage.fillWithClear_TeamID_TxtBox(value);
-            softAssert.assertEquals(createNewTeamPage.get_IDValidation_Txt(), "Can be at max 128", "Id Validation Message Is Matched As Expected");
+            softAssert.assertEquals(createNewTeamPage.get_IDValidation_Txt(), "Length must be smaller than 128", "Id Validation Message Is Matched As Expected");
         }
         softAssert.assertAll();
     }
@@ -210,7 +210,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         String teamName = teamsPage.createNewTeam().get("teamName");
         teamsPage.fillWithClear_Search_Txt(teamName);
         softAssert.assertTrue(commonActions.isPresent_TableData_Lbl("TEAM NAME"), "Team Name Data In The Table Is Present As Expected");
-        softAssert.assertEquals(commonActions.getText_TableData_Lbl("TEAM NAME"), teamName, "Team Name Is Matched As Expected");
+        softAssert.assertEquals(teamsPage.getText_TableData_Lbl("TEAM NAME"), teamName, "Team Name Is Matched As Expected");
         softAssert.assertAll();
     }
 
@@ -218,7 +218,7 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
     public void TC_Teams_014_Verify_The_Functionality_Of_Create_Team_With_Duplicate_Team_Name() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
-        String teamName = commonActions.getText_TableData_Lbl("TEAM NAME");
+        String teamName = teamsPage.getText_TableData_Lbl("TEAM NAME");
         teamsPage.click_NewTeam_Btn();
         createNewTeamPage.fillWithClear_TeamName_TxtBox(teamName);
         createNewTeamPage.click_Create_Btn();
@@ -233,13 +233,12 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
     public void TC_Teams_015_Verify_The_Functionality_Of_Create_Team_With_Duplicate_Id_Name() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
-        String teamId = commonActions.getText_TableData_Lbl("TEAM ID");
+        String teamId = teamsPage.getText_TableData_Lbl("TEAM ID");
 
         teamsPage.click_NewTeam_Btn();
         createNewTeamPage.fillWithClear_TeamName_TxtBox("Team" + Utility.generateRandomNoInRange(1, 1000));
         createNewTeamPage.fillWithClear_TeamID_TxtBox(teamId);
         createNewTeamPage.click_Create_Btn();
-        createNewTeamPage.click_teamsBreadCrumb_Link();
 
         teamsPage.fillWithClear_Search_Txt(teamId);
         softAssert.assertTrue(commonActions.isPresent_TableData_Lbl("TEAM ID"), "Team Id Data In The Table Is Present As Expected");
@@ -247,27 +246,27 @@ public class TestSuite_CreateNewTeam extends BaseTestClass {
         softAssert.assertAll();
     }
 
-    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_012, Verify The Functionality Of Create Team With Duplicate Team Name")
-    public void TC_Teams_012_Verify_The_Functionality_Of_Team_Manager_DropDown_Create_Teams_Page() {
+    @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_011, Verify The Functionality Of Create Team With Duplicate Team Name")
+    public void TC_Teams_011_Verify_The_Functionality_Of_Team_Manager_DropDown_Create_Teams_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
         teamsPage.click_NewTeam_Btn();
-        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(),"Create Teams Header Is Present As Expected");
-        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManager_DropDown(),"Team Manager DropDown Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(), "Create Teams Header Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManager_DropDown(), "Team Manager DropDown Is Present As Expected");
         createNewTeamPage.select_TeamManagerDropDown_Btn(Constants.TEAM_MANAGER);
-        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManagersDropDownList_Txt(),"Team Manager Name Is Matched As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_TeamManagersDropDownList_Txt(), "Team Manager Name Is Matched As Expected");
         softAssert.assertAll();
     }
 
     @Test(groups = {TestGroup.SMOKE, TestGroup.SANITY, TestGroup.CREATE_NEW_TEAM}, description = "TC_012, Verify The Functionality Of Create Team With Duplicate Team Name")
-    public void TC_Teams_013_Verify_The_Functionality_Of_Rider_DropDown_Create_Teams_Page() {
+    public void TC_Teams_012_Verify_The_Functionality_Of_Rider_DropDown_Create_Teams_Page() {
         JarvisSoftAssert softAssert = new JarvisSoftAssert();
         commonActions.coverJourneyTillTeams();
         teamsPage.click_NewTeam_Btn();
-        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(),"Create Teams Header Is Present As Expected");
-        softAssert.assertTrue(createNewTeamPage.isPresent_Rider_DropDown(),"Rider DropDown Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_Header_lbl(), "Create Teams Header Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_Rider_DropDown(), "Rider DropDown Is Present As Expected");
         createNewTeamPage.select_RiderDropDown_Btn(Constants.RIDER);
-        softAssert.assertTrue(createNewTeamPage.isPresent_RidersDropDownList_Txt(),"Rider Name Is Present As Expected");
+        softAssert.assertTrue(createNewTeamPage.isPresent_RidersDropDownList_Txt(), "Rider Name Is Present As Expected");
         softAssert.assertAll();
     }
 }

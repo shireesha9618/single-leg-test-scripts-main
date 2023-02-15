@@ -74,6 +74,9 @@ public class TeamsPage extends BaseTestClass {
     private final Locator teamsTableRiderIDColumnList_Link = Locator.builder().withWeb(By.xpath("//tr/td[@class='ant-table-cell'][1]/a/a"));
     private final Locator teamsTableData_Link = Locator.builder().withWeb(By.xpath("//tr[@data-row-key]"));
     String linkInFirstRow = "//tr[2]/td[index]/a/a";
+    String elementInFirstRow = "//tr[2]/td[index]";
+    String elementColumnDataList = "//tr[@class='ant-table-row ant-table-row-level-0']//td[index]";
+
     CommonActions commonActions = CommonActions.getInstance();
 
     public static TeamsPage getInstance() {
@@ -492,8 +495,30 @@ public class TeamsPage extends BaseTestClass {
     }
 
     public void click_TableData_Lbl(String tableColumnName) {
-        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName));
+        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName) + 1);
         Locator data = Locator.builder().withWeb(By.xpath(linkInFirstRow.replace("index", index)));
         ActionHelper.click(data);
+    }
+
+    public String getText_TableData_Lbl(String tableColumnName) {
+        isPresent_elementInFirstRow();
+        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName) + 1);
+        Locator data = Locator.builder().withWeb(By.xpath(elementInFirstRow.replace("index", index)));
+        return ActionHelper.getText(data);
+    }
+
+    public List<String> getTextList_TableDataList_Lbl(String tableColumnName) {
+        isPresent_elementColumnDataList();
+        String index = String.valueOf(commonActions.indexOfTableColumnName(tableColumnName) + 1);
+        Locator data = Locator.builder().withWeb(By.xpath(elementColumnDataList.replace("index", index)));
+        return Utility.getText_ListOfWebElements(ActionHelper.findElements(data));
+    }
+
+    public void isPresent_elementColumnDataList() {
+        ActionHelper.isPresent(By.id(elementColumnDataList), Constants.WAIT_FOR_THREE_SECOND);
+    }
+
+    public void isPresent_elementInFirstRow() {
+        ActionHelper.isPresent(By.id(elementInFirstRow), Constants.WAIT_FOR_THREE_SECOND);
     }
 }

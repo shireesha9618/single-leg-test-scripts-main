@@ -225,7 +225,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_AppsHeader_Lbl() {
-        return ActionHelper.isPresent(appsHeader_Lbl);
+        return ActionHelper.isPresent(appsHeader_Lbl, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public boolean isPresent_OpenMenu_Btn() {
@@ -329,7 +329,7 @@ public class HomePage extends BaseTestClass {
     }
 
     public boolean isPresent_TeamsMenu_Btn() {
-        return ActionHelper.isPresent(teamsMenu_Btn);
+        return ActionHelper.isPresent(teamsMenu_Btn, Constants.WAIT_FOR_THREE_SECOND);
     }
 
     public boolean isPresent_SettingsMenu_Icon() {
